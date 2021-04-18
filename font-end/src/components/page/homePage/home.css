@@ -1,0 +1,378 @@
+html,body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #292929;
+    }
+
+    @font-face {
+        font-family: 'Kanit';
+        src: url('../../../fonts/Kanit-Regular.ttf');
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .navBar {
+        height: 60px;
+        left: 4px;
+        top: 0px;
+
+        background: linear-gradient(0deg, #00AFB9, #00AFB9), #0081A7;
+        box-shadow: 0px 2px 4px rgba(0, 129, 167, 0.25);
+
+        display: flex;
+        justify-content: space-between;
+    }
+    .nav-leftside-pad {
+        display: flex;
+    }
+    .nav-rightside-pad {
+        display: flex;
+    }
+    .navbar-header {
+        margin: 16px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .current-navbar-header-button {
+        width: 139px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Kanit';
+        font-size: 24px;
+        text-align: center;
+        justify-content: center;
+        transition: ease all 250ms;
+        color: white;
+        background-color: #EC8E82;
+        backdrop-filter: blur(4px);
+        border-color: transparent;
+        border-radius: 50px;
+    }
+    .navbar-header-button {
+        width: 139px;
+        height: 60px;
+        font-family: 'Kanit';
+        font-size: 24px;
+        transition: ease all 250ms;
+        color: white;
+        background-color: transparent;
+        backdrop-filter: blur(4px);
+        border-color: transparent;
+        border-radius: 50px;
+    }
+
+    .navbar-header-button:hover {
+        cursor: pointer;
+        color: #0A272C;
+        background: #fddbd6;
+        border-style: solid;
+        border-color:#f0a89f;
+        box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
+        inset -3px -3px 5px rgba(241, 255, 255, 0.5);
+    }
+    .navbar-profile-icon{
+        margin: 8px;
+        margin-left: 80px;
+        margin-right: 30px;
+        height: 47px;
+        width: 47px;
+        border-radius: 100%;
+    }
+    .navbar-profile-icon:hover{
+        cursor: pointer;
+        margin: 8px;
+        margin-left: 80px;
+        margin-right: 30px;
+        height: 47px;
+        width: 47px;
+        border-radius: 100%;
+        opacity: 80%;
+        image-rendering: pixelated;
+    }
+
+    .navbar-logo-icon {
+        margin: 1px;
+        margin-left: 20px;
+        height: 57px;
+        width: 63px;
+    }
+
+    .navbar-bell-icon {
+        margin: 7px;
+        height: 45px;
+        width: 45px;
+    }
+
+    .home-background {
+        margin: 0;
+    }
+    
+
+/*------------------- N E W S ---------------------------------------------*/
+
+    .news-pad {
+        margin: 0;
+        height: 469px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .news {
+        /* max-height: 469px; */
+        max-height: 569px;
+    }
+    .news-img {
+        height: 469px;
+        width: 709px;
+    }
+
+
+/*------------------- W E L C O M E ---------------------------------------------*/
+
+    .welcome-pad-main {
+        height: 583px;
+        width: 100%;
+    }
+
+    .welcome-pad {
+        position: relative;
+    }
+
+    .welcome-bg {
+        position: absolute;
+        height: 583px;
+        width: 100%;
+
+    }
+    .welcome-font-pad{
+        position: absolute;
+        height: 583px;
+    }
+
+    .welcome-Header {
+        margin-top: 105px;
+        margin-left: 53px;
+        font-family: 'Kanit';
+        font-size: 64px;
+        color: #FFFFFF;
+    }
+    .welcome-text {
+        font-family: 'Kanit';
+        font-size: 32px;
+        color: #00D4E0;
+        margin-top: 49px;
+        margin-left: 149px;
+        margin-right: 421px;
+    }
+    .login-button-pad {
+        margin-top: 22px;
+        display: flex;
+        justify-content: flex-end;
+        margin: 0;
+    }
+    .welcome-login-button {
+        height: 80px;
+        width: 315.9693603515625px;
+        font-size: 26px;
+        font-family: 'Kanit';
+        color:#FFFFFF;
+        margin-right: 67px;
+        background: rgba(97, 97, 97, 0.6);
+        backdrop-filter: blur(4px);
+        /* Note: backdrop-filter has minimal browser support */
+        border-radius: 35px;
+    }
+    .welcome-login-button:hover {
+        cursor: pointer;
+        color: #00D4E0;
+        box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
+        inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+    }
+
+/*------------------- A C T I V I T I E S ---------------------------------------------*/
+
+
+    .activities-pad {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 919px;
+    }
+    .activities-pad-inside {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 919px;
+        margin: 20px;
+    }
+    .activity-pad {
+        height: 575.58px;
+        margin: 13px;
+        justify-content: center;
+        align-items: center;
+    }
+    .activity-header {
+        font-family: 'Kanit';
+        font-size: 42px;
+        font-style: Bold;
+        color:#0081A7;
+        text-align:center;
+    }
+    .activity-center-pad {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .activity-img {
+        height: 375px;
+        width: auto;
+    }
+    .activity-details {
+        font-family: 'Kanit';
+        font-size: 32px;
+        color:#00AFB9;
+        text-align:center;
+    }
+
+    .adopt-button {
+        height: 95.57615661621094px;
+        width: 328px;
+        border-radius: 35px;
+        border: 3px solid #0081A7;
+        box-sizing: border-box;
+
+
+        font-size: 26px;
+        font-family: 'Kanit';
+        color:#0081A7;
+        background: rgba(255, 255, 255);
+        text-align:center;
+        justify-content: center;
+        align-items: center;
+        /* Note: backdrop-filter has minimal browser support */
+
+    }
+    
+    .dealing-button {
+        height: 95.57615661621094px;
+        width: 328px;
+        border-radius: 35px;
+        border: 3px solid #0081A7;
+        box-sizing: border-box;
+
+        font-size: 26px;
+        font-family: 'Kanit';
+        color:#0081A7;
+        background: rgba(255, 255, 255);
+        text-align:center;
+        justify-content: center;
+        align-items: center;
+        /* Note: backdrop-filter has minimal browser support */
+
+    }
+    .office-button {
+        height: 95.57615661621094px;
+        width: 328px;
+        border-radius: 35px;
+        border: 3px solid #0081A7;
+        box-sizing: border-box;
+
+        font-size: 26px;
+        font-family: 'Kanit';
+        color:#0081A7;
+        background: rgba(255, 255, 255);
+        text-align:center;
+        justify-content: center;
+        align-items: center;
+        /* Note: backdrop-filter has minimal browser support */
+
+    }
+    
+    .adopt-button:hover {
+        cursor: pointer;
+        color: #FFFFFF;
+        background-color: #00AFB9;
+        border: 3px solid #00AFB9;
+        box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
+        inset -3px -3px 5px rgba(1, 32, 32, 0.5);
+    }
+    .dealing-button:hover {
+        cursor: pointer;
+        color: #FFFFFF;
+        background: #F07167;
+        border: 3px solid #F07167;
+        box-shadow: inset 3px 3px 5px rgba(82, 0, 214, 0.1),
+        inset -3px -3px 5px rgba(241, 255, 255, 0.5);
+    }
+    .office-button:hover {
+        cursor: pointer;
+        color: #FFFFFF;
+        background: #0081A7;
+        border: 3px solid #0081A7;
+        box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
+        inset -3px -3px 5px rgba(241, 255, 255, 0.5);
+    }
+
+/*------------------- C O N T A C T ---------------------------------------------*/  
+    
+    .contacts-pad {
+        background-color: #0A272C;
+        display: flex;
+        justify-content: space-around;
+        height: 300px;
+    }
+    .bottom-icon-pad {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bottom-icon {
+        width: 56px;
+        height: 59px;
+        margin: 20px;
+    }
+    .bottom-icon-text {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 72px;
+        color: white;
+    }
+    .contact-pad {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid #bbbbbb; */
+    }
+    .contact-text {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+    }
+    
+    .contact-pad-roll-1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .contact-pad-roll-2 {
+        align-items: center;
+        justify-content: center;
+    }
+    .tel-icon {
+        width: 21px;
+    }
+    .mail-icon {
+        width: 23px;
+    }
+    .address-icon {
+        width: 32px;
+    }
