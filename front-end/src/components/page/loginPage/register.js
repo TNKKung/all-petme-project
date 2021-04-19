@@ -216,8 +216,6 @@ const Register = () => {
           Postal_code:postalCode
         })
       };
-      console.log(configObj);
-
       fetch('http://localhost:4000/api/add',configObj)
       .then(function(response){
         return response.json();
@@ -226,8 +224,8 @@ const Register = () => {
         console.log(toy);
       })
 
-      // let path = `/`; 
-      // history.push(path);
+      let path = `/`; 
+      history.push(path);
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }
