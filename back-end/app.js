@@ -19,19 +19,22 @@ expressApp.get("/api/get/login",function(req,res){
     } = req.body;
 
     MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
         var dbo = db.db("User");
         dbo.collection("user").find({"Username" : Username}).toArray(function(err, result) {
-            if (err) throw err;
-            if(result[0].Username === Username && result[0].Password === Password){
-                res.send(202);
+            if(result.length){
+                if(result[0].Username === Username && result[0].Password === Password ){
+                    res.send(200);
+                }
+                else{
+                    res.send('Password Error');
+                }
             }
             else{
-                res.send('Password Error');
+                res.send('Error');
             }
             db.close();
         });
-        
+       
     });
     
 });
@@ -95,13 +98,15 @@ expressApp.post("/api/add",function(req,res) {
             'Province' : Province,
             'Postal_code' : Postal_code,
             'Status' : 'Null',
+            'like' : 0,
+            'report' : 0,
         }
         res.send(user);
         console.log(Username);
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            var dbo = db.db("User");
-            dbo.collection("user").insertOne(user, function(err, res) {
+            var dbo = db.db("PetMeApp");
+            dbo.collection("User").insertOne(user, function(err, res) {
               if (err) throw err;
               console.log("Add one people");
               db.close();
