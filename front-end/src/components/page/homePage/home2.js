@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
     BrowserRouter as Router,
+    useHistory ,                              
     Switch,
-    Route,
+    Route,                   
     Link,
     useRouteMatch
   } from "react-router-dom";
@@ -35,11 +36,22 @@ library.add(fas, fab, far);
 
 const Home2 = ()=> {
 
+
     const [classStyle, setClassStyle] = useState('menu-header')
     const [newsStyle, setNewsStyle] = useState('news')
     const [astStyle, setAstStyle] = useState('ast')
 
     const [currentPage,setCurrentPage] = useState('home')
+    const history = useHistory();
+
+    const routeChange= (page) =>{ 
+        if(page == 'login'){
+            console.log('HELLO')
+            let path = `/login`; 
+            history.push(path);
+        }
+       
+      }
 
     const setToggle = () => {
         classStyle == 'menu-header'?setClassStyle('menu-header active'):setClassStyle('menu-header')
@@ -60,7 +72,6 @@ const Home2 = ()=> {
                     <li class = {classStyle}><div className={astStyle}>ซื้อขาย</div></li>
                     <li class = {classStyle}><div className={astStyle}>บริจาค</div></li>
                     <li class = {classStyle}><div className={astStyle}>ติดต่อเรา</div></li>
-
 
                     <li class = 'menu-header logo button'><button class = 'a-center' href='#'><img class ='bell-icon' src={Bell_icon_src}/></button></li>
                     <li class = 'menu-header logo button profile'><botton class='profileBtt'><img class = 'profile-icon' src = {Profile_icon_src}/></botton></li>
@@ -83,7 +94,8 @@ const Home2 = ()=> {
                         <div className='welcome-sec2-inside'>
                             <p class = 'welcome-text'>&emsp;&emsp;เว็บไซต์สำหรับการบริจาคและการรับเลี้ยงสุนัขเพื่อช่วยลดจำนวนสุนัขไร้บ้าน และสำหรับการซื้อขายสุนัขที่มีความน่าเชื่อถือมาให้ผู้ซื้อโดยตรงคุณจึงมั่นใจได้ 100% ว่าซื้อน้องหมาจาก PetMe ได้รับสุนัขแน่นอนและมีใบรับประกันจากผู้ขายส่งให้ลูกค้าทุกคน</p>
                             <div class='login-button-pad'>
-                            <button class='welcome-login-button'><Link to='/login'><div  className='login-text' ><div className='ok'>เข้าสู่ระบบ</div></div></Link></button>
+                            <button class='welcome-login-button' onClick={() => routeChange('login')} > 
+                                <div  className='login-text' ><div className='ok'>เข้าสู่ระบบ</div></div></button>
                             </div>
                             </div>
                         </div>

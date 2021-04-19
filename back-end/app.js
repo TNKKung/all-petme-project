@@ -77,6 +77,7 @@ expressApp.post("/api/add",function(req,res) {
         District,
         Province,
         Postal_code
+
     } = req.body;
 
     console.log(req.body);
@@ -93,13 +94,11 @@ expressApp.post("/api/add",function(req,res) {
             'Birth' : Birth,
             'Address' : Address,
             'Road' : Road,
-            'Sub_district' : Sub_district,
-            'District' : District,
-            'Province' : Province,
-            'Postal_code' : Postal_code,
-            'Status' : 'Null',
-            'like' : 0,
-            'report' : 0,
+            "Sub_district":Sub_district,
+            "District":District,
+            "Province":Province,
+            "Postal_code":Postal_code,
+            'Status' : 'Null'
         }
         res.send(user);
         console.log(Username);
@@ -148,17 +147,6 @@ expressApp.put("/api/update",function(req,res) {
     });
 });
 
-// expressApp.delete("/api/delete/:id",function(req,res) {
-//     const confirmId = req.body.confirmId;
-//     const student = students.find(i => i.id === parseInt(id)); 
-//     if(student && confirmId === parseInt(id)){
-//         const index = students.indexOf(student);
-//         students.splice(index,1);
-//         res.send("delete " + student.name);
-//     }else{
-//         res.status(400).send("Error");
-//     }
-// });
 
 
 expressApp.listen(4000,function(){
