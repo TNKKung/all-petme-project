@@ -17,6 +17,9 @@ import validator from 'validator'
 import ModernDatepicker from 'react-modern-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
+
+var Username,Password,Name,Email,Tell,Birth,Address,Road,Sub_district,District,Province,Postal_code;
+
 const Register = () => {
 
   const inputRefs = React.useRef([
@@ -37,6 +40,9 @@ const Register = () => {
   var maxAddress = '40'
   var maxRoad = '20'
 
+
+  
+  
   const [emailErrorSign, setEmailErrorSign] = useState(' ')
   const [mobileErrorSign, setMobileErrorSign] = useState(' ')
   const [passErrorSign, setPassErrorSign] = useState(' ')
@@ -45,6 +51,11 @@ const Register = () => {
   const [roadErrorSign, setRoadErrorSign] = useState(' ')
   const [addressErrorSign, setAddressErrorSign] = useState(' ')
   const [dateErrorSign, setDateErrorSign] = useState(' ')
+  const [district,setDistrict] = useState(' ')
+  const [subDistrict,setSubDistrict] = useState(' ')
+  const [province,setProvince] = useState(' ')
+  const [postalCode,setPostalCode] = useState(' ')
+  
   
   const history = useHistory();
 
@@ -110,10 +121,10 @@ const Register = () => {
     //console.log('gap : '+ age)
     if(cur_year-year>20 && cur_year-year<100){
       setDateErrorSign('✔')}
-    else if(cur_year-year == 20){
+    else if(cur_year-year === 20){
       if(cur_month-month>0){
         setDateErrorSign('✔')}
-      else if(cur_month-month == 0){
+      else if(cur_month-month === 0){
         if(cur_day-day>=0){
           setDateErrorSign('✔')}
         else setDateErrorSign('ผู้ใช้งานต้องมีอายุระหว่าง 20 ถึง 100 ปีบริบูรณ์')
@@ -129,7 +140,7 @@ const Register = () => {
     var nameInput = e.target.value
     var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
     if(format.test(nameInput)){setNameErrorSign('ชื่อจริงห้ามมีอักขระพิเศษ')}
-    else if(nameInput.length == 0) {
+    else if(nameInput.length === 0) {
       setNameErrorSign('กรุณากรอกชื่อและนามสกุล')
     } else{
       setNameErrorSign('✔')
@@ -148,7 +159,7 @@ const Register = () => {
     }
   }
   const validMobile = (mobilePhone) =>{
-    if(mobilePhone.length == 10 && mobilePhone[0] == '0' && (mobilePhone[1]=='9' || mobilePhone[1]=='6' || mobilePhone[1]=='8' )){
+    if(mobilePhone.length === 10 && mobilePhone[0] === '0' && (mobilePhone[1]==='9' || mobilePhone[1]==='6' || mobilePhone[1]==='8' )){
       for (var i = 0; i < 10; i++) {
         if(mobilePhone[i]<'0' || mobilePhone[i]>'9'){
           return false
@@ -172,6 +183,7 @@ const Register = () => {
   }
 
   const submitRegisterForm = (next) => {
+    
     console.log('submit')
     if(
       emailErrorSign === '✔' &&
@@ -183,13 +195,46 @@ const Register = () => {
       addressErrorSign === '✔' &&
       dateErrorSign === '✔'
     ){
-      let path = `/`; 
-      history.push(path);
+      let configObj = {
+        method: "POST",
+        headers :{
+          "Content-Type":"application/json",
+          "Accept":"application/json"
+        },
+        body:JSON.stringify({
+          Username : Username,
+          Password:Password,
+          Name:Name,
+          Email:Email,
+          Tell:Tell,
+          Birth:Birth,
+          Address:Address,
+          Road:Road,
+          District:district,
+          Sub_District:subDistrict,
+          Province:province,
+          Postal_code:postalCode
+        })
+      };
+      console.log(configObj);
+
+      fetch('http://localhost:4000/api/add',configObj)
+      .then(function(response){
+        return response.json();
+      })
+      .then(toy => {
+        console.log(toy);
+      })
+
+      // let path = `/`; 
+      // history.push(path);
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }
   }
-
+  useEffect(()=>{
+    console.table(district,subDistrict,province,postalCode);
+  },[district,subDistrict,province,postalCode])
   return (
     <div className='Register'>
       <form class="reg-form" >
@@ -205,6 +250,7 @@ const Register = () => {
                   let tempSTR = curvalue.replace(/[^0-9A-Za-z]/ig, '')
                   validateID(tempSTR)
                   e.target.value = tempSTR
+                  Username = e.target.value
                   }}
                 maxLength={maxID}
               /></div>
@@ -221,6 +267,7 @@ const Register = () => {
                   let tempPassSTR = curPassvalue.replace(/[^0-9A-Za-z]/ig, '')
                   validatePassword(tempPassSTR)
                   e.target.value = tempPassSTR
+                  Password = e.target.value
                   }}
                 maxLength={maxPass}
               /></div>
@@ -232,7 +279,11 @@ const Register = () => {
               <div className="reg-input-wrapper">
               <input 
                 placeholder=""
-                onChange={(e) => validateName(e)}
+                onChange={(e) => {
+                  validateName(e)
+                  Name = e.target.value
+                }}
+                
                 maxLength={maxName}
               /></div>
               <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{nameErrorSign}</span>
@@ -243,7 +294,10 @@ const Register = () => {
               <div className="reg-input-wrapper">
               <input 
                 placeholder=""
-                onChange={(e) => validateEmail(e)}
+                onChange={(e) => {
+                  validateEmail(e)
+                  Email = e.target.value
+                }}
                 maxLength={maxEmail}
               />
               </div>
@@ -254,7 +308,10 @@ const Register = () => {
               <text class='reg-input-head'>เบอร์โทรศัพท์</text>
               <div className="reg-input-wrapper">
               <input
-                onChange={validateMobilePhone}
+                onChange={(e) => {
+                  validateMobilePhone(e)
+                  Tell = e.target.value
+                }}
                 maxLength={maxMobile}
               />
               </div>
@@ -267,7 +324,10 @@ const Register = () => {
                 date={ selectedDate}
                 format={'DD-MM-YYYY'}
                 showBorder
-                onChange={date => validateDate(date)}
+                onChange={date => {
+                  validateDate(date)
+                  Birth = date
+                }}
                 placeholder={'Select a date'}
               /></div>
               <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{dateErrorSign}</span>
@@ -283,7 +343,10 @@ const Register = () => {
               <div className="reg-input-wrapper">
               <input 
                 placeholder=""
-                onChange={(e) => validateAddress(e)}
+                onChange={(e) => {
+                  validateAddress(e)
+                  Address = e.target.value
+                }}
                 maxLength={maxAddress}
               /></div>
               <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{addressErrorSign}</span>
@@ -294,7 +357,10 @@ const Register = () => {
               <div className="reg-input-wrapper">
               <input 
                 placeholder=""
-                onChange={(e) => validateRoad(e)}
+                onChange={(e) => {
+                  validateRoad(e)
+                  Road = e.target.value
+                }}
                 maxLength={maxRoad}
               /></div> 
               <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{roadErrorSign}</span>
@@ -302,7 +368,7 @@ const Register = () => {
             </div>
             
 
-              <ProvinceInput />
+              <ProvinceInput setDistrict={setDistrict} setPostalCode={setPostalCode} setProvince={setProvince} setSubDistrict={setSubDistrict}/>
             
 
             

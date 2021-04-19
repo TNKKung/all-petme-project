@@ -1,111 +1,9 @@
-// import React, { useEffect, useState, useRef } from "react";
-
-// import './provinceInput.css'
-
-// const ProvinceInput = () => {
-//   const [display, setDisplay] = useState(false);
-//   const [singleProvince, setSingleProvince] = useState([]);
-//   const [singleProvinceData, setSingleProvinceData] = useState([]);
-//   const [addTog,setAddTog] = useState('▼')
-//   const [search, setSearch] = useState("");
-//   const wrapperRef = useRef(null);
-
-//   const province_dataBase_url = 'https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json'
-
-//   useEffect(() => {  
-//     const promises = new Array(20).fill(fetch(province_dataBase_url)
-//     .then((res) => { 
-//       return res.json().then((data) => { 
-
-//         const shallowSingleProvinceList = [];
-//         const shallowSingleProvinceDataList = [];
-//         const createSingleProvince = data.filter( (each) => {
-//           if (false === (shallowSingleProvinceList.includes(each.province))) {
-//             shallowSingleProvinceList.push(each.province)
-//             shallowSingleProvinceDataList.push(each)
-//           }
-//         })
-
-//         setSingleProvince(shallowSingleProvinceList)
-//         setSingleProvinceData(shallowSingleProvinceDataList)
-//         return data;
-//       }).catch((err) => {
-//           console.log(err);
-//       }) 
-//     }))
-//     }, [])
-
-//   useEffect(() => {
-//       window.addEventListener("mousedown", handleClickOutside);
-//       return () => {
-//       window.removeEventListener("mousedown", handleClickOutside);
-//       };
-//   });
-
-//   const handleClickOutside = event => {
-//       const { current: wrap } = wrapperRef;
-//       if (wrap && !wrap.contains(event.target)) {
-//         setDisplay(false);
-//       }
-//   };
-
-//   const updateProvince = inputProvince => {
-//       setSearch(inputProvince);
-//       setDisplay(false);
-//   };
-
-//   return (
-//     <div>
-//     <div ref={wrapperRef} className="flex-container flex-column pos-rel">
-//       <div class ='pad'>
-//       <input
-//         className = 'inputProvince'
-//         id="auto"
-//         placeholder="กรุณากรอกจังหวัด"
-//         value={'  '+search}
-//         onChange={event => {
-//             let p = event.target.value
-//             setSearch(event.target.value.replace(/\s/g, ''))}}
-//       />
-//       <div className='bttPad' onClick= { () =>{
-//           addTog === '▲'?setAddTog('▼'):setAddTog('▲')
-//           setDisplay(!display)
-//       }
-//       }><div className = 'bttText'>{addTog}</div></div>
-//       </div>
-//       {display && (
-//         <div className="autoContainer">
-//           { singleProvinceData
-//             .filter( ({province}) => province.indexOf(search.toLowerCase()) > -1)
-//             .map( (each,i) => {
-//               return (
-//                 <div 
-//                   onClick={() => updateProvince(each.province)}
-//                   className="singleProvinceData"
-//                   key={i}
-//                   tabIndex="0"
-//                 >
-//                 <span>{each.province}</span>
-//                 </div>
-//               )
-//             })}
-//         </div>
-//       )}
-//       </div>
-
-//     </div>
-//   );
-// }
-
-// export default ProvinceInput
-
-
 
 import React, { useEffect, useState, useRef } from "react";
 
 import './provinceInput.css'
 
-const ProvinceInput = () => {
+const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>{},setSubDistrict=()=>{}}) => {
   const [display,setDisplay] =useState(false)
   const [singleProvinceData, setSingleProvinceData] = useState([]);
   const [districtData, setDistrictData] = useState([{"amphoe":"คลองท่อม","zipcode":81120,"district":"คลองท่อมเหนือ","province":"กระบี่","amphoe_code":8104,"district_code":810402,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"คลองท่อมใต้","province":"กระบี่","amphoe_code":8104,"district_code":810401,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81170,"district":"คลองพน","province":"กระบี่","amphoe_code":8104,"district_code":810403,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81170,"district":"ทรายขาว","province":"กระบี่","amphoe_code":8104,"district_code":810404,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"พรุดินนา","province":"กระบี่","amphoe_code":8104,"district_code":810406,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"ห้วยน้ำขาว","province":"กระบี่","amphoe_code":8104,"district_code":810405,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"เพหลา","province":"กระบี่","amphoe_code":8104,"district_code":810407,"province_code":81}]);
@@ -121,7 +19,7 @@ const ProvinceInput = () => {
   const wrapperRef = useRef(null);
   const [provinceInterval,setProvinceInterval] = useState([])
   const  province_dataBase_url= 'https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json'
-  //const province_dataBase_url = 'https://api.npoint.io/96c60b86db7a518ace7c'
+
 
 
   useEffect(() => {
@@ -251,6 +149,7 @@ const ProvinceInput = () => {
     //console.log(`dt:${inpDistrict} ap:${inpAmphoe} pv:${inpProvince} `)
     var currentPostalCode = getPostalCode(inpDistrict,inpAmphoe,inpProvince)
     if(currentPostalCode != 0){
+      setPostalCode(currentPostalCode)
       return setInputPostalCode(currentPostalCode)
     }
     else setInputPostalCode("")
@@ -268,7 +167,9 @@ const ProvinceInput = () => {
               id="select-testing"
               class="selectProvince"
               onChange={(event) => {
+                console.log(event.target.value);
                 changePV(event.target.value)
+                setProvince(event.target.value)
               }}
               value = {inputProvince}
             >
@@ -291,6 +192,7 @@ const ProvinceInput = () => {
               class="selectProvince"
               onChange={(event) => {
                 changeAP(event.target.value)
+                setDistrict(event.target.value)
               }}
               value = {inputAmphoe}
             >
@@ -325,7 +227,7 @@ const ProvinceInput = () => {
               class="selectProvince"
               onChange={(event) => {
                 changeDT(event.target.value)
-                console.log(event.target.value)
+                setSubDistrict(event.target.value)
               }}
               value = {inputDistrict}
             >
@@ -349,10 +251,7 @@ const ProvinceInput = () => {
         /> */}
       </div>
 
-     
-      
-
-      
+  
 
         <div class='reg-block'>
           <text class='reg-input-head'>รหัสไปรษณีย์</text>
