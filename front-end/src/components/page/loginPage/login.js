@@ -20,22 +20,21 @@ const Login = () => {
   }
 
   const submitForm = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    // let isValid = true;
+    let isValid = true;
 
-    // for (let i = 0; i < inputRefs.current.length; i++) {
-    //   const valid = inputRefs.current[i].current.validate()
-    //   console.log(valid)
-    //   if (!valid) {
-    //     isValid = false
-    //   }
-    // }
+    for (let i = 0; i < inputRefs.current.length; i++) {
+      const valid = inputRefs.current[i].current.validate()
+      console.log(valid)
+      if (!valid) {
+        isValid = false
+      }
+    }
 
-    // if (!isValid) {
-    //   return
-    // }
-    
+    if (!isValid) {
+      return
+    }
     console.log("Logged In");
     //Carry on as normal
   }
