@@ -182,7 +182,7 @@ const Register = () => {
     }
   }
 
-  const submitRegisterForm = (next) => {
+  const submitRegisterForm = async(next) => {
     
     console.log('submit')
     if(
@@ -195,34 +195,29 @@ const Register = () => {
       addressErrorSign === '✔' &&
       dateErrorSign === '✔'
     ){
-      let configObj = {
-        method: "POST",
-        headers :{
-          "Content-Type":"application/json",
-          "Accept":"application/json"
-        },
-        body:JSON.stringify({
-          Username : Username,
-          Password:Password,
-          Name:Name,
-          Email:Email,
-          Tell:Tell,
-          Birth:Birth,
-          Address:Address,
-          Road:Road,
-          District:district,
-          Sub_District:subDistrict,
-          Province:province,
-          Postal_code:postalCode
-        })
-      };
-      fetch('http://localhost:4000/api/add',configObj)
-      .then(function(response){
-        return response.json();
-      })
-      .then(toy => {
-        console.log(toy);
-      })
+
+
+      const res = await fetch('http://localhost:4000/api/get',{
+          method: 'GET',
+          headers :{
+            "Content-Type":"application/json",
+            "Accept":"application/json"
+          },
+          body:JSON.stringify({
+            Username : Username,
+            Password:Password,
+            Name:Name,
+            Email:Email,
+            Tell:Tell,
+            Birth:Birth,
+            Address:Address,
+            Road:Road,
+            District:district,
+            Sub_District:subDistrict,
+            Province:province,
+            Postal_code:postalCode
+          })
+        });
 
       let path = `/`; 
       history.push(path);

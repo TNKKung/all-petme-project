@@ -22,12 +22,12 @@ const Login = () => {
     setData(prev => ({ ...prev, [name]: value }))
   }
 
-  const submitForm = (e) => {
+  const submitForm = async(e) => {
     e.preventDefault();
 
     
-    const res = fetch('http://localhost:4000/api/get',{
-          method: 'GET',
+    const res = await fetch('http://localhost:4000/api/get/login',{
+          method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
@@ -39,10 +39,9 @@ const Login = () => {
             }),
         });
 
+    
 
-
-    console.log(data.username);
-    console.log(data.password);
+    console.log(res);
 
     console.log("Logged In");
     //Carry on as normal

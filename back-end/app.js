@@ -12,15 +12,15 @@ expressApp.use((req, res, next) => {
     return next()
 });
 
-expressApp.get("/api/get/login",function(req,res){
+expressApp.post("/api/get/login",function(req,res){
     const {
         Username,
         Password,
     } = req.body;
 
     MongoClient.connect(url, function(err, db) {
-        var dbo = db.db("User");
-        dbo.collection("user").find({"Username" : Username}).toArray(function(err, result) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("User").find({"Username" : Username}).toArray(function(err, result) {
             if(result.length){
                 if(result[0].Username === Username && result[0].Password === Password ){
                     res.send(200);
