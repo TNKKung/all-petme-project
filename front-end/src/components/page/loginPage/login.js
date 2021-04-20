@@ -6,8 +6,11 @@ import InputField from './InputField';
 import Login_icon from './login_icon.png'
 import '../../../fonts/Abel-Regular.ttf'; 
 import { Link } from 'react-router-dom';
+import fetch from 'unfetch';
 
 const Login = () => {
+
+
 
   const inputRefs = React.useRef([
     React.createRef(), React.createRef()
@@ -22,23 +25,31 @@ const Login = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    let isValid = true;
+    
+    const res = fetch('http://localhost:4000/api/get',{
+          method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+              Username : data.username,
+              Password: data.password,
 
-    for (let i = 0; i < inputRefs.current.length; i++) {
-      const valid = inputRefs.current[i].current.validate()
-      console.log(valid)
-      if (!valid) {
-        isValid = false
-      }
-    }
+            }),
+        });
 
-    if (!isValid) {
-      return
-    }
+
+
+    console.log(data.username);
+    console.log(data.password);
+
     console.log("Logged In");
     //Carry on as normal
   }
-
+  React.useEffect(()=>{
+    console.log(data);
+  },[data]);
   return (
     <div className="Login">
       <img src = {Login_icon} className = 'logo_icon_style'/>
