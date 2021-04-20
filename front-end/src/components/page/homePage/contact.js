@@ -20,7 +20,9 @@ import Tel_icon_src from './img/tel_icon.png'
 import Mail_icon_src from './img/mail_icon.png'
 
 import about_background_src from './img/welcome_dog.png' //need to edit
-
+import Address_icon_black_src from './img/address_icon_black.png'
+import Tel_icon_black_src from './img/tel_icon_black.png'
+import Mail_icon_black_src from './img/mail_icon_black.png'
 
 
 library.add(fas, fab, far);
@@ -150,15 +152,15 @@ const Contact = ()=> {
                 <div className = 'addressBox'>
                     <h1 className = 'headText'>ที่อยู่</h1>
                     <div className = 'textBox'>
-                        <img className='logoAddress' src={Bell_icon_src}></img>
+                        <img className='logoAddress' src={Address_icon_black_src}></img>
                         <p className = 'textAddress'>เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพมหานคร ประเทศไทย 10520</p>
                     </div>
                     <div className = 'textBox'>
-                        <img className='logoAddress' src={Bell_icon_src}></img>
+                        <img className='logoAddress' src={Tel_icon_black_src}></img>
                         <p className = 'textAddress'>xxx-xxx-xxxx</p>
                     </div>
                     <div className = 'textBox'>
-                        <img className='logoAddress' src={Bell_icon_src}></img>
+                        <img className='logoAddress' src={Mail_icon_black_src}></img>
                         <p className = 'textAddress'>petMe@gmail.com</p>
                     </div>
 

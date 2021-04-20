@@ -61,8 +61,7 @@ const About = ()=> {
                     <li class = {classStyle}><div className='current-ast'><div class = 'paddy'>เกี่ยวกับ</div></div></li>
                     <li class = {classStyle}><div className={astStyle}>ซื้อขาย</div></li>
                     <li class = {classStyle}><div className={astStyle}>บริจาค</div></li>
-                    <li class = {classStyle}>
-                    <Link to='/contract'><div className={astStyle}>ติดต่อเรา</div></Link></li>
+                    <li class = {classStyle}><div className={astStyle}>ติดต่อเรา</div></li>
 
 
                     <li class = 'menu-header logo button'><button class = 'a-center' href='#'><img class ='bell-icon' src={Bell_icon_src}/></button></li>
