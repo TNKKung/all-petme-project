@@ -5,24 +5,16 @@
   position: relative;
 }
 .marketPage-part2 {
-  background: rgb(96, 197, 121);
-  height: 200px;
+  /* background: linear-gradient(top, #f38b7b, #f07268); */
+  background-image: linear-gradient(90deg, #f38b7b, #f07268);
+  /* background: rgb(59, 201, 106); */
+  height: 600px;
 }
 .marketPage-part3 {
-  background: rgb(82, 115, 185);
+  background: rgb(255, 255, 255);
 }
 
-.marketPage-part3-cards {
-  max-width: 1440px;
-  width: 100%;
-  height: 150%;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 280px);
-  grid-row-gap: 2rem;
-  justify-content: space-between;
-}
+/* ----------------------------part1----------------------- */
 
 .marketPage-part1-img {
   width: 100%;
@@ -51,6 +43,74 @@
 .marketPage-part1-line {
   background: #f4f0d2;
   width: 1000px;
-  height: 6px;
+  height: 4px;
   margin: 10px;
+}
+
+/* ---------------------- part2-------------------- */
+.marketPage-part2-cover {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 4rem;
+}
+.marketPage-part2-text1 {
+  font-size: 70px;
+  color: #ffff;
+  letter-spacing: 0.05em;
+}
+.marketPage-part2-line {
+  background: #f4f0d2;
+  width: 200px;
+  height: 4px;
+  margin: 10px;
+}
+.marketPage-part2-box-cover {
+  /* background: #65cf56; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.marketPage-part2-img {
+  width: 300px;
+}
+.marketPage-part2-box {
+  background: #fdfcdc;
+  width: 920px;
+  height: 100%;
+  border-radius: 1rem;
+  margin-left: 4rem;
+  opacity: 30%;
+  padding: 2rem 4rem;
+}
+.marketPage-part2-inBox1 {
+  background-color: #fed9b7;
+  height: 50px;
+  width: 350px;
+  border-radius: 1.5rem;
+  font-size: 30px;
+  padding-left: 1rem;
+}
+.marketPage-part2-inBox2 {
+  font-size: 24px;
+  margin: 2rem 1rem;
+  /* color: #ffff; */
+}
+
+/* ----------------------part3---------------------- */
+.marketPage-part3-cards {
+  max-width: 1440px;
+  width: 100%;
+  height: 150%;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 280px);
+  grid-row-gap: 2rem;
+  justify-content: space-between;
 }

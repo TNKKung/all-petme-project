@@ -3,6 +3,7 @@
   height: 380px;
   background: white;
   border-radius: 2rem;
+  box-shadow: 0px 2px 10px #888888;
 }
 
 .petcard-img {
@@ -11,8 +12,24 @@
   object-fit: cover;
   border-radius: 2rem;
 }
-
 .petcard-detail {
   display: flex;
+  justify-content: space-around;
+  /* background: rgb(72, 187, 88); */
+}
+.petcard-detail-left {
+  display: flex;
   height: 80px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  /* background: rgb(194, 89, 89); */
+}
+.petcard-detail-right {
+  /* background: rgb(103, 78, 195); */
+  height: 80px;
+  width: 100px;
+  font-size: 18px;
 }

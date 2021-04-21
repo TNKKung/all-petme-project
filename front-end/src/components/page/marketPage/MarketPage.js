@@ -6,14 +6,13 @@ import PetCard from '../../PetCard/PetCard.js'
 
 function MarketPage() {
   const dog = [
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
-    { imgName: 'part3.png', breed: 'บีเกิ้ล' },
+    {
+      imgName: 'part3.png',
+      breed: 'สุนัขพันธ์ : บีเกิ้ล',
+      cost: 'ราคา  3500 บาท',
+      imgProfile: 'picture',
+      profile: 'คุณต้อม',
+    },
   ]
   return (
     <div>
@@ -27,7 +26,21 @@ function MarketPage() {
           </div>
         </div>
       </div>
-      <div className='marketPage-part2'>part2</div>
+      <div className='marketPage-part2'>
+        <div className='marketPage-part2-cover'>
+          <div className='marketPage-part2-text1'>เลือกพันธุ์สุนัข</div>
+          <div className='marketPage-part2-line'></div>
+          <div className='marketPage-part2-box-cover'>
+            <img src={part2} className='marketPage-part2-img' />
+            <div className='marketPage-part2-box'>
+              <div className='marketPage-part2-inBox1'>เลือกพันธุ์สุนัข</div>
+              <div className='marketPage-part2-inBox2 '>
+                เลือกเลี้ยงพันธุ์สุนัขให้เหมาะกับคุณ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
           {dog.map((iter, idx) => {
