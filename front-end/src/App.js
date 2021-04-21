@@ -1,23 +1,23 @@
-import React from "react"
-import { render } from "@testing-library/react"
-import Home from "./components/page/homePage/home.js"
-import Home2 from "./components/page/homePage/home2.js"
-import About from "./components/page/homePage/about.js"
-import Contact from "./components/page/homePage/contact.js"
-import Dealing from "./components/page/homePage/dealing.js"
-import Donating from "./components/page/homePage/donating.js"
-import Login from "./components/page/loginPage/login.js"
-import Register from "./components/page/loginPage/register.js"
-import ResetPass from "./components/page/loginPage/resetPass.js"
-
+import React from 'react'
+import { render } from '@testing-library/react'
+import Home from './components/page/homePage/home.js'
+import Home2 from './components/page/homePage/home2.js'
+import About from './components/page/homePage/about.js'
+import Contact from './components/page/homePage/contact.js'
+import Dealing from './components/page/homePage/dealing.js'
+import Donating from './components/page/homePage/donating.js'
+import Login from './components/page/loginPage/login.js'
+import Register from './components/page/loginPage/register.js'
+import ResetPass from './components/page/loginPage/resetPass.js'
 
 import {
   BrowserRouter,
   Switch,
   Route,
   Link,
-  useRouteMatch
-} from "react-router-dom";
+  useRouteMatch,
+} from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar.js'
 
 // function App() {
 //   return (
@@ -26,24 +26,21 @@ import {
 // }
 
 const App = () => {
-  
-  return (  
+  return (
     <BrowserRouter>
-      
+      <Navbar />
       <div>
         <div>
-          <Route exact path="/" component={Home2} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route exact path='/' component={Home2} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
         </div>
       </div>
-  
     </BrowserRouter>
   )
 }
 
 export default App
-
 
 // import React from "react";
 // import {
@@ -91,7 +88,6 @@ export default App
 //     </Router>
 //   );
 // }
-
 
 // function Topics() {
 //   // The `path` lets us build <Route> paths that are
