@@ -21,11 +21,6 @@ import Office_dog_src from './img/office_dog.png'
 import Danated_dog_src from './img/donated_dog.jpg'
 import Welcome_background_src from './img/welcome_dog.png'
 
-import Bottom_logo_icon from './img/bottom-icon.png'
-import Address_icon_src from './img/address_icon.png'
-import Tel_icon_src from './img/tel_icon.png'
-import Mail_icon_src from './img/mail_icon.png'
-
 library.add(fas, fab, far)
 
 const Home2 = () => {
@@ -123,7 +118,7 @@ const Home2 = () => {
             </div>
           </div>
         </div>
-        <div className='contact-section'>
+        {/* <div className='contact-section'>
           <div class='bottom-icon-pad'>
             <img class='bottom-icon' src={Bottom_logo_icon}></img>
             <div class='bottom-icon-text'>PetMe</div>
@@ -158,7 +153,7 @@ const Home2 = () => {
               <div class='contact-text'>ประเทศไทย 10520</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

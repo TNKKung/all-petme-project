@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Logo_icon_src from '../page/homePage/img/top-icon.png'
-import Bell_icon_src from '../page/homePage/img/bell-icon.png'
-import Profile_icon_src from '../page/homePage/img/profile.jpg'
+import Logo_icon_src from './img/top-icon.png'
+import Bell_icon_src from './img/bell-icon.png'
+import Profile_icon_src from './img/profile.jpg'
 
 function Navbar() {
   return (

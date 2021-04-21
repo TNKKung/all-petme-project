@@ -1,0 +1,63 @@
+.contact-section {
+  background-color: #0a272c;
+
+  justify-content: space-around;
+  height: 300px;
+}
+.bottom-icon-pad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-icon {
+  width: 80px;
+  height: 80px;
+  margin: 20px;
+}
+.bottom-icon-text {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 80px;
+  color: white;
+}
+.contact-pad {
+  margin: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.contact-text {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+
+  color: white;
+  text-align: center;
+}
+
+.contact-pad-roll-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.contact-pad-roll-2 {
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.tel-icon {
+  width: 21px;
+}
+.mail-icon {
+  width: 23px;
+}
+.address-icon {
+  width: 32px;
+}

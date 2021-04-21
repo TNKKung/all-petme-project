@@ -18,6 +18,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar.js'
+import Footer from './components/Footer/Footer.js'
 
 // function App() {
 //   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path='/register' component={Register} />
         </div>
       </div>
+      <Footer />
     </BrowserRouter>
   )
 }
