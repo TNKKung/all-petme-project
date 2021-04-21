@@ -35,13 +35,14 @@ const Login = () => {
             body: JSON.stringify({
               Username : data.username,
               Password: data.password,
-
             }),
         });
 
-    
+      
 
-    console.log(res);
+
+  
+
 
     console.log("Logged In");
     //Carry on as normal

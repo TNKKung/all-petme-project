@@ -17,7 +17,7 @@
     "react": "^17.0.1",
     "react-alice-carousel": "^2.4.0",
     "react-awesome-slider": "^4.1.0",
-    "react-datepicker": "^3.7.0",
+    "react-datepicker": "^3.8.0",
     "react-dom": "^17.0.1",
     "react-modern-datepicker": "^1.1.0",
     "react-popup-alert": "^2.0.0",
@@ -52,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@rckeller/cypress-unfetch": "^1.0.1"
   }
 }

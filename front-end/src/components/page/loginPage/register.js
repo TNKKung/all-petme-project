@@ -197,8 +197,8 @@ const Register = () => {
     ){
 
 
-      const res = await fetch('http://localhost:4000/api/get',{
-          method: 'GET',
+      const res = await fetch('http://localhost:4000/api/add/regisUser',{
+          method: 'POST',
           headers :{
             "Content-Type":"application/json",
             "Accept":"application/json"
