@@ -1,0 +1,56 @@
+.marketPage-part1 {
+  background: #6a302c;
+  height: 700px;
+  display: flex;
+  position: relative;
+}
+.marketPage-part2 {
+  background: rgb(96, 197, 121);
+  height: 200px;
+}
+.marketPage-part3 {
+  background: rgb(82, 115, 185);
+}
+
+.marketPage-part3-cards {
+  max-width: 1440px;
+  width: 100%;
+  height: 150%;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 280px);
+  grid-row-gap: 2rem;
+  justify-content: space-between;
+}
+
+.marketPage-part1-img {
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+}
+.marketPage-part1-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.marketPage-part1-text1 {
+  font-size: 90px;
+  color: #ffff;
+  letter-spacing: 0.05em;
+}
+.marketPage-part1-text2 {
+  font-size: 40px;
+  color: #f4f0d2;
+  letter-spacing: 0.05em;
+}
+.marketPage-part1-line {
+  background: #f4f0d2;
+  width: 1000px;
+  height: 6px;
+  margin: 10px;
+}

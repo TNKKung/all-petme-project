@@ -1,0 +1,18 @@
+.petcard-wrapper {
+  width: 280px;
+  height: 380px;
+  background: white;
+  border-radius: 2rem;
+}
+
+.petcard-img {
+  width: 280px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.petcard-detail {
+  display: flex;
+  height: 80px;
+}

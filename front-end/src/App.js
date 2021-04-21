@@ -2,9 +2,10 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import Home from './components/page/homePage/home.js'
 import Home2 from './components/page/homePage/home2.js'
+import MarketPage from './components/page/MarketPage/MarketPage.js'
 import About from './components/page/homePage/about.js'
 import Contact from './components/page/homePage/contact.js'
-import Dealing from './components/page/homePage/dealing.js'
+// import Dealing from './components/page/homePage/dealing.js'
 import Donating from './components/page/homePage/donating.js'
 import Login from './components/page/loginPage/login.js'
 import Register from './components/page/loginPage/register.js'
@@ -35,6 +36,7 @@ const App = () => {
           <Route exact path='/' component={Home2} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/market' component={MarketPage} />
         </div>
       </div>
       <Footer />

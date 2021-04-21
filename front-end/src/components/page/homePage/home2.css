@@ -10,15 +10,8 @@ body {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'Kanit';
-  src: url('../../../fonts/Kanit-Regular.ttf');
-  font-style: normal;
-  font-weight: 400;
-}
-
 /* #Bnavbar-bg {
-  font-family: 'Kanit';
+   
   background: linear-gradient(0deg, #00AFB9, #00AFB9), #0081A7;
   box-shadow: 0px 2px 4px rgba(0, 129, 167, 0.25);
   height: 79px;
@@ -28,7 +21,7 @@ body {
 /*------------------------------------------------- N A V B A R -----------------------------------------------*/
 /* 
 .menu {
-  font-family: 'Kanit';
+   
   text-decoration: none;
   list-style-type: none;
   align-items: center;
@@ -138,7 +131,6 @@ body {
   /* border: 2px solid rgb(235, 235, 235); */
 }
 .welcome-Header {
-  font-family: 'Kanit';
   font-size: 64px;
   color: #ffffff;
 }
@@ -152,7 +144,6 @@ body {
   justify-content: center;
 }
 .welcome-text {
-  font-family: 'Kanit';
   font-size: 32px;
   color: #00d4e0;
   margin: 20px;
@@ -182,7 +173,7 @@ body {
   height: 80px;
   width: 315px;
   font-size: 26px;
-  font-family: 'Kanit';
+
   color: #ffffff;
   background: rgba(97, 97, 97, 0.6);
   backdrop-filter: blur(4px);
@@ -223,7 +214,6 @@ body {
 }
 
 .activity-header {
-  font-family: 'Kanit';
   font-size: 42px;
   font-style: Bold;
   color: #0081a7;
@@ -250,7 +240,6 @@ body {
   -khtml-box-shadow: 5px 5px 5px #ccc;
 }
 .activity-details {
-  font-family: 'Kanit';
   font-size: 32px;
   color: #00afb9;
   text-align: center;
@@ -265,7 +254,7 @@ body {
   box-sizing: border-box;
 
   font-size: 26px;
-  font-family: 'Kanit';
+
   color: #0081a7;
   background: rgba(255, 255, 255);
   text-align: center;
@@ -283,7 +272,7 @@ body {
   box-sizing: border-box;
 
   font-size: 26px;
-  font-family: 'Kanit';
+
   color: #0081a7;
   background: rgba(255, 255, 255);
   text-align: center;
@@ -300,7 +289,7 @@ body {
   box-sizing: border-box;
 
   font-size: 26px;
-  font-family: 'Kanit';
+
   color: #0081a7;
   background: rgba(255, 255, 255);
   text-align: center;
@@ -353,7 +342,6 @@ body {
   margin: 20px;
 }
 .bottom-icon-text {
-  font-family: 'Kanit';
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
@@ -370,7 +358,6 @@ body {
   align-items: center;
 }
 .contact-text {
-  font-family: 'Kanit';
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
@@ -405,7 +392,6 @@ ul {
 }
 
 .toggle-button {
-  font-family: 'Kanit';
   color: white;
   align-items: center;
   background: transparent;
@@ -493,7 +479,6 @@ ul {
   border-radius: 50px;
 }
 .current-ast {
-  font-family: 'Kanit';
   vertical-align: middle;
   color: white;
   align-items: center;
@@ -506,7 +491,6 @@ ul {
   border-radius: 50px;
 }
 .ast {
-  font-family: 'Kanit';
   vertical-align: middle;
   color: white;
   align-items: center;
@@ -519,7 +503,6 @@ ul {
   border-radius: 50px;
 }
 .ast-fullbg {
-  font-family: 'Kanit';
   color: white;
   text-decoration: none;
   align-items: center;
@@ -593,7 +576,6 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 40px;
     color: #ffffff;
   }
@@ -608,7 +590,6 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 25px;
     color: #00d4e0;
     margin: 20px;
@@ -639,7 +620,7 @@ ul {
     height: 60px;
     width: 150px;
     font-size: 20px;
-    font-family: 'Kanit';
+
     color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
@@ -851,7 +832,6 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
     color: #ffffff;
   }
@@ -865,7 +845,6 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 32px;
     color: #00d4e0;
     margin: 20px;
@@ -896,7 +875,7 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
+
     color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
@@ -935,7 +914,6 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
     color: #ffffff;
   }
@@ -949,7 +927,6 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 30px;
     color: #00d4e0;
     margin: 20px;
@@ -980,7 +957,7 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
+
     color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
@@ -1085,7 +1062,6 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
     color: #ffffff;
   }
@@ -1099,7 +1075,6 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 32px;
     color: #00d4e0;
     margin: 20px;
@@ -1130,7 +1105,7 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
+
     color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);

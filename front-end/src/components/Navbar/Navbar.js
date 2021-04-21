@@ -36,7 +36,7 @@ function Navbar() {
         </li>
         <li>
           <NavLink
-            to='/dealing'
+            to='/market'
             className='navbar-item'
             activeClassName='navbar-item-active'
           >
