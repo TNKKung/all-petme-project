@@ -6,7 +6,7 @@ import MarketPage from './components/page/MarketPage/MarketPage.js'
 import About from './components/page/homePage/about.js'
 import Contact from './components/page/homePage/contact.js'
 // import Dealing from './components/page/homePage/dealing.js'
-import Donating from './components/page/homePage/donating.js'
+import DonatePage from './components/page/DonatePage/DonatePage.js'
 import Login from './components/page/loginPage/login.js'
 import Register from './components/page/loginPage/register.js'
 import ResetPass from './components/page/loginPage/resetPass.js'
@@ -37,6 +37,7 @@ const App = () => {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/market' component={MarketPage} />
+          <Route path='/donate' component={DonatePage} />
         </div>
       </div>
       <Footer />

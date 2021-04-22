@@ -10,8 +10,34 @@ function MarketPage() {
       imgName: 'part3.png',
       breed: 'สุนัขพันธ์ : บีเกิ้ล',
       cost: 'ราคา  3500 บาท',
-      imgProfile: 'picture',
       profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'part3.png',
+      breed: 'สุนัขพันธ์ : บีเกิ้ล',
+      cost: 'ราคา  3500 บาท',
+      profile: 'คุณต้อม',
+      garuntee: true,
+    },
+    {
+      imgName: 'part3.png',
+      breed: 'สุนัขพันธ์ : บีเกิ้ล',
+      cost: 'ราคา  3500 บาท',
+      profile: 'คุณต้อม',
+      garuntee: true,
+    },
+    {
+      imgName: 'part3.png',
+      breed: 'สุนัขพันธ์ : บีเกิ้ล',
+      cost: 'ราคา  3500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'part3.png',
+      breed: 'สุนัขพันธ์ : บีเกิ้ล',
+      cost: 'ราคา  3500 บาท',
+      profile: 'คุณต้อม',
+      garuntee: true,
     },
   ]
   return (

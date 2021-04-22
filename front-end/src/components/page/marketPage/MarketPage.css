@@ -80,12 +80,12 @@
   width: 300px;
 }
 .marketPage-part2-box {
-  background: #fdfcdc;
+  background: #f5a08e;
   width: 920px;
   height: 100%;
   border-radius: 1rem;
   margin-left: 4rem;
-  opacity: 30%;
+  /* opacity: 30%; */
   padding: 2rem 4rem;
 }
 .marketPage-part2-inBox1 {

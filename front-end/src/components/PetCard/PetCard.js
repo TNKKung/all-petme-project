@@ -1,18 +1,19 @@
 import React from 'react'
 import './PetCard.css'
 
-function PetCard(props) {
+function PetCard({ imgName, breed, cost, profile, garuntee }) {
   return (
     <div className='petcard-wrapper'>
-      <img src={'./img/' + props.imgName} className='petcard-img' />
+      {garuntee && <div className='petcard-garuntee'>การันตี</div>}
+      <img src={'./img/' + imgName} className='petcard-img' />
       <div className='petcard-detail'>
         <div className='petcard-detail-left'>
-          {props.breed}
-          {props.cost}
+          {breed}
+          {cost}
         </div>
         <div className='petcard-detail-right'>
-          {props.imgProfile}
-          {props.profile}
+          <img className='petcard-detail-right-imgProfile' />
+          {profile}
         </div>
       </div>
     </div>

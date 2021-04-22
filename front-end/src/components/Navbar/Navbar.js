@@ -45,7 +45,7 @@ function Navbar() {
         </li>
         <li>
           <NavLink
-            to='/donating'
+            to='/donate'
             className='navbar-item'
             activeClassName='navbar-item-active'
           >
