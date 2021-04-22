@@ -11,11 +11,11 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
   const [amphoeData, setAmphoeData] = useState([]);
   
   const [provinceData, setProvinceData] = useState([]);
-  const [inputPostalCode, setInputPostalCode] = useState("81120")
-  const [inputAmphoe, setInputAmphoe] = useState("คลองท่อม")
-  const [inputDistrict, setInputDistrict] = useState("คลองท่อมเหนือ")
+  const [inputPostalCode, setInputPostalCode] = useState("")
+  const [inputAmphoe, setInputAmphoe] = useState("")
+  const [inputDistrict, setInputDistrict] = useState("")
 
-  const [inputProvince, setInputProvince] = useState('กระบี่')
+  const [inputProvince, setInputProvince] = useState('')
   const wrapperRef = useRef(null);
   const [provinceInterval,setProvinceInterval] = useState([])
   const  province_dataBase_url= 'https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json'

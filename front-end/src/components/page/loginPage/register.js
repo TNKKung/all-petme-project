@@ -197,27 +197,30 @@ const Register = () => {
     ){
 
 
-      const res = await fetch('http://localhost:4000/api/add/regisUser',{
+      const res = await fetch('http://localhost:4000/api/add/registerUser',{
           method: 'POST',
           headers :{
             "Content-Type":"application/json",
             "Accept":"application/json"
           },
           body:JSON.stringify({
-            Username : Username,
-            Password:Password,
-            Name:Name,
-            Email:Email,
-            Tell:Tell,
-            Birth:Birth,
-            Address:Address,
-            Road:Road,
-            District:district,
-            Sub_District:subDistrict,
-            Province:province,
-            Postal_code:postalCode
+            username : Username,
+            password:Password,
+            name:Name,
+            email:Email,
+            mobileNumber:Tell,
+            birth:Birth,
+            address:Address,
+            road:Road,
+            district:district,
+            subDistrict:subDistrict,
+            province:province,
+            postalCode:postalCode
           })
         });
+        
+        const a = res.json;
+        console.log(a);
 
       let path = `/`; 
       history.push(path);

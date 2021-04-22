@@ -12,6 +12,21 @@ expressApp.use((req, res, next) => {
     return next()
 });
 
+// expressApp.post("/api/get/login",function(req,res){
+//     const {
+//         Username,
+//         Password,
+//     } = req.body;
+
+//     MongoClient.connect(url, function(err, db) {
+//         var dbo = db.db("PetMeApp");
+//         dbo.collection("Pet").find().toArray(function(err, result) {
+//             res.send(result);
+//             db.close();
+//         });    
+//     }); 
+// });
+
 expressApp.post("/api/get/login",function(req,res){
     const {
         Username,
@@ -20,20 +35,9 @@ expressApp.post("/api/get/login",function(req,res){
 
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
-        dbo.collection("User").find({"Username" : Username}).toArray(function(err, result) {
-            if(result.length){
-                if(result[0].Username === Username && result[0].Password === Password ){
-                    res.send(200);
-                }
-                else{
-                    res.send({Message:'Password Error'});
-                }
-            }
-            else{
-                res.send('Error');
-            }
-            db.close();
-        });    
+        var a =dbo.collection("Pet").find().toArray();
+        console.log(a);
+        res.send(a); 
     }); 
 });
 
