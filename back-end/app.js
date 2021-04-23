@@ -257,6 +257,18 @@ expressApp.post("/api/add/report",function(req,res) {
     }
 });
 
+expressApp.post("/api/get/dataPet",function(req,res) {
+
+
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Pet").find().toArray(function(err, result) {
+            res.send(result);
+            db.close();
+        });    
+    }); 
+});
+
 expressApp.put("/api/update",function(req,res) {
     const {
         username,
