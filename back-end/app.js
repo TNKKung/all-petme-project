@@ -258,15 +258,25 @@ expressApp.post("/api/add/report",function(req,res) {
 });
 
 expressApp.post("/api/get/dataPet",function(req,res) {
-
+    var data = [];
 
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
         dbo.collection("Pet").find().toArray(function(err, result) {
-            res.send(result);
+            var i;
+            for(i=0;i<result.length;i++){
+                data.push({
+                    petId : result[i].petId,
+                    cost : result[i].cost,
+                    dogBreed : result[i].dogBreed,
+                    sellerUser : result[i].sellerUser,
+                });
+            }
+            res.send(data); 
             db.close();
         });    
-    }); 
+    });
+    
 });
 
 expressApp.put("/api/update",function(req,res) {
