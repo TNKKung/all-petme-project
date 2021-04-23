@@ -36,6 +36,10 @@ body {
   opacity: 0.5;
 } */
 
+.navbar-wrapper {
+  background: rgb(153, 90, 90);
+}
+
 .popup-box-large {
   padding: 1rem;
   display: flex;

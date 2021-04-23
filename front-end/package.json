@@ -12,6 +12,8 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "bootstrap": "^4.6.0",
+    "craco": "0.0.3",
+    "craco-plugin-scoped-css": "^1.1.1",
     "jquery": "^3.6.0",
     "mdbreact": "^5.0.1",
     "react": "^17.0.1",
@@ -26,9 +28,9 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

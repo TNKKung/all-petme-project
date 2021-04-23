@@ -1,4 +1,4 @@
-import './home2.css'
+import './home2.scoped.css'
 import Slider from './slider'
 import React, { useState, useEffect } from 'react'
 import Popup from '../../Popup/Popup'
@@ -172,7 +172,7 @@ const Home2 = () => {
           X
         </div>
         <p className='popup-text1'>ข้อตกลงการซื้อขายและการบริจาค</p>
-        <div className='popup-line'></div>
+        <div className='popup-line' />
         <p className='popup-text2'>
           - การเลือกรูปแบบลงบริจาคสุนัข ผู้ลงจะไม่สามารถสร้างกำไรใดๆได้
           และจำเป็น ต้องสร้างคำถามสำหรับคัดเลือกผู้ซื้ออย่างน้อย 2

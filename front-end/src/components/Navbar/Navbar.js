@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import './Navbar.css'
+import './Navbar.scoped.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Logo_icon_src from './img/top-icon.png'
