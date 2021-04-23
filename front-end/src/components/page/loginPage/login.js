@@ -39,7 +39,10 @@ const Login = () => {
         });
 
       
-
+        const a = await res.json();
+        console.log(a);
+        console.log(a[0]);
+        console.log(a[0].petId);
 
   
 
@@ -63,7 +66,7 @@ const Login = () => {
           onChange={handleChange}
           validation={"required|min:6|max:12,ชื่อผู้ใช้งาน"}
         />
-        <InputField
+        <InputField type = "password"
           ref={inputRefs.current[1]}
           name="password"
           placeholder="รหัสผ่าน"

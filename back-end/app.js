@@ -3,7 +3,9 @@ const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+const port = process.env.PORT || 4000
 
 expressApp.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -33,12 +35,24 @@ expressApp.post("/api/get/login",function(req,res){
         Password,
     } = req.body;
 
+    var data = [];
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
-        var a =dbo.collection("Pet").find().toArray();
-        console.log(a);
-        res.send(a); 
-    }); 
+        dbo.collection("Pet").find().toArray(function(err, result) {
+            for(var i=0;i<result.length;i++){
+                data.push({
+                    petId : result[i].petId,
+                    cost : result[i].cost,
+                    dogBreed : result[i].dogBreed,
+                    customerUser : result[i].customerUser,
+                    sellerUser : result[i].sellerUser,
+                    statusCheck : false
+                });
+            }
+            res.send(data); 
+            db.close();
+        });    
+    });
 });
 
 expressApp.post("/api/get/profile",function(req,res){
@@ -197,7 +211,7 @@ expressApp.post("/api/add/contact",function(req,res) {
     } = req.body;
 
     console.log(req.body);
-    if(Username.lenght <= 2){
+    if(name.lenght <= 2){
         res.status(400).send("Error");
     }
     else{
@@ -209,7 +223,7 @@ expressApp.post("/api/add/contact",function(req,res) {
             "message" : message
         }
         res.send(user);
-        console.log(Username);
+
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("Admin");
@@ -232,7 +246,7 @@ expressApp.post("/api/add/report",function(req,res) {
     } = req.body;
 
     console.log(req.body);
-    if(Username.lenght <= 2){
+    if(name.lenght <= 2){
         res.status(400).send("Error");
     }
     else{
@@ -244,12 +258,9 @@ expressApp.post("/api/add/report",function(req,res) {
             "message" : message
         }
         res.send(user);
-        console.log(Username);
         MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
             var dbo = db.db("Admin");
             dbo.collection("Contact").insertOne(user, function(err, res) {
-              if (err) throw err;
               console.log("Add one people");
               db.close();
             });
@@ -340,6 +351,6 @@ expressApp.put("/api/update",function(req,res) {
     });
 });
 
-expressApp.listen(4000,function(){
+expressApp.listen(port,function(){
     console.log("Listen 4000");
 });

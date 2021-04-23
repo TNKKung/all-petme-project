@@ -219,8 +219,7 @@ const Register = () => {
           })
         });
         
-        const a = res.json;
-        console.log(a);
+        
 
       let path = `/`; 
       history.push(path);
@@ -257,7 +256,7 @@ const Register = () => {
             <div class='reg-block'>
               <text class='reg-input-head'>รหัสผ่าน</text>
               <div className="reg-input-wrapper">
-              <input
+              <input type = "password"
                 onChange={(e) => {
                   let curPassvalue = e.target.value
                   let tempPassSTR = curPassvalue.replace(/[^0-9A-Za-z]/ig, '')
