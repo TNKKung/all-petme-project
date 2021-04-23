@@ -70,75 +70,75 @@ const About = ()=> {
 
                 </li>
             </nav>
-            <div className= 'sizePane'>
+            <div className= 'about-sizePane'>
             
             {/* ------------------เกี่ยวกับ--------------- */}
-            <div className = 'pageStyle'> 
-                <div class='Topic'>
-                    <img class='aboutTopic-bg' src={about_background_src}></img>
-                    <div class='aboutTopic'>
-                        <p class='aboutTopic-text'>เกี่ยวกับเรา</p>
+            <div className = 'about-pageStyle'> 
+                <div class='about-Topic'>
+                    <img class='about-aboutTopic-bg' src={about_background_src}></img>
+                    <div class='about-aboutTopic'>
+                        <p class='about-aboutTopic-text'>เกี่ยวกับเรา</p>
                     </div>
                 </div>
-                <div className = 'aboutHeader'>
-                    <h1 class='font-aboutHeader'>ทีมของเรา</h1>
+                <div className = 'about-aboutHeader'>
+                    <h1 class='about-font-aboutHeader'>ทีมของเรา</h1>
                 </div>
                 
-                <div className = 'TeamMemberGrid'>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {Profile_icon_src}></img>
+                <div className = 'about-TeamMemberGrid'>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {Profile_icon_src}></img>
                         </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>พิพิธพงศ์ จิตภักดิ์ไทย(เดย์)</p>
-                            <p className = 'memberName-Text'>61010750</p>
-                        </div>
-                    </div>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {MMMPhoto}></img>
-                        </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>วิภาดา มีสกุล(มุก)</p>
-                            <p className = 'memberName-Text'>61010972</p>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>พิพิธพงศ์ จิตภักดิ์ไทย(เดย์)</p>
+                            <p className = 'about-memberName-Text'>61010750</p>
                         </div>
                     </div>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {AAAPhoto}></img>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {MMMPhoto}></img>
                         </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>กฤติกามาส สุโนภักดิ์(เอริก้า)</p>
-                            <p className = 'memberName-Text'>62010029</p>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>วิภาดา มีสกุล(มุก)</p>
+                            <p className = 'about-memberName-Text'>61010972</p>
+                        </div>
+                    </div>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {AAAPhoto}></img>
+                        </div>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>กฤติกามาส สุโนภักดิ์(เอริก้า)</p>
+                            <p className = 'about-memberName-Text'>62010029</p>
                         </div>
                     </div>
                 </div>
-                <div className = 'TeamMemberGrid'>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {BBBPhoto}></img>
+                <div className = 'about-TeamMemberGrid'>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {BBBPhoto}></img>
                         </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>ชาติกุล รัตนฤทธิกุล(บริล)</p>
-                            <p className = 'memberName-Text'>62010193</p>
-                        </div>
-                    </div>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {Profile_icon_src}></img>
-                        </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>ณัฐภูมิ เพ็ชรชนะ(ปอนด์)</p>
-                            <p className = 'memberName-Text'>62010284</p>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>ชาติกุล รัตนฤทธิกุล(บริล)</p>
+                            <p className = 'about-memberName-Text'>62010193</p>
                         </div>
                     </div>
-                    <div className = 'memberBox'>
-                        <div class='memberImageBox'>
-                            <img class='memberImage' src = {TTTPhoto}></img>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {Profile_icon_src}></img>
                         </div>
-                        <div className = 'memberName-Box'>
-                            <p className = 'memberName-Text'>ณัฐวุฒิ ครองอารีธรรม(ต้อม)</p>
-                            <p className = 'memberName-Text'>62010293</p>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>ณัฐภูมิ เพ็ชรชนะ(ปอนด์)</p>
+                            <p className = 'about-memberName-Text'>62010284</p>
+                        </div>
+                    </div>
+                    <div className = 'about-memberBox'>
+                        <div class='about-memberImageBox'>
+                            <img class='about-memberImage' src = {TTTPhoto}></img>
+                        </div>
+                        <div className = 'about-memberName-Box'>
+                            <p className = 'about-memberName-Text'>ณัฐวุฒิ ครองอารีธรรม(ต้อม)</p>
+                            <p className = 'about-memberName-Text'>62010293</p>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@
   }
   
 
-  .pageStyle {
+  .about-pageStyle {
     justify-content:initial;
   }
   
@@ -38,7 +38,7 @@
     padding: 5px 20px;
     height: 79px;
   }
-  .sizePane {
+  .about-sizePane {
     height:max-content;
     /* border: 5px solid green; */
   }
@@ -47,12 +47,12 @@
     opacity: 0.5;
   }
   /* ---------------------------เกี่ยวกับเรา--------------------------------------------- */
-  .Topic{
+  .about-Topic{
     height: 341px;
     width: 100%;
     display:flex;
   }
-  .aboutTopic{
+  .about-aboutTopic{
     position:absolute;
     height: 341px;
     width: 100%;
@@ -61,7 +61,7 @@
     display: flex;
   }
 
-  .aboutTopic-text{
+  .about-aboutTopic-text{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;
@@ -71,28 +71,28 @@
     text-align: center;
 
   }
-  .aboutTopic-bg {
+  .about-aboutTopic-bg {
     position: relative;
     object-fit: cover;
     object-position: 75% 20%;
     height: 341px;
     width: 100%;
   }
-  .aboutHeader{
+  .about-aboutHeader{
     display:flex;
     padding-top: 2%;
     padding-left: 10%;
     padding-bottom: 2%;
   }
 
-  .font-aboutHeader{
+  .about-font-aboutHeader{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;
     font-size: 48px;
   }
 
-  .TeamMemberGrid{
+  .about-TeamMemberGrid{
     display:flex;
     margin-left: 5%;
     margin-right: 5%;
@@ -100,14 +100,14 @@
   }
 
   /* ----------memberBox-------------- */
-  .memberBox{
+  .about-memberBox{
     margin:2%;
     width: 30%;
     justify-content: center;
     align-items: center;
   
   }
-  .memberImageBox{
+  .about-memberImageBox{
     padding-top: 3%;
     padding-bottom: 3%;
     display: flex;
@@ -115,12 +115,12 @@
     align-items: center;
     padding-bottom: 10%;
   }
-  .memberImage{
+  .about-memberImage{
     border-radius: 50%;
     width: 60%;
     height: 60%;
   }
-  .memberName-Box{
+  .about-memberName-Box{
     padding-top: 5%;
     padding-bottom: 5%;
     border-radius: 10px;
@@ -129,7 +129,7 @@
     align-items: center;
      
   }
-  .memberName-Text{
+  .about-memberName-Text{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;

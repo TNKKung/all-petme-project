@@ -47,12 +47,12 @@
     opacity: 0.5;
   }
   /* ---------------------------ติดต่อเรา--------------------------------------------- */
-  .Topic{
+  .contract-Topic{
     height: 341px;
     width: 100%;
     display:flex;
   }
-  .aboutTopic{
+  .contract-aboutTopic{
     position:absolute;
     height: 341px;
     width: 100%;
@@ -61,7 +61,7 @@
     display: flex;
   }
 
-  .aboutTopic-text{
+  .contract-aboutTopic-text{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;
@@ -71,7 +71,7 @@
     text-align: center;
 
   }
-  .aboutTopic-bg {
+  .contract-aboutTopic-bg {
     position: relative;
     object-fit: cover;
     object-position: 75% 20%;
@@ -79,7 +79,7 @@
     width: 100%;
   }
   /* ----------Address-Contract------------ */
-  .addressContractBox{
+  .contract-addressContractBox{
     display: flex;
     padding-left: 20%;
     padding-right: 20%;
@@ -87,14 +87,14 @@
     margin-bottom: 2.5%;
     
   }
-  .addressContractWrap{
+  .contract-addressContractWrap{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
   }
 
-  .addressBox{
+  .contract-addressBox{
     display: flex;
     flex-direction: column;
     max-width: 30%;
@@ -103,7 +103,7 @@
     margin-bottom: 5%;
     
   }
-  .headText{
+  .contract-headText{
     padding-top: 1%;
     padding-bottom: 1%;
     font-family: 'Kanit';
@@ -113,7 +113,7 @@
     
     
   }
-  .textAddress{
+  .contract-textAddress{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;
@@ -122,12 +122,12 @@
     overflow:auto;
     
   }
-  .logoAddress{
+  .contract-logoAddress{
     height: 60px;
     width: 60px;
     margin: 0.5%;
   }
-  .textBox{
+  .contract-textBox{
     display: flex;
     gap: 5%;
     width: 100%;
@@ -135,7 +135,7 @@
   }
 
   /* ----------ติดต่อ--------------- */
-  .contractBox{
+  .contract-contractBox{
     display: flex;
     flex-direction: column;
     max-width: 70%;
@@ -143,14 +143,14 @@
     align-items: center;
     
   }
-  .inputLayer{
+  .contract-inputLayer{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
     
   }
-  .inputTextB{
+  .contract-inputTextB{
     margin-top: 30px;
     margin-left: 30px;
     width: 320px;
@@ -164,7 +164,7 @@
     font-weight: normal;
     font-size: 18px;
   }
-  .inputTextB-alert{
+  .contract-inputTextB-alert{
     margin-top: 30px;
     margin-left: 30px;
     width: 320px;
@@ -178,7 +178,7 @@
     font-weight: normal;
     font-size: 18px;
   }
-  .alert-text{
+  .contract-alert-text{
     padding-left: 10px;
     margin-left: 30px;
     font-family: 'Kanit';
@@ -187,7 +187,7 @@
     color: red;
   }
 
-  .inputTextBLong{
+  .contract-inputTextBLong{
     margin-top: 30px;
     margin-left: 30px;
     width: 95%;
@@ -205,7 +205,7 @@
     
   }
 
-  .inputTextBLong-alert{
+  .contract-inputTextBLong-alert{
     margin-top: 30px;
     margin-left: 30px;
     width: 95%;
@@ -223,7 +223,7 @@
     
   }
 
-  .buttonSumit{
+  .contract-buttonSumit{
     margin: 30px;
     background-color: #ED8E82;
     width: 150px;
@@ -239,11 +239,11 @@
     outline: none;
     
   }
-  .buttonSumit:hover{
+  .contract-buttonSumit:hover{
     background-color: #ED8E82;
     color: white;
   }
-  .buttonSumit:active{
+  .contract-buttonSumit:active{
     background-color: #c57368;
     color: rgb(207, 207, 207);
     transition: 0.2s;
@@ -252,19 +252,19 @@
   
     
   /* --------googlemap---------- */
-  .pointText{
+  .contract-pointText{
     font-family: 'Kanit';
     font-style: normal;
     font-weight: normal;
     color: white;
   }
-  .pointPane{
+  .contract-pointPane{
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .logoAddress{
+  .contract-logoAddress{
     height: 25px;
     width: 25px;
     margin: 0.5%;
