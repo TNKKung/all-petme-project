@@ -3,7 +3,8 @@ const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+// var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const port = process.env.PORT || 4000
 
@@ -118,8 +119,6 @@ expressApp.post("/api/add/registerUser",function(req,res) {
             "district": district,
             "province": province,
             "postalCode": postalCode,
-            "follower" : 0 ,
-            "following" : 0,
             "favorites" : 0,
             'status' : 'Null',
             "listPetId" : []
@@ -160,7 +159,7 @@ expressApp.post("/api/add/registerPet",function(req,res) {
         res.status(400).send("Error");
     }
     else{
-        const user = {
+        const pet = {
             "petId" : petId,
             "dogBreed" : dogBreed,
             "gender" : gender,
@@ -184,7 +183,7 @@ expressApp.post("/api/add/registerPet",function(req,res) {
                 question2:"i like this",
                 question3:"i like this"
             }],
-            "amountOfFavorite" : 0
+            "sellStatus": true
         }
         
         console.log(user);
@@ -192,9 +191,9 @@ expressApp.post("/api/add/registerPet",function(req,res) {
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("PetMeApp");
-            dbo.collection("Pet").insertOne(user, function(err, res) {
+            dbo.collection("Pet").insertOne(pet, function(err, res) {
               if (err) throw err;
-              console.log("Add one animal");
+              console.log("Add one pet");
               db.close();
             });
         });
@@ -260,7 +259,7 @@ expressApp.post("/api/add/report",function(req,res) {
         res.send(user);
         MongoClient.connect(url, function(err, db) {
             var dbo = db.db("Admin");
-            dbo.collection("Contact").insertOne(user, function(err, res) {
+            dbo.collection("Report").insertOne(user, function(err, res) {
               console.log("Add one people");
               db.close();
             });
@@ -281,7 +280,7 @@ expressApp.post("/api/get/dataPet",function(req,res) {
                     sellerUser : result[i].sellerUser,
                 });
             }
-            res.send(data); 
+            res.send(data);
             db.close();
         });    
     });
@@ -300,7 +299,9 @@ expressApp.post("/api/get/checkPayment",function(req,res) {
                     dogBreed : result[i].dogBreed,
                     customerUser : result[i].customerUser,
                     sellerUser : result[i].sellerUser,
-                    statusCheck : false
+                    statusCheck : false,
+                    nameAccountPromtpay : result[i].nameAccountPromtpay,
+
                 });
             }
             res.send(data); 
