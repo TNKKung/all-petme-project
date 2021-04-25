@@ -1,5 +1,5 @@
 import React from 'react'
-import './Footer.css'
+import './Footer.scoped.css'
 
 import Bottom_logo_icon from './img/bottom-icon.png'
 import Address_icon_src from './img/address_icon.png'
@@ -10,7 +10,7 @@ function Footer() {
   return (
     <div className='contact-section'>
       <div class='bottom-icon-pad'>
-        <img class='bottom-icon' src={Bottom_logo_icon}></img>
+        <img class='bottom-icon' src={Bottom_logo_icon} />
         <div class='bottom-icon-text'>PetMe</div>
       </div>
 

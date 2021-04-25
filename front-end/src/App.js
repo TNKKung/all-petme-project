@@ -20,6 +20,7 @@ import {
 } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar.js'
 import Footer from './components/Footer/Footer.js'
+import { ScrollToTop } from './ScrollToTop.js'
 
 // function App() {
 //   return (
@@ -30,16 +31,16 @@ import Footer from './components/Footer/Footer.js'
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
-      <div>
-        <div>
-          <Route exact path='/' component={Home2} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/market' component={MarketPage} />
-          <Route path='/donate' component={DonatePage} />
-        </div>
-      </div>
+      <Switch>
+        <Route exact path='/' component={Home2} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route path='/market' component={MarketPage} />
+        <Route path='/donate' component={DonatePage} />
+      </Switch>
+
       <Footer />
     </BrowserRouter>
   )

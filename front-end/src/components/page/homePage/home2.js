@@ -3,7 +3,8 @@ import Slider from './slider'
 import React, { useState, useEffect } from 'react'
 import Popup from '../../Popup/Popup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Popup1 from './HomePagePopup/Popup1'
+import Popup2 from './HomePagePopup/Popup2'
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,8 +22,6 @@ import Dealing_dog_src from './img/dealing_dog.jpeg'
 import Office_dog_src from './img/office_dog.png'
 import Danated_dog_src from './img/donated_dog.jpg'
 import Welcome_background_src from './img/welcome_dog.png'
-import popupImg1 from './img/popup1.png'
-import popupImg2 from './img/popup2.png'
 
 library.add(fas, fab, far)
 
@@ -96,7 +95,7 @@ const Home2 = () => {
               <div class='activity-details'> ที่อยากรับเลี้ยงสุนัข</div>
               <div class='activity-details'>ที่ไม่มีเจ้าของดูแล</div>
               <div class='activity-center-pad'>
-                <Link to='donate'>
+                <Link to='/donate'>
                   <button class='adopt-button'>รับเลี้ยง</button>
                 </Link>
               </div>
@@ -109,7 +108,7 @@ const Home2 = () => {
               <div class='activity-details'>สำหรับบุคคลที่อยากหาซื้อสุนัข</div>
               <div class='activity-details'>สายพันธ์ุที่ต้องการ</div>
               <div class='activity-center-pad'>
-                <Link to='market'>
+                <Link to='/market'>
                   <button class='dealing-button'>ไปตลาดซื้อขาย</button>
                 </Link>
               </div>
@@ -167,30 +166,11 @@ const Home2 = () => {
         </div> */}
       </div>
 
-      <Popup className='popup-box-large' popup={popup1}>
-        <div className='popup-closeButton' onClick={popup1.close}>
-          X
-        </div>
-        <p className='popup-text1'>ข้อตกลงการซื้อขายและการบริจาค</p>
-        <div className='popup-line' />
-        <p className='popup-text2'>
-          - การเลือกรูปแบบลงบริจาคสุนัข ผู้ลงจะไม่สามารถสร้างกำไรใดๆได้
-          และจำเป็น ต้องสร้างคำถามสำหรับคัดเลือกผู้ซื้ออย่างน้อย 2
-          ข้อเป็นอย่างต่ำ
-        </p>
-        <p className='popup-text3'>
-          - การเลือกรูปแบบลงขาย ผู้ลงสามารถสร้างกำไรจากตัวสุนัขได้ และสามารถ
-          เลือกได้ว่าจะเอาระบบการันตีจากผู้ขายหรือไม่ หากไม่เลือกทาง PetMe
-          จะไม่รับผิดชอบ ผลกระทบที่เกิดขึ้นใดๆทั้งสิ้นจากการซื้อขายในครั้งนี้
-        </p>
-        <div className='popup-img-cover'>
-          <img src={popupImg1} className='popup-img' />
-          <img src={popupImg2} className='popup-img' />
-        </div>
-        <div className='popup-button-cover'>
-          <div className='popup-button'>ลงขายสุนัข</div>
-          <div className='popup-button'>ลงบริจาค</div>
-        </div>
+      <Popup popup={popup1}>
+        <Popup1 popup1={popup1} popup2={popup2} />
+      </Popup>
+      <Popup popup={popup2}>
+        <Popup2 popup1={popup1} popup2={popup2} />
       </Popup>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import './MarketPage.css'
+import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
 import PetCard from '../../PetCard/PetCard.js'
@@ -46,7 +46,7 @@ function MarketPage() {
         <img src={part1} className='marketPage-part1-img' />
         <div className='marketPage-part1-cover'>
           <div className='marketPage-part1-text1'>ตลาดซื้อขายสุนัข</div>
-          <div className='marketPage-part1-line'></div>
+          <div className='marketPage-part1-line' />
           <div className='marketPage-part1-text2'>
             สำหรับบุคคลที่อยากหาซื้อสุนัขพันธุ์ที่ต้องการ
           </div>
@@ -55,7 +55,7 @@ function MarketPage() {
       <div className='marketPage-part2'>
         <div className='marketPage-part2-cover'>
           <div className='marketPage-part2-text1'>เลือกพันธุ์สุนัข</div>
-          <div className='marketPage-part2-line'></div>
+          <div className='marketPage-part2-line' />
           <div className='marketPage-part2-box-cover'>
             <img src={part2} className='marketPage-part2-img' />
             <div className='marketPage-part2-box'>

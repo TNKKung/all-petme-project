@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import './Popup.css'
+import './Popup.scoped.css'
 
 function Popup({ children, popup, className }) {
   if (!popup) throw new Error('!!! Please pass `popup` to the <Popup/> !!!')

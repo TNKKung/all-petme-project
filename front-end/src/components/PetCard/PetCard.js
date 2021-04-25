@@ -1,5 +1,5 @@
 import React from 'react'
-import './PetCard.css'
+import './PetCard.scoped.css'
 
 function PetCard({ imgName, breed, cost, profile, garuntee }) {
   return (

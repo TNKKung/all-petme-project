@@ -1,5 +1,5 @@
 import React from 'react'
-import './DonatePage.css'
+import './DonatePage.scoped.css'
 import part1 from './img/part1.png'
 import PetCard from '../../PetCard/PetCard.js'
 
@@ -44,7 +44,7 @@ function DonatePage() {
           <div className='donatePage-part1-text1'>
             รับเลี้ยงสุนัขสำหรับสุนัขไร้บ้าน
           </div>
-          <div className='donatePage-part1-line'></div>
+          <div className='donatePage-part1-line' />
           <div className='donatePage-part1-text2'>
             สำหรับบุคลที่มีใจเมตตา ที่อยากรับเลี้ยงสุนัขที่ไม่มีเจ้าของดูแล
           </div>
