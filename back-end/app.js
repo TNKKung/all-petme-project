@@ -2,11 +2,17 @@ const expressFunction = require('express');
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var fs = require('fs');
+var path = require('path');
+require('dotenv/config');
+
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 
 expressApp.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -15,20 +21,64 @@ expressApp.use((req, res, next) => {
     return next()
 });
 
-// expressApp.post("/api/get/login",function(req,res){
-//     const {
-//         Username,
-//         Password,
-//     } = req.body;
+mongoose.connect(process.env.MONGO_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+        console.log('connected')
+    });
 
-//     MongoClient.connect(url, function(err, db) {
-//         var dbo = db.db("PetMeApp");
-//         dbo.collection("Pet").find().toArray(function(err, result) {
-//             res.send(result);
-//             db.close();
-//         });    
-//     }); 
-// });
+expressApp.use(bodyParser.urlencoded({ extended: false }))
+expressApp.use(bodyParser.json())
+ 
+// Set EJS as templating engine
+expressApp.set("view engine", "ejs");
+
+
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+destination: (req, file, cb) => {
+    cb(null, 'uploads')
+},
+filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+}
+});
+
+var upload = multer({ storage: storage });
+
+var imgModel = require('./model');
+
+expressApp.get('/', (req, res) => {
+    imgModel.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('An error occurred', err);
+        }
+        else {
+            res.render('imagesPage', { items: items });
+        }
+    });
+});
+
+expressApp.post('/', upload.single('image'), (req, res, next) => {
+    var obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+    imgModel.create(obj, (err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            // item.save();
+            res.redirect('/');
+        }
+    });
+});
 
 expressApp.post("/api/get/login",function(req,res){
     const {
@@ -36,25 +86,16 @@ expressApp.post("/api/get/login",function(req,res){
         Password,
     } = req.body;
 
-    var data = [];
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
         dbo.collection("Pet").find().toArray(function(err, result) {
-            for(var i=0;i<result.length;i++){
-                data.push({
-                    petId : result[i].petId,
-                    cost : result[i].cost,
-                    dogBreed : result[i].dogBreed,
-                    customerUser : result[i].customerUser,
-                    sellerUser : result[i].sellerUser,
-                    statusCheck : false
-                });
-            }
-            res.send(data); 
+            res.send(result);
             db.close();
         });    
-    });
+    }); 
 });
+
+
 
 expressApp.post("/api/get/profile",function(req,res){
     const username = req.body.username;
