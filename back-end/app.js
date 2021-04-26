@@ -60,7 +60,7 @@ expressApp.get('/', (req, res) => {
     });
 });
 
-expressApp.post('/', upload.single('image'), (req, res, next) => {
+expressApp.post('/', upload.single('profile'), (req, res, next) => {
     var obj = {
         name: req.body.name,
         desc: req.body.desc,
@@ -75,7 +75,7 @@ expressApp.post('/', upload.single('image'), (req, res, next) => {
         }
         else {
             // item.save();
-            res.redirect('/');
+            res.send('tomtam');
         }
     });
 });

@@ -10,4 +10,4 @@ var imageSchema = new mongoose.Schema({
     }
 });
  
-module.exports = new mongoose.model('Image', imageSchema);
+module.exports = new mongoose.model('profile', imageSchema);
