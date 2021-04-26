@@ -2,7 +2,7 @@ import './Popup2.scoped.css'
 
 import React from 'react'
 
-function Popup2({ popup1, popup2 }) {
+function Popup2({ popup1, popup2, popupFinish }) {
   return (
     <div className='box-large'>
       <div className='popup-closeButton' onClick={popup2.close}>
@@ -76,9 +76,18 @@ function Popup2({ popup1, popup2 }) {
       </div>
       <div className='footer'>
         <div className='text-footer'>
-          *หมายเหตุ : สามารถตั้งคำถามได้มากสุด 5 ข้อ
+          หมายเหตุ : สามารถตั้งคำถามได้มากสุด 5 ข้อ
         </div>
-        <div className='footer-button'>ลงทะเบียนสุนัข</div>
+        <div
+          className='footer-button'
+          onClick={() => {
+            popup1.close()
+            popup2.close()
+            popupFinish.open()
+          }}
+        >
+          ลงทะเบียนสุนัข
+        </div>
       </div>
     </div>
   )

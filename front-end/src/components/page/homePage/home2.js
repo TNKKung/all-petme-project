@@ -5,6 +5,7 @@ import Popup from '../../Popup/Popup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Popup1 from './HomePagePopup/Popup1'
 import Popup2 from './HomePagePopup/Popup2'
+import PopupFinish from './HomePagePopup/PopupFinish'
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,7 @@ const Home2 = () => {
   const [currentPage, setCurrentPage] = useState('home')
   const popup1 = Popup.usePopup()
   const popup2 = Popup.usePopup()
+  const popupFinish = Popup.usePopup()
 
   // const setToggle = () => {
   //   classStyle == 'menu-header'
@@ -170,7 +172,14 @@ const Home2 = () => {
         <Popup1 popup1={popup1} popup2={popup2} />
       </Popup>
       <Popup popup={popup2}>
-        <Popup2 popup1={popup1} popup2={popup2} />
+        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} />
+      </Popup>
+      <Popup popup={popupFinish}>
+        <PopupFinish
+          // popup1={popup1}
+          // popup2={popup2}
+          popupFinish={popupFinish}
+        />
       </Popup>
     </div>
   )

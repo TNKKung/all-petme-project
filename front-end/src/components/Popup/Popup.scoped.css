@@ -11,8 +11,8 @@
 }
 
 .popup-box {
-  min-width: 650px;
-  min-height: 650px;
+  min-width: 200px;
+  min-height: 200px;
   background: white;
   border-radius: 1.5rem;
 }
