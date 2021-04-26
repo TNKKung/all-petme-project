@@ -8,7 +8,7 @@ function Popup({ children, popup, className }) {
     <>
       {popup.isShow &&
         ReactDOM.createPortal(
-          <div className='popup-wrapper' onClick={popup.close}>
+          <div className='popup-wrapper'>
             <div
               className={`popup-box ${className}`}
               onClick={(e) => {
