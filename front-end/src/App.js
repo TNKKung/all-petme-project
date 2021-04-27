@@ -10,8 +10,7 @@ import Donating from "./components/page/homePage/donating.js"
 import Login from "./components/page/loginPage/login.js"
 import Register from "./components/page/loginPage/register.js"
 import ResetPass from "./components/page/loginPage/resetPass.js"
-import Test from './test.js'
-import Test2 from './test2.js'
+
 
 import {
   BrowserRouter,
