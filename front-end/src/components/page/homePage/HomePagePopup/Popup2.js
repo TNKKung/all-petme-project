@@ -54,9 +54,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
                 setForm({ ...form, petId: e.target.value })
               }}
             >
-              <option value='เลือกรูปแบบการการันตี'>
-                เลือกรูปแบบการการันตี
-              </option>
+              <option value=''>เลือกรูปแบบการการันตี</option>
               <option value='แบบที่1'>แบบที่1</option>
               <option value='แบบที่2'>แบบที่2</option>
             </select>
