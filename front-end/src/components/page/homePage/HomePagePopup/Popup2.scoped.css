@@ -155,9 +155,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   cursor: pointer;
   overflow: hidden;
+  margin-bottom: -6rem;
 }
 .image {
   /* min-width: 100%;
@@ -171,6 +172,7 @@
   width: 300px;
   height: 1px;
   display: flex;
+  margin-bottom: -7rem;
 }
 .show-picture-cover {
   /* background: #e6a376; */

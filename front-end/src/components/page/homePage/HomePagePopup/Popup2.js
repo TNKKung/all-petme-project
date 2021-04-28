@@ -173,12 +173,12 @@ function Popup2({ popup1, popup2, popupFinish }) {
             }}
           />
           <div className='line2' />
-          <div className='show-picture-cover'>
+          {/* <div className='show-picture-cover'>
             <div className='show-picture' />
             <div className='show-picture' />
             <div className='show-picture' />
             <div className='show-picture' />
-          </div>
+          </div> */}
           <div className='text-input-box'>
             <div className='text-box-2'>
               <div className='text-origin-2'>ชื่อบัญชี</div>
