@@ -17,10 +17,27 @@ function Popup2({ popup1, popup2, popupFinish }) {
     question3: null,
     question4: null,
     question5: null,
+    picture: null,
   })
+  function arrayBufferToBase64(buffer) {
+    var binary = ''
+    var bytes = [].slice.call(new Uint8Array(buffer))
 
+    bytes.forEach((b) => (binary += String.fromCharCode(b)))
+
+    return window.btoa(binary)
+  }
   return (
-    <div className='box-large'>
+    <form
+      className='box-large'
+      onSubmit={(e) => {
+        e.preventDefault()
+        popup1.close()
+        popup2.close()
+        popupFinish.open()
+        console.table(form)
+      }}
+    >
       <div className='popup-closeButton' onClick={popup2.close}>
         X
       </div>
@@ -30,6 +47,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
             <div className='text-head'>ลงทะเบียนขายสุนัข</div>
             {/* เลือกรูปแบบการการันตี */}
             <select
+              required
               className='selector padding'
               value={form.petId}
               onChange={(e) => {
@@ -55,13 +73,14 @@ function Popup2({ popup1, popup2, popupFinish }) {
             </div>
             <div className='input-box'>
               <select
+                required
                 className='selector'
                 value={form.dogBreed}
                 onChange={(e) => {
                   setForm({ ...form, dogBreed: e.target.value })
                 }}
               >
-                <option value='เลือกพันธุ์สุนัข'>เลือกพันธุ์สุนัข</option>
+                <option value=''>เลือกพันธุ์สุนัข</option>
                 <option value='ปอมเมอเรเนี่ยน'>ปอมเมอเรเนี่ยน</option>
                 <option value='โกลเด้นรีทรีฟเวอร์'>โกลเด้นรีทรีฟเวอร์</option>
                 <option value='ชิสุ'>ชิสุ</option>
@@ -74,18 +93,22 @@ function Popup2({ popup1, popup2, popupFinish }) {
                 <option value='ชิวาวา'>ชิวาวา</option>
               </select>
               <select
+                required
                 className='selector'
                 value={form.gender}
                 onChange={(e) => {
                   setForm({ ...form, gender: e.target.value })
                 }}
               >
-                <option value='เลือกเพศ'>เลือกเพศ</option>
+                <option value=''>เลือกเพศ</option>
                 <option value='เพศผู้'>เพศผู้</option>
                 <option value='เพศเมีย'>เพศเมีย</option>
               </select>
 
               <Input
+                required
+                min='1'
+                max='20'
                 type='number'
                 value={form.age}
                 onChange={(e) => {
@@ -93,6 +116,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
                 }}
               />
               <Input
+                required
                 type='number'
                 value={form.cost}
                 onChange={(e) => {
@@ -104,6 +128,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
           <div className='detail'>รายละเอียด :</div>
           {/* <div className='input-detail' /> */}
           <textarea
+            required
             className='input-detail'
             // rows='4'
             // cols='50'
@@ -114,8 +139,39 @@ function Popup2({ popup1, popup2, popupFinish }) {
           />
         </div>
         <div className='right-box'>
-          <div className='addPicture'>เพิ่มรูปภาพ</div>
-          <input type='file' className='uploadPicture' />
+          <div
+            className='addPicture'
+            onClick={() => {
+              const button = document.querySelector('#uploadButton')
+              button.click()
+            }}
+          >
+            {form.picture ? (
+              <img src={form.picture} className='image' />
+            ) : (
+              'เพิ่มรูปภาพ'
+            )}
+          </div>
+          <input
+            type='file'
+            id='uploadButton'
+            className='uploadPicture'
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (!file) return
+              const reader = new FileReader()
+
+              reader.readAsArrayBuffer(file)
+              reader.onload = () => {
+                setForm({
+                  ...form,
+                  picture:
+                    'data:image/jpeg;base64,' +
+                    arrayBufferToBase64(reader.result),
+                })
+              }
+            }}
+          />
           <div className='line2' />
           <div className='show-picture-cover'>
             <div className='show-picture' />
@@ -130,6 +186,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
             </div>
             <div className='input-box-2'>
               <Input
+                required
                 className='margin'
                 value={form.nameAccountPromtpay}
                 onChange={(e) => {
@@ -137,6 +194,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
                 }}
               />
               <textarea
+                required
                 className='textArea-detailAccount'
                 rows='3'
                 // cols='50'
@@ -162,6 +220,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
           </div>
           <div className='input-box-bottom'>
             <textarea
+              required
               className='input-bottom'
               // rows='4'
               // cols='50'
@@ -171,6 +230,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
               }}
             />
             <textarea
+              required
               className='input-bottom'
               // rows='4'
               // cols='50'
@@ -180,6 +240,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
               }}
             />
             <textarea
+              required
               className='input-bottom'
               // rows='4'
               // cols='50'
@@ -213,19 +274,9 @@ function Popup2({ popup1, popup2, popupFinish }) {
         <div className='text-footer'>
           หมายเหตุ : สามารถตั้งคำถามได้มากสุด 5 ข้อ
         </div>
-        <div
-          className='footer-button'
-          onClick={() => {
-            popup1.close()
-            popup2.close()
-            popupFinish.open()
-            console.table(form)
-          }}
-        >
-          ลงทะเบียนสุนัข
-        </div>
+        <button className='footer-button'>ลงทะเบียนสุนัข</button>
       </div>
-    </div>
+    </form>
   )
 }
 
