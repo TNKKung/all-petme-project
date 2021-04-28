@@ -14,12 +14,34 @@
   text-align: center;
   cursor: pointer;
 }
+.uploadPicture {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
 .text-head {
   color: #0081a7;
   font-size: 32px;
   margin: 0rem 1rem;
   letter-spacing: 0.05em;
   font-weight: 400;
+}
+.selector {
+  border-radius: 1rem;
+  background: #00afb9;
+  border: none;
+  color: #ffff;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  padding-left: 1rem;
+}
+.selector:focus {
+  outline: none;
+}
+.padding {
+  padding-right: 1rem;
 }
 .text-special {
   color: #ffff;
@@ -107,6 +129,10 @@
   width: 500px;
   height: 100px;
   margin: 0.5rem 0rem 0rem 1.5rem;
+  padding: 0rem 1rem;
+}
+.input-detail:focus {
+  outline: none;
 }
 
 .right-box {
@@ -134,7 +160,7 @@
 .line2 {
   background: #00afb9;
   width: 300px;
-  height: 1.5px;
+  height: 1px;
   display: flex;
 }
 .show-picture-cover {
@@ -158,7 +184,7 @@
 }
 .text-box-2 {
   /* background: #00afb9; */
-  margin: 0.5rem 0.5rem 0rem 1.5rem;
+  margin: 1rem 1rem 0rem 1.5rem;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -168,25 +194,40 @@
 }
 .input-box-2 {
   /* background: #cfc06a; */
-  margin: 0.5rem;
-  height: 90px;
+  width: 200px;
+  margin: 1rem 1rem -2rem 0rem;
+  height: 120px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  padding-top: 2px;
+  /* align-items: center; */
 }
-.input-account {
+.textArea-detailAccount {
+  border: 1px solid #00afb9;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+.textArea-detailAccount:focus {
+  outline: none;
+}
+.margin {
+  margin-bottom: -0.5rem;
+}
+/* .input-account {
   border: 1px solid #00afb9;
   border-radius: 0.65rem;
   width: 200px;
   height: 30px;
   margin-bottom: 0.5rem;
-}
-.input-detail-2 {
+} */
+/* .input-detail-2 {
   border: 1px solid #00afb9;
   border-radius: 0.65rem;
   width: 200px;
   height: 50px;
-}
+} */
 
 .bottom-box {
   display: flex;
@@ -208,7 +249,8 @@
   border: 1px solid #00afb9;
   border-radius: 0.5rem;
   width: 740px;
-  height: 45px;
+  height: 40px;
+  padding: 6px;
 }
 .text-input-bottom {
   display: flex;
@@ -218,8 +260,8 @@
   margin: 1rem 0rem 0rem 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 270px;
+  justify-content: space-around;
+  height: 285px;
 }
 .input-box-bottom {
   /* background: rgb(116, 226, 112); */
@@ -227,7 +269,7 @@
   height: 285px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .footer {
   display: flex;
