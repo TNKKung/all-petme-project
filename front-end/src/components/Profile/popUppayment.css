@@ -1,0 +1,218 @@
+html,body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #292929;
+  }
+
+  @font-face {
+    font-family: 'Kanit';
+    src: url('C:SD/softdev_profile/src/fonts/Kanit-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+  }
+
+.during-popup{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.bg-pu{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color:rgb(0,0,0,0.6);
+    
+}
+
+.pu-row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pu-nocenter{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.PopUp{
+    /* position: fixed;
+    left: 25%;
+    top: 10%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 630px;
+
+    border-radius: 3%; */
+
+    position:relative;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 630px;
+    width: 550px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    z-index:101;
+    padding:15px;
+}
+.pu-header{
+    margin-left: 170px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    color: #0081A7;
+    text-align: center;
+}
+.pu-header2{
+    margin-left: 120px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    color: #0081A7;
+    text-align: center;
+}
+.pu-button{
+    font-family: 'Kanit';
+    font-size: 22px;
+    color: #F07167;
+
+    width: 500px;
+    height: 50px;
+    background: #FFFFFF;
+    border: 3px solid #F07167;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+.pu-button:hover{
+    cursor: pointer;
+    color: white;
+    background-color: #F07167;
+}
+.popup-x{
+    width: 50px;
+    height: 50px;
+    margin-left: 90px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    color: white;
+    background-color: #F07167;
+    border-radius: 50%;
+    border: 3px solid #F07167;
+}
+.popup-x:hover{
+    cursor: pointer;
+    color: #F07167;
+    background-color: white;
+}
+
+.pu-qr-img{
+    margin: 20px;
+    width: 300px;
+    height: 305px;
+}
+
+.pu-inp {
+    width: 450px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #0081A7;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.pu-inp-img{
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 160px;
+    background: #FFFFFF;
+    border: 1px solid #0081A7;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.pu-center-inp{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.pu-up-img-btt {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 100px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.pu-up-img{
+    margin-top: 10px;
+    width: 45px;
+    height: 45px;
+}
+.pu-up-img-btt:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.pu-up-text {
+    margin: 10px;
+    font-family: 'Kanit';
+    font-size: 16px;
+    color: black;
+}
+
+.pu-inp-text{
+    text-align: end;
+    margin-right: 20px;
+    width: 150px;
+    font-family: 'Kanit';
+    font-size: 16px;
+    color: #F07167;
+    border: white;
+    outline: none;
+}
+.pu-inp-text::placeholder {
+    color: #F07167;
+}
+
+
+
+/* ----------------------PopUpExit------------------- */
+
+.pop_wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+/* .during-popup{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.bg-pu{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color:rgb(0,0,0,0.6);
+} */

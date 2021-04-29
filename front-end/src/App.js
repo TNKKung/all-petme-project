@@ -11,6 +11,7 @@ import Login from './components/page/loginPage/login.js'
 import Register from './components/page/loginPage/register.js'
 import ResetPass from './components/page/loginPage/resetPass.js'
 import manager from "./components/page/AdminManager/manager.js"
+import Profile from './components/Profile/profile.js';
 
 import {
   BrowserRouter,
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/manager" component={manager}/>
+        <Route path='/Profile' component={Profile}/>
       </Switch>
 
       <Footer />
