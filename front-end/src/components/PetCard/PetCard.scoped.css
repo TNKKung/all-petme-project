@@ -32,22 +32,24 @@
 .head {
   font-size: 18px;
   font-weight: 300;
-  width: 75px;
+  width: 300px;
   height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* background: rgb(88, 200, 94); */
 }
-.box-detail {
+.box-details{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 120px;
+  height: 45px;
 }
 .detail {
   font-size: 16px;
   font-weight: 300;
-  width: 130px;
+  width: 150px;
   height: 27px;
   /* background: rgb(138, 114, 224); */
   padding: 2px 0px 0px 5px;
