@@ -22,7 +22,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import Dealing_dog_src from './img/dealing_dog.jpeg'
 import Office_dog_src from './img/office_dog.png'
 import Danated_dog_src from './img/donated_dog.jpg'
-import Welcome_background_src from './img/welcome_dog.png'
+import Welcome_background_src from './img/welcome_dog2.jpg'
 
 library.add(fas, fab, far)
 

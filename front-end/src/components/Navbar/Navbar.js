@@ -9,18 +9,18 @@ import Profile_icon_src from './img/profile.jpg'
 
 function Navbar() {
   return (
-    <nav className='navbar-wrapper'>
-      <div className='navbar-logo'>
+    <nav className='Mnavbar-wrapper'>
+      <div className='Mnavbar-logo'>
         <img src={Logo_icon_src} />
       </div>
 
-      <ul className='navbar-links'>
+      <ul className='Mnavbar-links'>
         <li>
           <NavLink
             exact
             to='/'
-            className='navbar-item'
-            activeClassName='navbar-item-active'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
           >
             หน้าหลัก
           </NavLink>
@@ -28,8 +28,8 @@ function Navbar() {
         <li>
           <NavLink
             to='/about'
-            className='navbar-item'
-            activeClassName='navbar-item-active'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
           >
             เกี่ยวกับ
           </NavLink>
@@ -37,8 +37,8 @@ function Navbar() {
         <li>
           <NavLink
             to='/market'
-            className='navbar-item'
-            activeClassName='navbar-item-active'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
           >
             ซื้อขาย
           </NavLink>
@@ -46,8 +46,8 @@ function Navbar() {
         <li>
           <NavLink
             to='/donate'
-            className='navbar-item'
-            activeClassName='navbar-item-active'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
           >
             บริจาค
           </NavLink>
@@ -55,18 +55,27 @@ function Navbar() {
         <li>
           <NavLink
             to='/contact'
-            className='navbar-item'
-            activeClassName='navbar-item-active'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
           >
             ติดต่อเรา
           </NavLink>
         </li>
       </ul>
+      {/* <div className='Mnavbar-links'>
+        <button className='Mnavbar-item'>หน้าหลัก</button>
+        <button className='Mnavbar-item'>หน้าหลัก</button>
+        <button className='Mnavbar-item'>หน้าหลัก</button>
+        <button className='Mnavbar-item'>หน้าหลัก</button>
 
-      <button class='navbar-bell' href='#'>
+      </div> */}
+
+      <button class='Mnavbar-bell' href='#'>
         <img class='bell-icon' src={Bell_icon_src} />
       </button>
-      <button class='navbar-profile'>
+      <button class='Mnavbar-profile' onClick={()=>{
+        
+      }}>
         <img class='profile-icon' src={Profile_icon_src} />
       </button>
     </nav>

@@ -1,17 +1,6 @@
 import './about.css'
 import React,{useState, useEffect} from 'react'
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch
-  } from "react-router-dom";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -19,7 +8,7 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 
 
 import Profile_icon_src from './img/profile.jpg'
-import about_background_src from './img/welcome_dog.png' //need to edit
+import about_background_src from './img/welcome_dog2.jpg' //need to edit
 
 import TTTPhoto from './img/TTT.jpg'
 import MMMPhoto from './img/MMM.jpg'
@@ -31,17 +20,6 @@ library.add(fas, fab, far);
 
 
 const About = ()=> {
-
-    const [classStyle, setClassStyle] = useState('menu-header active')
-    const [astStyle, setAstStyle] = useState('ast')
-
-    const [currentPage,setCurrentPage] = useState('home')
-
-    const setToggle = () => {
-        classStyle == 'menu-header'?setClassStyle('menu-header active'):setClassStyle('menu-header')
-        classStyle == 'menu-header active'?setAstStyle('ast-fullbg'):setAstStyle('ast')
-        console.log({astStyle})
-    }
 
     return (
         <div>

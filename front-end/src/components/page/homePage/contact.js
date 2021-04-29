@@ -14,7 +14,7 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import Bottom_logo_icon from './img/bottom-icon.png'
 
 
-import about_background_src from './img/welcome_dog.png' //need to edit
+import about_background_src from './img/welcome_dog2.jpg' //need to edit
 import Address_icon_black_src from './img/address_icon_black.png'
 import Tel_icon_black_src from './img/tel_icon_black.png'
 import Mail_icon_black_src from './img/mail_icon_black.png'
@@ -23,16 +23,7 @@ import Mail_icon_black_src from './img/mail_icon_black.png'
 library.add(fas, fab, far);
 
 const Contact = ()=> {
-    const [classStyle, setClassStyle] = useState('menu-header')
-    const [astStyle, setAstStyle] = useState('ast')
-
-    const [currentPage,setCurrentPage] = useState('home')
-
-    const setToggle = () => {
-        classStyle == 'menu-header'?setClassStyle('menu-header active'):setClassStyle('menu-header')
-        classStyle == 'menu-header active'?setAstStyle('ast-fullbg'):setAstStyle('ast')
-        console.log({astStyle})
-    }
+    
     // ----------------------------------------------------------------condition contract--------------------------------------------
     const [Name,setName] = useState('')                       /////////////////Name-Surname
     const [alertBoxName,setAlertBoxName] = useState(false)  
