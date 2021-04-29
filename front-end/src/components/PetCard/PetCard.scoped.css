@@ -1,17 +1,17 @@
 .petcard-wrapper {
-  width: 280px;
+  width: 300px;
   height: 380px;
   background: white;
-  border-radius: 2rem;
-  box-shadow: 0px 2px 10px #888888;
+  border-radius: 1.5rem;
+  box-shadow: 0px 1px 5px #888888;
   position: relative;
 }
 
 .petcard-img {
-  width: 280px;
+  width: 300px;
   height: 300px;
   object-fit: cover;
-  border-radius: 2rem;
+  border-radius: 1.5rem 1.5rem 0.5rem 0.5rem;
 }
 .petcard-detail {
   display: flex;
@@ -25,24 +25,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  padding: 0rem 0.6rem;
+  width: 220px;
+  padding-left: 0.25rem;
   /* background: rgb(194, 89, 89); */
+}
+.head {
+  font-size: 18px;
+  font-weight: 300;
+  width: 75px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background: rgb(88, 200, 94); */
+}
+.box-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.detail {
+  font-size: 16px;
+  font-weight: 300;
+  width: 130px;
+  height: 27px;
+  /* background: rgb(138, 114, 224); */
+  padding: 2px 0px 0px 5px;
 }
 .petcard-detail-right {
   /* background: rgb(103, 78, 195); */
   height: 80px;
-  width: 100px;
+  width: 80px;
   font-size: 18px;
+  font-weight: 300;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 16px;
+  margin-right: 5px;
 }
 .petcard-detail-right-imgProfile {
   background: rgb(202, 105, 105);
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 }
 

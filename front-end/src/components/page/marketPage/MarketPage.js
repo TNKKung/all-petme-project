@@ -1,43 +1,73 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
 import PetCard from '../../PetCard/PetCard.js'
 
 function MarketPage() {
+  const [form, setForm] = useState({
+    dogBreed: null,
+  })
   const dog = [
     {
-      imgName: 'part3.png',
-      breed: 'สุนัขพันธ์ : บีเกิ้ล',
-      cost: 'ราคา  3500 บาท',
+      imgName: 'Pomeranian.jpg',
+      breed: 'ปอมเมอเรเนี่ยน',
+      cost: ' 5,500 บาท',
       profile: 'คุณต้อม',
     },
     {
-      imgName: 'part3.png',
-      breed: 'สุนัขพันธ์ : บีเกิ้ล',
-      cost: 'ราคา  3500 บาท',
-      profile: 'คุณต้อม',
-      garuntee: true,
-    },
-    {
-      imgName: 'part3.png',
-      breed: 'สุนัขพันธ์ : บีเกิ้ล',
-      cost: 'ราคา  3500 บาท',
-      profile: 'คุณต้อม',
-      garuntee: true,
-    },
-    {
-      imgName: 'part3.png',
-      breed: 'สุนัขพันธ์ : บีเกิ้ล',
-      cost: 'ราคา  3500 บาท',
+      imgName: 'Chihuahua.jpg',
+      breed: 'ชิวาวา',
+      cost: ' 5,500 บาท',
       profile: 'คุณต้อม',
     },
     {
-      imgName: 'part3.png',
-      breed: 'สุนัขพันธ์ : บีเกิ้ล',
-      cost: 'ราคา  3500 บาท',
+      imgName: 'Beagle.png',
+      breed: 'บีเกิ้ล',
+      cost: ' 5,500 บาท',
       profile: 'คุณต้อม',
-      garuntee: true,
+    },
+    {
+      imgName: 'Yorkshire Terrier.jpg',
+      breed: 'ยอร์กไชร์เทอร์เรีย',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Bulldog.jpg',
+      breed: 'บูลล์ด็อก',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Rottweiler.jpg',
+      breed: 'ร็อตต์ไวเลอร์',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Siberian Husky.jpg',
+      breed: 'ไซบีเรียน ฮัสกี้',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Pug.jpg',
+      breed: 'ปั๊ก',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Shih Tzu.jpg',
+      breed: 'ชิสุ',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
+    },
+    {
+      imgName: 'Golden Retriever.jpg',
+      breed: 'โกลเด้นรีทรีฟเวอร์',
+      cost: ' 5,500 บาท',
+      profile: 'คุณต้อม',
     },
   ]
   return (
@@ -59,7 +89,30 @@ function MarketPage() {
           <div className='marketPage-part2-box-cover'>
             <img src={part2} className='marketPage-part2-img' />
             <div className='marketPage-part2-box'>
-              <div className='marketPage-part2-inBox1'>เลือกพันธุ์สุนัข</div>
+              {/* <div className='marketPage-part2-inBox1'> */}
+
+              <select
+                // required
+                className='marketPage-part2-inBox1'
+                value={form.dogBreed}
+                onChange={(e) => {
+                  setForm({ ...form, dogBreed: e.target.value })
+                  // console.table(form)
+                }}
+              >
+                <option value=''>เลือกพันธุ์สุนัข</option>
+                <option value='ปอมเมอเรเนี่ยน'>ปอมเมอเรเนี่ยน</option>
+                <option value='โกลเด้นรีทรีฟเวอร์'>โกลเด้นรีทรีฟเวอร์</option>
+                <option value='ชิสุ'>ชิสุ</option>
+                <option value='ปั๊ก'>ปั๊ก</option>
+                <option value='ไซบีเรียน ฮัสกี้'>ไซบีเรียน ฮัสกี้</option>
+                <option value='ร็อตต์ไวเลอร์'>ร็อตต์ไวเลอร์</option>
+                <option value='บูลล์ด็อก'>บูลล์ด็อก</option>
+                <option value='ยอร์กไชร์เทอร์เรีย'>ยอร์กไชร์เทอร์เรีย</option>
+                <option value='บีเกิ้ล'>บีเกิ้ล</option>
+                <option value='ชิวาวา'>ชิวาวา</option>
+              </select>
+              {/* </div> */}
               <div className='marketPage-part2-inBox2 '>
                 เลือกเลี้ยงพันธุ์สุนัขให้เหมาะกับคุณ
               </div>
@@ -69,9 +122,15 @@ function MarketPage() {
       </div>
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
-          {dog.map((iter, idx) => {
-            return <PetCard {...iter} key={'petcard' + idx} />
-          })}
+          {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
+          {dog
+            .filter((d) => {
+              if (form.dogBreed === null) return true
+              else if (d.breed === form.dogBreed) return true
+            })
+            .map((iter, idx) => {
+              return <PetCard {...iter} key={'petcard' + idx} />
+            })}
         </div>
       </div>
     </div>
