@@ -1,13 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
 import PetCard from '../../PetCard/PetCard.js'
+import { ContactsOutlined } from '@material-ui/icons'
 
 function MarketPage() {
   const [form, setForm] = useState({
     dogBreed: null,
   })
+  const [dataPet,setDataPet] = useState([])
+ 
+  React.useEffect(() => {
+    const fetchdata = async() =>{
+      const res = await fetch("http://localhost:4000/api/get/dataPet", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: "cors",
+      body: JSON.stringify({
+        "get" :"g",
+      }),
+    })
+    const a = await res.json();
+
+    setDataPet(a);
+    }
+    fetchdata()
+  },[]);
+
+  React.useEffect(() => {
+    console.log(dataPet)
+  },[dataPet]);
+
   const dog = [
     {
       imgName: 'Pomeranian.jpg',
@@ -69,6 +95,7 @@ function MarketPage() {
       cost: ' 5,500 บาท',
       profile: 'คุณต้อม',
     },
+
   ]
   return (
     <div>
@@ -124,7 +151,7 @@ function MarketPage() {
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
-          {dog
+          {dataPet
             .filter((d) => {
               if (form.dogBreed === null || form.dogBreed === 'ทั้งหมด')
                 return true

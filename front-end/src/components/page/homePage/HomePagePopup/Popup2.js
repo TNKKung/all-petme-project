@@ -44,7 +44,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
             gender: form.gender,
             age: form.age,
             petDetail: form.petDetail,
-            cost: form.const,
+            cost: form.cost,
             nameAccountPromtpay: form.nameAccountPromtpay,
             detailAccountPromtpay: form.detailAccountPromtpay,
             question1: form.question1,

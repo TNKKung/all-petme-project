@@ -317,18 +317,20 @@ expressApp.post("/api/add/report",function(req,res) {
 });
 
 expressApp.post("/api/get/dataPet",function(req,res) {
+    console.log("ttt");
     var data = [];
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
         dbo.collection("Pet").find().toArray(function(err, result) {
             for(var i=0;i<result.length;i++){
                 data.push({
-                    petId : result[i].petId,
+                    imgName : '',
                     cost : result[i].cost,
-                    dogBreed : result[i].dogBreed,
-                    sellerUser : result[i].sellerUser,
+                    breed : result[i].dogBreed,
+                    profile : result[i].sellerUser,
                 });
             }
+            console.log(data);
             res.send(data);
             db.close();
         });    
