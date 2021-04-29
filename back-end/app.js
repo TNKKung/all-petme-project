@@ -96,7 +96,6 @@ expressApp.post("/api/get/login",function(req,res){
 });
 
 
-
 expressApp.post("/api/get/profile",function(req,res){
     const username = req.body.username;
     console.log(req.body);
@@ -162,9 +161,10 @@ expressApp.post("/api/add/registerUser",function(req,res) {
             "postalCode": postalCode,
             "favorites" : 0,
             'status' : 'Null',
-            "listPetId" : []
+            "listPetId" : [],
+            "img" : [],
         }
-        
+
         res.send(user);
         console.log(username);
         MongoClient.connect(url, function(err, db) {
