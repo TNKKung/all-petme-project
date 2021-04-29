@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import Home from './components/page/homePage/home.js'
 import Home2 from './components/page/homePage/home2.js'
-import MarketPage from './components/page/MarketPage/MarketPage.js'
+import MarketPage from './components/page/marketPage/MarketPagess.js'
 import About from "./components/page/homePage/about.js"
 import Contact from "./components/page/homePage/contact.js"
 // import Dealing from './components/page/homePage/dealing.js'
