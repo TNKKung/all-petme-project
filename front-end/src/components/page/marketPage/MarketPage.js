@@ -111,6 +111,7 @@ function MarketPage() {
                 <option value='ยอร์กไชร์เทอร์เรีย'>ยอร์กไชร์เทอร์เรีย</option>
                 <option value='บีเกิ้ล'>บีเกิ้ล</option>
                 <option value='ชิวาวา'>ชิวาวา</option>
+                <option value='ทั้งหมด'>ทั้งหมด</option>
               </select>
               {/* </div> */}
               <div className='marketPage-part2-inBox2 '>
@@ -125,7 +126,8 @@ function MarketPage() {
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
           {dog
             .filter((d) => {
-              if (form.dogBreed === null) return true
+              if (form.dogBreed === null || form.dogBreed === 'ทั้งหมด')
+                return true
               else if (d.breed === form.dogBreed) return true
             })
             .map((iter, idx) => {
