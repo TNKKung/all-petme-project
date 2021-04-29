@@ -1,24 +1,17 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  }
-
-@font-face {
-  font-family: 'Kanit';
-  src: url('../../../fonts/Kanit-Regular.ttf');
-  font-style: normal;
-  font-weight: 400;
 }
 
 /* #Bnavbar-bg {
-  font-family: 'Kanit';
+   
   background: linear-gradient(0deg, #00AFB9, #00AFB9), #0081A7;
   box-shadow: 0px 2px 4px rgba(0, 129, 167, 0.25);
   height: 79px;
@@ -26,34 +19,28 @@ body{
 } */
 
 /*------------------------------------------------- N A V B A R -----------------------------------------------*/
-
+/* 
 .menu {
-  font-family: 'Kanit';
+   
   text-decoration: none;
-  list-style-type:  none;
+  list-style-type: none;
   align-items: center;
 }
 
-nav {
-  background: linear-gradient(0deg, #00AFB9, #00AFB9), #0081A7;
-  box-shadow: 0px 2px 4px rgba(0, 129, 167, 0.25);
-  padding: 5px 20px;
-  height: 79px;
-}
 .sizePane {
-  height:max-content;
-  /* border: 5px solid green; */
+  height: max-content;
+  border: 5px solid green;
 }
 .profile-icon:hover {
   cursor: pointer;
   opacity: 0.5;
-}
+} */
+
+/* -------------------------popup2------------------------ */
 
 /*------------------- N E W S ---------------------------------------------*/
 
-
 .news-section {
-
   height: 450px;
   display: flex;
   flex-direction: row;
@@ -81,7 +68,6 @@ nav {
   width: 230px;
 }
 
-
 .slider-pane {
   display: flex;
   flex-direction: row;
@@ -96,10 +82,8 @@ nav {
 }
 
 .slider-font-pane {
-
   height: 569px;
   position: absolute;
-
 }
 
 .slider-icon {
@@ -122,7 +106,6 @@ nav {
   cursor: pointer;
 }
 
-
 /*-------------------END  N E W S ---------------------------------------------*/
 /*------------------- W E L C O M E ---------------------------------------------*/
 
@@ -136,14 +119,12 @@ nav {
 
 .welcome-bg {
   position: absolute;
-  max-height:700px;
+  max-height: 700px;
   width: 100%;
-
 }
-.welcome-font-pad{
+.welcome-font-pad {
   height: 700px;
   position: absolute;
-
 }
 
 .welcome-Header-Pad {
@@ -152,9 +133,8 @@ nav {
   /* border: 2px solid rgb(235, 235, 235); */
 }
 .welcome-Header {
-  font-family: 'Kanit';
   font-size: 64px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .welcome-sec2 {
@@ -166,14 +146,13 @@ nav {
   justify-content: center;
 }
 .welcome-text {
-  font-family: 'Kanit';
   font-size: 32px;
-  color: #00D4E0;
+  color: #00d4e0;
   margin: 20px;
   margin-left: 100px;
 }
 .login-text {
-  color:#FFFFFF;
+  color: #ffffff;
   height: 80px;
   width: 315.9693603515625px;
 }
@@ -182,7 +161,7 @@ nav {
   align-items: center;
 }
 .login-text:hover {
-  color:#FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 .login-button-pad {
@@ -196,8 +175,8 @@ nav {
   height: 80px;
   width: 315px;
   font-size: 26px;
-  font-family: 'Kanit';
-  color:#FFFFFF;
+
+  color: #ffffff;
   background: rgba(97, 97, 97, 0.6);
   backdrop-filter: blur(4px);
   /* Note: backdrop-filter has minimal browser support */
@@ -205,9 +184,9 @@ nav {
 }
 .welcome-login-button:hover {
   cursor: pointer;
-  color: #00D4E0;
+  color: #00d4e0;
   box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-  inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+    inset -3px -3px 5px rgba(0, 231, 212, 0.5);
 }
 
 /*------------------- A C T I V I T I E S ---------------------------------------------*/
@@ -217,17 +196,15 @@ nav {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
 }
 .activity-section {
   /* border: 2px solid salmon; */
   align-items: center;
   justify-content: center;
-  
 }
 .activity-pad {
-  margin-right: 51px ;
-  margin-left: 51px ;
+  margin-right: 51px;
+  margin-left: 51px;
   margin-top: 222px;
   margin-bottom: 122px;
   /* border: 2px solid rgba(197, 0, 154, 0.829); */
@@ -239,11 +216,10 @@ nav {
 }
 
 .activity-header {
-  font-family: 'Kanit';
   font-size: 42px;
   font-style: Bold;
-  color:#0081A7;
-  text-align:center;
+  color: #0081a7;
+  text-align: center;
   text-shadow: 5px 5px 5px #ccc;
   -moz-text-shadow: 5px 5px 5px #ccc;
   -webkit-text-shadow: 5px 5px 5px #ccc;
@@ -253,7 +229,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-}   
+}
 .activity-img {
   height: 375px;
   width: auto;
@@ -266,10 +242,9 @@ nav {
   -khtml-box-shadow: 5px 5px 5px #ccc;
 }
 .activity-details {
-  font-family: 'Kanit';
   font-size: 32px;
-  color:#00AFB9;
-  text-align:center;
+  color: #00afb9;
+  text-align: center;
 }
 
 .adopt-button {
@@ -277,19 +252,17 @@ nav {
   height: 95.57615661621094px;
   width: 328px;
   border-radius: 35px;
-  border: 3px solid #0081A7;
+  border: 3px solid #0081a7;
   box-sizing: border-box;
 
-
   font-size: 26px;
-  font-family: 'Kanit';
-  color:#0081A7;
+
+  color: #0081a7;
   background: rgba(255, 255, 255);
-  text-align:center;
+  text-align: center;
   justify-content: center;
   align-items: center;
   /* Note: backdrop-filter has minimal browser support */
-
 }
 
 .dealing-button {
@@ -297,68 +270,66 @@ nav {
   height: 95.57615661621094px;
   width: 328px;
   border-radius: 35px;
-  border: 3px solid #0081A7;
+  border: 3px solid #0081a7;
   box-sizing: border-box;
 
   font-size: 26px;
-  font-family: 'Kanit';
-  color:#0081A7;
+
+  color: #0081a7;
   background: rgba(255, 255, 255);
-  text-align:center;
+  text-align: center;
   justify-content: center;
   align-items: center;
   /* Note: backdrop-filter has minimal browser support */
-
 }
 .office-button {
   margin-top: 20px;
   height: 95.57615661621094px;
   width: 328px;
   border-radius: 35px;
-  border: 3px solid #0081A7;
+  border: 3px solid #0081a7;
   box-sizing: border-box;
 
   font-size: 26px;
-  font-family: 'Kanit';
-  color:#0081A7;
+
+  color: #0081a7;
   background: rgba(255, 255, 255);
-  text-align:center;
+  text-align: center;
   justify-content: center;
   align-items: center;
   /* Note: backdrop-filter has minimal browser support */
-
 }
 
 .adopt-button:hover {
   cursor: pointer;
-  color: #FFFFFF;
-  background-color: #00AFB9;
-  border: 3px solid #00AFB9;
+  color: #ffffff;
+  background-color: #00afb9;
+  border: 3px solid #00afb9;
   box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-  inset -3px -3px 5px rgba(1, 32, 32, 0.5);
+    inset -3px -3px 5px rgba(1, 32, 32, 0.5);
 }
 .dealing-button:hover {
   cursor: pointer;
-  color: #FFFFFF;
-  background: #F07167;
-  border: 3px solid #F07167;
+  color: #ffffff;
+  background: #f07167;
+  border: 3px solid #f07167;
   box-shadow: inset 3px 3px 5px rgba(82, 0, 214, 0.1),
-  inset -3px -3px 5px rgba(241, 255, 255, 0.5);
+    inset -3px -3px 5px rgba(241, 255, 255, 0.5);
 }
 .office-button:hover {
   cursor: pointer;
-  color: #FFFFFF;
-  background: #0081A7;
-  border: 3px solid #0081A7;
+  color: #ffffff;
+  background: #0081a7;
+  border: 3px solid #0081a7;
   box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-  inset -3px -3px 5px rgba(241, 255, 255, 0.5);
+    inset -3px -3px 5px rgba(241, 255, 255, 0.5);
 }
 
-/*------------------- C O N T A C T ---------------------------------------------*/  
+/*------------------- C O N T A C T ---------------------------------------------*/
 
 .contact-section {
-  background-color: #0A272C;
-  
+  background-color: #0a272c;
+
   justify-content: space-around;
   height: 500px;
 }
@@ -373,7 +344,6 @@ nav {
   margin: 20px;
 }
 .bottom-icon-text {
-  font-family: 'Kanit';
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
@@ -388,10 +358,8 @@ nav {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
 }
 .contact-text {
-  font-family: 'Kanit';
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
@@ -405,13 +373,11 @@ nav {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
 }
 .contact-pad-roll-2 {
   align-items: center;
   justify-content: center;
   align-items: center;
-
 }
 .tel-icon {
   width: 21px;
@@ -424,11 +390,10 @@ nav {
 }
 /*------------------------------END SIZE---------------------------*/
 ul {
-  list-style-type:  none;
+  list-style-type: none;
 }
 
 .toggle-button {
-  font-family: 'Kanit';
   color: white;
   align-items: center;
   background: transparent;
@@ -443,7 +408,7 @@ ul {
   width: 63px;
 }
 
-.profile-icon{
+.profile-icon {
   height: 47px;
   width: 47px;
   border-radius: 100%;
@@ -455,7 +420,7 @@ ul {
 }
 
 .a-center {
-  align-items:  center;
+  align-items: center;
   background-color: transparent;
   border: transparent;
 }
@@ -464,11 +429,11 @@ ul {
   font-size: 16px;
   padding: 15px 5px;
   white-space: nowrap;
-  list-style-type:  none;
+  list-style-type: none;
 }
 
 .menu {
-  display:  flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: center;
@@ -478,7 +443,6 @@ ul {
 .toggle {
   order: 1;
 }
-
 
 .menu-header.logo.button {
   order: 2;
@@ -492,7 +456,7 @@ ul {
 .menu-header {
   width: 100%;
   text-align: center;
-  order:  3;
+  order: 3;
   display: none;
   align-items: center;
 }
@@ -516,8 +480,7 @@ ul {
   height: 0px;
   border-radius: 50px;
 }
-.current-ast{
-  font-family: 'Kanit';
+.current-ast {
   vertical-align: middle;
   color: white;
   align-items: center;
@@ -526,12 +489,10 @@ ul {
   align-items: center;
   width: 139px;
   height: 50px;
-  background-color: #EC8E82;
+  background-color: #ec8e82;
   border-radius: 50px;
 }
 .ast {
-
-  font-family: 'Kanit';
   vertical-align: middle;
   color: white;
   align-items: center;
@@ -542,10 +503,8 @@ ul {
   height: 40px;
   background-color: transparent;
   border-radius: 50px;
-
 }
 .ast-fullbg {
-  font-family: 'Kanit';
   color: white;
   text-decoration: none;
   align-items: center;
@@ -575,20 +534,18 @@ ul {
   border-radius: 50px;
 }
 
-
-@media all and (min-width: 300px){
+@media all and (min-width: 300px) {
   .activity-img {
-
     height: 300px;
     width: 100%;
   }
-  .activity-pad{
+  .activity-pad {
     margin-left: 10px;
     margin-right: 10px;
   }
 
   .activity-details {
-    font-size:  27px;
+    font-size: 27px;
   }
   .news-img {
     width: 100%;
@@ -600,34 +557,31 @@ ul {
   .welcome-section {
     height: 1000px;
   }
-  
+
   .welcome-pad {
     position: relative;
   }
-  
+
   .welcome-bg {
     position: absolute;
-    height:1000px;
+    height: 1000px;
     width: 100%;
-  
   }
-  .welcome-font-pad{
+  .welcome-font-pad {
     height: 1000px;
     position: absolute;
-  
   }
-  
+
   .welcome-Header-Pad {
     margin-top: 100px;
     margin-left: 53px;
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 40px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
-  
+
   .welcome-sec2 {
     direction: flex;
   }
@@ -638,16 +592,14 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 25px;
-    color: #00D4E0;
+    color: #00d4e0;
     margin: 20px;
     margin-left: 60px;
     margin-right: 60px;
-
   }
   .login-text {
-    color:#FFFFFF;
+    color: #ffffff;
     height: 40px;
     width: 150px;
   }
@@ -656,14 +608,13 @@ ul {
     align-items: center;
   }
   .login-text:hover {
-    color:#FFFFFF;
+    color: #ffffff;
     text-decoration: none;
   }
   .login-button-pad {
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
   .welcome-login-button {
     margin-top: 55px;
@@ -671,8 +622,8 @@ ul {
     height: 60px;
     width: 150px;
     font-size: 20px;
-    font-family: 'Kanit';
-    color:#FFFFFF;
+
+    color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
@@ -680,37 +631,34 @@ ul {
   }
   .welcome-login-button:hover {
     cursor: pointer;
-    color: #00D4E0;
+    color: #00d4e0;
     box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-    inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+      inset -3px -3px 5px rgba(0, 231, 212, 0.5);
   }
-  
 }
 
-@media all and (min-width: 600px){
-  
-
+@media all and (min-width: 600px) {
   .activity-img {
     width: 500px;
   }
-  
+
   .menu {
     justify-content: center;
   }
-  
+
   .menu-header {
     border: none;
   }
-  .menu-logo  {
+  .menu-logo {
     flex: 1;
   }
 
-  .toggle{
+  .toggle {
     flex: 1;
     text-align: right;
   }
 
-  .menu-header.logo.button{
+  .menu-header.logo.button {
     width: auto;
     height: 100%;
     order: 1;
@@ -726,7 +674,7 @@ ul {
     display: none;
   }
 
-  .logo.button.profile{
+  .logo.button.profile {
     align-items: center;
   }
 
@@ -734,29 +682,26 @@ ul {
     padding: 3px 15px;
     color: white;
     background: teal;
-    border: 1px solid #006D6D;
+    border: 1px solid #006d6d;
   }
 
   .profile-button {
     padding: 3px 15px;
     color: white;
     background: transparent;
-    border: 1px solid #006D6D;
+    border: 1px solid #006d6d;
   }
 
-  .menu-header.logo.button:hover{
-    text-decoration:  none;
+  .menu-header.logo.button:hover {
+    text-decoration: none;
   }
 
-  .menu-header.logo.button:not(.profile) :hover{
+  .menu-header.logo.button:not(.profile) :hover {
     opacity: 0.5;
   }
 }
 
-
-
-
-@media all and (min-width: 750px){
+@media all and (min-width: 750px) {
   .news-section {
     margin: 0;
     height: 569px;
@@ -774,7 +719,7 @@ ul {
     justify-content: center;
     align-items: center;
   }
-  
+
   .center-pad {
     width: 709px;
     height: 569px;
@@ -807,16 +752,16 @@ ul {
   .contact-section {
     height: 400px;
   }
-  .bottom-icon-text{
+  .bottom-icon-text {
     font-size: 60px;
   }
-  .menu-header{
+  .menu-header {
     display: flex;
     width: auto;
     align-items: center;
     border: none;
   }
-  
+
   .toggle {
     display: none;
   }
@@ -824,15 +769,15 @@ ul {
   .ast {
     width: 100px;
     height: 50px;
-    background-color: #00AFB9;
+    background-color: #00afb9;
     border-radius: 50px;
     align-items: center;
   }
-  
-  a:hover{
+
+  /* a:hover {
     width: 100px;
     height: 50px;
-  }
+  } */
 
   .menu-logo {
     order: 0;
@@ -853,18 +798,17 @@ ul {
     padding-right: 0;
   }
 
-
   .menu-header.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: transparent
+    border: transparent;
   }
   .activity-sections-inside {
     display: flex;
   }
 
-    /*------------------- W E L C O M E ---------------------------------------------*/
+  /*------------------- W E L C O M E ---------------------------------------------*/
 
   .welcome-section {
     height: 700px;
@@ -876,14 +820,12 @@ ul {
 
   .welcome-bg {
     position: absolute;
-    max-height:700px;
+    max-height: 700px;
     width: 100%;
-
   }
-  .welcome-font-pad{
+  .welcome-font-pad {
     height: 700px;
     position: absolute;
-
   }
 
   .welcome-Header-Pad {
@@ -892,9 +834,8 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .welcome-sec2 {
@@ -906,15 +847,14 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 32px;
-    color: #00D4E0;
+    color: #00d4e0;
     margin: 20px;
     margin-left: 100px;
     margin-right: 220px;
   }
   .login-text {
-    color:#FFFFFF;
+    color: #ffffff;
     height: 80px;
     width: 315.9693603515625px;
   }
@@ -923,7 +863,7 @@ ul {
     align-items: center;
   }
   .login-text:hover {
-    color:#FFFFFF;
+    color: #ffffff;
     text-decoration: none;
   }
   .login-button-pad {
@@ -937,8 +877,8 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
-    color:#FFFFFF;
+
+    color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
@@ -946,14 +886,14 @@ ul {
   }
   .welcome-login-button:hover {
     cursor: pointer;
-    color: #00D4E0;
+    color: #00d4e0;
     box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-    inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+      inset -3px -3px 5px rgba(0, 231, 212, 0.5);
   }
   /*------------------- W E L C O M E ---------------------------------------------*/
 
   .welcome-section {
-    height:800px;
+    height: 800px;
   }
 
   .welcome-pad {
@@ -962,14 +902,12 @@ ul {
 
   .welcome-bg {
     position: absolute;
-    max-height:800px;
+    max-height: 800px;
     width: 100%;
-
   }
-  .welcome-font-pad{
+  .welcome-font-pad {
     height: 800px;
     position: absolute;
-
   }
 
   .welcome-Header-Pad {
@@ -978,9 +916,8 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .welcome-sec2 {
@@ -992,15 +929,14 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 30px;
-    color: #00D4E0;
+    color: #00d4e0;
     margin: 20px;
     margin-left: 100px;
     margin-right: 220px;
   }
   .login-text {
-    color:#FFFFFF;
+    color: #ffffff;
     height: 80px;
     width: 315.9693603515625px;
   }
@@ -1009,7 +945,7 @@ ul {
     align-items: center;
   }
   .login-text:hover {
-    color:#FFFFFF;
+    color: #ffffff;
     text-decoration: none;
   }
   .login-button-pad {
@@ -1023,8 +959,8 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
-    color:#FFFFFF;
+
+    color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
@@ -1032,19 +968,17 @@ ul {
   }
   .welcome-login-button:hover {
     cursor: pointer;
-    color: #00D4E0;
+    color: #00d4e0;
     box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-    inset -3px -3px 5px rgba(0, 231, 212, 0.5);
-  }  
-
+      inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+  }
 }
 
-
-@media all and (min-width: 1280px){
+@media all and (min-width: 1280px) {
   .contact-section {
     height: 300px;
   }
-  .bottom-icon-text{
+  .bottom-icon-text {
     font-size: 72px;
   }
   .contact-text {
@@ -1055,8 +989,8 @@ ul {
     height: 450px;
   }
 
-  .activity-details{
-    font-size:  30px;
+  .activity-details {
+    font-size: 30px;
   }
   .activity-sections-inside {
     display: flex;
@@ -1066,14 +1000,14 @@ ul {
     padding-left: 180px;
     margin-right: 40px;
   }
-  .activity-section{
-    display:flex;
+  .activity-section {
+    display: flex;
   }
-  .office-button{
+  .office-button {
     margin-top: 67px;
   }
-  .dealing-button{
-    margin-top:67px;
+  .dealing-button {
+    margin-top: 67px;
   }
   .news-img {
     height: 569px;
@@ -1086,11 +1020,9 @@ ul {
   .menu-header:not(.logo) {
     padding: 0px 10px;
   }
-
-  
 }
 
-@media all and (min-width: 1400px){
+@media all and (min-width: 1400px) {
   .menu-header.menu-header.logo.button:not(.profile) {
     padding-left: 41px;
   }
@@ -1098,7 +1030,7 @@ ul {
     display: flex;
   }
 
-  .bottom-icon-text{
+  .bottom-icon-text {
     margin-right: 300px;
   }
 
@@ -1118,14 +1050,12 @@ ul {
 
   .welcome-bg {
     position: absolute;
-    max-height:700px;
+    max-height: 700px;
     width: 100%;
-
   }
-  .welcome-font-pad{
+  .welcome-font-pad {
     height: 700px;
     position: absolute;
-
   }
 
   .welcome-Header-Pad {
@@ -1134,9 +1064,8 @@ ul {
     /* border: 2px solid rgb(235, 235, 235); */
   }
   .welcome-Header {
-    font-family: 'Kanit';
     font-size: 64px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   .welcome-sec2 {
@@ -1148,15 +1077,14 @@ ul {
     justify-content: center;
   }
   .welcome-text {
-    font-family: 'Kanit';
     font-size: 32px;
-    color: #00D4E0;
+    color: #00d4e0;
     margin: 20px;
     margin-left: 100px;
     margin-right: 220px;
   }
   .login-text {
-    color:#FFFFFF;
+    color: #ffffff;
     height: 80px;
     width: 315.9693603515625px;
   }
@@ -1165,7 +1093,7 @@ ul {
     align-items: center;
   }
   .login-text:hover {
-    color:#FFFFFF;
+    color: #ffffff;
     text-decoration: none;
   }
   .login-button-pad {
@@ -1179,16 +1107,16 @@ ul {
     height: 80px;
     width: 315px;
     font-size: 26px;
-    font-family: 'Kanit';
-    color:#FFFFFF;
+
+    color: #ffffff;
     background: rgba(97, 97, 97, 0.6);
     backdrop-filter: blur(4px);
     border-radius: 35px;
   }
   .welcome-login-button:hover {
     cursor: pointer;
-    color: #00D4E0;
+    color: #00d4e0;
     box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
-    inset -3px -3px 5px rgba(0, 231, 212, 0.5);
+      inset -3px -3px 5px rgba(0, 231, 212, 0.5);
   }
 }
