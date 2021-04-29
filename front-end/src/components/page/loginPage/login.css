@@ -261,16 +261,10 @@ body {
   color: #ffffff;
   box-shadow: inset 3px 3px 5px rgba(94, 14, 223, 0.1),
     inset -3px -3px 5px rgba(241, 255, 255, 0.5);
-  }
+}
 
-  .bottom {
-    width: 1320px;
-    height: 180px;
-    justify-content: flex-end;
-  }
-
-  .selectProvince{
-    background-color: #b60000;
-  }
-
-  
+.bottom {
+  width: 1320px;
+  height: 180px;
+  justify-content: flex-end;
+}
