@@ -95,11 +95,15 @@
   border-radius: 1.5rem;
   font-size: 30px;
   padding-left: 1rem;
+  border: 0;
+}
+.marketPage-part2-inBox1:focus {
+  outline: none;
 }
 .marketPage-part2-inBox2 {
   font-size: 24px;
   margin: 2rem 1rem;
-  /* color: #ffff; */
+  color: #ffff;
 }
 
 /* ----------------------part3---------------------- */
