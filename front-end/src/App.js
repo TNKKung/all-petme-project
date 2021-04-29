@@ -9,6 +9,7 @@ import Donating from "./components/page/homePage/donating.js"
 import Login from "./components/page/loginPage/login.js"
 import Register from "./components/page/loginPage/register.js"
 import ResetPass from "./components/page/loginPage/resetPass.js"
+import manager from "./components/page/AdminManager/manager.js"
 
 
 import {
@@ -35,6 +36,10 @@ const App = () => {
           <Route exact path="/" component={Home2} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/manager" component={manager}/>
+
         </div>
       </div>
   
