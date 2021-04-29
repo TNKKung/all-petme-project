@@ -1,159 +1,406 @@
-const expressFunction = require('express')
-const expressApp = expressFunction()
-expressApp.use(expressFunction.json())
+const expressFunction = require('express');
+const expressApp = expressFunction();
+expressApp.use(expressFunction.json());
 
-var MongoClient = require('mongodb').MongoClient
-var url = 'mongodb://localhost:27017/'
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var fs = require('fs');
+var path = require('path');
+require('dotenv/config');
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+// var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+const port = process.env.PORT || 4000
 
 expressApp.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Methods',
-    'POST, GET, PUT, PATCH, DELETE, OPTIONS'
-  )
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Option, Authorization'
-  )
-  return next()
-})
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods','POST, GET, PUT, PATCH, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Headers','Content-Type, Option, Authorization')
+    return next()
+});
 
-expressApp.get('/api/get/login', function (req, res) {
-  const { Username, Password } = req.body
+mongoose.connect(process.env.MONGO_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+        console.log('connected')
+    });
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err
-    var dbo = db.db('User')
-    dbo
-      .collection('user')
-      .find({ Username: Username })
-      .toArray(function (err, result) {
-        if (err) throw err
-        if (
-          result[0].Username === Username &&
-          result[0].Password === Password
-        ) {
-          res.send(202)
-        } else {
-          res.send('Password Error')
+expressApp.use(bodyParser.urlencoded({ extended: false }))
+expressApp.use(bodyParser.json())
+ 
+// Set EJS as templating engine
+expressApp.set("view engine", "ejs");
+
+
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+destination: (req, file, cb) => {
+    cb(null, 'uploads')
+},
+filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+}
+});
+
+var upload = multer({ storage: storage });
+
+var imgModel = require('./model');
+
+expressApp.get('/', (req, res) => {
+    imgModel.find({}, (err, items) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('An error occurred', err);
         }
-        db.close()
-      })
-  })
-})
-
-expressApp.get('/api/get/profile', function (req, res) {
-  const { Username, Password } = req.body
-
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err
-    var dbo = db.db('User')
-    dbo
-      .collection('user')
-      .find({ Username: Username })
-      .toArray(function (err, result) {
-        if (err) throw err
-        if (result[0].Username === Username) {
-          res.send('tom')
+        else {
+            res.render('imagesPage', { items: items });
         }
-        db.close()
-      })
-  })
-})
+    });
+});
 
-expressApp.post('/api/add', function (req, res) {
-  const {
-    Username,
-    Password,
-    Name,
-    Email,
-    Tell,
-    Birth,
-    Address,
-    Road,
-    Sub_district,
-    District,
-    Province,
-    Postal_code,
-  } = req.body
+expressApp.post('/uploadPhotos', upload.single('profile'), (req, res, next) => {
 
-  console.log(req.body)
-  if (Username.lenght <= 2) {
-    res.status(400).send('Error')
-  } else {
-    const user = {
-      Username: Username,
-      Password: Password,
-      Name: Name,
-      Email: Email,
-      Tell: Tell,
-      Birth: Birth,
-      Address: Address,
-      Road: Road,
-      Sub_district: Sub_district,
-      District: District,
-      Province: Province,
-      Postal_code: Postal_code,
-      Status: 'Null',
+    const img = {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        var query = { "username" : req.body.username};
+        var updateName = {$set : {
+            "img" : img
+        }};
+        dbo.collection("User").updateOne(query,updateName,function(err, res) {
+            console.log("1 document updated");
+            db.close();
+        });
+        res.send("Uploads photos of " + req.body.username +" complete ");
+    });
+});
+
+expressApp.post("/api/get/login",function(req,res){
+    const {
+        username,
+        password,
+    } = req.body;
+
+    console.log(req.body);
+
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("User").find().toArray(function(err, result) {
+            res.send("tom");
+            
+            // if(result[0].username === username){
+            //     res.send(true);
+            // }
+            // else{
+            //     res.send(false);
+            // }
+        });    
+    }); 
+});
+
+
+expressApp.post("/api/get/profile",function(req,res){
+    const username = req.body.username;
+    console.log(req.body);
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        console.log(req.body);
+        dbo.collection("User").find({"username" : username}).toArray(function(err, result) {
+            if(result[0].username === username){
+                console.log(req.body);
+                res.send({
+                    name : result[0].name,
+                    email : result[0].email,
+                    mobileNumber : result[0].mobileNumber,
+                    birth : result[0].birth,
+                    address : result[0].address,
+                    road : result[0].road,
+                    subDistrict : result[0].subDistrict,
+                    district : result[0].district,
+                    province : result[0].province,
+                    postalCode : result[0].postalCode
+
+                });
+                console.log(result[0]);
+            }
+            db.close();
+        });      
+    });  
+});
+
+expressApp.post("/api/add/registerUser",function(req,res) {
+    const {
+        username,
+        password,
+        name,
+        email,
+        mobileNumber,
+        birth,
+        address,
+        road,
+        subDistrict,
+        district,
+        province,
+        postalCode
+    } = req.body;
+
+    console.log(req.body);
+    if(username.lenght <= 2){
+        res.status(400).send("Error");
     }
-    res.send(user)
-    console.log(Username)
-    MongoClient.connect(url, function (err, db) {
-      if (err) throw err
-      var dbo = db.db('User')
-      dbo.collection('user').insertOne(user, function (err, res) {
-        if (err) throw err
-        console.log('Add one people')
-        db.close()
-      })
-    })
-  }
-})
+    else{
+        const user = {
+            "username" : username, 
+            "password" : password,
+            "name": name,
+            "email" : email,
+            "mobileNumber" : mobileNumber,
+            "birth" : birth,
+            "address" : address,
+            "road" : road,
+            "subDistrict": subDistrict,
+            "district": district,
+            "province": province,
+            "postalCode": postalCode,
+            "listPetIForsell" : [],
+            "listPetIdForBuy" : [],
+            "img" : [],
 
-expressApp.delete('/api/delete', function (req, res) {
-  const confirmId = req.body.confirmUsername
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err
-    var dbo = db.db('User')
-    var deleteId = { Username: confirmId }
-    dbo.collection('user').deleteOne(deleteId, function (err, obj) {
-      if (err) throw err
-      console.log('Delete ' + confirmId + ' complete ')
-      db.close()
-    })
-    res.send('Delete ' + confirmId + ' complete ')
-  })
-})
+        }
 
-expressApp.put('/api/update', function (req, res) {
-  const userId = req.body.Id
-  const userName = req.body.Name
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err
-    var dbo = db.db('User')
-    var query = { id: userId }
-    var updateName = { $set: { name: userName } }
-    dbo.collection('user').updateOne(query, updateName, function (err, res) {
-      if (err) throw err
-      console.log('1 document updated')
-      db.close()
-    })
-    res.send('Update ' + userId + ' complete ')
-  })
-})
+        res.send(user);
+        console.log(username);
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("PetMeApp");
+            dbo.collection("User").insertOne(user, function(err, res) {
+              if (err) throw err;
+              console.log("Add one people");
+              db.close();
+            });
+        });
+    }
+});
 
-// expressApp.delete("/api/delete/:id",function(req,res) {
-//     const confirmId = req.body.confirmId;
-//     const student = students.find(i => i.id === parseInt(id));
-//     if(student && confirmId === parseInt(id)){
-//         const index = students.indexOf(student);
-//         students.splice(index,1);
-//         res.send("delete " + student.name);
-//     }else{
-//         res.status(400).send("Error");
-//     }
-// });
+expressApp.post("/api/add/registerPet",function(req,res) {
+    const {
+        petId,
+        dogBreed,
+        gender,
+        age,
+        petDetail,
+        cost,
+        nameAccountPromtpay,
+        detailAccountPromtpay,
+        question1,
+        question2,
+        question3,
+        sellerUser,
+    } = req.body;
 
-expressApp.listen(4000, function () {
-  console.log('Listen 4000')
-})
+    console.log(req.body);
+    if(req.body.lenght <= 2){
+        res.status(400).send("Error");
+    }
+    else{
+        const pet = {
+            "petId" : petId,
+            "dogBreed" : dogBreed,
+            "gender" : gender,
+            "age" : age,
+            "detail" : petDetail,
+            "cost" : cost,
+            "nameAccountPromtpay" : nameAccountPromtpay,
+            "detailAccountPromtpay" : detailAccountPromtpay,
+            "question1" : question1,
+            "question2" : question2,
+            "question3" : question3,
+            "sellerUser" : sellerUser,
+            "listPeople" : [{
+                username:"tomtam",
+                question1:"i like this",
+                question2:"i like this",
+                question3:"i like this"
+            },{
+                username:"tomtam",
+                question1:"i like this",
+                question2:"i like this",
+                question3:"i like this"
+            }],
+            "sellStatus": true
+        }
+        
+        console.log(user);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("PetMeApp");
+            dbo.collection("Pet").insertOne(pet, function(err, res) {
+              if (err) throw err;
+              console.log("Add one pet");
+              db.close();
+            });
+        });
+    }
+});
+
+expressApp.post("/api/add/contact",function(req,res) {
+    const {
+        name,
+        email,
+        mobileNumber,
+        topic,
+        message
+    } = req.body;
+
+    console.log(req.body);
+    if(name.lenght <= 2){
+        res.status(400).send("Error");
+    }
+    else{
+        const user = {
+            "name" : name,
+            "email" : email,
+            "mobileNumber" : mobileNumber,
+            "topic" : topic,
+            "message" : message
+        }
+        res.send(user);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Admin");
+            dbo.collection("Contact").insertOne(user, function(err, res) {
+              if (err) throw err;
+              console.log("Add one people");
+              db.close();
+            });
+        });
+    }
+});
+
+expressApp.post("/api/add/report",function(req,res) {
+    const {
+        name,
+        email,
+        mobileNumber,
+        topic,
+        message
+    } = req.body;
+
+    console.log(req.body);
+    if(name.lenght <= 2){
+        res.status(400).send("Error");
+    }
+    else{
+        const user = {
+            "name" : name,
+            "email" : email,
+            "mobileNumber" : mobileNumber,
+            "topic" : topic,
+            "message" : message
+        }
+        res.send(user);
+        MongoClient.connect(url, function(err, db) {
+            var dbo = db.db("Admin");
+            dbo.collection("Report").insertOne(user, function(err, res) {
+              console.log("Add one people");
+              db.close();
+            });
+        });
+    }
+});
+
+expressApp.post("/api/get/dataPet",function(req,res) {
+    var data = [];
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Pet").find().toArray(function(err, result) {
+            for(var i=0;i<result.length;i++){
+                data.push({
+                    petId : result[i].petId,
+                    cost : result[i].cost,
+                    dogBreed : result[i].dogBreed,
+                    sellerUser : result[i].sellerUser,
+                });
+            }
+            res.send(data);
+            db.close();
+        });    
+    });
+    
+});
+
+expressApp.post("/api/get/checkPayment",function(req,res) {
+    var data = [];
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("Admin");
+        dbo.collection("Pament").find().toArray(function(err, result) {
+            for(var i=0;i<result.length;i++){
+                data.push({
+                    petId : result[i].petId,
+                    cost : result[i].cost,
+                    dogBreed : result[i].dogBreed,
+                    customerUser : result[i].customerUser,
+                    sellerUser : result[i].sellerUser,
+                    statusCheck : false,
+                    nameAccountPromtpay : result[i].nameAccountPromtpay,
+
+                });
+            }
+            res.send(data); 
+            db.close();
+        });    
+    });
+    
+});
+
+
+
+expressApp.put("/api/update",function(req,res) {
+    const {
+        username,
+        name,
+        email,
+        mobileNumber,
+        birth,
+        address,
+        road,
+        subDistrict,
+        district,
+        province,
+        postalCode
+    } = req.body;
+    console.log(req.body);
+
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        var query = { 'Username' : username};
+        var updateName = {$set : {
+            "name":name,
+            "email" : email,
+            "mobileNumber" : mobileNumber,
+            "birth" : birth,
+            "address" : address,
+            "road" : road,
+            "subDistrict" : subDistrict,
+            "district" : district,
+            "province" : province,
+            "postalCode" :postalCode
+        }};
+        dbo.collection("User").updateOne(query,updateName,function(err, res) {
+            console.log("1 document updated");
+            db.close();
+        });
+        res.send("Update " + username +" complete ");
+    });
+});
+
+expressApp.listen(port,function(){
+    console.log("Listen 4000");
+});
