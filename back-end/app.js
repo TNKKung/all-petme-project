@@ -82,15 +82,23 @@ expressApp.post('/uploadPhotos', upload.single('profile'), (req, res, next) => {
 
 expressApp.post("/api/get/login",function(req,res){
     const {
-        Username,
-        Password,
+        username,
+        password,
     } = req.body;
+
+    console.log(req.body);
 
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
-        dbo.collection("Pet").find().toArray(function(err, result) {
-            res.send(result);
-            db.close();
+        dbo.collection("User").find().toArray(function(err, result) {
+            res.send("tom");
+            
+            // if(result[0].username === username){
+            //     res.send(true);
+            // }
+            // else{
+            //     res.send(false);
+            // }
         });    
     }); 
 });
@@ -159,10 +167,10 @@ expressApp.post("/api/add/registerUser",function(req,res) {
             "district": district,
             "province": province,
             "postalCode": postalCode,
-            "favorites" : 0,
-            'status' : 'Null',
-            "listPetId" : [],
+            "listPetIForsell" : [],
+            "listPetIdForBuy" : [],
             "img" : [],
+
         }
 
         res.send(user);
