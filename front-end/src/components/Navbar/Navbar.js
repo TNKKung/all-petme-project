@@ -73,11 +73,9 @@ function Navbar() {
       <button class='Mnavbar-bell' href='#'>
         <img class='bell-icon' src={Bell_icon_src} />
       </button>
-      <button class='Mnavbar-profile' onClick={()=>{
-        
-      }}>
+      <NavLink to='/profile' className='Mnavbar-profile'>
         <img class='profile-icon' src={Profile_icon_src} />
-      </button>
+      </NavLink>
     </nav>
   )
 }

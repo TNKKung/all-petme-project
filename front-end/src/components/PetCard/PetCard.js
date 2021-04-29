@@ -7,9 +7,11 @@ function PetCard({ imgName, breed, cost, profile, garuntee }) {
       {garuntee && <div className='petcard-garuntee'>การันตี</div>}
       <img src={'./img/' + imgName} className='petcard-img' />
       <div className='petcard-detail'>
-        <div className='petcard-detail-left'>
-          {breed}
-          {cost}
+        <div className='petcard-detail-left' >
+          <div className='head'>
+            <div>สุนัขพันธ์ : {breed}</div>
+            <div>ราคา : {cost}</div>
+          </div>
         </div>
         <div className='petcard-detail-right'>
           <img className='petcard-detail-right-imgProfile' />
