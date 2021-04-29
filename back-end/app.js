@@ -12,7 +12,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 
 expressApp.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -60,23 +60,23 @@ expressApp.get('/', (req, res) => {
     });
 });
 
-expressApp.post('/', upload.single('profile'), (req, res, next) => {
-    var obj = {
-        name: req.body.name,
-        desc: req.body.desc,
-        img: {
+expressApp.post('/uploadPhotos', upload.single('profile'), (req, res, next) => {
+
+    const img = {
             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
             contentType: 'image/png'
         }
-    }
-    imgModel.create(obj, (err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // item.save();
-            res.send('tomtam');
-        }
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        var query = { "username" : req.body.username};
+        var updateName = {$set : {
+            "img" : img
+        }};
+        dbo.collection("User").updateOne(query,updateName,function(err, res) {
+            console.log("1 document updated");
+            db.close();
+        });
+        res.send("Uploads photos of " + req.body.username +" complete ");
     });
 });
 
