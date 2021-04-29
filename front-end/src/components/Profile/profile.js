@@ -227,7 +227,6 @@ const Profile = () => {
 
     return (
         <div style={{height:'100%',width:'100%'}}>
-            {popUp && <PopUp setPopUp={setPopUp} getTotalPaid={totalPaid} />}
             <div className = 'containerProfile'></div>
             <div class ='content'>
                 <h1>บัญชีของฉัน</h1>
@@ -1076,6 +1075,7 @@ const Profile = () => {
                         })}
                     </div>
             </div>}
+            {popUp && <PopUp setPopUp={setPopUp} getTotalPaid={totalPaid} />}
     </div>
     );
 }

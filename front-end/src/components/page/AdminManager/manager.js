@@ -12,7 +12,7 @@ import {
     Link,
     useRouteMatch
 } from "react-router-dom";
-// ------------------------payment-------------------------
+// ------------------------payment------------------------- 
 const ModalSlip = (props) => {
     const [detailPaymentID, SetdetailPaymentId] = useState(props.detailPayment)
     const [imagesPreview, SetimagesPreview] = useState(null)
