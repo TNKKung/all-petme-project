@@ -19,7 +19,7 @@ const Login = () => {
     setData(prev => ({ ...prev, [name]: value }))
   }
 
-  const submitForm = (e) => {
+  const submitForm = async(e) => {
     // e.preventDefault();
 
     // let isValid = true;
@@ -35,6 +35,19 @@ const Login = () => {
     // if (!isValid) {
     //   return
     // }
+
+    const res = await fetch('http://localhost:4000/api/add',{
+          method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+              username :data.username,
+              password :data.password,
+            }),
+        });
+        
     
     console.log("Logged In");
     //Carry on as normal

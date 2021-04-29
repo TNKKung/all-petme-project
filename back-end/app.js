@@ -200,7 +200,11 @@ expressApp.post("/api/add/registerPet",function(req,res) {
         question1,
         question2,
         question3,
+        question4,
+        question5,
         sellerUser,
+        picture,
+        typeSell
     } = req.body;
 
     console.log(req.body);
@@ -220,6 +224,8 @@ expressApp.post("/api/add/registerPet",function(req,res) {
             "question1" : question1,
             "question2" : question2,
             "question3" : question3,
+            "question4" : question4,
+            "question5" : question5,
             "sellerUser" : sellerUser,
             "listPeople" : [{
                 username:"tomtam",
@@ -232,10 +238,11 @@ expressApp.post("/api/add/registerPet",function(req,res) {
                 question2:"i like this",
                 question3:"i like this"
             }],
-            "sellStatus": true
+            "sellStatus": true,
+            "typeSell" : typeSell,
+            "img" : picture
         }
         
-        console.log(user);
 
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
@@ -259,10 +266,6 @@ expressApp.post("/api/add/contact",function(req,res) {
     } = req.body;
 
     console.log(req.body);
-    if(name.lenght <= 2){
-        res.status(400).send("Error");
-    }
-    else{
         const user = {
             "name" : name,
             "email" : email,
@@ -271,17 +274,14 @@ expressApp.post("/api/add/contact",function(req,res) {
             "message" : message
         }
         res.send(user);
-
         MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db("Admin");
+            var dbo = db.db("manager");
             dbo.collection("Contact").insertOne(user, function(err, res) {
-              if (err) throw err;
-              console.log("Add one people");
+              console.log("Add one one contact");
               db.close();
             });
         });
-    }
+    
 });
 
 expressApp.post("/api/add/report",function(req,res) {

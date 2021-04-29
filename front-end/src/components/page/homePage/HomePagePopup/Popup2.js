@@ -1,6 +1,7 @@
 import './Popup2.scoped.css'
 import Input from '../../../Input/Input'
 import React, { useState } from 'react'
+import fetch from 'unfetch';
 
 function Popup2({ popup1, popup2, popupFinish }) {
   const [form, setForm] = useState({
@@ -30,7 +31,31 @@ function Popup2({ popup1, popup2, popupFinish }) {
   return (
     <form
       className='box-large'
-      onSubmit={(e) => {
+      onSubmit={async(e) => {
+        const res = await fetch("http://localhost:4000/api/add/registerPet",{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'     
+          },
+          mode : "cors",
+          body: JSON.stringify({
+            petId: form.petId,
+            dogBreed: form.dogBreed,
+            gender: form.gender,
+            age: form.age,
+            petDetail: form.petDetail,
+            cost: form.const,
+            nameAccountPromtpay: form.nameAccountPromtpay,
+            detailAccountPromtpay: form.detailAccountPromtpay,
+            question1: form.question1,
+            question2: form.question2,
+            question3: form.question3,
+            question4: form.question4,
+            question5: form.question5,
+            picture: [],        
+          }),
+        })
+        console.log(res);
         e.preventDefault()
         popup1.close()
         popup2.close()

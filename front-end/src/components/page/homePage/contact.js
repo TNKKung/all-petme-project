@@ -9,6 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAlignJustify, fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import fetch from 'unfetch';
 
 
 import Bottom_logo_icon from './img/bottom-icon.png'
@@ -81,7 +82,7 @@ const Contact = ()=> {
     function getTextbox(val){setTextbox(val.target.value)}
 
     const [sumitText,setSumitText] = useState('Not summit')
-    function checkSumit(){
+    const checkSumit=async()=>{
         var a = CheckName();
         var b = CheckEmail();
         var c = CheckPhone();
@@ -97,6 +98,24 @@ const Contact = ()=> {
             setPhoneNumber('')
             setTopic('')
             setTextbox('')
+        const res = await fetch("http://localhost:4000/api/add/contact",{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'     
+          },
+          mode : "cors",
+          body: JSON.stringify({
+
+            "name": Name,
+            "email": Email,
+            "mobileNumber": PhoneNumber,
+            "topic": Topic,
+            "message" : Textbox
+   
+          }),
+        })
+
+        console.log(res)
         }
     }
     // ----------------------------------------------------------------condition contract End--------------------------------------------
