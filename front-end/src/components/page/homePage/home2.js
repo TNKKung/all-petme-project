@@ -97,9 +97,9 @@ const Home2 = () => {
               <div class='activity-details'> ที่อยากรับเลี้ยงสุนัข</div>
               <div class='activity-details'>ที่ไม่มีเจ้าของดูแล</div>
               <div class='activity-center-pad'>
-                <Link to='/donate'>
+                <div><Link to='/donate'>
                   <button class='adopt-button'>รับเลี้ยง</button>
-                </Link>
+                </Link></div>
               </div>
             </div>
             <div class='activity-pad'>
@@ -110,9 +110,9 @@ const Home2 = () => {
               <div class='activity-details'>สำหรับบุคคลที่อยากหาซื้อสุนัข</div>
               <div class='activity-details'>สายพันธ์ุที่ต้องการ</div>
               <div class='activity-center-pad'>
-                <Link to='/market'>
+                <div><Link to='/market'>
                   <button class='dealing-button'>ไปตลาดซื้อขาย</button>
-                </Link>
+                </Link></div>
               </div>
             </div>
             <div class='activity-pad'>

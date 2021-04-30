@@ -309,6 +309,7 @@ body {
     inset -3px -3px 5px rgba(1, 32, 32, 0.5);
 }
 .dealing-button:hover {
+  
   cursor: pointer;
   color: #ffffff;
   background: #f07167;
