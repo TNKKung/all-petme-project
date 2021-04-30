@@ -14,14 +14,11 @@ function MarketPage() {
   React.useEffect(() => {
     const fetchdata = async() =>{
       const res = await fetch("http://localhost:4000/api/get/dataPet", {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
       mode: "cors",
-      body: JSON.stringify({
-        "get" :"g",
-      }),
     })
     const a = await res.json();
 
@@ -34,69 +31,6 @@ function MarketPage() {
     console.log(dataPet)
   },[dataPet]);
 
-  const dog = [
-    {
-      imgName: 'Pomeranian.jpg',
-      breed: 'ปอมเมอเรเนี่ยน',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Chihuahua.jpg',
-      breed: 'ชิวาวา',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Beagle.png',
-      breed: 'บีเกิ้ล',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Yorkshire Terrier.jpg',
-      breed: 'ยอร์กไชร์เทอร์เรีย',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Bulldog.jpg',
-      breed: 'บูลล์ด็อก',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Rottweiler.jpg',
-      breed: 'ร็อตต์ไวเลอร์',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Siberian Husky.jpg',
-      breed: 'ไซบีเรียน ฮัสกี้',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Pug.jpg',
-      breed: 'ปั๊ก',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Shih Tzu.jpg',
-      breed: 'ชิสุ',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-    {
-      imgName: 'Golden Retriever.jpg',
-      breed: 'โกลเด้นรีทรีฟเวอร์',
-      cost: ' 5,500 บาท',
-      profile: 'คุณต้อม',
-    },
-
-  ]
   return (
     <div>
       <div className='marketPage-part1'>

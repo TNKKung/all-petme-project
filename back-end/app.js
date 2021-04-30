@@ -80,56 +80,50 @@ expressApp.post('/uploadPhotos', upload.single('profile'), (req, res, next) => {
     });
 });
 
-expressApp.post("/api/get/login",function(req,res){
+expressApp.post("/api/post/login",function(req,res){
     const {
         username,
         password,
     } = req.body;
-
     console.log(req.body);
-
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
-        dbo.collection("User").find().toArray(function(err, result) {
-            res.send("tom");
-            
-            // if(result[0].username === username){
-            //     res.send(true);
-            // }
-            // else{
-            //     res.send(false);
-            // }
+        dbo.collection("User").find({"username" : username}).toArray(function(err, result) {          
+            if(result[0].username === username){
+                res.send(result[0]);
+            }
+            else{
+                res.send(false);
+            }
         });    
     }); 
 });
 
-
-expressApp.post("/api/get/profile",function(req,res){
-    const username = req.body.username;
-    console.log(req.body);
-    MongoClient.connect(url, function(err, db) {
-        var dbo = db.db("PetMeApp");
-        dbo.collection("User").find({"username" : username}).toArray(function(err, result) {
-            if(result[0].username === username){
-                res.send({
-                    name : result[0].name,
-                    email : result[0].email,
-                    mobileNumber : result[0].mobileNumber,
-                    birth : result[0].birth,
-                    address : result[0].address,
-                    road : result[0].road,
-                    subDistrict : result[0].subDistrict,
-                    district : result[0].district,
-                    province : result[0].province,
-                    postalCode : result[0].postalCode
-
-                });
-                console.log(result[0]);
-            }
-            db.close();
-        });      
-    });  
-});
+// expressApp.post("/api/get/profile",function(req,res){
+//     const username = req.body.username;
+//     console.log(req.body);
+//     MongoClient.connect(url, function(err, db) {
+//         var dbo = db.db("PetMeApp");
+//         dbo.collection("User").find({"username" : username}).toArray(function(err, result) {
+//             if(result[0].username === username){
+//                 res.send({
+//                     name : result[0].name,
+//                     email : result[0].email,
+//                     mobileNumber : result[0].mobileNumber,
+//                     birth : result[0].birth,
+//                     address : result[0].address,
+//                     road : result[0].road,
+//                     subDistrict : result[0].subDistrict,
+//                     district : result[0].district,
+//                     province : result[0].province,
+//                     postalCode : result[0].postalCode
+//                 });
+//                 console.log(result[0]);
+//             }
+//             db.close();
+//         });      
+//     });  
+// });
 
 expressApp.post("/api/add/registerUser",function(req,res) {
     const {
@@ -314,7 +308,7 @@ expressApp.post("/api/add/report",function(req,res) {
     }
 });
 
-expressApp.post("/api/get/dataPet",function(req,res) {
+expressApp.get("/api/get/dataPet",function(req,res) {
     console.log("ttt");
     var data = [];
     MongoClient.connect(url, function(err, db) {

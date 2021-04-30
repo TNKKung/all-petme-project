@@ -276,18 +276,7 @@ const Profile = () => {
         console.log(curTotalPaid)
     }
     React.useEffect(() => {
-        const fetchdata = async() =>{
-          const res = await fetch("http://localhost:4000/api/get/profile", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          mode: "cors",
-          body: JSON.stringify({
-              username : "tomkabtokom"
-          }),
-        })
-        const data = await res.json();
+        const data = JSON.parse(localStorage.getItem("user"))
         setName(data.name)
         setEmail(data.email)
         setMobileNumber(data.mobileNumber)
@@ -298,8 +287,7 @@ const Profile = () => {
         setDistrict(data.district)
         setProvince(data.province)
         setPostalCode(data.postalCode)
-        }
-        fetchdata()
+        
       },[]);
     
 

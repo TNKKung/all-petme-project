@@ -18,9 +18,10 @@ const Login = () => {
   const handleChange = (name, value) => {
     setData(prev => ({ ...prev, [name]: value }))
   }
+  
 
   const submitForm = async(e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     // let isValid = true;
 
@@ -36,7 +37,7 @@ const Login = () => {
     //   return
     // }
 
-    const res = await fetch('http://localhost:4000/api/add',{
+    const res = await fetch('http://localhost:4000/api/post/login',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
@@ -47,9 +48,18 @@ const Login = () => {
               password :data.password,
             }),
         });
+
+
+        const a = await res.json()
+        console.log(a);
+
+        localStorage.setItem("user", JSON.stringify(a));
         
     
     console.log("Logged In");
+
+
+
     //Carry on as normal
   }
 
