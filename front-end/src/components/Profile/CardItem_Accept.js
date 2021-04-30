@@ -8,12 +8,29 @@ import { colors } from '@material-ui/core';
 
 export const CardItem_Accept = [
         {
-            imgName: <img className="img_list" src={Profile_Dog}/>,           
-            breed: 'สุนัขพันธ์ : ซามอย',
+            imgName: Profile_Dog,           
+            breed: 'ซามอย',
             cost: '35000',
             status: 'ตอบรับแล้ว',
             icon: <FavoriteIcon className="icon_details_accept" style={{ fontSize: 45 }}/>,
             like: 5,
+            question1: 'ทำไม',
+            answer1: '',
+            question2: 'ทำไม',
+            answer2: '',
+            question3: 'ทำไม',
+            answer3: '',
+            question4: 'ทำไม',
+            answer4: '',
+            question5: 'ทำไม',
+            answer5: '',
+            seller: {picture:'',name:'คุณต้อม'},
+            dateCreate:'12/02/2554',
+            detail: 'รับสุนัขตัวน้อยไหมคะ',
+            gender: 'ชาย',
+            age: '12 month'
+
+
         },
     ]
 
