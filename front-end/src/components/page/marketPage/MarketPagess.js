@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
-import PetCard from '../../PetCard/PetCardMarket'
+import PetCard from '../../PetCard/PetCardMarket.js'
 import { ContactsOutlined } from '@material-ui/icons'
 import PopDetail from '../../Profile/popdogDetail'
 
@@ -270,9 +270,6 @@ function MarketPage() {
     },
 
   ]
-  function CreatePet(){
-
-  }
   return (
     <div>
       <div className='marketPage-part1'>
@@ -328,13 +325,13 @@ function MarketPage() {
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
           {doger                                                     /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
-            .filter(doger => {
+            .filter(d => {
               if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
-              else if (doger.dogBreed === form.ChoosedogBreed) return true
+              else if (d.dogBreed === form.ChoosedogBreed) return true
             })
-            .map(doger => {            
-              return <PetCard dog={doger} setdogDetail={SetdogInfo} setpop={setPopups} />
+            .map(e => {            
+              return <PetCard dog={e} setdogDetail={SetdogInfo} setpop={setPopups} />
             })}
           {Popup ?<PopDetail setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>
