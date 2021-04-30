@@ -21,7 +21,8 @@ import Profile_item2_src from './img/item2.jpg'
 import Profile_icon_src from './img/profile.jpg'
 import Profile_wallpaper_src from './img/wall.jpg'
 
-import PopUp from './popUppayment'
+import PopUppayment from './popUppayment'
+import PopDetail from './popdogDetail'
 
 import CardItem_Accept from './CardItem_Accept';
 import CardItem_Wait from './CardItem_Wait';
@@ -76,30 +77,47 @@ const Profile = () => {
         }
     }
 
-    const showPopUpsell = (type) => {
+    const showPopUp = (type) => {
         if (type === 'Sell') {
-            setPopUp(true)
+            setPopUpPay(true)
             // getTotalPaid()
         }
+        else if (type === 'Exit') {
+            // setPopUpExit(true)
+            // getTotalPaid()
+        }
+        else if (type === 'Dog') {
+            // let shallowDate = ''
+            // for (let i = 3; i < 15; i++) {
+            //     shallowDate = shallowDate+ dog.dateCreate[i]
+            // }
+            // setDogDateCreate(shallowDate)
+            setPopUpDe(true)
+        }
+        else if (type === 'Buy') {
+            // setPopUp(true)
+            getTotalPaid()
+        }
+
     }
     // --------------------------------------------Account Page----------------------------------------------------------
     const Account = () =>{
         console.log("Hello in sayHello")
     }
 
-    const showPopUpEdit = (type) => {
-        if (type === 'Edit') {
-            setPopUp(true)
-            // getTotalPaid()
-        }
-    }
+    // const showPopUpEdit = (type) => {
+    //     if (type === 'Edit') {
+    //         setPopUp(true)
+    //         // getTotalPaid()
+    //     }
+    // }
     // --------------------------------------------Exit Page----------------------------------------------------------
-    const showPopUpExit = (type) => {
-        if (type === 'Exit') {
-            // setPopUpExit(true)
-            // getTotalPaid()
-        }
-    }
+    // const showPopUpExit = (type) => {
+    //     if (type === 'Exit') {
+    //         // setPopUpExit(true)
+    //         // getTotalPaid()
+    //     }
+    // }
 
     // ******************Edit****************
     
@@ -121,14 +139,29 @@ const Profile = () => {
             setlikeTab([false, false, true])
         }
     }
-
-    const showPopUpDog = (type) => {
-        if (type === 'Dog') {
-            // setPopUpDog(true)
-            // getTotalPaid()
-        }
-    }
-
+    const [dogDateCreate,setDogDateCreate] = useState('')
+    const [dogDetail,setdogDetail] = useState({imgName: '',
+        breed: '',
+        cost: '',
+        status: '',
+        icon: <FavoriteIcon className="icon_details_accept" style={{ fontSize: 45 }}/>,
+        like: 5,
+        question1: '',
+        answer1: '',
+        question2: '',
+        answer2: '',
+        question3: '',
+        answer3: '',
+        question4: '',
+        answer4: '',
+        question5: '',
+        answer5: '',
+        seller: {picture:'',name:''},
+        dateCreate:'',
+        detail: '',
+        gender: '',
+        age: ''})
+    
     // --------------------------------------------Store Page----------------------------------------------------------
     
     const [storeTab, setstoreTab] = useState([true, false]);
@@ -166,7 +199,8 @@ const Profile = () => {
     { name: 'หมาชนิดสองจ่ายและ', picture: Profile_item2_src, price: 15000, amount: 1 }])
 
     const [totalPaid, setTotalPaid] = useState(12000 + 7000)
-    const [popUp, setPopUp] = useState(false)
+    const [popUpPay, setPopUpPay] = useState(false)
+    const [popUpDe, setPopUpDe] = useState(false)
     const [canceledPaidDog, setCanceledPaidDog] = useState([])
 
     const [moneyTab, setMoneyTab] = useState([true, false, false])
@@ -199,12 +233,12 @@ const Profile = () => {
         else setTotalPaid(0)
     }
 
-    const showPopUp = (type) => {
-        if (type === 'Buy') {
-            setPopUp(true)
-            getTotalPaid()
-        }
-    }
+    // const showPopUp = (type) => {
+    //     if (type === 'Buy') {
+    //         // setPopUp(true)
+    //         getTotalPaid()
+    //     }
+    // }
 
     const getTotalPaid = () => {
         return totalPaid
@@ -303,7 +337,7 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }}/></div> 
                                             <div id="title">สถานะการชำระเงิน</div>                          
                                     </li>
-                                    <li onClick={() => showPopUpExit('Exit')} className ="row">
+                                    <li onClick={() => showPopUp('Exit')} className ="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }}/></div> 
                                             <div id="title">ออกจากระบบ</div>                          
                                     </li>
@@ -448,8 +482,8 @@ const Profile = () => {
                                         {CardItem_Accept.map((val,key)=> {
                                             return(
                                                     <div className='cards__wrapper' key={key}>
-                                                        <div className="img_wrapper" onClick={() => showPopUpDog('Dog')}>
-                                                            <div className="img_list">{val.imgName}</div> 
+                                                        <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
+                                                            <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
                                                             <div className="img_text_bottom">
                                                                 <text>{val.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -463,8 +497,8 @@ const Profile = () => {
                                         {CardItem_Wait.map((val,key)=> {
                                             return(
                                                     <div className='cards__wrapper' key={key}>
-                                                        <div className="img_wrapper" onClick={() => showPopUpDog('Dog')} >
-                                                            <div className="img_list">{val.imgName}</div> 
+                                                        <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}} >
+                                                            <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
                                                             <div className="img_text_bottom">
                                                                 <text>{val.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -494,8 +528,8 @@ const Profile = () => {
                                         {CardItem_Wait.map((val,key)=> {
                                             return(
                                                 <div className='cards__wrapper' key={key}>
-                                                    <div className="img_wrapper" onClick={() => showPopUpDog('Dog')}>
-                                                        <div className="img_list">{val.imgName}</div> 
+                                                    <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
+                                                        <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
                                                         <div className="img_text_bottom">
                                                             <text>{val.breed}</text>
                                                             <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -524,8 +558,8 @@ const Profile = () => {
                                         {CardItem_Accept.map((val,key)=> {
                                             return(
                                                 <div className='cards__wrapper' key={key}>
-                                                    <div className="img_wrapper" onClick={() => showPopUpDog('Dog')}>
-                                                        <div className="img_list">{val.imgName}</div> 
+                                                    <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
+                                                        <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
                                                         <div className="img_text_bottom">
                                                             <text>{val.breed}</text>
                                                             <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -728,7 +762,7 @@ const Profile = () => {
 
                                     </div>
                                     <div className='money-pane'>
-                                        <button class="money-button" onClick={() => showPopUpsell('Sell')}>
+                                        <button class="money-button" onClick={() => showPopUp('Sell')}>
                                             ซื้อสุนัข
                                         </button>
                                     </div>
@@ -961,7 +995,6 @@ const Profile = () => {
 
             {profileTab[5] && 
             <div className = "content2">
-                {/* {popUp && <PopUp setPopUp={setPopUp} getTotalPaid={totalPaid} />} */}
                 <div className="tab_one">
                     <label>
                         <div className='img_border'>
@@ -1103,7 +1136,15 @@ const Profile = () => {
                         })}
                     </div>
             </div>}
-            {popUp && <PopUp setPopUp={setPopUp} getTotalPaid={totalPaid} />}
+            {popUpPay && <PopUppayment setPopUp={setPopUpPay} getTotalPaid={totalPaid} />}
+            
+            {popUpDe && <PopDetail setPopUp={setPopUpDe} 
+                    // setDog = {setDog}
+                    // getDateCreate = {dogDateCreate}
+                    getDog = {dogDetail}
+                />}
+
+
     </div>
     );
 }

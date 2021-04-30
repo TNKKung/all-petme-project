@@ -7,7 +7,7 @@ import './popUppayment.css';
 import QR_src from './img/qr.png'
 import IMG_src from './img/img.png'
 
-const PopUp = (props) => {
+const PopUppayment = (props) => {
     // function that takes boolean as param to conditionally display popup
     const setPopUp = props.setPopUp
     const getTotalPaid = props.getTotalPaid
@@ -106,4 +106,4 @@ const PopUp = (props) => {
     );
 }
 
-export default PopUp;
+export default PopUppayment;
