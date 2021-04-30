@@ -848,7 +848,7 @@ const Profile = () => {
                             <div id="name">
                                 <p>ชื่อผู้ใช้งาน</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={name} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
@@ -860,7 +860,7 @@ const Profile = () => {
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={email} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
@@ -872,13 +872,7 @@ const Profile = () => {
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
-                        </div>
-                        <div className ="Account_Text">
-                            <div  id="name">
-                                <p>เพศ</p>           
-                            </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={date} id="text"></input>
                         </div>
 
                     <div className = "head_topic">
