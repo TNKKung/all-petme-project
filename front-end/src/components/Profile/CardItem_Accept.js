@@ -8,8 +8,8 @@ import { colors } from '@material-ui/core';
 
 export const CardItem_Accept = [
         {
-            imgName: Profile_Dog,           
-            breed: 'ซามอย',
+            picture: Profile_Dog,           
+            dogBreed: 'ซามอย',
             cost: '35000',
             status: 'ตอบรับแล้ว',
             icon: <FavoriteIcon className="icon_details_accept" style={{ fontSize: 45 }}/>,
@@ -26,7 +26,7 @@ export const CardItem_Accept = [
             answer5: '',
             seller: {picture:'',name:'คุณต้อม'},
             dateCreate:'12/02/2554',
-            detail: 'รับสุนัขตัวน้อยไหมคะ',
+            petDetail: 'รับสุนัขตัวน้อยไหมคะ',
             gender: 'ชาย',
             age: '12 month'
 

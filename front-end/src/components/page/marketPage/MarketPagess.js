@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
-import PetCard from '../../PetCard/PetCard.js'
+import PetCard from '../../PetCard/PetCardMarket'
 import { ContactsOutlined } from '@material-ui/icons'
+import PopDetail from '../../Profile/popdogDetail'
 
 function MarketPage() {
   const [form, setForm] = useState({
-    dogBreed: null,
+    ChoosedogBreed: null,
   })
   const [dataPet,setDataPet] = useState([])
+
+  const [dogInfo,SetdogInfo] = useState(null);
+  const [Popup,setPopups] = useState(false);
  
   React.useEffect(() => {
     const fetchdata = async() =>{
@@ -31,6 +35,241 @@ function MarketPage() {
     console.log(dataPet)
   },[dataPet]);
 
+  const doger = [
+    {
+      picture: 'Pomeranian.jpg',
+      breed: 'ปอมเมอเรเนี่ยน',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+      
+    },
+    {
+      picture: 'Chihuahua.jpg',
+      dogBreed: 'บีเกิ้ล',
+      ost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Beagle.png',
+      dogBreed: 'บีเกิ้ล',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Yorkshire Terrier.jpg',
+      dogBreed: 'บีเกิ้ล',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Bulldog.jpg',
+      dogBreed: 'บีเกิ้ล',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Rottweiler.jpg',
+      dogBreed: 'ร็อตต์ไวเลอร์',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Siberian Husky.jpg',
+      dogBreed: 'ไซบีเรียน ฮัสกี้',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Pug.jpg',
+      dogBreed: 'ปั๊ก',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Shih Tzu.jpg',
+      dogBreed: 'ชิสุ',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+    },
+    {
+      picture: 'Golden Retriever.jpg',
+      dogBreed: 'โกลเด้นรีทรีฟเวอร์',
+      cost: '3500 บาท',
+      profile: 'คุณต้อม',
+      status: 'ตอบรับแล้ว',
+      like: 5,
+      question1: 'ทำไม',
+      answer1: '',
+      question2: 'ทำไม',
+      answer2: '',
+      question3: 'ทำไม',
+      answer3: '',
+      question4: 'ทำไม',
+      answer4: '',
+      question5: 'ทำไม',
+      answer5: '',
+      seller: {picture:'',name:'คุณต้อม'},
+      dateCreate:'12/02/2554',
+      petDetail: 'มันเยอะเหลือเกินน',
+      gender: 'ผู้',
+      age: '12 month'
+      
+    },
+
+  ]
   return (
     <div>
       <div className='marketPage-part1'>
@@ -55,9 +294,9 @@ function MarketPage() {
               <select
                 // required
                 className='marketPage-part2-inBox1'
-                value={form.dogBreed}
+                value={form.ChoosedogBreed}
                 onChange={(e) => {
-                  setForm({ ...form, dogBreed: e.target.value })
+                  setForm({ ...form, ChoosedogBreed: e.target.value })
                   // console.table(form)
                 }}
               >
@@ -85,15 +324,16 @@ function MarketPage() {
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
-          {dataPet
+          {doger                                                     /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
             .filter((d) => {
-              if (form.dogBreed === null || form.dogBreed === 'ทั้งหมด')
+              if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
-              else if (d.breed === form.dogBreed) return true
+              else if (d.dogBreed === form.ChoosedogBreed) return true
             })
-            .map((iter, idx) => {
-              return <PetCard {...iter} key={'petcard' + idx} />
+            .map(doger => {            
+              return <PetCard dog={doger} setdogDetail={SetdogInfo} setpop={setPopups} />
             })}
+          {Popup ?<PopDetail setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>
       </div>
     </div>

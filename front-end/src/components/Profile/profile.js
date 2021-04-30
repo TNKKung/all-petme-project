@@ -276,17 +276,17 @@ const Profile = () => {
         console.log(curTotalPaid)
     }
     React.useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("user"))
-        setName(data.name)
-        setEmail(data.email)
-        setMobileNumber(data.mobileNumber)
-        setDate(data.birth)
-        setAddress(data.address)
-        setRoad(data.road)
-        setSubDistrict(data.subDistrict)
-        setDistrict(data.district)
-        setProvince(data.province)
-        setPostalCode(data.postalCode)
+        // const data = JSON.parse(localStorage.getItem("user"))
+        // setName(data.name)
+        // setEmail(data.email)
+        // setMobileNumber(data.mobileNumber)
+        // setDate(data.birth)
+        // setAddress(data.address)
+        // setRoad(data.road)
+        // setSubDistrict(data.subDistrict)
+        // setDistrict(data.district)
+        // setProvince(data.province)
+        // setPostalCode(data.postalCode)
         
       },[]);
     

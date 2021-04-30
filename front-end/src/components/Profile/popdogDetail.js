@@ -1,9 +1,9 @@
+import { PortableWifiOffRounded } from '@material-ui/icons';
 import React, { useState} from 'react';
 import './popdogDetail.css';
 
 const PopUpDogDetail = (props) => {
 
-    const setPopUp = props.setPopUp
     const getDog = props.getDog
     // const dogDateCreate = props.getDateCreate
 
@@ -17,20 +17,20 @@ const PopUpDogDetail = (props) => {
     const [puType2, setPuType2] = useState(0)
 
 
-    const [mainImg, setMainImg] = useState(getDog.imgName)
-    const [subImg, setSubImg] = useState(getDog.imgName)
+    const [mainImg, setMainImg] = useState(getDog.picture)
+    const [subImg, setSubImg] = useState(getDog.picture)
 
     const showUpload = (inp) => {
 
         if (inp == 1) {
-            setPopUp(true)
+            props.setPopUp(true)
             setPuType(0)
             setPuType2(1)
             setlastBtt('ส่งคำตอบ')
             setPuHeader('ตอบคำถามเพื่อพิจารณาคุณสมบัติของผู้เลี้ยง')
         }
         else {
-            setPopUp(true)
+            props.setPopUp(true)
             setPuType(1)
             setPuType2(0)
             setlastBtt('ส่ง')
@@ -90,9 +90,9 @@ const PopUpDogDetail = (props) => {
                             </div>
                             <div className='pu-half-line'></div>
                             <div className='pu-halfPad1'>
-                            <div style={{width:'100%',height:'50px',display:'flex',flexDirection:'row-reverse'}}><text className="popup-x2" onClick={() => setPopUp(false)} >X</text></div>
+                            <div style={{width:'100%',height:'50px',display:'flex',flexDirection:'row-reverse'}}><text className="popup-x2" onClick={() => props.setPopUp(false)} >X</text></div>
                                 <div className='pu-row2'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.breed}</div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.dogBreed}</div></div>
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> ราคา: {dogPU.cost}</div></div></div>
@@ -113,7 +113,7 @@ const PopUpDogDetail = (props) => {
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-dogDatailPad'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.detail}</div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.petDetail}</div></div>
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
@@ -153,7 +153,7 @@ const PopUpDogDetail = (props) => {
                                         <div className='pu-rowHeader2'><text className='pu-headerA2'>{puHeader}</text></div>
                                         <div className='pu-underline'></div>
                                     </div>
-                                    <text className="popup-x2" onClick={() => setPopUp(false)} >X</text>
+                                    <text className="popup-x2" onClick={() => props.setPopUp(false)} >X</text>
                                 </div>
                                 {dogPU.question1 && <div>
                                     <div className='pu-row2'>
@@ -188,7 +188,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => setPopUp(false)}>{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => props.setPopUp(false)}>{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>

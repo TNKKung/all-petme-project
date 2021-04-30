@@ -13,6 +13,7 @@ function PetCard(props) {
         <div className='petcard-detail-left' >
           <div className='head'>
             <div>สุนัขพันธ์ : {dogDetail.dogBreed}</div>
+            <div>ราคา : {dogDetail.cost}</div>
           </div>
         </div>
         <div className='petcard-detail-right'>
