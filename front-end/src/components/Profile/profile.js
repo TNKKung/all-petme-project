@@ -471,7 +471,7 @@ const Profile = () => {
                                             return(
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
-                                                            <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
+                                                            <div className="img_list"><img className="img_list" src={val.picture}/></div> 
                                                             <div className="img_text_bottom">
                                                                 <text>{val.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -486,7 +486,7 @@ const Profile = () => {
                                             return(
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}} >
-                                                            <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
+                                                            <div className="img_list"><img className="img_list" src={val.picture}/></div> 
                                                             <div className="img_text_bottom">
                                                                 <text>{val.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -517,7 +517,7 @@ const Profile = () => {
                                             return(
                                                 <div className='cards__wrapper' key={key}>
                                                     <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
-                                                        <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
+                                                        <div className="img_list"><img className="img_list" src={val.picture}/></div> 
                                                         <div className="img_text_bottom">
                                                             <text>{val.breed}</text>
                                                             <text>{'ราคา :' + ' ' + val.cost}</text>
@@ -547,7 +547,7 @@ const Profile = () => {
                                             return(
                                                 <div className='cards__wrapper' key={key}>
                                                     <div className="img_wrapper" onClick={() => {setdogDetail(val);showPopUp('Dog')}}>
-                                                        <div className="img_list"><img className="img_list" src={val.imgName}/></div> 
+                                                        <div className="img_list"><img className="img_list" src={val.picture}/></div> 
                                                         <div className="img_text_bottom">
                                                             <text>{val.breed}</text>
                                                             <text>{'ราคา :' + ' ' + val.cost}</text>

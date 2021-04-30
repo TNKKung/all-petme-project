@@ -37,7 +37,7 @@ const CardItem_Wait = [
             imgName: Profile_Dog3,          
             breed: 'ลาบราดอร์',
             cost: '15000',
-            status: 'รอการตอบรับ',
+            status: 'ตอบรับแล้ว',
             icon: <FavoriteBorderIcon className="icon_details" style={{ fontSize: 45 }}/>,
             like: 15,
             question1: 'ทำไม',

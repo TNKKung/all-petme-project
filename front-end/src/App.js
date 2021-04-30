@@ -34,17 +34,18 @@ import { ScrollToTop } from './ScrollToTop.js'
 const App = () => {
   return (
     <BrowserRouter>
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
+        <Route path="/manager" component={manager}/>
       <ScrollToTop />
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home2} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
+        
         <Route path='/market' component={MarketPage} />
         <Route path='/donate' component={DonatePage} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path="/manager" component={manager}/>
         <Route path='/Profile' component={Profile}/>
       </Switch>
 
