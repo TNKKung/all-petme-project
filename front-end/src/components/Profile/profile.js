@@ -31,12 +31,29 @@ import CardStoreSell from './CardStoreSell';
 import UserLike from './UserLike'
 import UserAccept from './UserAccept'
 import UserCancel from './UserCancel'
+import fetch from 'unfetch';
 
 
 library.add(fas, fab, far);
 
 const Profile = () => {
     const [profileTab, setprofileTab] = useState([true, false, false, false, false, false])
+    const [name,setName]= useState()
+    const [email,setEmail]= useState()
+    const [mobileNumber,setMobileNumber]= useState()
+    const [date,setDate]= useState()
+    const [address,setAddress]= useState()
+    const [road,setRoad]= useState()
+    const [subDistrict,setSubDistrict]= useState()
+    const [district,setDistrict]= useState()
+    const [province,setProvince] = useState()
+    const [postalCode,setPostalCode] = useState()
+
+
+    
+    //   React.useEffect(() => {
+
+    //   },[]);
 
     const profileSwitch = (selectedTab) => {
         if (selectedTab === 1) {
@@ -224,6 +241,33 @@ const Profile = () => {
         setTotalPaid(curTotalPaid)
         console.log(curTotalPaid)
     }
+    React.useEffect(() => {
+        const fetchdata = async() =>{
+          const res = await fetch("http://localhost:4000/api/get/profile", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: "cors",
+          body: JSON.stringify({
+              username : "tomkabtokom"
+          }),
+        })
+        const data = await res.json();
+        setName(data.name)
+        setEmail(data.email)
+        setMobileNumber(data.mobileNumber)
+        setDate(data.birth)
+        setAddress(data.address)
+        setRoad(data.road)
+        setSubDistrict(data.subDistrict)
+        setDistrict(data.district)
+        setProvince(data.province)
+        setPostalCode(data.postalCode)
+        }
+        fetchdata()
+      },[]);
+    
 
     return (
         <div style={{height:'100%',width:'100%'}}>
@@ -275,42 +319,32 @@ const Profile = () => {
                     <div className = "head_topic">
                         <p>รายละเอียดบัญชี</p>
                     </div>
-                        <div className ="Account_Text">
-                            <div id="name">
-                                <p>ชื่อผู้ใช้งาน</p>           
-                            </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
-                        </div>
+                        
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ชื่อ-นามสกุล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={name} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={email} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>เบอร์โทรศัพท์</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={mobileNumber} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={date} id="text"></input>
                         </div>
-                        <div className ="Account_Text">
-                            <div  id="name">
-                                <p>เพศ</p>           
-                            </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
-                        </div>
+                        
                     <div className = "head_topic">
                         <p>รายละเอียดที่อยู่</p>
                     </div>
@@ -318,37 +352,37 @@ const Profile = () => {
                             <div id="name">
                                 <p>ที่อยู่</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={address} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ถนน</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={road} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ตำบล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={subDistrict} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อำเภอ</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={district} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>จังหวัด</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={province} id="text"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>รหัสไปรษณีย์</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text"></input>
+                            <input type="text" value="" placeholder={postalCode} id="text"></input>
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>

@@ -109,10 +109,8 @@ expressApp.post("/api/get/profile",function(req,res){
     console.log(req.body);
     MongoClient.connect(url, function(err, db) {
         var dbo = db.db("PetMeApp");
-        console.log(req.body);
         dbo.collection("User").find({"username" : username}).toArray(function(err, result) {
             if(result[0].username === username){
-                console.log(req.body);
                 res.send({
                     name : result[0].name,
                     email : result[0].email,
