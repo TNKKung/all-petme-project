@@ -23,6 +23,7 @@ import Profile_wallpaper_src from './img/wall.jpg'
 
 import PopUppayment from './popUppayment'
 import PopDetail from './popdogDetail'
+import PopUpAnswer from './popUpAnswer'
 
 import CardItem_Accept from './CardItem_Accept';
 import CardItem_Wait from './CardItem_Wait';
@@ -80,6 +81,7 @@ const Profile = () => {
     const showPopUp = (type) => {
         if (type === 'Sell') {
             setPopUpPay(true)
+            setPopUpDe(false)
             // getTotalPaid()
         }
         else if (type === 'Exit') {
@@ -97,6 +99,11 @@ const Profile = () => {
         else if (type === 'Buy') {
             // setPopUp(true)
             getTotalPaid()
+        }
+        else if(type == 'Answer'){
+            setPopUpAns(true)
+            setPopUpPay(false)
+            setPopUpDe(false)
         }
 
     }
@@ -201,7 +208,14 @@ const Profile = () => {
     const [totalPaid, setTotalPaid] = useState(12000 + 7000)
     const [popUpPay, setPopUpPay] = useState(false)
     const [popUpDe, setPopUpDe] = useState(false)
+    const [popUpAns,setPopUpAns] = useState(false)
+
+    const [userAnswer,setUserAnswer] = useState()
+    const [selectedDog,setSelectedDog] = useState()
+
     const [canceledPaidDog, setCanceledPaidDog] = useState([])
+
+
 
     const [moneyTab, setMoneyTab] = useState([true, false, false])
 
@@ -1041,6 +1055,7 @@ const Profile = () => {
                                                 
                                             </div>
                                         </div>
+{/* --1 22   33 3 2  1 5 5------------------ EDIR HERE KAAA ----------------------------------- */}
                                         {likeNameTab[0] &&
                                             <div className="like_card">
                                                  <div className="like_button_box">
@@ -1058,9 +1073,9 @@ const Profile = () => {
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserLike.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1084,9 +1099,9 @@ const Profile = () => {
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserAccept.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1106,13 +1121,14 @@ const Profile = () => {
                                                         ยกเลิก
                                                     </button>
                                                 </div>
+
                                                 <div className="like_card_details">
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserCancel.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1131,6 +1147,13 @@ const Profile = () => {
                     // getDateCreate = {dogDateCreate}
                     getDog = {dogDetail}
                 />}
+
+            {popUpAns && <PopUpAnswer setPopUp={setPopUpAns}
+                                user = {userAnswer}
+                                dog = {selectedDog}
+                        />}    
+
+                 
 
 
     </div>
