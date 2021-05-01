@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
-import PetCard from '../../PetCard/PetCardMarket'
+import PetCard from '../../PetCard/PetCardMarket.js'
 import { ContactsOutlined } from '@material-ui/icons'
 import PopDetail from '../../Profile/popdogDetail'
 
@@ -63,10 +63,11 @@ function MarketPage() {
                 value={form.ChoosedogBreed}
                 onChange={(e) => {
                   setForm({ ...form, ChoosedogBreed: e.target.value })
+
                   // console.table(form)
                 }}
               >
-                <option value=''>เลือกพันธุ์สุนัข</option>
+                <option value= ''>เลือกพันธุ์สุนัข</option>
                 <option value='ปอมเมอเรเนี่ยน'>ปอมเมอเรเนี่ยน</option>
                 <option value='โกลเด้นรีทรีฟเวอร์'>โกลเด้นรีทรีฟเวอร์</option>
                 <option value='ชิสุ'>ชิสุ</option>
@@ -89,15 +90,20 @@ function MarketPage() {
       </div>
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
+<<<<<<< HEAD
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
           {dataPet                                                   /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
             .filter((d) => {
+=======
+          {doger                                                     /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
+            .filter(d => {
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
               if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
               else if (d.dogBreed === form.ChoosedogBreed) return true
             })
-            .map(doger => {            
-              return <PetCard dog={doger} setdogDetail={SetdogInfo} setpop={setPopups} />
+            .map(e => {            
+              return <PetCard dog={e} setdogDetail={SetdogInfo} setpop={setPopups} />
             })}
           {Popup ?<PopDetail onChange={console.log(localStorage.setItem("petId",dogInfo.petId))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>

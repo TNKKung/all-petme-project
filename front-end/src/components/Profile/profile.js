@@ -23,6 +23,7 @@ import Profile_wallpaper_src from './img/wall.jpg'
 
 import PopUppayment from './popUppayment'
 import PopDetail from './popdogDetail'
+import PopUpAnswer from './popUpAnswer'
 
 import CardItem_Accept from './CardItem_Accept';
 import CardItem_Wait from './CardItem_Wait';
@@ -39,16 +40,16 @@ library.add(fas, fab, far);
 
 const Profile = () => {
     const [profileTab, setprofileTab] = useState([true, false, false, false, false, false])
-    const [name,setName]= useState()
-    const [email,setEmail]= useState()
-    const [mobileNumber,setMobileNumber]= useState()
-    const [date,setDate]= useState()
-    const [address,setAddress]= useState()
-    const [road,setRoad]= useState()
-    const [subDistrict,setSubDistrict]= useState()
-    const [district,setDistrict]= useState()
-    const [province,setProvince] = useState()
-    const [postalCode,setPostalCode] = useState()
+    const [name,setName]= useState('name')
+    const [email,setEmail]= useState('email@emil.com')
+    const [mobileNumber,setMobileNumber]= useState('09xxxxxxxx')
+    const [date,setDate]= useState('xx/xx/xxxx')
+    const [address,setAddress]= useState('xxx')
+    const [road,setRoad]= useState('xxx')
+    const [subDistrict,setSubDistrict]= useState('xxx') 
+    const [district,setDistrict]= useState('xxx')
+    const [province,setProvince] = useState('xxx')
+    const [postalCode,setPostalCode] = useState('xxx')
 
 
     
@@ -80,6 +81,7 @@ const Profile = () => {
     const showPopUp = (type) => {
         if (type === 'Sell') {
             setPopUpPay(true)
+            setPopUpDe(false)
             // getTotalPaid()
         }
         else if (type === 'Exit') {
@@ -97,6 +99,11 @@ const Profile = () => {
         else if (type === 'Buy') {
             // setPopUp(true)
             getTotalPaid()
+        }
+        else if(type == 'Answer'){
+            setPopUpAns(true)
+            setPopUpPay(false)
+            setPopUpDe(false)
         }
 
     }
@@ -201,7 +208,14 @@ const Profile = () => {
     const [totalPaid, setTotalPaid] = useState(12000 + 7000)
     const [popUpPay, setPopUpPay] = useState(false)
     const [popUpDe, setPopUpDe] = useState(false)
+    const [popUpAns,setPopUpAns] = useState(false)
+
+    const [userAnswer,setUserAnswer] = useState()
+    const [selectedDog,setSelectedDog] = useState()
+
     const [canceledPaidDog, setCanceledPaidDog] = useState([])
+
+
 
     const [moneyTab, setMoneyTab] = useState([true, false, false])
 
@@ -346,25 +360,41 @@ const Profile = () => {
                             <div  id="name">
                                 <p>ชื่อ-นามสกุล</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={name} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={name} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={email} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={email} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>เบอร์โทรศัพท์</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={mobileNumber} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={mobileNumber} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={date} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={date} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         
                     <div className = "head_topic">
@@ -374,37 +404,61 @@ const Profile = () => {
                             <div id="name">
                                 <p>ที่อยู่</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={address} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={address} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ถนน</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={road} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={road} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ตำบล</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={subDistrict} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={subDistrict} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อำเภอ</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={district} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={district} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>จังหวัด</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={province} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={province} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>รหัสไปรษณีย์</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={postalCode} id="text"></input>
+=======
+                            <input type="text" readonly="readonly" placeholder={postalCode} id="text"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>
@@ -870,31 +924,43 @@ const Profile = () => {
                             <div id="name">
                                 <p>ชื่อผู้ใช้งาน</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={name} id="text"></input>
+=======
+                            <input type="text" value={name} placeholder={name} id="text" readonly="readonly"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ชื่อ-นามสกุล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text"  placeholder={name} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={email} id="text"></input>
+=======
+                            <input type="text" value="" placeholder={email} id="text" readonly="readonly"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>เบอร์โทรศัพท์</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text"  placeholder={mobileNumber} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
+<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={date} id="text"></input>
+=======
+                            <input type="text" value="" placeholder={date} id="text" readonly="readonly"></input>
+>>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
 
                     <div className = "head_topic">
@@ -905,38 +971,47 @@ const Profile = () => {
                             <div id="name">
                                 <p>ที่อยู่</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={address} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ถนน</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={road} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ตำบล</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={subDistrict} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อำเภอ</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={district} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>จังหวัด</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={province} id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>รหัสไปรษณีย์</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder={postalCode} id="text_edit"></input>
                         </div>
+
+                        <div className='Edit2-pane'>
+                        <button class="Edit2-button" onClick={() => profileSwitch(1)}>
+                            บันทึก
+                        </button>
+                        <button class="Edit2-button" onClick={() => profileSwitch(1)}>
+                            ยกเลิก
+                        </button>
+                    </div>
 
                     <div className = "head_topic">
                         <p>เปลี่ยนรหัสผ่าน</p>
@@ -946,27 +1021,24 @@ const Profile = () => {
                             <div id="name">
                                 <p>รหัสเดิม</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text"  placeholder='old password' id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>รหัสผ่านใหม่</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text"  placeholder='new password' id="text_edit"></input>
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ยืนยันรหัสผ่าน</p>           
                             </div> 
-                            <input type="text" value="" placeholder={Account} id="text_edit"></input>
+                            <input type="text" placeholder='confirm password' id="text_edit"></input>
                         </div>
                     
                     <div className='Edit2-pane'>
                         <button class="Edit2-button" onClick={() => profileSwitch(1)}>
-                            บันทึก
-                        </button>
-                        <button class="Edit2-button" onClick={() => profileSwitch(1)}>
-                            ยกเลิก
+                            เปลี่ยนรหัสผ่าน
                         </button>
                     </div>
                             {/* <div className='sell-pane'>
@@ -1041,6 +1113,7 @@ const Profile = () => {
                                                 
                                             </div>
                                         </div>
+{/* --1 22   33 3 2  1 5 5------------------ EDIR HERE KAAA ----------------------------------- */}
                                         {likeNameTab[0] &&
                                             <div className="like_card">
                                                  <div className="like_button_box">
@@ -1058,9 +1131,9 @@ const Profile = () => {
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserLike.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1084,9 +1157,9 @@ const Profile = () => {
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserAccept.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1106,13 +1179,14 @@ const Profile = () => {
                                                         ยกเลิก
                                                     </button>
                                                 </div>
+
                                                 <div className="like_card_details">
                                                     <div className="Text_like_all">{'จำนวน' +' '+ val.like +' '+'คนสนใจ'}</div>
                                                     {UserCancel.map((val,key)=> {
                                                         return( 
-                                                            <div className="block_user">
+                                                            <div className="block_user" onClick= {()=> {setUserAnswer(val); showPopUp('Answer')}}>
                                                                 <div className="img_block_user_detail">{val.pic_user}</div>
-                                                                <div className="name_block_user_detail">{val.user_like}</div>
+                                                                <div className="name_block_user_detail">{val.name}</div>
                                                             </div>
                                                         );
                                                     })}
@@ -1131,6 +1205,13 @@ const Profile = () => {
                     // getDateCreate = {dogDateCreate}
                     getDog = {dogDetail}
                 />}
+
+            {popUpAns && <PopUpAnswer setPopUp={setPopUpAns}
+                                user = {userAnswer}
+                                dog = {selectedDog}
+                        />}    
+
+                 
 
 
     </div>

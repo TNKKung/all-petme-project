@@ -12,19 +12,31 @@ const UserLike = [
 
         {
             pic_user: <img className="img_user_list" src={Profile}/>,
-            user_like: 'ธันยวัชร์ พงศ์เจริญ',
+            name: 'ธันยวัชร์ พงศ์เจริญ',
+            answer1: 'ans1',
+            answer2: 'ans2',
+            answer3: 'ans3',
         },
         {
             pic_user: <img className="img_user_list" src={Profile2}/>,
-            user_like: 'วิภาดา มีสกุล',
+            name: 'วิภาดา มีสกุล',
+            answer1: 'ans1',
+            answer2: 'ans2',
+            answer3: 'ans3',
         },
         {
             pic_user: <img className="img_user_list" src={Profile3}/>,
-            user_like: 'ธันนน เจริญ',
+            name: 'ธันนน เจริญ',
+            answer1: 'ans1',
+            answer2: 'ans2',
+            answer3: 'ans3',
         },
         {
             pic_user: <img className="img_user_list" src={Profile4}/>,
-            user_like: 'ชัยยุทธ์ ไกรทอง',
+            name: 'ชัยยุทธ์ ไกรทอง',
+            answer1: 'ans1',
+            answer2: 'ans2',
+            answer3: 'ans3',
         },
         
     ]

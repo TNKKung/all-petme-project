@@ -6,8 +6,11 @@ import InputField from './InputField';
 import Login_icon from './login_icon.png'
 import '../../../fonts/Abel-Regular.ttf'; 
 import { Link } from 'react-router-dom';
+import fetch from 'unfetch';
 
 const Login = () => {
+
+
 
   const inputRefs = React.useRef([
     React.createRef(), React.createRef()
@@ -18,51 +21,38 @@ const Login = () => {
   const handleChange = (name, value) => {
     setData(prev => ({ ...prev, [name]: value }))
   }
-  
 
   const submitForm = async(e) => {
     e.preventDefault();
 
-    // let isValid = true;
-
-    // for (let i = 0; i < inputRefs.current.length; i++) {
-    //   const valid = inputRefs.current[i].current.validate()
-    //   console.log(valid)
-    //   if (!valid) {
-    //     isValid = false
-    //   }
-    // }
-
-    // if (!isValid) {
-    //   return
-    // }
-
-    const res = await fetch('http://localhost:4000/api/post/login',{
+    
+    const res = await fetch('http://localhost:4000/api/get/login',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
             mode : "cors",
             body: JSON.stringify({
-              username :data.username,
-              password :data.password,
+              Username : data.username,
+              Password: data.password,
             }),
         });
 
-
-        const a = await res.json()
+      
+        const a = await res.json();
         console.log(a);
+        console.log(a[0]);
+        console.log(a[0].petId);
 
-        localStorage.setItem("user", JSON.stringify(a));
-        
-    
+  
+
+
     console.log("Logged In");
-
-
-
     //Carry on as normal
   }
-
+  React.useEffect(()=>{
+    console.log(data);
+  },[data]);
   return (
     <div className="Login">
       <img src = {Login_icon} className = 'logo_icon_style'/>
@@ -76,7 +66,7 @@ const Login = () => {
           onChange={handleChange}
           validation={"required|min:6|max:12,ชื่อผู้ใช้งาน"}
         />
-        <InputField
+        <InputField type = "password"
           ref={inputRefs.current[1]}
           name="password"
           placeholder="รหัสผ่าน"

@@ -3,9 +3,9 @@ import './PetCard.scoped.css'
 
 
 function PetCard(props) {
-  const [dogDetail,SetdogDetail] = useState(props.dog)
-  // const [Popup,setPopups] = useState(false)
+  const dogDetail = props.dog
   return (
+    
     <div className='petcard-wrapper' onClick={()=>{props.setdogDetail(dogDetail);props.setpop(true)}}>
       {dogDetail.garuntee && <div className='petcard-garuntee'>การันตี</div>}
       <img src={'./img/' + dogDetail.picture} className='petcard-img' />
