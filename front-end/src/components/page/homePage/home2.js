@@ -12,6 +12,7 @@ import {
   Route,
   Link,
   useRouteMatch,
+  useHistory
 } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -35,7 +36,7 @@ const Home2 = () => {
   const popup1 = Popup.usePopup()
   const popup2 = Popup.usePopup()
   const popupFinish = Popup.usePopup()
-
+  const [checkLogin,setCheckLogin] = useState(false)
   // const setToggle = () => {
   //   classStyle == 'menu-header'
   //     ? setClassStyle('menu-header active')
@@ -48,6 +49,7 @@ const Home2 = () => {
   //     : setAstStyle('ast')
   //   console.log({ astStyle })
   // }
+  const history = useHistory();
 
   return (
     <div>

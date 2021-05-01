@@ -7,11 +7,12 @@ import Login_icon from './login_icon.png'
 import '../../../fonts/Abel-Regular.ttf'; 
 import { Link } from 'react-router-dom';
 import fetch from 'unfetch';
+import {useHistory } from "react-router-dom";
 
 const Login = () => {
 
 
-
+  const history = useHistory();
   const inputRefs = React.useRef([
     React.createRef(), React.createRef()
   ]);
@@ -42,9 +43,15 @@ const Login = () => {
         const a = await res.json();
         console.log(a)
         localStorage.setItem("user",JSON.stringify(a))
+        const dataPath = JSON.parse(localStorage.getItem("user"))
+        console.log(dataPath.userId)
 
-  
-
+        if(dataPath.userId != null){
+          console.log('111')
+          let path = "/profile"; 
+          history.push(path);
+        }
+      
 
     console.log("Logged In");
     //Carry on as normal
@@ -78,6 +85,8 @@ const Login = () => {
 
       <Link to ='/register'><text className="text-new-account">สร้างบัญชีใหม่</text></Link>
     </div>
+
+
   );
 }
 

@@ -49,10 +49,15 @@ const PopUpDogDetail = (props) => {
             body: JSON.stringify({
                 petId : localStorage.getItem("petId"),
                 name : data.username,
+                question1 : dogPU.question1,
                 answer1 : dogPU.answer1,
+                question2 : dogPU.question2,
                 answer2 : dogPU.answer2,
+                question3 : dogPU.question3,
                 answer3 : dogPU.answer3,
+                question4 : dogPU.question4,
                 answer4 : dogPU.answer4,
+                question5 : dogPU.question5,
                 answer5 : dogPU.answer5,
             }),
         });
@@ -65,7 +70,7 @@ const PopUpDogDetail = (props) => {
             mode : "cors",
             body: JSON.stringify({
                 petId : localStorage.getItem("petId"),
-                username : data.username,
+                userId : data.userId,
 
             }),
         });
@@ -78,7 +83,7 @@ const PopUpDogDetail = (props) => {
         if(i==1){
             curDog.answer1 = ans
         }
-        else if(i==22){
+        else if(i==2){
             curDog.answer2 = ans
         }else if(i==3){
             curDog.answer3 = ans
@@ -160,7 +165,7 @@ const PopUpDogDetail = (props) => {
                                         <div className='pu-rowHeader2'>
                                             <div>
                                             <div className='ddd'>
-                                                <div className='pu-headerDetail5'>{dogPU.seller.name}</div>
+                                                <div className='pu-headerDetail5'>{dogPU.profile}</div>
                                                 </div>
                                                 <div className='pu-headerDetail6'>ลงเมื่อวันที่ : {dogPU.dateCreate}</div>
                                             </div>
@@ -226,7 +231,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => fetchdata()} >{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => {fetchdata();props.setPopUp(false)}} >{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>
