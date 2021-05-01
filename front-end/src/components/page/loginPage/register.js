@@ -3,20 +3,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import {
   BrowserRouter as Router,
   useHistory ,                              
-  Switch,
-  Route,                   
-  Link,
-  useRouteMatch
 } from "react-router-dom";
 import './login.css';
 
 import ProvinceInput from './registerComponent/provinceInput.js'
 import validator from 'validator'
 
-
 import ModernDatepicker from 'react-modern-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-
 
 var Username,Password,Name,Email,Tell,Birth,Address,Road,Sub_district,District,Province,Postal_code;
 
