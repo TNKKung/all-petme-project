@@ -40,6 +40,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
           },
           mode : "cors",
           body: JSON.stringify({
+            userId : data.userId,
             dogBreed: form.dogBreed,
             gender: form.gender,
             age: form.age,
@@ -53,10 +54,11 @@ function Popup2({ popup1, popup2, popupFinish }) {
             question3: form.question3,
             question4: form.question4,
             question5: form.question5,
-            picture: [],        
+            picture: [],       
           }),
         })
-        console.log(res);
+
+
         e.preventDefault()
         popup1.close()
         popup2.close()

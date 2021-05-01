@@ -2,6 +2,7 @@ const expressFunction = require("express");
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 
+const { v4: uuidv4 } = require("uuid");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var fs = require("fs");
@@ -128,7 +129,7 @@ expressApp.post("/api/add/registerUser", function (req, res) {
       district: district,
       province: province,
       postalCode: postalCode,
-      listPetIForsell: [],
+      listPetIdForsell: [],
       listPetIdForBuy: [],
       img: [],
     };
@@ -172,9 +173,10 @@ expressApp.post("/api/add/listPetIdForBuy", function (req, res) {
       );
   });
 });
-const { v4: uuidv4 } = require("uuid");
+
 expressApp.post("/api/add/registerPet", function (req, res) {
   const {
+    userId,
     dogBreed,
     gender,
     age,
@@ -211,49 +213,27 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       question4: question4,
       question5: question5,
       profile: profile,
-      likeUser: [
-        {
-          username: "tomkabtokom",
-          question1: "i like this",
-          question2: "i like this",
-          question3: "i like this",
-          question4: "i like this",
-          question5: "i like this",
-        },
-      ],
-      acceptUser: [
-        {
-          username: "arika",
-          question1: "i like this",
-          question2: "i like this",
-          question3: "i like this",
-          question4: "i like this",
-          question5: "i like this",
-        },
-      ],
-      cancelUser: [
-        {
-          username: "brilly",
-          question1: "i like this",
-          question2: "i like this",
-          question3: "i like this",
-          question4: "i like this",
-          question5: "i like this",
-        },
-      ],
+      likeUser: [],
+      acceptUser: [],
+      cancelUser: [],
       sellStatus: true,
       typeSell: typeSell,
       img: picture,
     };
 
+    
     MongoClient.connect(url, function (err, db) {
-      if (err) throw err;
       var dbo = db.db("PetMeApp");
       dbo.collection("Pet").insertOne(pet, function (err, res) {
-        if (err) throw err;
-        console.log("Add one pet");
-        db.close();
-      });
+        console.log("Add one pet")
+        });
+        const listPetIdForsell = {
+            petId : pet.petId
+        };    
+      dbo.collection("User").updateOne({"userId": userId },{ $push: { listPetIdForsell } },function (err, res) {
+          console.log("add pet")
+          db.close();
+        });
     });
   }
 });
@@ -278,12 +258,7 @@ expressApp.post("/api/add/addAnswer", function (req, res) {
       answer4: answer4,
       answer5: answer5,
     };
-    dbo
-      .collection("Pet")
-      .updateOne(
-        { petId: petId },
-        { $push: { likeUser } },
-        function (err, res) {
+    dbo.collection("Pet").updateOne({ petId: petId },{ $push: { likeUser } },function (err, res) {
           console.log("add answer of petId" + petId + " complete");
           res.send(true);
           db.close();

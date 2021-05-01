@@ -70,7 +70,7 @@ const PopUpDogDetail = (props) => {
             mode : "cors",
             body: JSON.stringify({
                 petId : localStorage.getItem("petId"),
-                username : data.username,
+                userId : data.userId,
 
             }),
         });
