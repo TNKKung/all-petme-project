@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './profile';
 import Profile_Dog from './img/profile3.jpg'
@@ -6,14 +6,14 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { colors } from '@material-ui/core';
 
+
+
 export const CardItem_Accept = [
         {
             picture: Profile_Dog,           
             dogBreed: 'ซามอย',
             cost: '35000',
             status: 'ตอบรับแล้ว',
-            icon: <FavoriteIcon className="icon_details_accept" style={{ fontSize: 45 }}/>,
-            like: 5,
             question1: 'ทำไม',
             answer1: '',
             question2: 'ทำไม',
@@ -29,8 +29,6 @@ export const CardItem_Accept = [
             petDetail: 'รับสุนัขตัวน้อยไหมคะ',
             gender: 'ชาย',
             age: '12 month'
-
-
         },
     ]
 
