@@ -26,23 +26,22 @@ const Login = () => {
     e.preventDefault();
 
     
-    const res = await fetch('http://localhost:4000/api/get/login',{
+    const res = await fetch('http://localhost:4000/api/login',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
             mode : "cors",
             body: JSON.stringify({
-              Username : data.username,
-              Password: data.password,
+              username : data.username,
+              password: data.password,
             }),
         });
 
       
         const a = await res.json();
-        console.log(a);
-        console.log(a[0]);
-        console.log(a[0].petId);
+        console.log(a)
+        localStorage.setItem("user",JSON.stringify(a))
 
   
 

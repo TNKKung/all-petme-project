@@ -38,15 +38,17 @@ const PopUpDogDetail = (props) => {
         }
     }
     const fetchdata = async() => {
-        const res = await fetch('http://localhost:4000/api/add/addAnswer',{
+        const data = JSON.parse(localStorage.getItem("user"))
+        console.log(data.name)
+        const res1 = await fetch('http://localhost:4000/api/add/addAnswer',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
             mode : "cors",
             body: JSON.stringify({
-                petId : JSON.parse(localStorage.getItem("petId")),
-                name : JSON.parse(localStorage.getItem("user").name),
+                petId : localStorage.getItem("petId"),
+                name : data.username,
                 answer1 : dogPU.answer1,
                 answer2 : dogPU.answer2,
                 answer3 : dogPU.answer3,
@@ -54,7 +56,19 @@ const PopUpDogDetail = (props) => {
                 answer5 : dogPU.answer5,
             }),
         });
-        console.log('111')
+
+        const res2 = await fetch('http://localhost:4000/api/add/listPetId',{
+          method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : localStorage.getItem("petId"),
+                username : data.username,
+
+            }),
+        });
 
     }
 
@@ -212,7 +226,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => props.setPopUp(true)} >{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => fetchdata()} >{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>

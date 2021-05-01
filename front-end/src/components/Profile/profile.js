@@ -360,41 +360,25 @@ const Profile = () => {
                             <div  id="name">
                                 <p>ชื่อ-นามสกุล</p>           
                             </div> 
-<<<<<<< HEAD
                             <input disabled type="text" value="" placeholder={name} id="text"></input>
-=======
-                            <input type="text" readonly="readonly" placeholder={name} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={email} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={email} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>เบอร์โทรศัพท์</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={mobileNumber} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={mobileNumber} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={date} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={date} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         
                     <div className = "head_topic">
@@ -404,61 +388,37 @@ const Profile = () => {
                             <div id="name">
                                 <p>ที่อยู่</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={address} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={address} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ถนน</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={road} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={road} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>ตำบล</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={subDistrict} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={subDistrict} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>อำเภอ</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={district} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={district} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>จังหวัด</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={province} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={province} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
                                 <p>รหัสไปรษณีย์</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={postalCode} id="text"></input>
-=======
                             <input type="text" readonly="readonly" placeholder={postalCode} id="text"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>
@@ -924,11 +884,7 @@ const Profile = () => {
                             <div id="name">
                                 <p>ชื่อผู้ใช้งาน</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={name} id="text"></input>
-=======
                             <input type="text" value={name} placeholder={name} id="text" readonly="readonly"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
@@ -940,11 +896,7 @@ const Profile = () => {
                             <div  id="name">
                                 <p>อีเมล</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={email} id="text"></input>
-=======
                             <input type="text" value="" placeholder={email} id="text" readonly="readonly"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
                         <div className ="Account_Text">
                             <div  id="name">
@@ -956,11 +908,7 @@ const Profile = () => {
                             <div  id="name">
                                 <p>วันเกิด</p>           
                             </div> 
-<<<<<<< HEAD
-                            <input disabled type="text" value="" placeholder={date} id="text"></input>
-=======
                             <input type="text" value="" placeholder={date} id="text" readonly="readonly"></input>
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
                         </div>
 
                     <div className = "head_topic">

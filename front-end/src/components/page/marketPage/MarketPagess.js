@@ -90,14 +90,9 @@ function MarketPage() {
       </div>
       <div className='marketPage-part3'>
         <div className='marketPage-part3-cards'>
-<<<<<<< HEAD
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
           {dataPet                                                   /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
             .filter((d) => {
-=======
-          {doger                                                     /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
-            .filter(d => {
->>>>>>> 93efea30fba7c59e5a5a3b97dd16f24c66c63740
               if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
               else if (d.dogBreed === form.ChoosedogBreed) return true
