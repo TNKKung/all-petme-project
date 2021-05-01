@@ -32,6 +32,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     <form
       className='box-large'
       onSubmit={async(e) => {
+        const data = JSON.parse(localStorage.getItem("user"))
         const res = await fetch("http://localhost:4000/api/add/registerPet",{
           method: 'POST',
           headers: {
@@ -39,12 +40,12 @@ function Popup2({ popup1, popup2, popupFinish }) {
           },
           mode : "cors",
           body: JSON.stringify({
-            petId: form.petId,
             dogBreed: form.dogBreed,
             gender: form.gender,
             age: form.age,
             petDetail: form.petDetail,
             cost: form.cost,
+            profile : data.name,
             nameAccountPromtpay: form.nameAccountPromtpay,
             detailAccountPromtpay: form.detailAccountPromtpay,
             question1: form.question1,

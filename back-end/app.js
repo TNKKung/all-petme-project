@@ -90,6 +90,7 @@ expressApp.post("/api/post/login",function(req,res){
         var dbo = db.db("PetMeApp");
         dbo.collection("User").find({"username" : username}).toArray(function(err, result) {          
             if(result[0].username === username){
+                console.log(result[0])
                 res.send(result[0]);
             }
             else{
@@ -178,10 +179,10 @@ expressApp.post("/api/add/registerUser",function(req,res) {
         });
     }
 });
-
+const { v4: uuidv4 } = require('uuid');
 expressApp.post("/api/add/registerPet",function(req,res) {
     const {
-        petId,
+
         dogBreed,
         gender,
         age,
@@ -194,7 +195,7 @@ expressApp.post("/api/add/registerPet",function(req,res) {
         question3,
         question4,
         question5,
-        sellerUser,
+        profile,
         picture,
         typeSell
     } = req.body;
@@ -205,7 +206,7 @@ expressApp.post("/api/add/registerPet",function(req,res) {
     }
     else{
         const pet = {
-            "petId" : petId,
+            "petId" : uuidv4(),
             "dogBreed" : dogBreed,
             "gender" : gender,
             "age" : age,
@@ -218,7 +219,7 @@ expressApp.post("/api/add/registerPet",function(req,res) {
             "question3" : question3,
             "question4" : question4,
             "question5" : question5,
-            "sellerUser" : sellerUser,
+            "profile" : profile,
             "listPeople" : [{
                 username:"tomtam",
                 question1:"i like this",
@@ -246,6 +247,52 @@ expressApp.post("/api/add/registerPet",function(req,res) {
             });
         });
     }
+});
+
+expressApp.post("/api/add/addAnswer",function(req,res){
+    const {
+        petId,
+    } = req.body
+    console.log(req.body.petId)
+    // MongoClient.connect(url, function(err, db) {
+    //     var dbo = db.db("PetMeApp");
+    //     dbo.collection("Pet").find({"petId" : petId}).toArray(function(err, result) { 
+    //         db.close();
+    //     });    
+    // });
+});
+
+expressApp.get("/api/get/dataPet",function(req,res) {
+    var data = [];
+    MongoClient.connect(url, function(err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Pet").find().toArray(function(err, result) {
+            for(var i=0;i<result.length;i++){
+                data.push({
+                    petId : result[i].petId,
+                    picture : " ",
+                    cost : result[i].cost,
+                    breed : result[i].dogBreed,
+                    profile : result[i].profile,
+                    status : "false",
+                    like:2,
+                    question1 : result[i].question1,
+                    question2 : result[i].question2,
+                    question3 : result[i].question3,
+                    question4 : result[i].question4,
+                    question5 : result[i].question5,
+                    seller :{ picture : " ",name:"ต้อม"},
+                    dateCreate:'12/02/2554',
+                    petDetail: result[i].detail,
+                    gender: result[i].gender,
+                    age: result[i].age
+                });
+            }
+            res.send(data);
+            db.close();
+        });    
+    });
+    
 });
 
 expressApp.post("/api/add/contact",function(req,res) {
@@ -308,27 +355,7 @@ expressApp.post("/api/add/report",function(req,res) {
     }
 });
 
-expressApp.get("/api/get/dataPet",function(req,res) {
-    console.log("ttt");
-    var data = [];
-    MongoClient.connect(url, function(err, db) {
-        var dbo = db.db("PetMeApp");
-        dbo.collection("Pet").find().toArray(function(err, result) {
-            for(var i=0;i<result.length;i++){
-                data.push({
-                    imgName : '',
-                    cost : result[i].cost,
-                    breed : result[i].dogBreed,
-                    profile : result[i].sellerUser,
-                });
-            }
-            console.log(data);
-            res.send(data);
-            db.close();
-        });    
-    });
-    
-});
+
 
 expressApp.post("/api/get/checkPayment",function(req,res) {
     var data = [];

@@ -1,6 +1,7 @@
 import { PortableWifiOffRounded } from '@material-ui/icons';
 import React, { useState} from 'react';
 import './popdogDetail.css';
+import fetch from 'unfetch';
 
 const PopUpDogDetail = (props) => {
 
@@ -36,8 +37,28 @@ const PopUpDogDetail = (props) => {
             setlastBtt('ส่ง')
         }
     }
+    const fetchdata = async() => {
+        const res = await fetch('http://localhost:4000/api/add/addAnswer',{
+          method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : JSON.parse(localStorage.getItem("petId")),
+                name : JSON.parse(localStorage.getItem("user").name),
+                answer1 : dogPU.answer1,
+                answer2 : dogPU.answer2,
+                answer3 : dogPU.answer3,
+                answer4 : dogPU.answer4,
+                answer5 : dogPU.answer5,
+            }),
+        });
+        console.log('111')
 
-    const insertAns = (i,ans) => {
+    }
+
+    const insertAns = async(i,ans) => {
         let curDog = {}
         curDog = dogPU
         if(i==1){
@@ -53,8 +74,11 @@ const PopUpDogDetail = (props) => {
             curDog.answer5 = ans
         }
         setDogPU(curDog)
+      
+       
         // setDog(curDog)
     }
+    
 
     // const switchImg = (newImg) => {                                                          ///////////สำหรับหลายภาพ
     //     const shallowSubImg = [newImg]
@@ -188,7 +212,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => props.setPopUp(false)}>{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => props.setPopUp(true)} >{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>

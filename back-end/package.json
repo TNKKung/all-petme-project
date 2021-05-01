@@ -19,6 +19,7 @@
     "mongood": "0.0.5",
     "mongoose": "^5.12.5",
     "multer": "^1.4.2",
+    "uuid": "^8.3.2",
     "warn": "^1.0.1"
   },
   "proxy": "http://localhost:4000/",
