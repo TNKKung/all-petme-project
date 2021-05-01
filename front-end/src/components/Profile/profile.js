@@ -656,7 +656,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {user.listPetIForsell.map((each, key) => {
+                                            {user.listPetIForsell && (user.listPetIForsell.map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { profileSwitch(6); setDogForSellToShow(each) }}>
@@ -669,7 +669,7 @@ const Profile = () => {
                                                         </div>
                                                     </div>
                                                 );
-                                            })}
+                                            }))}
                                         </div>
                                     </div>
                                 </div>
@@ -1085,7 +1085,6 @@ const Profile = () => {
 
                                         </div>
                                     </div>
-                                    {/* --1 22   33 3 2  1 5 5------------------ EDIR HERE KAAA ----------------------------------- */}
                                     {likeNameTab[0] &&
                                         <div className="like_card">
                                             <div className="like_button_box">
