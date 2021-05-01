@@ -334,9 +334,17 @@ const Profile = () => {
                 'Content-Type': 'application/json'     
             },
             mode : "cors"
-        });
+        });  
+    }
+    const fetchDataMyMarket = async() => {
 
-        
+        const res = await fetch('http://localhost:4000/dataShowLikePet',{
+          method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors"
+        });  
     }
 
 
@@ -640,7 +648,7 @@ const Profile = () => {
                     </li>
                     <li className="row">
                         <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
-                        <div id="title" style={{ color: "#ED8E82" }}>ร้านค้าของฉัน</div>
+                        <div id="title" style={{ color: "#ED8E82" }} onChange={console.log("ttt")}>ร้านค้าของฉัน</div>
                     </li>
                     <li onClick={() => profileSwitch(4)} className="row">
                         <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>

@@ -35,7 +35,6 @@ function MarketPage() {
     console.log(dataPet)
   },[dataPet]);
 
- 
   return (
     <div>
       <div className='marketPage-part1'>
