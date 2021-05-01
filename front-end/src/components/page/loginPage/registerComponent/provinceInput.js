@@ -3,7 +3,9 @@ import React, { useEffect, useState, useRef } from "react";
 
 import './provinceInput.css'
 
-const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>{},setSubDistrict=()=>{}}) => {
+const ProvinceInput = ({setDistrict,setSubDistrict,
+  setProvince,setPostalCode}) => {
+
   const [display,setDisplay] =useState(false)
   const [singleProvinceData, setSingleProvinceData] = useState([]);
   const [districtData, setDistrictData] = useState([{"amphoe":"คลองท่อม","zipcode":81120,"district":"คลองท่อมเหนือ","province":"กระบี่","amphoe_code":8104,"district_code":810402,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"คลองท่อมใต้","province":"กระบี่","amphoe_code":8104,"district_code":810401,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81170,"district":"คลองพน","province":"กระบี่","amphoe_code":8104,"district_code":810403,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81170,"district":"ทรายขาว","province":"กระบี่","amphoe_code":8104,"district_code":810404,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"พรุดินนา","province":"กระบี่","amphoe_code":8104,"district_code":810406,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"ห้วยน้ำขาว","province":"กระบี่","amphoe_code":8104,"district_code":810405,"province_code":81},{"amphoe":"คลองท่อม","zipcode":81120,"district":"เพหลา","province":"กระบี่","amphoe_code":8104,"district_code":810407,"province_code":81}]);
@@ -11,11 +13,11 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
   const [amphoeData, setAmphoeData] = useState([]);
   
   const [provinceData, setProvinceData] = useState([]);
-  const [inputPostalCode, setInputPostalCode] = useState("")
-  const [inputAmphoe, setInputAmphoe] = useState("")
-  const [inputDistrict, setInputDistrict] = useState("")
+  const [inputPostalCode, setInputPostalCode] = useState("81120")
+  const [inputAmphoe, setInputAmphoe] = useState("คลองท่อม")
+  const [inputDistrict, setInputDistrict] = useState("คลองท่อมเหนือ")
 
-  const [inputProvince, setInputProvince] = useState('')
+  const [inputProvince, setInputProvince] = useState('กระบี่')
   const wrapperRef = useRef(null);
   const [provinceInterval,setProvinceInterval] = useState([])
   const  province_dataBase_url= 'https://raw.githubusercontent.com/earthchie/jquery.Thailand.js/master/jquery.Thailand.js/database/raw_database/raw_database.json'
@@ -69,7 +71,6 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
 
   const changePV = (ev) => {
     setInputProvince(ev)
-    
 
     let i =0
     let index = 1
@@ -91,12 +92,11 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
     }
     setSingleAmphoeData(shallowSingleAmphoe)
     setAmphoeData(shallowAmphoe)
-    changeAP(shallowSingleAmphoe[0])
+    changeAP(shallowSingleAmphoe[0],shallowAmphoe)
   }
 
   
-  const changeAP = (ev) => {
-    console.log('changeAP')
+  const changeAP = (ev,amphoeDataFunc) => {
 
     setInputAmphoe(ev)
     let selectedAmphoe = ev
@@ -104,19 +104,16 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
     let index = 1
     const shallowDistrict = []
     const shallowSingleDistrict = []
-    console.log(amphoeData)
-    for(let i =0;i<amphoeData.length;i++){
-      console.log(amphoeData[i].amphoe,selectedAmphoe)
-      if (amphoeData[i].amphoe == selectedAmphoe) {
-        if (false === (shallowSingleDistrict.includes(amphoeData[i].district))) {
-          shallowSingleDistrict.push(amphoeData[i].district)
-          shallowDistrict.push(amphoeData[i])
+    for(let i =0;i<amphoeDataFunc.length;i++){
+      
+      if (amphoeDataFunc[i].amphoe == selectedAmphoe) {
+        if (false === (shallowSingleDistrict.includes(amphoeDataFunc[i].district))) {
+          shallowSingleDistrict.push(amphoeDataFunc[i].district)
+          shallowDistrict.push(amphoeDataFunc[i])
         }
       }
     }
-    
     setDistrictData(shallowDistrict)
-    //console.log(shallowSingleDistrict[0])
     changeDT(shallowSingleDistrict[0])
   }
 
@@ -129,7 +126,6 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
     let i =0
     let index = 1
     
-    //console.log(`i:${i} index:${index}\ndis:${dis} amp:${amp} prov:${prov}`)
     for(;i<provinceData.length;i++){
       if (provinceData[i].province == prov) {
         if (provinceData[i].district == dis & provinceData[i].amphoe == amp){
@@ -145,10 +141,12 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
   }
 
   const showPostalcode = (inpDistrict,inpAmphoe,inpProvince) => {
-    //console.log('start show postal')
-    //console.log(`dt:${inpDistrict} ap:${inpAmphoe} pv:${inpProvince} `)
     var currentPostalCode = getPostalCode(inpDistrict,inpAmphoe,inpProvince)
     if(currentPostalCode != 0){
+
+      setDistrict(inputAmphoe)
+      setSubDistrict(inpDistrict)
+      setProvince(inpProvince)
       setPostalCode(currentPostalCode)
       return setInputPostalCode(currentPostalCode)
     }
@@ -167,7 +165,6 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
               id="select-testing"
               class="selectProvince"
               onChange={(event) => {
-                console.log(event.target.value);
                 changePV(event.target.value)
                 setProvince(event.target.value)
               }}
@@ -191,7 +188,7 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
               id="select-testing"
               class="selectProvince"
               onChange={(event) => {
-                changeAP(event.target.value)
+                changeAP(event.target.value,amphoeData)
                 setDistrict(event.target.value)
               }}
               value = {inputAmphoe}
@@ -258,6 +255,7 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
           <input
             className='reg-input-wrapper'
             id="auto"
+            type="text" disabled="disabled"
             placeholder="กรุณากรอกรหัสไปรษณีย์"
             value={'  ' + inputPostalCode}
             onChange={event => {
@@ -274,6 +272,5 @@ const ProvinceInput = ({setDistrict=()=>{},setPostalCode=()=>{},setProvince=()=>
 }
 
 export default ProvinceInput
-
 
 
