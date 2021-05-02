@@ -49,6 +49,7 @@ const Home2 = () => {
   //     : setAstStyle('ast')
   //   console.log({ astStyle })
   // }
+  const dataUser = JSON.parse(localStorage.getItem("user"))
   const history = useHistory();
 
   return (
@@ -99,9 +100,12 @@ const Home2 = () => {
               <div class='activity-details'> ที่อยากรับเลี้ยงสุนัข</div>
               <div class='activity-details'>ที่ไม่มีเจ้าของดูแล</div>
               <div class='activity-center-pad'>
-                <div><Link to='/donate'>
-                  <button class='adopt-button'>รับเลี้ยง</button>
-                </Link></div>
+              
+                <div> {dataUser == null?<Link to='/login'>
+                <button class='adopt-button'>รับเลี้ยง</button>
+              </Link>: <Link to='/donate'>
+                <button class='adopt-button'>รับเลี้ยง</button>
+              </Link>}</div>
               </div>
             </div>
             <div class='activity-pad'>
@@ -112,9 +116,11 @@ const Home2 = () => {
               <div class='activity-details'>สำหรับบุคคลที่อยากหาซื้อสุนัข</div>
               <div class='activity-details'>สายพันธ์ุที่ต้องการ</div>
               <div class='activity-center-pad'>
-                <div><Link to='/market'>
-                  <button class='dealing-button'>ไปตลาดซื้อขาย</button>
-                </Link></div>
+                <div>{dataUser == null ?<Link to='/login'>
+                <button class='dealing-button'>ไปตลาดซื้อขาย</button>
+              </Link>:<Link to='/market'>
+              <button class='dealing-button'>ไปตลาดซื้อขาย</button>
+            </Link>}</div>
               </div>
             </div>
             <div class='activity-pad'>

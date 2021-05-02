@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,} from 'react'
 import './MarketPage.scoped.css'
 import part1 from './img/part1.jpg'
 import part2 from './img/part2.png'
 import PetCard from '../../PetCard/PetCardMarket.js'
 import { ContactsOutlined } from '@material-ui/icons'
 import PopDetail from '../../Profile/popdogDetail'
+
 
 function MarketPage() {
   const [form, setForm] = useState({
@@ -29,6 +30,8 @@ function MarketPage() {
     }
     fetchdata()
   },[]);
+
+
 
   React.useEffect(() => {
     // console.log(dataPet)
