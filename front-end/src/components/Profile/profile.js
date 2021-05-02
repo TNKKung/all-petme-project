@@ -891,7 +891,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardStoreSold.map((each, key) => {
+                                            {dataPet.filter(e=>e.statusSell==false).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => profileSwitch(6)}>
@@ -1395,28 +1395,26 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className='temp-money-pane'>
-                                {CardStoreSell.map((each, key) => {
-                                    return (
                                         <div className="store_page2">
                                             <div className="Dog_box">
                                                 <div className="Dog_card">
-                                                    <div className="img_dog">{each.imgName2}</div>
-                                                    <div className="img_dog_details">
+                                                    <div className="img_dog">{dogForSellToShow.picture}</div>
+                                                    {/* <div className="img_dog_details">
                                                         <div className="img_dog_small">{each.imgdetail1}</div>
                                                         <div className="img_dog_small">{each.imgdetail2}</div>
                                                         <div className="img_dog_small">{each.imgdetail3}</div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div className="Text_card">
                                                     <div className="cancel" onClick={() => profileSwitch(3)}><CancelIcon className="C_hover" style={{ fontSize: 70 }} /></div>
-                                                    <div className="garantee">{each.garantee}</div>
-                                                    <div className="text_card_text1">{each.breed}</div>
-                                                    <div className="text_card_text2">{'ราคา :' + ' ' + each.cost}</div>
-                                                    <div className="text_card_text1">{'เพศ :' + ' ' + each.sex}</div>
-                                                    <div className="text_card_text1">{'อายุ :' + ' ' + each.age}</div>
+                                                    <div className="garantee">{dogForSellToShow.garantee}</div>
+                                                    <div className="text_card_text1">{dogForSellToShow.breed}</div>
+                                                    <div className="text_card_text2">{'ราคา :' + ' ' + dogForSellToShow.cost}</div>
+                                                    <div className="text_card_text1">{'เพศ :' + ' ' + dogForSellToShow.gender}</div>
+                                                    <div className="text_card_text1">{'อายุ :' + ' ' + dogForSellToShow.age}</div>
                                                     <div className="text_card_text1">{'รายละเอียด :'}</div>
-                                                    <div className="text_card_text3">{each.detail}</div>
-                                                    <div className="text_card_text4">{'ลงขายเมื่อวันที่ :' + ' ' + each.date}</div>
+                                                    <div className="text_card_text3">{dogForSellToShow.detail}</div>
+                                                    <div className="text_card_text4">{'ลงขายเมื่อวันที่ :' + ' ' + dogForSellToShow.dateCreate}</div>
 
                                                 </div>
                                             </div>
@@ -1429,7 +1427,7 @@ const Profile = () => {
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
-                                                        <button className="like_bชutton_details" onClick={() => likeNameSwitch(3)}>
+                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
                                                             ยกเลิก
                                                     </button>
                                                     </div>
@@ -1438,8 +1436,8 @@ const Profile = () => {
                                                         {dogForSellToShow.likeUser.map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer') }}>
-                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.user.img[0]} /></div>
-                                                                    <div className="name_block_user_detail">{each.user.name}</div>
+                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
+                                                                    <div className="name_block_user_detail">{each.userId}</div>
                                                                 </div>
                                                             );
                                                         })}
@@ -1464,8 +1462,8 @@ const Profile = () => {
                                                         {dogForSellToShow.acceptUser.map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
-                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.user.img[0]} /></div>
-                                                                    <div className="name_block_user_detail">{each.user.name}</div>
+                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>
+                                                                    <div className="name_block_user_detail">{each.userId}</div>
                                                                 </div>
                                                             );
                                                         })}
@@ -1491,8 +1489,8 @@ const Profile = () => {
                                                         {dogForSellToShow.cancelUser.map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
-                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.user.img[0]} /></div>
-                                                                    <div className="name_block_user_detail">{each.user.name}</div>
+                                                                    <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
+                                                                    <div className="name_block_user_detail">{each.userId}</div>
                                                                 </div>
                                                             );
                                                         })}
@@ -1500,8 +1498,7 @@ const Profile = () => {
                                                 </div>
                                             }
                                         </div>
-                                    );
-                                })}
+                            
                             </div>
                         </div>
                     }
