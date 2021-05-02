@@ -395,6 +395,8 @@ const Profile = () => {
 
     const [totalPaid, setTotalPaid] = useState(12000 + 7000)
     const [popUpPay, setPopUpPay] = useState(false)
+    const [choosePayment,setChoosePayment] = useState(null)
+
     const [popUpDe, setPopUpDe] = useState(false)
     const [popUpAns, setPopUpAns] = useState(false)
 
@@ -738,8 +740,8 @@ const Profile = () => {
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.statusSell}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
+                                                                <text>{each.statusSell==true?'สถานะ :' + ' ' + 'รอการยืนยัน':'สถานะ :' + ' ' + 'ได้รับการยืนยันแล้ว'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
                                                         </div>
@@ -769,7 +771,7 @@ const Profile = () => {
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
                                                                 <text>{'สถานะ :' + ' ' + 'รอการตอบรับ'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
@@ -799,7 +801,7 @@ const Profile = () => {
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
                                                                 <text>{'สถานะ :' + ' ' + 'ตอบรับแล้ว'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
@@ -876,8 +878,8 @@ const Profile = () => {
                                                             <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'จำนวนคนสนใจ :' + ' ' + each.like}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
+                                                                <text>{'จำนวนคนสนใจ :' + ' ' + each.likeUser.length}</text>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -974,28 +976,22 @@ const Profile = () => {
                                         <div class='col2-pic-header' />
                                         <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
                                         <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
-                                        <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
                                         <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
                                         <div class='col4-price-header'><div class='.center-div-black'>ยกเลิก</div></div>
                                     </div>
-                                    {notPaidDogData.map(each => {
+                                    {dataPetForLike.filter((a)=>a.typeSell==='ขาย' && a.statusSell==false).map(each => {
+                                                       /////////ต้องใส่ตัวแปรอื่น
                                         return (
                                             <div className='money-table-row'>
                                                 <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
-                                                <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
-                                                <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
-                                                <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
+                                                <div className='col3-name'><div className='.center-div-black'>{each.breed}</div></div>
+                                                <div className='col4-price'><div className='.center-div-pink'>{each.cost}</div></div>
                                                 <div className='col6-total'><div className='.center-div-pink'>
-                                                <button class="money-button" onClick={() => showPopUp('Sell')}>ซื้อสุนัข</button></div></div>
+                                                <button class="money-button" onClick={() => {showPopUp('Sell');setChoosePayment(each);}}>ซื้อสุนัข</button></div></div>
                                                 <div class='col4-price'><div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div></div>
                                             </div>
                                         )
                                     })}
-                                </div>
-                                <div className='money-info-pane-bottom'>
-                                    <div className='money-table-row'>
-                                        <div class='money-bottom-blog'>ยอดชำระทั้งหมด</div><div className='money-bottom-value'>{totalPaid}</div>
-                                    </div>
                                 </div>
                                 </div>}
 
@@ -1376,7 +1372,7 @@ const Profile = () => {
                                                     <div className="cancel" onClick={() => profileSwitch(3)}><CancelIcon className="C_hover" style={{ fontSize: 70 }} /></div>
                                                     <div className="garantee">{dogForSellToShow.garantee}</div>
                                                     <div className="text_card_text1">{dogForSellToShow.breed}</div>
-                                                    <div className="text_card_text2">{'ราคา :' + ' ' + dogForSellToShow.cost}</div>
+                                                    <div className="text_card_text2">{dogForSellToShow.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา :' + ' ' + dogForSellToShow.cost}</div>
                                                     <div className="text_card_text1">{'เพศ :' + ' ' + dogForSellToShow.gender}</div>
                                                     <div className="text_card_text1">{'อายุ :' + ' ' + dogForSellToShow.age}</div>
                                                     <div className="text_card_text1">{'รายละเอียด :'}</div>
@@ -1469,7 +1465,7 @@ const Profile = () => {
                             </div>
                         </div>
                     }
-                    {popUpPay && <PopUppayment setPopUp={setPopUpPay} getTotalPaid={totalPaid} />}
+                    {popUpPay && <PopUppayment setPopUp={setPopUpPay} getTotalPaid={choosePayment} />}
 
                     {
                         popUpDe && <PopDetail setPopUp={setPopUpDe}

@@ -154,7 +154,7 @@ const PopUpDogDetail = (props) => {
                                     <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.breed}</div></div>
                                 </div>
                                 <div className='pu-row2'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> ราคา: {dogPU.cost}</div></div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> {dogPU.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ dogPU.cost}</div></div></div>
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-rowHeader2'>
