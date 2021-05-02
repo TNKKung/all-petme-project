@@ -183,7 +183,6 @@ const Profile = () => {
         }
     }
     const [Name,setName]=useState()
-
     const submitEditPassForm = async (next) => {
         if (passErrorSign == 'OK' && ( password_storer[1] == password_storer[2])) {      
             setUserData('password',password_storer[1])
