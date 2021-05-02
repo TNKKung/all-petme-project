@@ -433,9 +433,6 @@ const Profile = () => {
         else if (selectedTab === 2) {
             setMoneyTab([false, true, false])
         }
-        else {
-            setMoneyTab([false, false, true])
-        }
     }
 
     const delCanceledPaidDog = (item) => {
@@ -953,7 +950,6 @@ const Profile = () => {
                                 <div className='money-tab'>
                                     <text className='money-header-selected'>ที่ต้องชำระ</text>
                                     <text className='money-header' onClick={() => moneySwitch(2)}>ชำระแล้ว</text>
-                                    <text className='money-header' onClick={() => moneySwitch(3)}>ยกเลิก</text>
                                 </div>
                                 <div className='money-info-pane'>
                                     <div className='money-table-row'>
@@ -974,7 +970,6 @@ const Profile = () => {
                                                 <div className='col6-total'><div className='.center-div-pink'>
                                                 <button class="money-button" onClick={() => showPopUp('Sell')}>ซื้อสุนัข</button></div></div>
                                                 <div class='col4-price'><div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div></div>
-                                                
                                             </div>
                                         )
                                     })}
@@ -990,7 +985,6 @@ const Profile = () => {
                             <div className='money-tab'>
                                 <text className='money-header' onClick={() => moneySwitch(1)}>ที่ต้องชำระ</text>
                                 <text className='money-header-selected'>ชำระแล้ว</text>
-                                <text className='money-header' onClick={() => moneySwitch(3)}>ยกเลิก</text>
                             </div>
                             <div className='money-info-pane'>
                                 <div className='money-table-row'>
@@ -1016,36 +1010,6 @@ const Profile = () => {
                                 })}
                             </div>
                             <div className='money-pane' />
-                        </div>}
-
-                        {moneyTab[2] && <div className='temp-money-pane'>
-                            <div className='money-tab'>
-                                <text className='money-header' onClick={() => moneySwitch(1)}>ที่ต้องชำระ</text>
-                                <text className='money-header' onClick={() => moneySwitch(2)}>ชำระแล้ว</text>
-                                <text className='money-header-selected' >ยกเลิก</text>
-                            </div>
-                            <div className='money-info-pane'>
-                                <div className='money-table-row'>
-                                    <div class='col1-tools-header' />
-                                    <div class='col2-pic-header' />
-                                    <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
-                                    <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
-                                    <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
-                                    <div className='col6-total-header'><div class='.center-div-black'>ทั้งหมด</div></div>
-                                </div>
-                                {(canceledPaidDog.length > 0) && canceledPaidDog.map(each => {
-                                    return (
-                                        <div className='money-table-row'>
-                                            <div class='col1-tools' onClick={() => delCanceledPaidDog(each)}>X</div>
-                                            <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
-                                            <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
-                                            <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
-                                            <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
-                                            <div className='col6-total'><div className='.center-div-pink'>{each.amount * each.price}</div></div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
                         </div>}
                     </div>
                 </div>
