@@ -85,7 +85,6 @@ expressApp.put("/checkPasswordAndUpdate", function (req, res) {
     originalPassword,
     newPassword
   } = req.body;
-  var checkPassword = null;
   function getFalse(){
     res.send(false)
   }
