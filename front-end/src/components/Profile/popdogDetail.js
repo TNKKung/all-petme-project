@@ -88,10 +88,10 @@ const PopUpDogDetail = (props) => {
     const sendReport = () => {
         console.log('Sending these data :')
 
-        console.log('\nDog :'+dogPU.name+' sold by '+dogPU.profile)
-        console.log('Type of report :'+reportType)
-        console.log('Report Info :'+reportDetail)
-        console.log('Report by :'+props.user.name)
+        console.log('\nDog : '+dogPU.breed+' sold by '+dogPU.profile)
+        console.log('Type of report : '+reportType)
+        console.log('Report Info : '+reportDetail)
+        console.log('Report by : '+props.user.name)
         props.setPopUp(false)
     }
 
