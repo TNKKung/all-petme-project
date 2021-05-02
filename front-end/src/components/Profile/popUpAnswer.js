@@ -91,9 +91,9 @@ const PopUpAnswer = (props) => {
 
             <div className='pu-ans-row-right'><button className="popup-x" onClick={() => setPopUp(false)} >X</button></div>
             <div className='pu-ans-row-center'><div className = 'col-center'>
-                <img className='pu-ans-profile' src = {user.user.img}/>
-                <div className='pu-ans-name'>{user.user.name}</div>
-                <div className='pu-ans-createDate'>ตอบเมื่อวันที่ {user.dateCreate}</div>
+                <img className='pu-ans-profile' src = {user.picture}/>
+                <div className='pu-ans-name'>{user.userId}</div>
+                <div className='pu-ans-createDate'>ตอบเมื่อวันที่ {dog.dateCreate}</div>
             </div></div>
 {/* ------------------- question & answer ------------------------ */}            
             <div className='pu-ans-row-left'><div className = 'pu-ans-col-left'>
