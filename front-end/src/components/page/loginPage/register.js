@@ -213,8 +213,7 @@ const Register = () => {
         });
         
         
-
-      let path = `/`; 
+      let path = `/login`; 
       history.push(path);
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");

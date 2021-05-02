@@ -65,7 +65,6 @@ const Profile = () => {
     const setPostalCode =(val) => { postalCode = val}
 
     const [password_storer,set_password_storer] = useState([])
-
     const [user, setUser] = useState({})
     const data = JSON.parse(localStorage.getItem("user"))
 
@@ -186,20 +185,11 @@ const Profile = () => {
     const [Name,setName]=useState()
 
     const submitEditPassForm = async (next) => {
-        if (
-            passErrorSign == 'OK' && 
-
-            (
-                password_storer[0] == user.password
-            ) &&
-            (    
-                password_storer[1] == password_storer[2]
-            )
-        ) {     
-            
+        if (passErrorSign == 'OK' && ( password_storer[1] == password_storer[2])) {      
             setUserData('password',password_storer[1])
-            profileSwitch(1)
-            const res = await fetch('http://localhost:4000/updatePasswordUser',{
+            
+
+            const res = await fetch('http://localhost:4000/checkPasswordAndUpdate',{
                   method: 'PUT',
                   headers :{
                     "Content-Type":"application/json",
@@ -207,11 +197,21 @@ const Profile = () => {
                   },
                   body:JSON.stringify({
                     userId : data.userId,
-                    password : password_storer[1]
+                    originalPassword : password_storer[0],
+                    newPassword : password_storer[1]
                   })
                 });
-            let path = `/profile`;
-            history.push(path);
+
+                const respone = await res.json();
+                console.log(respone)
+                if(respone === false ){
+                    alert("รหัสเดิมไม่ถูกต้อง");
+                }else{
+                    alert("แก้ไขรหัสผ่านสำเร็จ");
+                    profileSwitch(1)
+                }
+                
+                
         }
         else {
             
@@ -480,10 +480,11 @@ const Profile = () => {
         }
         
     }
-    React.useEffect(() => {
-        
-
-    }, []);
+    const logOut = () => {
+        localStorage.removeItem("user")
+        let path = `/login`;
+        history.push(path);
+    }
     const setUserData = (attr, val) => {
         let shallowUser = user
         if (attr == 'listPetIForsell') {
@@ -523,16 +524,7 @@ const Profile = () => {
         setUser(data)
 
     }, []);
-    const fetchData = async() => {
 
-        const res = await fetch('http://localhost:4000/dataShowLikePet',{
-          method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'     
-            },
-            mode : "cors"
-        });  
-    }
     const fetchDataMyMarket = async() => {
         const res = await fetch('http://localhost:4000/dataPetMyStore',{
           method: 'POST',
@@ -585,7 +577,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li onClick={() => showPopUp('Exit')} className="row">
+                                <li onClick={() => {logOut();showPopUp('Exit')}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -702,7 +694,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row">
+                                <li className="row" onClick= {()=> logOut()}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -856,7 +848,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row">
+                                <li className="row" onClick= {()=> logOut()}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -960,7 +952,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row">
+                                <li className="row" onClick= {()=> logOut()}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -1112,7 +1104,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row">
+                                <li className="row" onClick= {()=> logOut()}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -1294,7 +1286,7 @@ const Profile = () => {
 
                                     {/* <input type="text" placeholder='old password' id="text_edit"></input> */}
                                     <div className="edit-profile-input-block">
-                                        <input
+                                        <input type="password"
                                             className='edit-input-style'
                                             placeholder='old password'
                                             onChange={(e) => {
@@ -1358,7 +1350,7 @@ const Profile = () => {
 
 
                             <div className='Edit2-pane'>
-                                <button class="Edit2-button" onClick={() => { submitEditPassForm('profile');}}>
+                                <button class="Edit2-button" onClick={() => { submitEditPassForm('profile')}}>
                                     เปลี่ยนรหัสผ่าน
                         </button>
                             </div>
@@ -1403,7 +1395,7 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สถานะการชำระเงิน</div>
                                         </li>
-                                        <li className="row">
+                                        <li className="row" onClick= {()=> logOut()}>
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">ออกจากระบบ</div>
                                         </li>

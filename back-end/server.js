@@ -10,8 +10,7 @@ const cors = require("cors");
 const { v4: uuidv4 } = require('uuid');
 
 var MongoClient = require("mongodb").MongoClient;
-var url =
-  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+var url ="mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const port = process.env.PORT || 4000;
@@ -77,6 +76,38 @@ expressApp.post("/api/login", function (req, res) {
           res.send(false);
         }
       });
+  });
+});
+
+expressApp.put("/checkPasswordAndUpdate", function (req, res) {
+  const {
+    userId, 
+    originalPassword,
+    newPassword
+  } = req.body;
+  var checkPassword = null;
+  function getFalse(){
+    res.send(false)
+  }
+  function getTrue(){
+    res.send(true)
+  }
+  
+  MongoClient.connect(url, function (err, db) {
+    
+    var dbo = db.db("PetMeApp"); 
+    dbo.collection("User").find({ userId: userId }).toArray(function (res, result) {
+      if(result[0].password !== originalPassword){
+        console.log("faild")
+        getFalse()
+      }else{
+        dbo.collection("User").updateOne({ userId: userId },{ $set: { password : newPassword } },function (err, res) {
+          console.log("success")
+          getTrue()
+         }
+        );
+      }
+    });
   });
 });
 
@@ -469,27 +500,6 @@ expressApp.put("/updateProfileUser", function (req, res) {
   });
 });
 
-expressApp.put("/updatePasswordUser", function (req, res) {
-  const {
-    userId,
-    password
-  } = req.body;
-  console.log(req.body);
-
-  MongoClient.connect(url, function (err, db) {
-    var dbo = db.db("PetMeApp");
-    var query = { userId : userId };
-    var updateName = {
-      $set: {
-        password : password
-      },
-    };
-    dbo.collection("User").updateOne(query, updateName, function (err, res) {
-      console.log("1 document updated");
-      db.close();
-    });  
-  });
-});
 expressApp.listen(port, function () {
   console.log("Listen 4000");
 });
