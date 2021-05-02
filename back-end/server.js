@@ -7,6 +7,7 @@ const fs = require("fs");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 const cors = require("cors");
+const { v4: uuidv4 } = require('uuid');
 
 var MongoClient = require("mongodb").MongoClient;
 var url =
@@ -61,7 +62,7 @@ expressApp.post("/api/login", function (req, res) {
               district: result[0].district,
               email: result[0].email,
               img: [],
-              listPetIForsell: result[0].listPetIForsell,
+              listPetIdForSell: result[0].listPetIdForSell,
               listPetIdForBuy: result[0].listPetIdForBuy,
               mobileNumber: result[0].mobileNumber,
               name: result[0].name,
@@ -70,7 +71,6 @@ expressApp.post("/api/login", function (req, res) {
               road: result[0].road,
               subDistrict: result[0].subDistrict,
               userId: result[0].userId,
-              username: result[0].username,
             }
           res.send(data);
         } else {
@@ -80,31 +80,6 @@ expressApp.post("/api/login", function (req, res) {
   });
 });
 
-// expressApp.post("/api/get/profile",function(req,res){
-//     const username = req.body.username;
-//     console.log(req.body);
-//     MongoClient.connect(url, function(err, db) {
-//         var dbo = db.db("PetMeApp");
-//         dbo.collection("User").find({"username" : username}).toArray(function(err, result) {
-//             if(result[0].username === username){
-//                 res.send({
-//                     name : result[0].name,
-//                     email : result[0].email,
-//                     mobileNumber : result[0].mobileNumber,
-//                     birth : result[0].birth,
-//                     address : result[0].address,
-//                     road : result[0].road,
-//                     subDistrict : result[0].subDistrict,
-//                     district : result[0].district,
-//                     province : result[0].province,
-//                     postalCode : result[0].postalCode
-//                 });
-//                 console.log(result[0]);
-//             }
-//             db.close();
-//         });
-//     });
-// });
 
 expressApp.post("/api/add/registerUser", function (req, res) {
   const {
@@ -140,7 +115,7 @@ expressApp.post("/api/add/registerUser", function (req, res) {
       district: district,
       province: province,
       postalCode: postalCode,
-      listPetIdForsell: [],
+      listPetIdForSell: [],
       listPetIdForBuy: [],
       img: [],
     };
@@ -188,7 +163,7 @@ expressApp.post("/api/add/listPetIdForBuy", function (req, res) {
 expressApp.post("/api/add/registerPet", function (req, res) {
   const {
     userId,
-    dogBreed,
+    breed,
     gender,
     age,
     petDetail,
@@ -211,7 +186,8 @@ expressApp.post("/api/add/registerPet", function (req, res) {
   } else {
     const pet = {
       petId: uuidv4(),
-      dogBreed: dogBreed,
+      userId:userId,
+      breed: breed,
       gender: gender,
       age: age,
       detail: petDetail,
@@ -227,9 +203,11 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       likeUser: [],
       acceptUser: [],
       cancelUser: [],
-      sellStatus: true,
+      statusSell: true,
       typeSell: typeSell,
-      img: picture,
+      picture : " ",
+      seller: { picture: " ", name: "ต้อม" },
+      dateCreate: "12/02/2554",
     };
 
     MongoClient.connect(url, function (err, db) {
@@ -237,51 +215,74 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       dbo.collection("Pet").insertOne(pet, function (err, res) {
         console.log("Add one pet");
       });
-      const listPetIdForsell = {
+      const listPetIdForSell = {
         petId: pet.petId,
       };
-      dbo
-        .collection("User")
-        .updateOne(
-          { userId: userId },
-          { $push: { listPetIdForsell } },
-          function (err, res) {
+      dbo.collection("User").updateOne({ userId: userId },{ $push: { listPetIdForSell } },function (err, res) {
             console.log("add pet");
             db.close();
           }
         );
+        dbo.collection("User").find({ "userId": userId }).toArray(function (err, result) {
+              const data = {
+                address: result[0].address,
+                birth: result[0].birth,
+                district: result[0].district,
+                email: result[0].email,
+                img: [],
+                listPetIdForSell: result[0].listPetIdForSell,
+                listPetIdForBuy: result[0].listPetIdForBuy,
+                mobileNumber: result[0].mobileNumber,
+                name: result[0].name,
+                postalCode: result[0].postalCode,
+                province: result[0].province,
+                road: result[0].road,
+                subDistrict: result[0].subDistrict,
+                userId: result[0].userId,
+                username: result[0].username,
+              }
+            res.send(data);
+        });
     });
   }
 });
 
-expressApp.post("/api/add/addAnswer", function (req, res) {
+expressApp.post("/addAnswer", function (req, res) {
   const {
     petId,
-    username,
+    userId,
     answer1,
     answer2,
     answer3,
     answer4,
     answer5,
   } = req.body;
+  console.log(req.body)
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
     const likeUser = {
-      username: username,
+      userId,
       answer1: answer1,
       answer2: answer2,
       answer3: answer3,
       answer4: answer4,
       answer5: answer5,
     };
-    dbo
-      .collection("Pet")
-      .updateOne(
+    dbo.collection("Pet").updateOne(
         { petId: petId },
         { $push: { likeUser } },
         function (err, res) {
           console.log("add answer of petId" + petId + " complete");
-          res.send(true);
+        }
+      );
+      const listPetIdForBuy = {
+        petId : petId
+      };
+    dbo.collection("User").updateOne(
+        { userId: userId },
+        { $push: { listPetIdForBuy } },
+        function (err, res) {
+          console.log("ttt")
           db.close();
         }
       );
@@ -299,28 +300,45 @@ expressApp.get("/api/get/dataPet", function (req, res) {
         for (var i = 0; i < result.length; i++) {
           data.push({
             petId: result[i].petId,
-            picture: " ",
+            picture: result[i].picture,
             cost: result[i].cost,
-            breed: result[i].dogBreed,
+            breed: result[i].breed,
             profile: result[i].profile,
-            status: "false",
-            like: 2,
+            statusSell: result[i].statusSell,
+            likeUser : result[i].likeUser,
             question1: result[i].question1,
             question2: result[i].question2,
             question3: result[i].question3,
             question4: result[i].question4,
             question5: result[i].question5,
-            seller: { picture: " ", name: "ต้อม" },
-            dateCreate: "12/02/2554",
+            seller: result[i].seller,
+            dateCreate: result[i].dateCreate,
             petDetail: result[i].detail,
             gender: result[i].gender,
             age: result[i].age,
+            userId : result[i].userId
           });
         }
         res.send(data);
         db.close();
       });
   });
+});
+
+expressApp.post("/dataPetMyStore", function (req, res) {
+  const {
+    userId
+  }=req.body
+  var data = []
+    MongoClient.connect(url, function (err, db) {
+      var dbo = db.db("PetMeApp");
+      const query = {"userId" : userId}
+      dbo.collection("Pet").find(query).toArray(function (err, result) {
+        data.push(result)  
+        res.send(data)
+      });
+
+    });
 });
 
 expressApp.post("/api/add/contact", function (req, res) {
@@ -381,7 +399,7 @@ expressApp.post("/api/get/checkPayment", function (req, res) {
           data.push({
             petId: result[i].petId,
             cost: result[i].cost,
-            dogBreed: result[i].dogBreed,
+            breed: result[i].breed,
             customerUser: result[i].customerUser,
             sellerUser: result[i].sellerUser,
             statusCheck: false,
@@ -394,13 +412,11 @@ expressApp.post("/api/get/checkPayment", function (req, res) {
   });
 });
 
-expressApp.put("/api/update", function (req, res) {
+expressApp.put("/updateProfileUser", function (req, res) {
   const {
-    username,
+    userId,
     name,
-    email,
     mobileNumber,
-    birth,
     address,
     road,
     subDistrict,
@@ -412,13 +428,11 @@ expressApp.put("/api/update", function (req, res) {
 
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
-    var query = { Username: username };
+    var query = { userId : userId };
     var updateName = {
       $set: {
         name: name,
-        email: email,
         mobileNumber: mobileNumber,
-        birth: birth,
         address: address,
         road: road,
         subDistrict: subDistrict,
@@ -431,10 +445,53 @@ expressApp.put("/api/update", function (req, res) {
       console.log("1 document updated");
       db.close();
     });
-    res.send("Update " + username + " complete ");
+    dbo.collection("User").find(query).toArray(function(err,result){
+      const data = {
+        address: result[0].address,
+        birth: result[0].birth,
+        district: result[0].district,
+        email: result[0].email,
+        img: [],
+        listPetIdForSell: result[0].listPetIdForsell,
+        listPetIdForBuy: result[0].listPetIdForBuy,
+        mobileNumber: result[0].mobileNumber,
+        name: result[0].name,
+        postalCode: result[0].postalCode,
+        province: result[0].province,
+        road: result[0].road,
+        subDistrict: result[0].subDistrict,
+        userId: result[0].userId,
+      }
+    console.log("Update " + userId + " complete ");
+    res.send(data)
+    });
+    
   });
 });
 
+expressApp.put("/updatePasswordUser", function (req, res) {
+  const {
+    userId,
+    password
+  } = req.body;
+  console.log(req.body);
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    var query = { userId : userId };
+    var updateName = {
+      $set: {
+        password : password
+      },
+    };
+    dbo.collection("User").updateOne(query, updateName, function (err, res) {
+      console.log("1 document updated");
+      db.close();
+    });  
+  });
+});
 expressApp.listen(port, function () {
   console.log("Listen 4000");
 });
+
+

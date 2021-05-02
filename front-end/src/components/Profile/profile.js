@@ -59,37 +59,23 @@ const Profile = () => {
     const [roadErrorSign, setRoadErrorSign] = useState('✔')
     const [addressErrorSign, setAddressErrorSign] = useState('✔')
     const [dateErrorSign, setDateErrorSign] = useState('✔')
-    const setDistrict =(val) => { District = val}
-    const setSubDistrict =(val) => { Sub_district = val}
-    const setProvince =(val) => { Province = val}   
-    const setPostalCode =(val) => { Postal_code = val}
+    const setDistrict =(val) => { district = val}
+    const setSubDistrict =(val) => { subDistrict = val}
+    const setProvince =(val) => { province = val}   
+    const setPostalCode =(val) => { postalCode = val}
 
     const [password_storer,set_password_storer] = useState([])
 
-    const [user, setUser] = useState({
-        username: 'ชื่อผู้ใช้งานน่ะนะ',
-        password: 'pass123456',
-        name: 'วิภาดา มีสกุล',
-        email: 'email@emil.com',
-        mobileNumber: '09xxxxxxxx',
-        birth: 'xx/xx/xxxx',
-        address: 'address',
-        road: 'road',
-        subDistrict: 'จำลองตำบล',
-        district: 'อำเภอน่ะนะ',
-        province: 'เชียงใหม่',
-        postalCode: '12345',
-        listPetIForsell: CardStoreSell,
-        listPetIdForBuy: [],
-        img: [Profile_icon_src],
-    })
+    const [user, setUser] = useState({})
+    const data = JSON.parse(localStorage.getItem("user"))
 
-        var Username=user.username, Password=['','',''], 
-        Name=user.name, Email=user.email, Tell=user.mobileNumber, 
-        Birth=user.birth, Address=user.address, Road=user.road, 
-        Sub_district=user.subDistrict, District=user.district, 
-        Province=user.province, Postal_code=user.postalCode;
-    
+        var Password=['','',''], 
+        name=user.name, email=user.email, mobilePhone=user.mobileNumber, 
+        birth=user.birth, address=user.address, road=user.road, 
+        subDistrict=user.subDistrict, district=user.district, 
+        province=user.province, postalCode=user.postalCode;
+
+        
 
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -98,6 +84,7 @@ const Profile = () => {
             setNameErrorSign('✔')
         }
     }
+
 
     const validMobile = (mobilePhone) => {
         if (mobilePhone[0] === '0' && (mobilePhone[1] === '9' || mobilePhone[1] === '6' || mobilePhone[1] === '8')) {
@@ -152,6 +139,7 @@ const Profile = () => {
         set_password_storer(tempPass)
         setPassErrorSign(shallowPasswordError)
     }
+
     const submitEditForm = async (next) => {
 
         if (
@@ -161,33 +149,31 @@ const Profile = () => {
             addressErrorSign === '✔' &&
             dateErrorSign === '✔' 
         ) {
-            if(Postal_code != ''){
-            //   const res = await fetch('http://localhost:4000/api/add/registerUser',{
-            //       method: 'POST',
-            //       headers :{
-            //         "Content-Type":"application/json",
-            //         "Accept":"application/json"
-            //       },
-            //       body:JSON.stringify({
-            //         username : Username,
-            //         password:Password,
-            //         name:Name,
-            //         email:Email,
-            //         mobileNumber:Tell,
-            //         birth:Birth,
-            //         address:Address,
-            //         road:Road,
-            //         district:district,
-            //         subDistrict:subDistrict,
-            //         province:province,
-            //         postalCode:postalCode
-            //       })
-            //     });
-
-            saveEditAccountData(Name,
-                Tell,
-                Postal_code)
+            if(postalCode != ''){
+            saveEditAccountData(name,
+                mobilePhone,
+                postalCode)
             profileSwitch(1)
+              const res = await fetch('http://localhost:4000/updateProfileUser',{
+                  method: 'PUT',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    userId : data.userId,
+                    name:Name,
+                    mobileNumber:mobilePhone,
+                    address:address,
+                    road:road,
+                    district:district,
+                    subDistrict:subDistrict,
+                    province:province,
+                    postalCode:postalCode
+                  })
+                });
+            const a = await res.json();
+            localStorage.setItem("user",JSON.stringify(a))
             let path = `/profile`;
             history.push(path);}
             else{
@@ -197,6 +183,7 @@ const Profile = () => {
             alert("กรุณากรอกข้อมูลให้ถูกต้อง");
         }
     }
+    const [Name,setName]=useState()
 
     const submitEditPassForm = async (next) => {
         if (
@@ -212,6 +199,17 @@ const Profile = () => {
             
             setUserData('password',password_storer[1])
             profileSwitch(1)
+            const res = await fetch('http://localhost:4000/updatePasswordUser',{
+                  method: 'PUT',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    userId : data.userId,
+                    password : password_storer[1]
+                  })
+                });
             let path = `/profile`;
             history.push(path);
         }
@@ -467,22 +465,25 @@ const Profile = () => {
         ) => {
 
         if (name != '' && nameErrorSign == '✔') {
-            setUserData('name', Name)
+            setUserData('name', name)
         }
         if (mobileNumber != '' && mobileErrorSign == '✔') {
-            setUserData('mobileNumber', Tell)
+            setUserData('mobileNumber', mobilePhone)
         }
         if (postalCode != '' && addressErrorSign == '✔' && roadErrorSign == '✔'){
-            setUserData('address', Address)
-            setUserData('road', Road)
-            setUserData('subDistrict', Sub_district)
-            setUserData('district', District)
-            setUserData('province', Province)
-            setUserData('postalCode', Postal_code)
+            setUserData('address', address)
+            setUserData('road', road)
+            setUserData('subDistrict', subDistrict)
+            setUserData('district', district)
+            setUserData('province', province)
+            setUserData('postalCode', postalCode)
         }
         
     }
+    React.useEffect(() => {
+        
 
+    }, []);
     const setUserData = (attr, val) => {
         let shallowUser = user
         if (attr == 'listPetIForsell') {
@@ -519,16 +520,7 @@ const Profile = () => {
     }
     React.useEffect(() => {
         const data = JSON.parse(localStorage.getItem("user"))
-        // setName(data.name)
-        // setEmail(data.email)
-        // setMobileNumber(data.mobileNumber)
-        // setDate(data.birth)
-        // setAddress(data.address)
-        // setRoad(data.road)
-        // setSubDistrict(data.subDistrict)
-        // setDistrict(data.district)
-        // setProvince(data.province)
-        // setPostalCode(data.postalCode)
+        setUser(data)
 
     }, []);
     const fetchData = async() => {
@@ -542,17 +534,22 @@ const Profile = () => {
         });  
     }
     const fetchDataMyMarket = async() => {
-
-        const res = await fetch('http://localhost:4000/dataShowLikePet',{
-          method: 'GET',
+        const res = await fetch('http://localhost:4000/dataPetMyStore',{
+          method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
-            mode : "cors"
-        });  
+            mode : "cors",
+            body: JSON.stringify({
+                userId : data.userId
+            }),
+        });
+        const a = await res.json(); 
+        localStorage.setItem("dataPet",JSON.stringify(a[0]))
+        
     }
 
-
+    const dataPet = JSON.parse(localStorage.getItem("dataPet"))
     return (
         <div style={{ height: '100%', width: '100%' }}>
             <div className='containerProfile'></div>
@@ -580,7 +577,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => profileSwitch(3)} className="row">
+                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -609,61 +606,61 @@ const Profile = () => {
                             <div id="name">
                                 <p>ชื่อ-นามสกุล</p>
                             </div>
-                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={user.name} id="text"></input>
+                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={data.name} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อีเมล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.email} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.email} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>เบอร์โทรศัพท์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.mobileNumber} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.mobileNumber} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>วันเกิด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.birth} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.birth} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ที่อยู่</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.address} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.address} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ถนน</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.road} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.road} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ตำบล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.subDistrict} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.subDistrict} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อำเภอ</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.district} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.district} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>จังหวัด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.province} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.province} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>รหัสไปรษณีย์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.postalCode} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.postalCode} id="text"></input>
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>
@@ -697,7 +694,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สนใจ</div>
                                 </li>
-                                <li onClick={() => profileSwitch(3)} className="row">
+                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -881,11 +878,12 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {user.listPetIForsell && (user.listPetIForsell.map((each, key) => {
+                                            
+                                            {dataPet.map((each, key) => { 
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { profileSwitch(6); setDogForSellToShow(each) }}>
-                                                            <div className="img_list">{each.imgName}</div>
+                                                            {/* <div className="img_list">{each.imgName}</div> */}
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
@@ -894,7 +892,7 @@ const Profile = () => {
                                                         </div>
                                                     </div>
                                                 );
-                                            }))}
+                                            })}
                                         </div>
                                     </div>
                                 </div>
@@ -954,7 +952,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => profileSwitch(3)} className="row">
+                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -1106,7 +1104,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => profileSwitch(3)} className="row">
+                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -1134,9 +1132,6 @@ const Profile = () => {
                         <div className='edit-input-row-right-main'>
                             <div className='edit-input-col-center'>
                                 <div id="name" className='edit-input-subHeader'>
-                                    <p>ชื่อผู้ใช้งาน</p>
-                                </div>
-                                <div id="name" className='edit-input-subHeader'>
                                     <p>ชื่อ-นามสกุล</p>
                                 </div>
                                 <div id="name" className='edit-input-subHeader'>
@@ -1151,10 +1146,7 @@ const Profile = () => {
                             </div>
                             <div className='edit-input-col-center'>
 
-                                <div className="edit-input-row-left">
-
-                                    <div className='edit-input-subHeader-data'>{user.username}</div>
-                                </div>
+                                
                                 <div className="edit-input-row-left">
 
                                     {/* <input type="text" placeholder={user.name} id="text_edit"></input> */}
@@ -1167,7 +1159,8 @@ const Profile = () => {
                                                     let tempVVV = e.target.value
                                                     let tempPassSTR = tempVVV.replace(/[^A-Za-zก-ฮ]/ig, '')
                                                     validateName(tempPassSTR)
-                                                    Name = tempPassSTR
+                                                    name = tempPassSTR
+                                                    setName(tempVVV)
                                                 }}
                                                 maxLength={maxName}
                                             /></div>
@@ -1179,7 +1172,7 @@ const Profile = () => {
 
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{user.email}</div>
+                                    <div className='edit-input-subHeader-data'>{data.email}</div>
 
                                 </div>
 
@@ -1192,7 +1185,7 @@ const Profile = () => {
                                             className='edit-input-style'
                                             onChange={(e) => {
                                                 validateMobilePhone(e)
-                                                Tell = e.target.value
+                                                mobilePhone = e.target.value
                                             }}
                                             maxLength={maxMobile}
                                         />
@@ -1203,7 +1196,7 @@ const Profile = () => {
                                 </div>
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{user.birth}</div>
+                                    <div className='edit-input-subHeader-data'>{data.birth}</div>
 
 
                                 </div>
@@ -1231,7 +1224,7 @@ const Profile = () => {
                                             placeholder={user.address}
                                             onChange={(e) => {
                                                 validateAddress(e)
-                                                Address = e.target.value
+                                                address = e.target.value
                                             }}
                                             maxLength={maxAddress}
                                         /></div>
@@ -1248,7 +1241,7 @@ const Profile = () => {
                                             placeholder={user.road}
                                             onChange={(e) => {
                                                 validateRoad(e)
-                                                Road = e.target.value
+                                                road = e.target.value
                                             }}
                                             maxLength={maxRoad}
                                         /></div>
@@ -1402,9 +1395,9 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สนใจ</div>
                                         </li>
-                                        <li onClick={() => profileSwitch(3)} className="row">
+                                        <li onClick={() => {console.log('111');profileSwitch(3)}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
-                                            <div id="title" style={{ color: "#ED8E82" }}>ร้านค้าของฉัน</div>
+                                            <div id="title" style={{ color: "#ED8E82" }} >ร้านค้าของฉัน</div>
                                         </li>
                                         <li onClick={() => {profileSwitch(4)}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>

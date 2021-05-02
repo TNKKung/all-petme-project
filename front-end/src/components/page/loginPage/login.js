@@ -41,19 +41,18 @@ const Login = () => {
 
       
         const a = await res.json();
-        console.log(a)
+        
         localStorage.setItem("user",JSON.stringify(a))
         const dataPath = JSON.parse(localStorage.getItem("user"))
-        console.log(dataPath.userId)
+
 
         if(dataPath.userId != null){
-          console.log('111')
           let path = "/profile"; 
           history.push(path);
         }
       
 
-    console.log("Logged In");
+
     //Carry on as normal
   }
   React.useEffect(()=>{

@@ -12,7 +12,7 @@ function PetCard(props) {
       <div className='petcard-detail'>
         <div className='petcard-detail-left' >
           <div className='head'>
-            <div>สุนัขพันธ์ : {dogDetail.dogBreed}</div>
+            <div>สุนัขพันธ์ : {dogDetail.breed}</div>
             <div>ราคา : {dogDetail.cost}</div>
           </div>
         </div>

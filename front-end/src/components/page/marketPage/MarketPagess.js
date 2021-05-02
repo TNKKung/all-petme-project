@@ -24,15 +24,14 @@ function MarketPage() {
       },
       mode: "cors",
     })
-    const a = await res.json();
-    console.log(a)
-    setDataPet(a);
+    const data = await res.json();
+    setDataPet(data);
     }
     fetchdata()
   },[]);
 
   React.useEffect(() => {
-    console.log(dataPet)
+    // console.log(dataPet)
   },[dataPet]);
 
   return (
@@ -94,12 +93,12 @@ function MarketPage() {
             .filter((d) => {
               if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
-              else if (d.dogBreed === form.ChoosedogBreed) return true
+              else if (d.breed === form.ChoosedogBreed) return true
             })
-            .map(e => {            
+            .map(e => {  
               return <PetCard dog={e} setdogDetail={SetdogInfo} setpop={setPopups} />
             })}
-          {Popup ?<PopDetail onChange={console.log(localStorage.setItem("petId",dogInfo.petId))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
+          {Popup ?<PopDetail onChange={localStorage.setItem("dataPetId",JSON.stringify(dogInfo.petId))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>
       </div>
     </div>

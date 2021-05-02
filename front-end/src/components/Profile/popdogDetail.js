@@ -4,6 +4,8 @@ import './popdogDetail.css';
 import fetch from 'unfetch';
 
 const PopUpDogDetail = (props) => {
+    const data = JSON.parse(localStorage.getItem("user"))
+    const petId = JSON.parse(localStorage.getItem("dataPetId"))
 
     const getDog = props.getDog
     // const dogDateCreate = props.getDateCreate
@@ -36,45 +38,24 @@ const PopUpDogDetail = (props) => {
         }
     }
     const fetchdata = async() => {
-        const data = JSON.parse(localStorage.getItem("user"))
-        console.log(data.name)
-        const res1 = await fetch('http://localhost:4000/api/add/addAnswer',{
+        
+        const res = await fetch('http://localhost:4000/addAnswer',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
             },
             mode : "cors",
             body: JSON.stringify({
-                petId : localStorage.getItem("petId"),
-                name : data.username,
-                question1 : dogPU.question1,
+                petId : petId,
+                userId: data.userId,
                 answer1 : dogPU.answer1,
-                question2 : dogPU.question2,
                 answer2 : dogPU.answer2,
-                question3 : dogPU.question3,
                 answer3 : dogPU.answer3,
-                question4 : dogPU.question4,
                 answer4 : dogPU.answer4,
-                question5 : dogPU.question5,
                 answer5 : dogPU.answer5,
             }),
         });
-
-        const res2 = await fetch('http://localhost:4000/api/add/listPetId',{
-          method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'     
-            },
-            mode : "cors",
-            body: JSON.stringify({
-                petId : localStorage.getItem("petId"),
-                userId : data.userId,
-
-            }),
-        });
-
     }
-
     const insertAns = async(i,ans) => {
         let curDog = {}
         curDog = dogPU
@@ -91,8 +72,6 @@ const PopUpDogDetail = (props) => {
             curDog.answer5 = ans
         }
         setDogPU(curDog)
-      
-       
         // setDog(curDog)
     }
     
@@ -110,13 +89,14 @@ const PopUpDogDetail = (props) => {
     // }
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
-        useLikePet.push(<li key={index}>{value.user}</li>)
+        useLikePet.push(value.userId)
     }
     function CheckID(va){
-        if(dogPU.profile == va){
+
+        if(dogPU.userId == va){
             return <p>รายละเอียดสุนัขของคุณ</p>
         }
-        else if(useLikePet.indexOf(va)){
+        else if(!useLikePet.indexOf(va)){
             return <button className="pu-buttonA2" onClick={() => {
                 props.setPopUp(false);
                                                                 //////////////////////////////////พื้นที่สำหรับเขียนโค้ดยกเลิกการกดถูกใจ
@@ -152,7 +132,7 @@ const PopUpDogDetail = (props) => {
                             <div className='pu-halfPad1'>
                             <div style={{width:'100%',height:'50px',display:'flex',flexDirection:'row-reverse'}}><text className="popup-x2" onClick={() => props.setPopUp(false)} >X</text></div>
                                 <div className='pu-row2'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.dogBreed}</div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.breed}</div></div>
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> ราคา: {dogPU.cost}</div></div></div>
@@ -192,7 +172,7 @@ const PopUpDogDetail = (props) => {
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
-                                <div className='ddd'>{CheckID('asa')}</div>  {/* แก้ asa คือ user ที่ทำการ login*/}
+                                <div className='ddd'>{CheckID(data.userId)}</div>  {/* แก้ asa คือ user ที่ทำการ login*/}
                                 </div>
                             </div>
 
