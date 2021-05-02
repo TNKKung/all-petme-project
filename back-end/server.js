@@ -286,6 +286,8 @@ expressApp.post("/addAnswer", function (req, res) {
     answer3,
     answer4,
     answer5,
+    name,
+    picture
   } = req.body;
   console.log(req.body)
   MongoClient.connect(url, function (err, db) {
@@ -297,6 +299,9 @@ expressApp.post("/addAnswer", function (req, res) {
       answer3: answer3,
       answer4: answer4,
       answer5: answer5,
+      name : name,
+      picture : picture
+
     };
     dbo.collection("Pet").updateOne(
         { petId: petId },

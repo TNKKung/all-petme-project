@@ -2,8 +2,19 @@ import './Popup1.scoped.css'
 
 import popupImg1 from './img/popup1.png'
 import popupImg2 from './img/popup2.png'
+import React, { useState, useEffect ,} from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useHistory
+} from 'react-router-dom'
 
 function Popup1({ popup1, popup2 }) {
+  const dataUser = JSON.parse(localStorage.getItem("user"))
+  const history = useHistory();
   return (
     <div className='popup-box-large'>
       <div className='popup-closeButton' onClick={popup1.close}>
@@ -28,8 +39,13 @@ function Popup1({ popup1, popup2 }) {
         <div
           className='popup-button'
           onClick={() => {
-            popup1.close()
-            popup2.open()
+            if(dataUser == null){
+              let path = `/login`;
+              history.push(path);
+            }else{
+              popup1.close()
+              popup2.open()
+            }
           }}
         >
           ลงขายสุนัข
@@ -37,8 +53,13 @@ function Popup1({ popup1, popup2 }) {
         <div
           className='popup-button'
           onClick={() => {
-            popup1.close()
-            popup2.open()
+            if(dataUser == null){
+              let path = `/login`;
+              history.push(path);
+            }else{
+              popup1.close()
+              popup2.open()
+            }
           }}
         >
           ลงบริจาค

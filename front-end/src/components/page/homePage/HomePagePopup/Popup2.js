@@ -2,8 +2,26 @@ import './Popup2.scoped.css'
 import Input from '../../../Input/Input'
 import React, { useState } from 'react'
 import fetch from 'unfetch';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useHistory
+} from 'react-router-dom'
 
 function Popup2({ popup1, popup2, popupFinish }) {
+
+  const dataUser = JSON.parse(localStorage.getItem("user"))
+  const history = useHistory();
+
+  function checkLogin() {
+    if(dataUser == null){
+      let path = `/login`;
+      history.push(path);
+    }
+  }
   
   const [form, setForm] = useState({
     petId: null,

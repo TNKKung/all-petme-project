@@ -53,6 +53,8 @@ const PopUpDogDetail = (props) => {
                 answer3 : dogPU.answer3,
                 answer4 : dogPU.answer4,
                 answer5 : dogPU.answer5,
+                name : data.name,
+                picture : data.picture
             }),
         });
     }
