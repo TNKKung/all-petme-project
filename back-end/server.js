@@ -1,13 +1,12 @@
 const expressFunction = require("express");
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
-
-const { v4: uuidv4 } = require("uuid");
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
+const fs = require("fs");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var fs = require("fs");
-var path = require("path");
-require("dotenv/config");
+const cors = require("cors");
 
 var MongoClient = require("mongodb").MongoClient;
 var url =
@@ -15,6 +14,8 @@ var url =
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const port = process.env.PORT || 4000;
+expressApp.use(cors());
+expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 
 expressApp.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,7 +30,22 @@ expressApp.use((req, res, next) => {
   return next();
 });
 
-//hi
+// upload picture naja
+expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
+  let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
+  let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
+  fs.rename(
+    `./uploads/${req.file.filename}`,
+    `./uploads/${newFileName}`,
+    () => {
+      //ใช้prosition +ชื่อไฟล์ที่ทำการโหลด
+      console.log("newFileName");
+      res.send("200");
+    }
+  );
+});
+
+//---------------------------------------------------------------
 
 expressApp.post("/api/login", function (req, res) {
   const { username, password } = req.body;
@@ -216,19 +232,24 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       img: picture,
     };
 
-    
     MongoClient.connect(url, function (err, db) {
       var dbo = db.db("PetMeApp");
       dbo.collection("Pet").insertOne(pet, function (err, res) {
-        console.log("Add one pet")
-        });
-        const listPetIdForsell = {
-            petId : pet.petId
-        };    
-      dbo.collection("User").updateOne({"userId": userId },{ $push: { listPetIdForsell } },function (err, res) {
-          console.log("add pet")
-          db.close();
-        });
+        console.log("Add one pet");
+      });
+      const listPetIdForsell = {
+        petId: pet.petId,
+      };
+      dbo
+        .collection("User")
+        .updateOne(
+          { userId: userId },
+          { $push: { listPetIdForsell } },
+          function (err, res) {
+            console.log("add pet");
+            db.close();
+          }
+        );
     });
   }
 });
@@ -253,7 +274,12 @@ expressApp.post("/api/add/addAnswer", function (req, res) {
       answer4: answer4,
       answer5: answer5,
     };
-    dbo.collection("Pet").updateOne({ petId: petId },{ $push: { likeUser } },function (err, res) {
+    dbo
+      .collection("Pet")
+      .updateOne(
+        { petId: petId },
+        { $push: { likeUser } },
+        function (err, res) {
           console.log("add answer of petId" + petId + " complete");
           res.send(true);
           db.close();

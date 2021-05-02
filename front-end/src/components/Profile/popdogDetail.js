@@ -8,8 +8,6 @@ const PopUpDogDetail = (props) => {
     const getDog = props.getDog
     // const dogDateCreate = props.getDateCreate
 
-    const setDog = props.setDog
-
     const [dogPU,setDogPU] = useState(getDog)
 
     const [lastBtt, setlastBtt] = useState('ไม่มีหลักฐานการชำระเงิน')
@@ -110,6 +108,25 @@ const PopUpDogDetail = (props) => {
     //         setSubImg(shallowSubImg)
     //     }
     // }
+    const useLikePet = [];
+    for (const [index, value] of dogPU.likeUser.entries()){
+        useLikePet.push(<li key={index}>{value.user}</li>)
+    }
+    function CheckID(va){
+        if(dogPU.profile == va){
+            return <p>รายละเอียดสุนัขของคุณ</p>
+        }
+        else if(useLikePet.indexOf(va)){
+            return <button className="pu-buttonA2" onClick={() => {
+                props.setPopUp(false);
+                                                                //////////////////////////////////พื้นที่สำหรับเขียนโค้ดยกเลิกการกดถูกใจ
+                                                                
+            }}>ยกเลิก</button>;
+        }
+        else{
+            return <button className="pu-buttonA2" onClick={() => showUpload(1)}>สนใจซื้อสุนัข</button>;
+        }
+    }
 
     return (
         <div className='manager-modal-wrapper'>
@@ -169,15 +186,13 @@ const PopUpDogDetail = (props) => {
                                                 </div>
                                                 <div className='pu-headerDetail6'>ลงเมื่อวันที่ : {dogPU.dateCreate}</div>
                                             </div>
-                                            <img src={dogPU.seller.picture} className='pu-profile-img2' />
+                                            {/* <img src={dogPU.seller.picture} className='pu-profile-img2' /> */}
                                         </div>
                                     </div>
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
-                                <div className='ddd'>
-                                        <button className="pu-buttonA2" onClick={() => showUpload(1)}>สนใจซื้อสุนัข</button>
-                                        </div>
+                                <div className='ddd'>{CheckID('asa')}</div>  {/* แก้ asa คือ user ที่ทำการ login*/}
                                 </div>
                             </div>
 
