@@ -957,41 +957,34 @@ const Profile = () => {
                                 </div>
                                 <div className='money-info-pane'>
                                     <div className='money-table-row'>
-                                        <div class='col1-tools-header' />
                                         <div class='col2-pic-header' />
                                         <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
                                         <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
                                         <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
-                                        <div className='col6-total-header'><div class='.center-div-black'>ทั้งหมด</div></div>
+                                        <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
+                                        <div class='col4-price-header'><div class='.center-div-black'>ยกเลิก</div></div>
                                     </div>
                                     {notPaidDogData.map(each => {
                                         return (
                                             <div className='money-table-row'>
-                                                <div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div>
                                                 <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
                                                 <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
                                                 <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
                                                 <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
-                                                <div className='col6-total'><div className='.center-div-pink'>{each.amount * each.price}</div></div>
+                                                <div className='col6-total'><div className='.center-div-pink'>
+                                                <button class="money-button" onClick={() => showPopUp('Sell')}>ซื้อสุนัข</button></div></div>
+                                                <div class='col4-price'><div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div></div>
+                                                
                                             </div>
                                         )
                                     })}
                                 </div>
                                 <div className='money-info-pane-bottom'>
                                     <div className='money-table-row'>
-                                        <div class='money-bottom-blog'>ยอดชำระ</div><div className='money-bottom-value'>{totalPaid}</div>
-                                    </div>
-                                    <div className='money-table-row'>
                                         <div class='money-bottom-blog'>ยอดชำระทั้งหมด</div><div className='money-bottom-value'>{totalPaid}</div>
                                     </div>
-
                                 </div>
-                                <div className='money-pane'>
-                                    <button class="money-button" onClick={() => showPopUp('Sell')}>
-                                        ซื้อสุนัข
-                                        </button>
-                                </div>
-                            </div>}
+                                </div>}
 
                         {moneyTab[1] && <div className='temp-money-pane'>
                             <div className='money-tab'>
@@ -1001,22 +994,23 @@ const Profile = () => {
                             </div>
                             <div className='money-info-pane'>
                                 <div className='money-table-row'>
-                                    <div class='col1-tools-header' />
                                     <div class='col2-pic-header' />
-                                    <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
-                                    <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
-                                    <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
-                                    <div className='col6-total-header'><div class='.center-div-black'>ทั้งหมด</div></div>
+                                        <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
+                                        <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
+                                        <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
+                                        <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
+                                        <div class='col4-price-header'><div class='.center-div-black'></div></div>
                                 </div>
                                 {paidDogData && paidDogData.map(each => {
                                     return (
                                         <div className='money-table-row'>
-                                            <div class='col1-tools' />
                                             <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
-                                            <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
-                                            <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
-                                            <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
-                                            <div className='col6-total'><div className='.center-div-pink'>{each.amount * each.price}</div></div>
+                                                <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
+                                                <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
+                                                <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
+                                                <div className='col6-total'><div className='.center-div-pink'>
+                                                <button class="money-button" onClick={() => showPopUp('Sell')}>ดูสลิป</button></div></div>
+                                                <div class='col4-price'></div>
                                         </div>
                                     )
                                 })}

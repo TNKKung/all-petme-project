@@ -133,7 +133,8 @@ html,body {
     height: 100%; /*150vh*/
     /* background-color: rgb(33, 28, 61); */
     margin-top: 10%;
-    top:20px
+    top:20px;
+    margin-bottom: 10%;
   }
   .SidebarList{
     font-family: 'Prompt', sans-serif;
@@ -1080,13 +1081,13 @@ h1 {
 .money-info-pane{
     border: 1px solid rgb(134, 134, 134);
     margin-left: 10%;
-    width: 800px;   
+    width: 950px;   
     /* background-color: rgb(96, 116, 78); */
 }
 
 .money-table-row{
     min-height: 50px;
-    width: 800px;
+    width: 950px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -1108,8 +1109,7 @@ h1 {
     align-items: center;
     justify-content: center;
     width: 50px;
-    min-height: 110px;
-    border: 1px solid rgb(134, 134, 134);
+    min-height: 100px;
 }
 .col1-tools:hover{
     cursor: pointer;
@@ -1237,7 +1237,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
+    width: 350px;
     min-height: 50px;
     border: 1px solid rgb(134, 134, 134);
 }
@@ -1251,7 +1251,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
+    width: 350px;
     min-height: 110px;
     border: 1px solid rgb(134, 134, 134);
 }
@@ -1262,6 +1262,7 @@ h1 {
     border: 1px solid rgb(0, 0, 0);
     margin-left: 10%;
     width: 800px;
+    margin-bottom: 30px;
 }
 
 .money-bottom-blog{
