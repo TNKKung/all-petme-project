@@ -38,7 +38,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     question4: null,
     question5: null,
     picture: null,
-  })
+  });
   const [dataimage, setDataimage] = useState({});
   const sendDataImage = (e) => {
     console.log("succes");
@@ -54,18 +54,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
       });
   };
 
-  function arrayBufferToBase64(buffer) {
-    var binary = ''
-    var bytes = [].slice.call(new Uint8Array(buffer))
-
-    bytes.forEach((b) => (binary += String.fromCharCode(b)))
-
-    return window.btoa(binary)
-  }
-  return (
-    <form
-      className='box-large'
-      onSubmit={async(e) => {
+  /*{async(e) => {
         const data = JSON.parse(localStorage.getItem("user"))
         const res = await fetch("http://localhost:4000/api/add/registerPet",{
           method: 'POST',
@@ -98,247 +87,256 @@ function Popup2({ popup1, popup2, popupFinish }) {
         popup2.close()
         popupFinish.open()
         console.table(form)
-      }}
-    >
-      <div className='popup-closeButton' onClick={popup2.close}>
+      }}*/
+  function arrayBufferToBase64(buffer) {
+    var binary = "";
+    var bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => (binary += String.fromCharCode(b)));
+
+    return window.btoa(binary);
+  }
+  return (
+    <form className="box-large" onSubmit={sendDataImage}>
+      <div className="popup-closeButton" onClick={popup2.close}>
         X
       </div>
-      <div className='top-box'>
-        <div className='left-box'>
-          <div className='header'>
-            <div className='text-head'>ลงทะเบียนขายสุนัข</div>
+      <div className="top-box">
+        <div className="left-box">
+          <div className="header">
+            <div className="text-head">ลงทะเบียนขายสุนัข</div>
             {/* เลือกรูปแบบการการันตี */}
             <select
               required
-              className='selector padding'
+              className="selector padding"
               value={form.petId}
               onChange={(e) => {
-                setForm({ ...form, petId: e.target.value })
+                setForm({ ...form, petId: e.target.value });
               }}
             >
-              <option value=''>เลือกรูปแบบการการันตี</option>
-              <option value='แบบที่1'>แบบที่1</option>
-              <option value='แบบที่2'>แบบที่2</option>
+              <option value="">เลือกรูปแบบการการันตี</option>
+              <option value="แบบที่1">แบบที่1</option>
+              <option value="แบบที่2">แบบที่2</option>
             </select>
           </div>
 
-          <div className='line' />
-          <div className='text-input-box'>
-            <div className='text-box'>
-              <div className='text-origin'>สุนัขพันธุ์</div>
-              <div className='text-origin'>เพศ</div>
+          <div className="line" />
+          <div className="text-input-box">
+            <div className="text-box">
+              <div className="text-origin">สุนัขพันธุ์</div>
+              <div className="text-origin">เพศ</div>
 
-              <div className='text-origin'>อายุ</div>
-              <div className='text-origin'>ราคา</div>
+              <div className="text-origin">อายุ</div>
+              <div className="text-origin">ราคา</div>
             </div>
-            <div className='input-box'>
+            <div className="input-box">
               <select
                 required
-                className='selector'
+                className="selector"
                 value={form.dogBreed}
                 onChange={(e) => {
-                  setForm({ ...form, dogBreed: e.target.value })
+                  setForm({ ...form, dogBreed: e.target.value });
                 }}
               >
-                <option value=''>เลือกพันธุ์สุนัข</option>
-                <option value='ปอมเมอเรเนี่ยน'>ปอมเมอเรเนี่ยน</option>
-                <option value='โกลเด้นรีทรีฟเวอร์'>โกลเด้นรีทรีฟเวอร์</option>
-                <option value='ชิสุ'>ชิสุ</option>
-                <option value='ปั๊ก'>ปั๊ก</option>
-                <option value='ไซบีเรียน ฮัสกี้'>ไซบีเรียน ฮัสกี้</option>
-                <option value='ร็อตต์ไวเลอร์'>ร็อตต์ไวเลอร์</option>
-                <option value='บูลล์ด็อก'>บูลล์ด็อก</option>
-                <option value='ยอร์กไชร์เทอร์เรีย'>ยอร์กไชร์เทอร์เรีย</option>
-                <option value='บีเกิ้ล'>บีเกิ้ล</option>
-                <option value='ชิวาวา'>ชิวาวา</option>
+                <option value="">เลือกพันธุ์สุนัข</option>
+                <option value="ปอมเมอเรเนี่ยน">ปอมเมอเรเนี่ยน</option>
+                <option value="โกลเด้นรีทรีฟเวอร์">โกลเด้นรีทรีฟเวอร์</option>
+                <option value="ชิสุ">ชิสุ</option>
+                <option value="ปั๊ก">ปั๊ก</option>
+                <option value="ไซบีเรียน ฮัสกี้">ไซบีเรียน ฮัสกี้</option>
+                <option value="ร็อตต์ไวเลอร์">ร็อตต์ไวเลอร์</option>
+                <option value="บูลล์ด็อก">บูลล์ด็อก</option>
+                <option value="ยอร์กไชร์เทอร์เรีย">ยอร์กไชร์เทอร์เรีย</option>
+                <option value="บีเกิ้ล">บีเกิ้ล</option>
+                <option value="ชิวาวา">ชิวาวา</option>
               </select>
               <select
                 required
-                className='selector'
+                className="selector"
                 value={form.gender}
                 onChange={(e) => {
-                  setForm({ ...form, gender: e.target.value })
+                  setForm({ ...form, gender: e.target.value });
                 }}
               >
-                <option value=''>เลือกเพศ</option>
-                <option value='เพศผู้'>เพศผู้</option>
-                <option value='เพศเมีย'>เพศเมีย</option>
+                <option value="">เลือกเพศ</option>
+                <option value="เพศผู้">เพศผู้</option>
+                <option value="เพศเมีย">เพศเมีย</option>
               </select>
 
               <Input
                 required
-                min='1'
-                max='20'
-                type='number'
+                min="1"
+                max="20"
+                type="number"
                 value={form.age}
                 onChange={(e) => {
-                  setForm({ ...form, age: e.target.value })
+                  setForm({ ...form, age: e.target.value });
                 }}
               />
               <Input
                 required
-                type='number'
+                type="number"
                 value={form.cost}
                 onChange={(e) => {
-                  setForm({ ...form, cost: e.target.value })
+                  setForm({ ...form, cost: e.target.value });
                 }}
               />
             </div>
           </div>
-          <div className='detail'>รายละเอียด :</div>
+          <div className="detail">รายละเอียด :</div>
           {/* <div className='input-detail' /> */}
           <textarea
             required
-            className='input-detail'
+            className="input-detail"
             // rows='4'
             // cols='50'
             value={form.petDetail}
             onChange={(e) => {
-              setForm({ ...form, petDetail: e.target.value })
+              setForm({ ...form, petDetail: e.target.value });
             }}
           />
         </div>
-        <div className='right-box'>
+        <div className="right-box">
           <div
-            className='addPicture'
+            className="addPicture"
             onClick={() => {
-              const button = document.querySelector('#uploadButton')
-              button.click()
+              const button = document.querySelector("#uploadButton");
+              button.click();
             }}
           >
             {form.picture ? (
-              <img src={form.picture} className='image' />
+              <img src={form.picture} className="image" />
             ) : (
-              'เพิ่มรูปภาพ'
+              "เพิ่มรูปภาพ"
             )}
           </div>
           <input
-            type='file'
-            id='uploadButton'
-            className='uploadPicture'
+            type="file"
+            id="uploadButton"
+            className="uploadPicture"
             onChange={(e) => {
-              const file = e.target.files[0]
-              if (!file) return
-              const reader = new FileReader()
+              const file = e.target.files[0];
+              if (!file) return;
+              const reader = new FileReader();
 
-              reader.readAsArrayBuffer(file)
+              reader.readAsArrayBuffer(file);
               reader.onload = () => {
                 setForm({
                   ...form,
                   picture:
-                    'data:image/jpeg;base64,' +
+                    "data:image/jpeg;base64," +
                     arrayBufferToBase64(reader.result),
-                })
-              }
+                });
+              };
               setDataimage(file);
             }}
           />
-          <div className='line2' />
+          <div className="line2" />
           {/* <div className='show-picture-cover'>
             <div className='show-picture' />
             <div className='show-picture' />
             <div className='show-picture' />
             <div className='show-picture' />
           </div> */}
-          <div className='text-input-box'>
-            <div className='text-box-2'>
-              <div className='text-origin-2'>ชื่อบัญชี</div>
-              <div className='text-origin-2'>รายละเอียด</div>
+          <div className="text-input-box">
+            <div className="text-box-2">
+              <div className="text-origin-2">ชื่อบัญชี</div>
+              <div className="text-origin-2">รายละเอียด</div>
             </div>
-            <div className='input-box-2'>
+            <div className="input-box-2">
               <Input
                 required
-                className='margin'
+                className="margin"
                 value={form.nameAccountPromtpay}
                 onChange={(e) => {
-                  setForm({ ...form, nameAccountPromtpay: e.target.value })
+                  setForm({ ...form, nameAccountPromtpay: e.target.value });
                 }}
               />
               <textarea
                 required
-                className='textArea-detailAccount'
-                rows='3'
+                className="textArea-detailAccount"
+                rows="3"
                 // cols='50'
                 value={form.detailAccountPromtpay}
                 onChange={(e) => {
-                  setForm({ ...form, detailAccountPromtpay: e.target.value })
+                  setForm({ ...form, detailAccountPromtpay: e.target.value });
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-      <div className='bottom-box'>
-        <div className='text-head'>สร้างแบบสอบถามสำหรับคัดเลือกผู้ซื้อ</div>
-        <div className='line-bottom' />
-        <div className='text-input-bottom'>
-          <div className='text-box-bottom'>
-            <div className='text-bottom'>คำถามข้อที่ 1</div>
-            <div className='text-bottom'>คำถามข้อที่ 2</div>
-            <div className='text-bottom'>คำถามข้อที่ 3</div>
-            <div className='text-bottom'>คำถามข้อที่ 4</div>
-            <div className='text-bottom'>คำถามข้อที่ 5</div>
+      <div className="bottom-box">
+        <div className="text-head">สร้างแบบสอบถามสำหรับคัดเลือกผู้ซื้อ</div>
+        <div className="line-bottom" />
+        <div className="text-input-bottom">
+          <div className="text-box-bottom">
+            <div className="text-bottom">คำถามข้อที่ 1</div>
+            <div className="text-bottom">คำถามข้อที่ 2</div>
+            <div className="text-bottom">คำถามข้อที่ 3</div>
+            <div className="text-bottom">คำถามข้อที่ 4</div>
+            <div className="text-bottom">คำถามข้อที่ 5</div>
           </div>
-          <div className='input-box-bottom'>
+          <div className="input-box-bottom">
             <textarea
               required
-              className='input-bottom'
+              className="input-bottom"
               // rows='4'
               // cols='50'
               value={form.question1}
               onChange={(e) => {
-                setForm({ ...form, question1: e.target.value })
+                setForm({ ...form, question1: e.target.value });
               }}
             />
             <textarea
               required
-              className='input-bottom'
+              className="input-bottom"
               // rows='4'
               // cols='50'
               value={form.question2}
               onChange={(e) => {
-                setForm({ ...form, question2: e.target.value })
+                setForm({ ...form, question2: e.target.value });
               }}
             />
             <textarea
               required
-              className='input-bottom'
+              className="input-bottom"
               // rows='4'
               // cols='50'
               value={form.question3}
               onChange={(e) => {
-                setForm({ ...form, question3: e.target.value })
+                setForm({ ...form, question3: e.target.value });
               }}
             />
             <textarea
-              className='input-bottom'
+              className="input-bottom"
               // rows='4'
               // cols='50'
               value={form.question4}
               onChange={(e) => {
-                setForm({ ...form, question4: e.target.value })
+                setForm({ ...form, question4: e.target.value });
               }}
             />
             <textarea
-              className='input-bottom'
+              className="input-bottom"
               // rows='4'
               // cols='50'
               value={form.question5}
               onChange={(e) => {
-                setForm({ ...form, question5: e.target.value })
+                setForm({ ...form, question5: e.target.value });
               }}
             />
           </div>
         </div>
       </div>
-      <div className='footer'>
-        <div className='text-footer'>
+      <div className="footer">
+        <div className="text-footer">
           หมายเหตุ : สามารถตั้งคำถามได้มากสุด 5 ข้อ
         </div>
-        <button className='footer-button'>ลงทะเบียนสุนัข</button>
+        <button className="footer-button">ลงทะเบียนสุนัข</button>
       </div>
     </form>
-  )
+  );
 }
 
-export default Popup2
+export default Popup2;
