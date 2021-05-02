@@ -2,22 +2,24 @@ const expressFunction = require("express");
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
-const fs = require("fs");
+var upload = multer({ dest: "./uploads/" }); //ที่เก็บข้อมุล
+const fs = require("fs"); //เขียนรูป
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
-
+MongoClient = require("mongodb").MongoClient;
+expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 var MongoClient = require("mongodb").MongoClient;
+const pondmongo =
+  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 var url =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+const tommongo =
+  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
 const port = process.env.PORT || 4000;
 expressApp.use(cors());
-expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
-
 expressApp.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -35,15 +37,46 @@ expressApp.use((req, res, next) => {
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
-  fs.rename(
-    `./uploads/${req.file.filename}`,
-    `./uploads/${newFileName}`,
-    () => {
-      //ใช้prosition +ชื่อไฟล์ที่ทำการโหลด
-      console.log("newFileName");
-      res.send("200");
-    }
-  );
+  if (req.file == null) {
+    console.log("empty");
+  } else {
+    MongoClient.connect(url, (err, db) => {
+      const ponddb = db.db("image");
+      console.log(newFileName);
+      fs.rename(
+        `./uploads/${req.file.filename}`,
+        `./uploads/${newFileName}`,
+        () => {
+          console.log("200");
+        }
+      );
+      getpath = `http://localhost:4000/static/${newFileName}`;
+      var newItem = {
+        contentType: req.file.mimetype,
+        size: req.file.size,
+        name: req.file.originalname,
+        path: getpath,
+      };
+      ponddb.collection("yourcollectionname").insert(newItem, () => {
+        /////collection มึงไปแก้เอง
+        console.log("success");
+      });
+    });
+  }
+});
+expressApp.get("/image", (req, res) => {
+  ///ส่งรูปไปแก้เอง
+  console.log("haha");
+  MongoClient.connect(url, (err, db) => {
+    const ponddb = db.db("image");
+    ponddb
+      .collection("yourcollectionname")
+      .find({ size: 35000 })
+      .toArray((err, result) => {
+        console.log(result[0].path);
+        res.send(result[0].path);
+      });
+  });
 });
 
 //---------------------------------------------------------------
