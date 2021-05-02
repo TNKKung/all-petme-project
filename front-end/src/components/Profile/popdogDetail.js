@@ -16,7 +16,9 @@ const PopUpDogDetail = (props) => {
     const [puHeader, setPuHeader] = useState('หน้าชำระเงิน')
     const [puType, setPuType] = useState(1)
     const [puType2, setPuType2] = useState(0)
-
+    const [puType3, setPuType3] = useState(0)
+    const [reportType,set_reportType] = useState()
+    const [reportDetail,set_reportDetail] = useState()
 
     const [mainImg, setMainImg] = useState(getDog.picture)
     const [subImg, setSubImg] = useState(getDog.picture)
@@ -26,15 +28,23 @@ const PopUpDogDetail = (props) => {
         if (inp == 1) {
             props.setPopUp(true)
             setPuType(0)
+            setPuType3(0)
             setPuType2(1)
             setlastBtt('ส่งคำตอบ')
             setPuHeader('ตอบคำถามเพื่อพิจารณาคุณสมบัติของผู้เลี้ยง')
         }
-        else {
+        else  if (inp == 2){
             props.setPopUp(true)
             setPuType(1)
+            setPuType3(0)
             setPuType2(0)
             setlastBtt('ส่ง')
+        }
+        else {
+            props.setPopUp(true)
+            setPuType(0)
+            setPuType3(1)
+            setPuType2(0)
         }
     }
     const fetchdata = async() => {
@@ -53,8 +63,6 @@ const PopUpDogDetail = (props) => {
                 answer3 : dogPU.answer3,
                 answer4 : dogPU.answer4,
                 answer5 : dogPU.answer5,
-                name : data.name,
-                picture : data.picture
             }),
         });
     }
@@ -77,6 +85,15 @@ const PopUpDogDetail = (props) => {
         // setDog(curDog)
     }
     
+    const sendReport = () => {
+        console.log('Sending these data :')
+
+        console.log('\nDog : '+dogPU.breed+' sold by '+dogPU.profile)
+        console.log('Type of report : '+reportType)
+        console.log('Report Info : '+reportDetail)
+        console.log('Report by : '+props.user.name)
+        props.setPopUp(false)
+    }
 
     // const switchImg = (newImg) => {                                                          ///////////สำหรับหลายภาพ
     //     const shallowSubImg = [newImg]
@@ -149,7 +166,7 @@ const PopUpDogDetail = (props) => {
                                     <div className='pu-rowHeader2'>
                                         <div className='pu-rowHeader2'><div className='pu-headerDetail4-1'>รายละเอียด :</div>
                                         </div>
-                                        <button className='pu-reportBtt'>รายงานปัญหา</button>
+                                        <button onClick = {() => showUpload(3)} className='pu-reportBtt'>รายงานปัญหา</button>
                                     </div>
 
                                 </div>
@@ -234,6 +251,41 @@ const PopUpDogDetail = (props) => {
                             </div>
                         </div>
 
+                    </div>
+                </div>
+                }
+                {puType3 == 1 && <div>
+                    <div className="PopUpdetailC">
+                        <div className='pu-report-Header-pad'>
+                            <div className='pu-report-Header-text'>
+                                รายงานปัญหา
+                            </div>
+                        </div>
+                        <div>
+                            <div className='pu-report-row-left'>
+                            
+                                    <div className = 'pu-report-text-L'>ประเภทปัญหาที่เกิดขึ้น</div>
+                                    <div><input className = 'pu-report-inp1-style' onChange={(e) => {
+                                        set_reportType(e.target.value)
+                                    }}/></div>
+                            </div>
+                            <div className='pu-report-row-left-step'><div className = 'pu-report-flex'>
+                                    <div className = 'pu-report-text-step'>ปัญหาเกิดขึ้นกับ : </div>
+                                    <div className = 'pu-report-text2'> คุณ {dogPU.profile}</div>
+                            </div></div>
+                            <div className='pu-report-row-left'><div className = 'pu-report-text'>เกิดอะไรขึ้น? :</div></div>
+                            <div className='pu-report-inp3-style'>
+                                <textarea className='pu-report-inp3'
+                                    onChange={(e) => {
+                                        set_reportDetail(e.target.value)
+                                    }}
+                                />
+                            </div>
+                            <div className='pu-report-row-center'>
+                                <button onClick = { () => {sendReport(); props.setPopUp(false)}} className='pu-report-button'>รายงานปัญหา</button>
+                                <button onClick = { () => props.setPopUp(false)} className='pu-report-button'>ยกเลิก</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 }

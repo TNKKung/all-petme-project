@@ -1476,6 +1476,7 @@ const Profile = () => {
                             // setDog = {setDog}
                             // getDateCreate = {dogDateCreate}
                             getDog={dogDetail}
+                            user ={data}
                         />
                     }
 

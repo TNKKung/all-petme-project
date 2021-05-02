@@ -341,3 +341,137 @@ html,body {
     display: flex;
     justify-content: flex-end;
 }
+/*----------------------- R E P O R T -------------------------*/
+.PopUpdetailC{
+    position:fixed;
+    top:10%;
+    left: 20%;
+    height: 740px;
+    width: 1100px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: 15px;
+    z-index:101;
+    padding:15px;
+}
+
+.pu-report-Header-pad{
+    height: 120px;
+    background-color: #00AFB9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+}
+.pu-report-Header-text{
+    font-family: 'Kanit';
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+}
+.pu-report-row-left{
+    margin-left: 40px;
+    margin: 8px;
+    display: flex;
+    margin-left: 15px;
+
+}
+.pu-report-text-L{
+    font-family: 'Kanit';
+    font-size: 35px;
+    margin: 8px;
+    margin-right: 20px;
+    margin-left: 15px;
+
+}
+.pu-report-text{
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 8px;
+    margin-left: 15px;
+}
+.pu-report-text2{
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 10px;
+    color: #00a095;
+}
+.pu-report-text-step{
+    margin: 10px;
+    margin-left: 60px;
+    font-family: 'Kanit';
+    font-size: 30px;
+}
+.pu-report-row-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pu-report-flex{
+    display: flex;
+}
+.pu-report-inp3-style{
+    margin-left: 50px;
+    width: 970px;
+    height: 260px;
+    background-color: #C4C4C4;
+    border:1px solid#b9b9b9;
+    border-radius: 5px;
+}
+.pu-report-inp1-style{
+    background-color: #b9cad4;
+    border:1px solid#b9b9b9;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 20px;
+    height: 40px;
+}
+.pu-report-inp3{
+    font-family: 'Kanit';
+    font-size: 20px;
+    margin: 20px;
+    background-color: transparent;
+    border:transparent;
+    width: 930px;
+    height: 220px;
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    
+    resize: none;
+
+}
+
+.pu-report-inp3:focus{
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+}
+
+.pu-report-button{
+    color: white;
+    width: 200px;
+    height: 60px;
+    background-color: #EC8E82;
+    border-radius: 15px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 10px;
+    margin-top: 20px;
+    border: transparent;
+}
+.pu-report-button:hover{
+    cursor: pointer;
+    color: #EC8E82;
+    background-color: white;
+    border: 3px solid #EC8E82;
+}
