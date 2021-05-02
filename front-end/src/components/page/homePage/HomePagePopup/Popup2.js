@@ -54,40 +54,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
       });
   };
 
-  /*{async(e) => {
-        const data = JSON.parse(localStorage.getItem("user"))
-        const res = await fetch("http://localhost:4000/api/add/registerPet",{
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'     
-          },
-          mode : "cors",
-          body: JSON.stringify({
-            userId : data.userId,
-            breed: form.dogBreed,
-            gender: form.gender,
-            age: form.age,
-            petDetail: form.petDetail,
-            cost: form.cost,
-            profile : data.name,
-            nameAccountPromtpay: form.nameAccountPromtpay,
-            detailAccountPromtpay: form.detailAccountPromtpay,
-            question1: form.question1,
-            question2: form.question2,
-            question3: form.question3,
-            question4: form.question4,
-            question5: form.question5,
-            picture: [],       
-          }),
-        })
-        const a = await res.json();
-        localStorage.setItem("user",JSON.stringify(a))
-        e.preventDefault()
-        popup1.close()
-        popup2.close()
-        popupFinish.open()
-        console.table(form)
-      }}*/
+   
   function arrayBufferToBase64(buffer) {
     var binary = "";
     var bytes = [].slice.call(new Uint8Array(buffer));
@@ -97,7 +64,43 @@ function Popup2({ popup1, popup2, popupFinish }) {
     return window.btoa(binary);
   }
   return (
-    <form className="box-large" onSubmit={sendDataImage}>
+    <form className="box-large" 
+    onSubmit={async(e) =>
+    {
+      const data = JSON.parse(localStorage.getItem("user"))
+      const res = await fetch("http://localhost:4000/api/add/registerPet",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'     
+        },
+        mode : "cors",
+        body: JSON.stringify({
+          userId : data.userId,
+          breed: form.dogBreed,
+          gender: form.gender,
+          age: form.age,
+          petDetail: form.petDetail,
+          cost: form.cost,
+          profile : data.name,
+          nameAccountPromtpay: form.nameAccountPromtpay,
+          detailAccountPromtpay: form.detailAccountPromtpay,
+          question1: form.question1,
+          question2: form.question2,
+          question3: form.question3,
+          question4: form.question4,
+          question5: form.question5,
+          picture: [],       
+        }),
+      })
+      const a = await res.json();
+      localStorage.setItem("user",JSON.stringify(a))
+      e.preventDefault()
+      popup1.close()
+      popup2.close()
+      popupFinish.open()
+      console.table(form)
+    }
+  }>
       <div className="popup-closeButton" onClick={popup2.close}>
         X
       </div>

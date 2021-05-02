@@ -84,7 +84,6 @@ const Profile = () => {
         }
     }
 
-
     const validMobile = (mobilePhone) => {
         if (mobilePhone[0] === '0' && (mobilePhone[1] === '9' || mobilePhone[1] === '6' || mobilePhone[1] === '8')) {
             for (var i = 0; i < 10; i++) {
@@ -138,6 +137,12 @@ const Profile = () => {
         set_password_storer(tempPass)
         setPassErrorSign(shallowPasswordError)
     }
+    const clearData = () =>{
+        localStorage.removeItem('dataPetForLike')
+        localStorage.removeItem('dataPet')
+        localStorage.removeItem('user')
+        localStorage.removeItem('dataPetId')
+    }
 
     const submitEditForm = async (next) => {
 
@@ -182,6 +187,21 @@ const Profile = () => {
             alert("กรุณากรอกข้อมูลให้ถูกต้อง");
         }
     }
+    const dataPetForLike = JSON.parse(localStorage.getItem("dataPetForLike"))
+    const fetDataForLike = async() => {
+        const res = await fetch('http://localhost:4000/dataPetForLike',{
+                  method: 'post',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                  userId : data.userId
+            })
+        });
+        const a = await res.json();
+        localStorage.setItem("dataPetForLike",JSON.stringify(a))
+    }   
     const [Name,setName]=useState()
     const submitEditPassForm = async (next) => {
         if (passErrorSign == 'OK' && ( password_storer[1] == password_storer[2])) {      
@@ -414,7 +434,6 @@ const Profile = () => {
         }
         else setTotalPaid(0)
     }
-
     // const showPopUp = (type) => {
     //     if (type === 'Buy') {
     //         // setPopUp(true)
@@ -434,7 +453,6 @@ const Profile = () => {
             setMoneyTab([false, true, false])
         }
     }
-
     const delCanceledPaidDog = (item) => {
         let tempCanceledPaidDogData = []
         let tempNotPaidDogData = notPaidDogData
@@ -518,8 +536,9 @@ const Profile = () => {
     React.useEffect(() => {
         const data = JSON.parse(localStorage.getItem("user"))
         setUser(data)
-
-    }, []);
+        fetDataForLike()
+        fetchDataMyMarket()
+    }, [],[]);
 
     const fetchDataMyMarket = async() => {
         const res = await fetch('http://localhost:4000/dataPetMyStore',{
@@ -534,7 +553,6 @@ const Profile = () => {
         });
         const a = await res.json(); 
         localStorage.setItem("dataPet",JSON.stringify(a[0]))
-        
     }
 
     const dataPet = JSON.parse(localStorage.getItem("dataPet"))
@@ -561,11 +579,11 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => profileSwitch(2)} className="row">
+                                <li onClick={() => { profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
+                                <li onClick={() => {profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -573,7 +591,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li onClick={() => {logOut();showPopUp('Exit')}} className="row">
+                                <li onClick={() => {logOut();showPopUp('Exit');clearData()}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -674,15 +692,15 @@ const Profile = () => {
                         </label>
                         <div className="profile_bar">
                             <div className="SidebarList">
-                                <li onClick={() => profileSwitch(1)} className="row">
+                                <li onClick={() => {profileSwitch(1)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li className="row">
+                                <li className="row" onClick={() => {fetDataForLike()}}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สนใจ</div>
                                 </li>
-                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
+                                <li onClick={() => {profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -690,7 +708,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row" onClick= {()=> logOut()}>
+                                <li className="row" onClick= {()=> {logOut();clearData()}}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -713,7 +731,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardItem_Accept.map((each, key) => {
+                                            {dataPetForLike.map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -721,7 +739,7 @@ const Profile = () => {
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.status}</text>
+                                                                <text>{'สถานะ :' + ' ' + each.statusSell}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
                                                         </div>
@@ -744,7 +762,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardItem_Accept.filter(e=>e.status == true).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.statusSell == true).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -752,7 +770,7 @@ const Profile = () => {
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.status}</text>
+                                                                <text>{'สถานะ :' + ' ' + 'รอการตอบรับ'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
                                                         </div>
@@ -774,7 +792,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardItem_Accept.filter(e=>e.status == false).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.statusSell == false).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -782,7 +800,7 @@ const Profile = () => {
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.status}</text>
+                                                                <text>{'สถานะ :' + ' ' + 'ตอบรับแล้ว'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
                                                         </div>
@@ -817,7 +835,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => profileSwitch(2)} className="row">
+                                <li onClick={() => {profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -829,7 +847,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row" onClick= {()=> logOut()}>
+                                <li className="row" onClick= {()=> {logOut();clearData()}}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -920,11 +938,11 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => profileSwitch(2)} className="row">
+                                <li onClick={() => {profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
+                                <li onClick={() => {profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -932,7 +950,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row" onClick= {()=> logOut()}>
+                                <li className="row" onClick= {()=> {logOut();clearData()}}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -1033,11 +1051,11 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => profileSwitch(2)} className="row">
+                                <li onClick={() => {profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
-                                <li onClick={() => {fetchDataMyMarket();profileSwitch(3)}} className="row">
+                                <li onClick={() => {profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -1045,7 +1063,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สถานะการชำระเงิน</div>
                                 </li>
-                                <li className="row" onClick= {()=> logOut()}>
+                                <li className="row" onClick= {()=> {logOut();clearData()}}>
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ออกจากระบบ</div>
                                 </li>
@@ -1324,11 +1342,11 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">บัญชีของฉัน</div>
                                         </li>
-                                        <li onClick={() => profileSwitch(2)} className="row">
+                                        <li onClick={() => {profileSwitch(2)}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สนใจ</div>
                                         </li>
-                                        <li onClick={() => {console.log('111');profileSwitch(3)}} className="row">
+                                        <li onClick={() => {profileSwitch(3);}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title" style={{ color: "#ED8E82" }} >ร้านค้าของฉัน</div>
                                         </li>
@@ -1336,7 +1354,7 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สถานะการชำระเงิน</div>
                                         </li>
-                                        <li className="row" onClick= {()=> logOut()}>
+                                        <li className="row" onClick= {()=>{ logOut();clearData()}}>
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">ออกจากระบบ</div>
                                         </li>
@@ -1386,7 +1404,7 @@ const Profile = () => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer') }}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
-                                                                    <div className="name_block_user_detail">{each.userId}</div>
+                                                                    <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
                                                             );
                                                         })}
@@ -1412,7 +1430,7 @@ const Profile = () => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>
-                                                                    <div className="name_block_user_detail">{each.userId}</div>
+                                                                    <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
                                                             );
                                                         })}
@@ -1439,7 +1457,7 @@ const Profile = () => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
-                                                                    <div className="name_block_user_detail">{each.userId}</div>
+                                                                    <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
                                                             );
                                                         })}

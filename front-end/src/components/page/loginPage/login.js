@@ -45,7 +45,6 @@ const Login = () => {
         localStorage.setItem("user",JSON.stringify(a))
         const dataPath = JSON.parse(localStorage.getItem("user"))
 
-
         if(dataPath.userId != null){
           let path = "/profile"; 
           history.push(path);
