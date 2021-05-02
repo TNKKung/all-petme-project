@@ -11,7 +11,7 @@ import { colors } from '@material-ui/core';
 export const CardItem_Accept = [
     {
         picture: Profile_Dog,
-        dogBreed: 'ซามอย',
+        breed: 'ซามอย',
         cost: '35000',
         status: true,
         question1: 'ทำไม',
@@ -47,7 +47,7 @@ export const CardItem_Accept = [
 
     {
         picture: Profile_Dog,
-        dogBreed: 'บีเกิ้ล',
+        breed: 'บีเกิ้ล',
         cost: '45000',
         status: true,
         question1: 'ทำไม1',
@@ -84,7 +84,7 @@ export const CardItem_Accept = [
 
     {
         picture: Profile_Dog,
-        dogBreed: 'อื่นๆ',
+        breed: 'อื่นๆ',
         cost: '45000',
         status: false,
         question1: 'ทำไม1',

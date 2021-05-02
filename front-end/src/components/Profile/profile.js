@@ -740,22 +740,7 @@ const Profile = () => {
                                                     </div>
                                                 );
                                             })}
-                                            {CardItem_Wait.map((each, key) => {
-                                                return (
-                                                    <div className='cards__wrapper' key={key}>
-                                                        <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }} >
-                                                            <div className="img_list"><img className="img_list" src={each.picture} /></div>
-                                                            <div className="img_text_bottom">
-                                                                <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.status}</text>
-                                                                <div className='icon_details'>{each.icon}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                );
-                                            })}
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -771,7 +756,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardItem_Wait.map((each, key) => {
+                                            {CardItem_Accept.filter(e=>e.status == true).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -801,7 +786,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {CardItem_Accept.map((each, key) => {
+                                            {CardItem_Accept.filter(e=>e.status == false).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -878,12 +863,11 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            
-                                            {dataPet.map((each, key) => { 
+                                            {dataPet.filter(e=>e.statusSell==true).map((each, key) => { 
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { profileSwitch(6); setDogForSellToShow(each) }}>
-                                                            {/* <div className="img_list">{each.imgName}</div> */}
+                                                            <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>

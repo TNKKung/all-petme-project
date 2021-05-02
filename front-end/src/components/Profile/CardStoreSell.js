@@ -150,14 +150,9 @@ const CardStoreSell = [
 
     {
         imgName: <img className="img_list" src={Profile_Dog} />,
-        imgName2: <img className="img_list2" src={Profile_Dog} />,
-        imgdetail1: <img className="img_list3" src={Profile_Dog} />,
-        imgdetail2: <img className="img_list3" src={Profile_Dog} />,
-        imgdetail3: <img className="img_list3" src={Profile_Dog} />,
         breed: 'สุนัขพันธ์ : ซามอย',
         cost: '35000',
-        garantee: 'การันตี',
-        sex: 'ผู้',
+        WebGL2RenderingContext: 'ผู้',
         age: '5 เดือน',
         detail: 'ลูกบีเกิ้ลแท้สามสี ไซส์13 นิ้ว พ่อมีใบเพด แม่ไม่มีใบ มาร์คครบ อายุ31วัน พร้อมส่งหลังรับวัคซีนรวม5โรค ที่อายุ50วัน',
         date: '2/12/2564',
@@ -165,7 +160,8 @@ const CardStoreSell = [
         question2 : "question2 whay",
         question3 : "question3 wht",
         likeUser: [{
-            user: user1,
+            userId: user1,
+            name: 'Tom',
             answer1: 'like ans1',
             answer2: 'like ans2',
             answer3: 'like ans3',
