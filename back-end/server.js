@@ -37,30 +37,25 @@ expressApp.post("/api/login", function (req, res) {
   console.log(req.body);
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
-    dbo
-      .collection("User")
-      .find({ username: username })
-      .toArray(function (err, result) {
+    dbo.collection("User").find({ "username": username }).toArray(function (err, result) {
         if (result[0].username === username) {
-          for (var i = 0; i < result.length; i++) {
-            data.push({
-              address: result[i].address,
-              birth: result[i].birth,
-              district: result[i].district,
-              email: result[i].email,
+            const data = {
+              address: result[0].address,
+              birth: result[0].birth,
+              district: result[0].district,
+              email: result[0].email,
               img: [],
-              listPetIForsell: result[i].listPetIForsell,
-              listPetIdForBuy: result[i].listPetIdForBuy,
-              mobileNumber: result[i].mobileNumber,
-              name: result[i].name,
-              postalCode: result[i].postalCode,
-              province: result[i].province,
-              road: result[i].road,
-              subDistrict: result[i].subDistrict,
-              userId: result[i].userId,
-              username: result[i].username,
-            });
-          }
+              listPetIForsell: result[0].listPetIForsell,
+              listPetIdForBuy: result[0].listPetIdForBuy,
+              mobileNumber: result[0].mobileNumber,
+              name: result[0].name,
+              postalCode: result[0].postalCode,
+              province: result[0].province,
+              road: result[0].road,
+              subDistrict: result[0].subDistrict,
+              userId: result[0].userId,
+              username: result[0].username,
+            }
           res.send(data);
         } else {
           res.send(false);
