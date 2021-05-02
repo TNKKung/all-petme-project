@@ -13,10 +13,10 @@ expressApp.use("/static", expressFunction.static("uploads")); //ทำให้�
 var MongoClient = require("mongodb").MongoClient;
 const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-var url =
-  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+var url = tommongo;
+
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const port = process.env.PORT || 4000;
 expressApp.use(cors());
