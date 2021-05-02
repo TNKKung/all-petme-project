@@ -203,31 +203,31 @@ expressApp.post("/api/add/registerUser", function (req, res) {
   }
 });
 
-expressApp.post("/api/add/listPetIdForBuy", function (req, res) {
-  const { petId, username } = req.body;
-  MongoClient.connect(url, function (err, db) {
-    var dbo = db.db("PetMeApp");
-    const listPetIdForBuy = {
-      username: username,
-      answer1: answer1,
-      answer2: answer2,
-      answer3: answer3,
-      answer4: answer4,
-      answer5: answer5,
-    };
-    dbo
-      .collection("Pet")
-      .updateOne(
-        { petId: petId },
-        { $push: { likeUser } },
-        function (err, res) {
-          console.log("add answer of petId" + petId + " complete");
-          res.send(true);
-          db.close();
-        }
-      );
-  });
-});
+// expressApp.post("/api/add/listPetIdForBuy", function (req, res) {
+//   const { petId, username } = req.body;
+//   MongoClient.connect(url, function (err, db) {
+//     var dbo = db.db("PetMeApp");
+//     const listPetIdForBuy = {
+//       username: username,
+//       answer1: answer1,
+//       answer2: answer2,
+//       answer3: answer3,
+//       answer4: answer4,
+//       answer5: answer5,
+//     };
+//     dbo
+//       .collection("Pet")
+//       .updateOne(
+//         { petId: petId },
+//         { $push: { likeUser } },
+//         function (err, res) {
+//           console.log("add answer of petId" + petId + " complete");
+//           res.send(true);
+//           db.close();
+//         }
+//       );
+//   });
+// });
 
 expressApp.post("/api/add/registerPet", function (req, res) {
   const {
@@ -324,6 +324,20 @@ expressApp.post("/api/add/registerPet", function (req, res) {
   }
 });
 
+expressApp.post("/dataPetForLike", function (req, res) {
+  const {
+    userId,
+  } = req.body;
+    MongoClient.connect(url, function (err, db) {
+      var dbo = db.db("PetMeApp");
+      dbo.collection("Pet").find({ likeUser:{$elemMatch:{userId: userId}}}).toArray(function(err,result){
+        console.log(result)
+        res.send(result)
+      });
+    });
+  });
+
+
 expressApp.post("/addAnswer", function (req, res) {
   const {
     petId,
@@ -347,7 +361,7 @@ expressApp.post("/addAnswer", function (req, res) {
       answer4: answer4,
       answer5: answer5,
       name : name,
-      picture : picture
+      picture : " "
 
     };
     dbo

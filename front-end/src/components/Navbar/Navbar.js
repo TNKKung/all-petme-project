@@ -7,7 +7,9 @@ import Logo_icon_src from './img/top-icon.png'
 import Bell_icon_src from './img/bell-icon.png'
 import Profile_icon_src from './img/profile.jpg'
 
+
 function Navbar() {
+
   return (
     <nav className='Mnavbar-wrapper'>
       <div className='Mnavbar-logo'>
@@ -70,10 +72,10 @@ function Navbar() {
 
       </div> */}
 
-      <button class='Mnavbar-bell' href='#'>
+      <button class='Mnavbar-bell'  href='#'> 
         <img class='bell-icon' src={Bell_icon_src} />
       </button>
-      <NavLink to='/profile' className='Mnavbar-profile'>
+      <NavLink to='/profile'  className='Mnavbar-profile'>
         <img class='profile-icon' src={Profile_icon_src} />
       </NavLink>
     </nav>
