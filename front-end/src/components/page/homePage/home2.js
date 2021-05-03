@@ -37,6 +37,8 @@ const Home2 = () => {
   const popup2 = Popup.usePopup()
   const popupFinish = Popup.usePopup()
   const [checkLogin,setCheckLogin] = useState(false)
+
+  const [PopType,SetPopType] = useState(null)
   // const setToggle = () => {
   //   classStyle == 'menu-header'
   //     ? setClassStyle('menu-header active')
@@ -177,10 +179,10 @@ const Home2 = () => {
       </div>
 
       <Popup popup={popup1}>
-        <Popup1 popup1={popup1} popup2={popup2} />
+        <Popup1 popup1={popup1} popup2={popup2} setType={SetPopType} />
       </Popup>
       <Popup popup={popup2}>
-        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} />
+        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} setType={PopType} />
       </Popup>
       <Popup popup={popupFinish}>
         <PopupFinish

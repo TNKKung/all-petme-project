@@ -12,7 +12,7 @@ import {
   useHistory
 } from 'react-router-dom'
 
-function Popup1({ popup1, popup2 }) {
+function Popup1({ popup1, popup2, setType}) {
   const dataUser = JSON.parse(localStorage.getItem("user"))
   const history = useHistory();
   return (
@@ -45,6 +45,7 @@ function Popup1({ popup1, popup2 }) {
             }else{
               popup1.close()
               popup2.open()
+              setType('ขาย')
             }
           }}
         >
@@ -59,6 +60,7 @@ function Popup1({ popup1, popup2 }) {
             }else{
               popup1.close()
               popup2.open()
+              setType('บริจาค')
             }
           }}
         >

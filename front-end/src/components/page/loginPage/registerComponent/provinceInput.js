@@ -156,14 +156,14 @@ const ProvinceInput = ({setDistrict,setSubDistrict,
 
   return (
     <div className='addpad'>
-      <div class='reg-block'>
-      <text class='reg-input-head'>จังหวัด</text>
+      <div class='reg-blockA'>
+      <text class='reg-input-headA'>จังหวัด</text>
         <div ref={wrapperRef} className="flex-container flex-column pos-rel">
           <div class='pad'>
             <select
               title="เลือกจังหวัด"
               id="select-testing"
-              class="selectProvince"
+              class="selectProvinceA"
               onChange={(event) => {
                 changePV(event.target.value)
                 setProvince(event.target.value)
@@ -180,13 +180,13 @@ const ProvinceInput = ({setDistrict,setSubDistrict,
         </div>
         
         <div class='reg-block'>
-        <text class='reg-input-head'>อำเภอ</text>
+        <text class='reg-input-headA'>อำเภอ</text>
         <div ref={wrapperRef} className="flex-container flex-column pos-rel">
           <div class='pad'>
             <select
               title="เลือกอำเภอ"
               id="select-testing"
-              class="selectProvince"
+              class="selectProvinceA"
               onChange={(event) => {
                 changeAP(event.target.value,amphoeData)
                 setDistrict(event.target.value)
@@ -215,13 +215,13 @@ const ProvinceInput = ({setDistrict,setSubDistrict,
       </div>
 
       <div class='reg-block'>
-        <text class='reg-input-head'>ตำบล/เขต</text>
+        <text class='reg-input-headA'>ตำบล/เขต</text>
         <div ref={wrapperRef} className="flex-container flex-column pos-rel">
           <div class='pad'>
             <select
               title="เลือกตำบล"
               id="select-testing2"
-              class="selectProvince"
+              class="selectProvinceA2"
               onChange={(event) => {
                 changeDT(event.target.value)
                 setSubDistrict(event.target.value)
@@ -250,19 +250,9 @@ const ProvinceInput = ({setDistrict,setSubDistrict,
 
   
 
-        <div class='reg-block'>
-          <text class='reg-input-head'>รหัสไปรษณีย์</text>
-          <input
-            className='reg-input-wrapper'
-            id="auto"
-            type="text" disabled="disabled"
-            placeholder="กรุณากรอกรหัสไปรษณีย์"
-            value={'  ' + inputPostalCode}
-            onChange={event => {
-              let p = event.target.value
-              setInputPostalCode(event.target.value.replace(/\s/g, ''))
-            }}
-          />
+        <div class='reg-blockAa2'>
+          <text class='reg-input-headA'>รหัสไปรษณีย์</text>
+          <div className='sdskaka'>{inputPostalCode}</div>
         </div>
       </div>
 

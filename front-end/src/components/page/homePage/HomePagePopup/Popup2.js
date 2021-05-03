@@ -11,10 +11,11 @@ import {
   useHistory
 } from 'react-router-dom'
 
-function Popup2({ popup1, popup2, popupFinish }) {
+function Popup2({ popup1, popup2, popupFinish, setType}) {
 
   const dataUser = JSON.parse(localStorage.getItem("user"))
   const history = useHistory();
+  const typeSell = setType;
 
   function checkLogin() {
     if(dataUser == null){
@@ -29,7 +30,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     gender: null,
     age: null,
     petDetail: null,
-    cost: null,
+    cost: 0,
     nameAccountPromtpay: null,
     detailAccountPromtpay: null,
     question1: null,
@@ -39,6 +40,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     question5: null,
     picture: null,
   });
+
   const [dataimage, setDataimage] = useState({});
   const sendDataImage = (e) => {
     console.log("succes");
@@ -130,20 +132,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
       <div className="top-box">
         <div className="left-box">
           <div className="header">
-            <div className="text-head">ลงทะเบียนขายสุนัข</div>
-            {/* เลือกรูปแบบการการันตี */}
-            <select
-              required
-              className="selector padding"
-              value={form.petId}
-              onChange={(e) => {
-                setForm({ ...form, petId: e.target.value });
-              }}
-            >
-              <option value="">เลือกรูปแบบการการันตี</option>
-              <option value="แบบที่1">แบบที่1</option>
-              <option value="แบบที่2">แบบที่2</option>
-            </select>
+            <div className="text-head">{typeSell=='ขาย'?'ลงทะเบียนขายสุนัข':'ลงทะเบียนบริจาคสุนัข'}</div>
           </div>
 
           <div className="line" />
@@ -153,7 +142,8 @@ function Popup2({ popup1, popup2, popupFinish }) {
               <div className="text-origin">เพศ</div>
 
               <div className="text-origin">อายุ</div>
-              <div className="text-origin">ราคา</div>
+              
+              <div className="text-origin">{typeSell=='ขาย'?'ราคา':'บริจาคฟรี'}</div>
             </div>
             <div className="input-box">
               <select
@@ -199,14 +189,15 @@ function Popup2({ popup1, popup2, popupFinish }) {
                   setForm({ ...form, age: e.target.value });
                 }}
               />
-              <Input
+              {typeSell=='ขาย'?<Input
                 required
                 type="number"
                 value={form.cost}
                 onChange={(e) => {
                   setForm({ ...form, cost: e.target.value });
                 }}
-              />
+              />:<div></div>}
+              
             </div>
           </div>
           <div className="detail">รายละเอียด :</div>
@@ -264,6 +255,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
             <div className='show-picture' />
             <div className='show-picture' />
           </div> */}
+          {typeSell=='ขาย'?
           <div className="text-input-box">
             <div className="text-box-2">
               <div className="text-origin-2">ชื่อบัญชี</div>
@@ -289,7 +281,8 @@ function Popup2({ popup1, popup2, popupFinish }) {
                 }}
               />
             </div>
-          </div>
+          </div>:<div></div>}
+          
         </div>
       </div>
       <div className="bottom-box">
