@@ -573,7 +573,7 @@ const Profile = () => {
 
     const dataPet = JSON.parse(localStorage.getItem("dataPet"))
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ height: '100%', width: '100%',fontFamily:'Kanit'}}>
             <div className='containerProfile'></div>
             <div class='content'>
                 <h1>บัญชีของฉัน</h1>
@@ -1384,13 +1384,12 @@ const Profile = () => {
                                                 </div>
                                                 <div className="Text_card">
                                                     <div className="cancel" onClick={() => profileSwitch(3)}><CancelIcon className="C_hover" style={{ fontSize: 70 }} /></div>
-                                                    <div className="garantee">{dogForSellToShow.garantee}</div>
                                                     <div className="text_card_text1">{dogForSellToShow.breed}</div>
                                                     <div className="text_card_text2">{dogForSellToShow.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา :' + ' ' + dogForSellToShow.cost}</div>
                                                     <div className="text_card_text1">{'เพศ :' + ' ' + dogForSellToShow.gender}</div>
                                                     <div className="text_card_text1">{'อายุ :' + ' ' + dogForSellToShow.age}</div>
                                                     <div className="text_card_text1">{'รายละเอียด :'}</div>
-                                                    <div className="text_card_text3">{dogForSellToShow.detail}</div>
+                                                    <div className="text_card_text3" style={{width:'500px',height:'170px',overflowY:'auto'}}>{dogForSellToShow.detail}</div>
                                                     <div className="text_card_text4">{'ลงขายเมื่อวันที่ :' + ' ' + dogForSellToShow.dateCreate}</div>
 
                                                 </div>

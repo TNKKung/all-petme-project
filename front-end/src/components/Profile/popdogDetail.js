@@ -187,7 +187,7 @@ const PopUpDogDetail = (props) => {
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-rowHeader2'>
-                                        <div className='pu-headerDetail3'>เพศ : {dogPU.gender}</div>
+                                        <div className='pu-headerDetail3'>{dogPU.gender}</div>
                                         <div className='pu-headerDetail3-2'>อายุ : {dogPU.age} ปี</div>
                                         </div>
                                 </div>

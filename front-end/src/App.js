@@ -41,7 +41,6 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home2} />
-        
         <Route path='/market' component={MarketPage} />
         <Route path='/donate' component={DonatePage} />
         <Route path="/about" component={About} />
