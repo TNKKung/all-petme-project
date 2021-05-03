@@ -1,5 +1,5 @@
 const expressFunction = require("express");
-const io = require("socket.io")(4000);
+const io = require("socket.io")(5000);
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 var multer = require("multer");
@@ -431,7 +431,7 @@ expressApp.post("/addAnswer", function (req, res) {
       answer4: answer4,
       answer5: answer5,
       name: name,
-      picture: " ",
+      picture: picture,
     };
     dbo
       .collection("Pet")
