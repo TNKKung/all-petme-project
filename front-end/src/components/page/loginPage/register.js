@@ -186,7 +186,7 @@ const Register = () => {
       IDErrorSign === '✔' &&
       roadErrorSign === '✔' &&
       addressErrorSign === '✔' &&
-      dateErrorSign === '✔')==false
+      dateErrorSign === '✔')==true
     ){
 
 
