@@ -53,7 +53,7 @@ function MarketPage() {
       <div className='marketPage-part1'>
         <img src={part1} className='marketPage-part1-img' />
         <div className='marketPage-part1-cover'>
-          <div className='marketPage-part1-text1'>ตลาดซื้อขายสุนัข</div>
+          <div className='marketPage-part1-text1'>ตลาดขายสุนัข</div>
           <div className='marketPage-part1-line' />
           <div className='marketPage-part1-text2'>
             สำหรับบุคคลที่อยากหาซื้อสุนัขพันธุ์ที่ต้องการ
