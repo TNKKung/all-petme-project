@@ -11,7 +11,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-function Popup2({ popup1, popup2, popupFinish }) {
+function Popup2({ popup1, popup2, popupFinish, setType }) {
   const dataUser = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   const typeSell = setType;
