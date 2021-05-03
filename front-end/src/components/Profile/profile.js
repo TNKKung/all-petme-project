@@ -4,6 +4,12 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditProvinceInput from './Components/editProvinceInput.js'
 
+import Popup from '../../components/Popup/Popup'
+import Popup1 from '../../components/page/homePage/HomePagePopup/Popup1'
+import Popup2 from '../../components/page/homePage/HomePagePopup/Popup2'
+import PopupFinish from '../../components/page/homePage/HomePagePopup/PopupFinish'
+
+
 import {
     BrowserRouter as Router,
     useHistory,
@@ -46,6 +52,12 @@ const Profile = () => {
     const [profileTab, setprofileTab] = useState([true, false, false, false, false, false])
 
     const history = useHistory();
+
+    const popup1 = Popup.usePopup()
+    const popup2 = Popup.usePopup()
+    const popupFinish = Popup.usePopup()
+    const [PopType,SetPopType] = useState(null)
+
 
     var maxName = '30'
     var maxPass = '15'
@@ -620,7 +632,7 @@ const Profile = () => {
                                 </li>
                             </div>
                             <div className='sell-pane'>
-                                <button class="sell-button" onClick={() => showPopUp('Sell')}>
+                                <button class="sell-button" onClick={popup1.open}>
                                     + ลงขาย
                                 </button>
                             </div>
@@ -1504,6 +1516,20 @@ const Profile = () => {
                             setUserData={setUserData}
                         />
                     }
+
+                    <Popup popup={popup1}>
+        <Popup1 popup1={popup1} popup2={popup2} setType={SetPopType} />
+      </Popup>
+      <Popup popup={popup2}>
+        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} setType={PopType} />
+      </Popup>
+      <Popup popup={popupFinish}>
+        <PopupFinish
+          // popup1={popup1}
+          // popup2={popup2}
+          popupFinish={popupFinish}
+        />
+      </Popup>
 
                 </div >
     );
