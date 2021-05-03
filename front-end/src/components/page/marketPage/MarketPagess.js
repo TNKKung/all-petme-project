@@ -15,8 +15,19 @@ function MarketPage() {
 
   const [dogInfo,SetdogInfo] = useState(null);
   const [Popup,setPopups] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
  
   React.useEffect(() => {
+
+    const dataB = JSON.parse(localStorage.getItem("user"))
+    console.log(dataB)
+    if(dataB == null){
+      // alert('not logged in')
+      setIsLoggedIn(false)
+    }else{
+      // alert('logged in')
+      setIsLoggedIn(true)
+    }
     const fetchdata = async() =>{
       const res = await fetch("http://localhost:4000/api/get/dataPet", {
       method: 'GET',
@@ -46,7 +57,7 @@ function MarketPage() {
           <div className='marketPage-part1-line' />
           <div className='marketPage-part1-text2'>
             สำหรับบุคคลที่อยากหาซื้อสุนัขพันธุ์ที่ต้องการ
-          </div>
+          </div>  
         </div>
       </div>
       <div className='marketPage-part2'>
