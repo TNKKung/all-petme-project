@@ -63,18 +63,41 @@ const Profile = () => {
     const setSubDistrict =(val) => { subDistrict = val}
     const setProvince =(val) => { province = val}   
     const setPostalCode =(val) => { postalCode = val}
-
+    var data = {}
     const [password_storer,set_password_storer] = useState([])
     const [user, setUser] = useState({})
-    const data = JSON.parse(localStorage.getItem("user"))
-
+    
         var Password=['','',''], 
         name=user.name, email=user.email, mobilePhone=user.mobileNumber, 
         birth=user.birth, address=user.address, road=user.road, 
         subDistrict=user.subDistrict, district=user.district, 
         province=user.province, postalCode=user.postalCode;
 
+    // useEffect(() => {
         
+    // },[])
+    React.useEffect(() => {
+        const dataB = JSON.parse(localStorage.getItem("user"))
+        data = dataB
+        if (data==null){
+            alert("กรุณาเข้าสู่ระบบ");
+            let path = `/`;
+            history.push(path);}
+        if(data!=null){
+        setUser(data);
+        name=user.name;
+        email=user.email
+        mobilePhone=user.mobileNumber
+        birth=user.birth
+        address=user.address
+        road=user.road
+        subDistrict=user.subDistrict
+        district=user.district
+        province=user.province
+        postalCode=user.postalCode;
+        fetDataForLike()
+        fetchDataMyMarket()}
+    }, [],[]);
 
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -165,7 +188,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                    userId : data.userId,
+                    userId : user.userId,
                     name:Name,
                     mobileNumber:mobilePhone,
                     address:address,
@@ -196,7 +219,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                  userId : data.userId
+                  userId : user.userId
             })
         });
         const a = await res.json();
@@ -215,7 +238,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                    userId : data.userId,
+                    userId : user.userId,
                     originalPassword : password_storer[0],
                     newPassword : password_storer[1]
                   })
@@ -238,10 +261,6 @@ const Profile = () => {
         }
     }
 
-
-    //   React.useEffect(() => {
-
-    //   },[]);
 
     const profileSwitch = (selectedTab) => {
         if (selectedTab === 1) {
@@ -498,8 +517,8 @@ const Profile = () => {
     }
     const logOut = () => {
         localStorage.removeItem("user")
-        let path = `/login`;
-        history.push(path);
+        window.open('http://localhost:3000/');
+        window.close("_self");
     }
     const setUserData = (attr, val) => {
         let shallowUser = user
@@ -535,12 +554,7 @@ const Profile = () => {
         }
         setUser(shallowUser)
     }
-    React.useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("user"))
-        setUser(data)
-        fetDataForLike()
-        fetchDataMyMarket()
-    }, [],[]);
+    
 
     const fetchDataMyMarket = async() => {
         const res = await fetch('http://localhost:4000/dataPetMyStore',{
@@ -550,7 +564,7 @@ const Profile = () => {
             },
             mode : "cors",
             body: JSON.stringify({
-                userId : data.userId
+                userId : user.userId
             }),
         });
         const a = await res.json(); 
@@ -611,64 +625,64 @@ const Profile = () => {
                         </div>
 
                         <div className="Account_Text">
-                            <div id="name">
+                            <div id="name" onClick ={()=> console.log(user.name)}>
                                 <p>ชื่อ-นามสกุล</p>
                             </div>
-                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={data.name} id="text"></input>
+                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={user.name} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อีเมล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.email} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.email} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>เบอร์โทรศัพท์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.mobileNumber} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.mobileNumber} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>วันเกิด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.birth} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.birth} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ที่อยู่</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.address} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.address} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ถนน</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.road} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.road} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ตำบล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.subDistrict} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.subDistrict} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อำเภอ</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.district} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.district} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>จังหวัด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.province} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.province} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>รหัสไปรษณีย์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.postalCode} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.postalCode} id="text"></input>
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>
@@ -1119,7 +1133,7 @@ const Profile = () => {
 
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{data.email}</div>
+                                    <div className='edit-input-subHeader-data'>{user.email}</div>
 
                                 </div>
 
@@ -1143,7 +1157,7 @@ const Profile = () => {
                                 </div>
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{data.birth}</div>
+                                    <div className='edit-input-subHeader-data'>{user.birth}</div>
 
 
                                 </div>

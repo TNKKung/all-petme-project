@@ -46,7 +46,7 @@ const App = () => {
         <Route path='/donate' component={DonatePage} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path='/Profile' component={Profile}/>
+        <Route path='/Profile' component={Profile} />
       </Switch>
 
       <Footer />
