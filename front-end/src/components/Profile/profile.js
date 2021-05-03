@@ -101,9 +101,11 @@ const Profile = () => {
     });
     
     useEffect(()=>{
+        const data = JSON.parse(localStorage.getItem("user"))
+        setUser(data)
         fetDataForLike();
         fetchDataMyMarket();
-    })
+    },[],[])
 
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
