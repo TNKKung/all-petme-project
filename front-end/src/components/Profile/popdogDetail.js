@@ -66,6 +66,7 @@ const PopUpDogDetail = (props) => {
                 name : data.name
             }),
         });
+        
     }
     const insertAns = async(i,ans) => {
         let curDog = {}
@@ -274,7 +275,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => {fetchdata();props.setPopUp(false)}} >{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => {fetchdata();props.setPopUp(false);window.location.reload()}} >{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>

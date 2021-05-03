@@ -75,7 +75,7 @@ const Profile = () => {
         province=user.province, postalCode=user.postalCode;
 
         
-
+    const [choosePeopleForAccept,setChoosePeopleForAccept] = useState()
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
         if (format.test(nameInput)) { setNameErrorSign('ชื่อจริงห้ามมีอักขระพิเศษ') }
@@ -741,8 +741,8 @@ const Profile = () => {
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
-                                                                <text>{each.statusSell==true?'สถานะ :' + ' ' + 'รอการยืนยัน':'สถานะ :' + ' ' + 'ได้รับการยืนยันแล้ว'}</text>
-                                                                <div className='icon_details'>{each.icon}</div>
+                                                                <text>{each.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length===0?'สถานะ :' + ' ' + 'รอการตอบรับ':'สถานะ :' + ' ' + 'ตอบรับแล้ว'}</text>
+                                                                <div className='icon_details'>{}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -764,7 +764,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {dataPetForLike.filter(e=>e.statusSell == true).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length===0).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -794,7 +794,7 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {dataPetForLike.filter(e=>e.statusSell == false).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
@@ -874,7 +874,7 @@ const Profile = () => {
                                             {dataPet.filter(e=>e.statusSell==true).map((each, key) => { 
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
-                                                        <div className="img_wrapper" onClick={() => { profileSwitch(6); setDogForSellToShow(each) }}>
+                                                        <div className="img_wrapper" onClick={() => { localStorage.setItem('petIdForStorePage',JSON.stringify(each.petId)); profileSwitch(6); setDogForSellToShow(each) }}>
                                                             <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
@@ -979,7 +979,7 @@ const Profile = () => {
                                         <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
                                         <div class='col4-price-header'><div class='.center-div-black'>ยกเลิก</div></div>
                                     </div>
-                                    {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.statusSell==false).map(each => {
+                                    {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0).map(each => {
                                                        /////////ต้องใส่ตัวแปรอื่น
                                         return (
                                             <div className='money-table-row'>
@@ -1398,7 +1398,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.likeUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer');localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
@@ -1424,7 +1424,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.acceptUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
@@ -1451,7 +1451,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.cancelUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.cancelUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);;localStorage.setItem('likeUser',JSON.stringify(each)) }}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>

@@ -82,6 +82,29 @@ const PopUpAnswer = (props) => {
         setPopUp(false)
 
     }
+    const petId = JSON.parse(localStorage.getItem("petIdForStorePage"))
+    const userId = JSON.parse(localStorage.getItem("likeUser"))
+
+    const fetchData = async() => {
+        console.log(petId)
+        const res = await fetch('http://localhost:4000/choosePeopleForChat',{
+          method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : petId,
+                userId : userId.userId,
+                name : userId.name,
+                answer1 : userId.answer1,
+                answer2 : userId.answer2,
+                answer3 : userId.answer3,
+                answer4 : userId.answer4,
+                answer5 : userId.answer5,
+            }),
+        });
+    }
 
     return (
         <div className='manager-modal-wrapper'>
@@ -129,8 +152,7 @@ const PopUpAnswer = (props) => {
 
             { popUpAnsType && 
                 <div className='pu-ans-row-center'>
-                    <button className = 'pu-ans-button' onClick={() => {selectLikeUser(user); setPopUp(false)} }>เลือกผู้ซื้อคนนี้</button>
-                    <button className = 'pu-ans-button' onClick={() => {cancelLikeUser(user); setPopUp(false)} }>ลบผู้ซื้อออกจากรายการ</button>
+                    <button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
                     <button className = 'pu-ans-button' onClick={() => setPopUp(false)}>ดูรายชื่อผู้ซื้อคนอื่น</button>
                 </div>
             }
