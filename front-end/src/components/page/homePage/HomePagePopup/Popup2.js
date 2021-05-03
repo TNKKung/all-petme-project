@@ -173,7 +173,8 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
           question3: form.question3,
           question4: form.question4,
           question5: form.question5,   
-          picture :  pathPicture
+          picture :  pathPicture,
+          typeSell : typeSell
         }),
 
       })
