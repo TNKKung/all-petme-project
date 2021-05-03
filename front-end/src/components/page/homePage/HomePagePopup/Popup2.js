@@ -13,6 +13,7 @@ import {
 
 function Popup2({ popup1, popup2, popupFinish, setType}) {
 
+  
   const dataUser = JSON.parse(localStorage.getItem("user"))
   const history = useHistory();
   const typeSell = setType;
@@ -80,13 +81,13 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
         },
         mode : "cors",
         body: JSON.stringify({
-          userId : data.userId,
+          userId : dataUser.userId,
           breed: form.dogBreed,
           gender: form.gender,
           age: form.age,
           petDetail: form.petDetail,
           cost: form.cost,
-          profile : data.name,
+          profile : dataUser.name,
           nameAccountPromtpay: form.nameAccountPromtpay,
           detailAccountPromtpay: form.detailAccountPromtpay,
           question1: form.question1,
@@ -118,6 +119,64 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
     <form className="box-large" 
     onSubmit={async(e) =>
     {
+
+      // let formData = new FormData();
+
+      // formData.append("avatar", dataimage);
+      // const res2 = await fetch("http://localhost:4000/uploadFile",{
+      //   method: 'POST',
+      //   headers: {
+      //     "Content-length" : "fileSizeInBytes"
+      //   },
+      //   mode : "cors",
+      //   body : formData
+      // })
+      // await fetch("http://localhost:4000/uploadFile", {
+      //   method: "post",
+      //   body: formData,
+      // })
+      //   .then((res) => res.text())
+      //   .then((resBody) => {
+      //     console.log(resBody)
+      //     let a = resBody;
+      //     localStorage.setItem("pathPicture",resBody)
+      //   });
+      //   const b = localStorage.getItem("pathPicture")
+      //   setPathPicture(b)
+
+
+      //   console.log(pathPicture)
+      
+
+      const res = await fetch("http://localhost:4000/api/add/registerPet",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'     
+        },
+        mode : "cors",
+        body: JSON.stringify({
+          userId : dataUser.userId,
+          breed: form.dogBreed,
+          gender: form.gender,
+          age: form.age,
+          petDetail: form.petDetail,
+          cost: form.cost,
+          profile : dataUser.name,
+          nameAccountPromtpay: form.nameAccountPromtpay,
+          detailAccountPromtpay: form.detailAccountPromtpay,
+          question1: form.question1,
+          question2: form.question2,
+          question3: form.question3,
+          question4: form.question4,
+          question5: form.question5,   
+          picture :  pathPicture
+        }),
+
+      })
+
+      
+      const a = await res.json();
+      localStorage.setItem("user",JSON.stringify(a))
 
       e.preventDefault()
       popup1.close()
