@@ -221,7 +221,7 @@ const PopUpDogDetail = (props) => {
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
-                                <div className='ddd'>{CheckID(data.userId)}</div>  {/* แก้ asa คือ user ที่ทำการ login*/}
+                                {data && <div className='ddd'>{CheckID(data.userId)}</div>}  {/* แก้ asa คือ user ที่ทำการ login*/}
                                 </div>
                             </div>
 
