@@ -119,10 +119,20 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
     <form className="box-large" 
     onSubmit={async(e) =>
     {
+      let formData = new FormData();
 
-      // let formData = new FormData();
-
-      // formData.append("avatar", dataimage);
+      formData.append("avatar", dataimage);
+      fetch("http://localhost:4000/uploadFile", {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.text())
+        .then((resBody) => {
+          setPathPicture(resBody);
+          
+        });
+  
+      console.log(pathPicture)
       // const res2 = await fetch("http://localhost:4000/uploadFile",{
       //   method: 'POST',
       //   headers: {
@@ -131,21 +141,15 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
       //   mode : "cors",
       //   body : formData
       // })
-      // await fetch("http://localhost:4000/uploadFile", {
-      //   method: "post",
-      //   body: formData,
+      // const res = await fetch("/uploadFile",{
+      //   method: 'POST',
+      //   headers: {
+      //       "Content-Type":"multipart/form-data"   
+      //   },
+      //   mode : "cors",
+      //   body: formData
       // })
-      //   .then((res) => res.text())
-      //   .then((resBody) => {
-      //     console.log(resBody)
-      //     let a = resBody;
-      //     localStorage.setItem("pathPicture",resBody)
-      //   });
-      //   const b = localStorage.getItem("pathPicture")
-      //   setPathPicture(b)
 
-
-      //   console.log(pathPicture)
       
 
       const res = await fetch("http://localhost:4000/api/add/registerPet",{

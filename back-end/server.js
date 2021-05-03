@@ -32,12 +32,14 @@ expressApp.use((req, res, next) => {
   );
   return next();
 });
-var a; 
+
+
 
 // upload picture naja
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
+  console.log(req.body)
   if (req.file == null) {
     console.log("empty");
   } else {
@@ -52,13 +54,14 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
         }
       );
       let getpath = `http://localhost:4000/static/${newFileName}`;
+      res.send(getpath)
       var newItem = {
         contentType: req.file.mimetype,
         size: req.file.size,
         name: req.file.originalname,
         path: getpath,
       };
-      res.send(getpath)
+      
       ponddb.collection("yourcollectionname").insert(newItem, () => {
         /////collection มึงไปแก้เอง
         console.log("success");
@@ -573,6 +576,24 @@ expressApp.put("/updateProfileUser", function (req, res) {
       });
   });
 });
+
+
+expressApp.delete("/cancelLike",function(req,res){
+  const {
+    userId,
+    petId
+  }=req.body
+  
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo.collection("petId").updateOne({petId:petId},{$pull:{"userLike":{"userId" : userId}}}).then(obj => {
+      console
+    })
+  })
+})
+
+
 
 expressApp.listen(port, function () {
   console.log("Listen 4000");

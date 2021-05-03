@@ -107,7 +107,7 @@ const PopUpDogDetail = (props) => {
     //     }
     // }
     const fetchDataCancelLike = async(e) =>{
-        const res = await fetch('http://localhost:4000/checkPasswordAndUpdate',{
+        const res = await fetch('http://localhost:4000/cancelLike',{
                   method: 'DELETE',
                   headers :{
                     "Content-Type":"application/json",
@@ -119,6 +119,7 @@ const PopUpDogDetail = (props) => {
                   })
                 });
     }
+
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
         useLikePet.push(value.userId)
@@ -130,9 +131,21 @@ const PopUpDogDetail = (props) => {
         }
         else if(!useLikePet.indexOf(va)){
             return <button className="pu-buttonA2" onClick={() => {
-                props.setPopUp(false);
-                                                                //////////////////////////////////พื้นที่สำหรับเขียนโค้ดยกเลิกการกดถูกใจ
-                                                                
+                // props.setPopUp(false);
+                const fetchDataCancelLike = async() =>{
+                    const res = await fetch('http://localhost:4000/cancelLike',{
+                              method: 'DELETE',
+                              headers :{
+                                "Content-Type":"application/json",
+                                "Accept":"application/json"
+                              },
+                              body:JSON.stringify({
+                                userId : data.userId,
+                                petId :dogPU.petId
+                              })
+                            });
+                }
+                fetchDataCancelLike()
             }}>ยกเลิก</button>;
         }
         else{
