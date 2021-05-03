@@ -178,7 +178,7 @@ const Profile = () => {
             dateErrorSign === '✔' 
         ) {
             if(postalCode != ''){
-            saveEditAccountData(name,
+            saveEditAccountData(Name,
                 mobilePhone,
                 postalCode)
             profileSwitch(1)
@@ -1122,7 +1122,6 @@ const Profile = () => {
                                                     let tempVVV = e.target.value
                                                     let tempPassSTR = tempVVV.replace(/[^A-Za-zก-ฮ]/ig, '')
                                                     validateName(tempPassSTR)
-                                                    name = tempPassSTR
                                                     setName(tempVVV)
                                                 }}
                                                 maxLength={maxName}
