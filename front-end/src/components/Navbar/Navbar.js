@@ -29,15 +29,6 @@ function Navbar() {
         </li>
         <li>
           <NavLink
-            to='/about'
-            className='Mnavbar-item'
-            activeClassName='Mnavbar-item-active'
-          >
-            เกี่ยวกับ
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to='/market'
             className='Mnavbar-item'
             activeClassName='Mnavbar-item-active'
@@ -52,6 +43,15 @@ function Navbar() {
             activeClassName='Mnavbar-item-active'
           >
             บริจาค
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to='/about'
+            className='Mnavbar-item'
+            activeClassName='Mnavbar-item-active'
+          >
+            เกี่ยวกับ
           </NavLink>
         </li>
         <li>

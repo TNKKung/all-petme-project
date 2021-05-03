@@ -1,30 +1,28 @@
-import './Popup2.scoped.css'
-import Input from '../../../Input/Input'
-import React, { useState } from 'react'
-import fetch from 'unfetch';
+import "./Popup2.scoped.css";
+import Input from "../../../Input/Input";
+import React, { useState, useEffect } from "react";
+import fetch from "unfetch";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useRouteMatch,
-  useHistory
-} from 'react-router-dom'
+  useHistory,
+} from "react-router-dom";
 
-function Popup2({ popup1, popup2, popupFinish, setType}) {
-
-  
-  const dataUser = JSON.parse(localStorage.getItem("user"))
+function Popup2({ popup1, popup2, popupFinish, setType }) {
+  const dataUser = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   const typeSell = setType;
 
   function checkLogin() {
-    if(dataUser == null){
+    if (dataUser == null) {
       let path = `/login`;
       history.push(path);
     }
   }
-  
+
   const [form, setForm] = useState({
     petId: null,
     dogBreed: null,
@@ -43,12 +41,33 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
   });
 
   const [dataimage, setDataimage] = useState({});
-  const sendDataImage = (e) => {
+
+  const sendDataImage = async (e) => {
+    const data = JSON.parse(localStorage.getItem("user"));
     console.log("succes");
     let formData = new FormData();
     formData.append("avatar", dataimage);
-    fetch("http://localhost:4000/uploadFile", {
-      method: "post",
+    formData.append(
+      "jsonbody",
+      JSON.stringify({
+        userId: dataUser.userId,
+        breed: form.dogBreed,
+        gender: form.gender,
+        age: form.age,
+        petDetail: form.petDetail,
+        cost: form.cost,
+        profile: dataUser.name,
+        nameAccountPromtpay: form.nameAccountPromtpay,
+        detailAccountPromtpay: form.detailAccountPromtpay,
+        question1: form.question1,
+        question2: form.question2,
+        question3: form.question3,
+        question4: form.question4,
+        question5: form.question5,
+      })
+    );
+    const res = await fetch("http://localhost:4000/uploadFile", {
+      method: "POST",
       body: formData,
     })
       .then((res) => res.text())
@@ -56,55 +75,6 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
         console.log(resBody);
       });
   };
-  const fetchUpload = () =>{
-    let formData = new FormData();
-
-    formData.append("avatar", dataimage);
-    fetch("http://localhost:4000/uploadFile", {
-      method: "post",
-      body: formData,
-    })
-      .then((res) => res.text())
-      .then((resBody) => {
-        let a = resBody;
-        setPathPicture(a)
-      });
-      console.log(pathPicture)
-
-  }
-  const fetchRegister = async() => {
-    const data = JSON.parse(localStorage.getItem("user"))
-      const res = await fetch("http://localhost:4000/api/add/registerPet",{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'     
-        },
-        mode : "cors",
-        body: JSON.stringify({
-          userId : dataUser.userId,
-          breed: form.dogBreed,
-          gender: form.gender,
-          age: form.age,
-          petDetail: form.petDetail,
-          cost: form.cost,
-          profile : dataUser.name,
-          nameAccountPromtpay: form.nameAccountPromtpay,
-          detailAccountPromtpay: form.detailAccountPromtpay,
-          question1: form.question1,
-          question2: form.question2,
-          question3: form.question3,
-          question4: form.question4,
-          question5: form.question5,   
-          picture :  pathPicture
-        }),
-
-      })
-
-      
-      const a = await res.json();
-      localStorage.setItem("user",JSON.stringify(a))
-  }
-
 
   function arrayBufferToBase64(buffer) {
     var binary = "";
@@ -114,88 +84,18 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
 
     return window.btoa(binary);
   }
-  const [pathPicture,setPathPicture]=useState("")
+  const [pathPicture, setPathPicture] = useState("");
   return (
-    <form className="box-large" 
-    onSubmit={async(e) =>
-    {
-      let formData = new FormData();
-
-      formData.append("avatar", dataimage);
-      fetch("http://localhost:4000/uploadFile", {
-        method: "post",
-        body: formData,
-      })
-        .then((res) => res.text())
-        .then((resBody) => {
-          setPathPicture(resBody); 
-        });
-  
-      console.log(pathPicture)
-      // const res2 = await fetch("http://localhost:4000/uploadFile",{
-      //   method: 'POST',
-      //   headers: {
-      //     "Content-length" : "fileSizeInBytes"
-      //   },
-      //   mode : "cors",
-      //   body : formData
-      // })
-      // const res = await fetch("/uploadFile",{
-      //   method: 'POST',
-      //   headers: {
-      //       "Content-Type":"multipart/form-data"   
-      //   },
-      //   mode : "cors",
-      //   body: formData
-      // })
-
-      
-
-      const res = await fetch("http://localhost:4000/api/add/registerPet",{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'     
-        },
-        mode : "cors",
-        body: JSON.stringify({
-          userId : dataUser.userId,
-          breed: form.dogBreed,
-          gender: form.gender,
-          age: form.age,
-          petDetail: form.petDetail,
-          cost: form.cost,
-          profile : dataUser.name,
-          nameAccountPromtpay: form.nameAccountPromtpay,
-          detailAccountPromtpay: form.detailAccountPromtpay,
-          question1: form.question1,
-          question2: form.question2,
-          question3: form.question3,
-          question4: form.question4,
-          question5: form.question5,   
-          picture :  pathPicture,
-          typeSell : typeSell
-        }),
-
-      })
-
-      
-      const a = await res.json();
-      localStorage.setItem("user",JSON.stringify(a))
-
-      e.preventDefault()
-      popup1.close()
-      popup2.close()
-      popupFinish.open()
-      
-    }
-  }>
+    <form className="box-large" onSubmit={sendDataImage}>
       <div className="popup-closeButton" onClick={popup2.close}>
         X
       </div>
       <div className="top-box">
         <div className="left-box">
           <div className="header">
-            <div className="text-head">{typeSell=='ขาย'?'ลงทะเบียนขายสุนัข':'ลงทะเบียนบริจาคสุนัข'}</div>
+            <div className="text-head">
+              {typeSell == "ขาย" ? "ลงทะเบียนขายสุนัข" : "ลงทะเบียนบริจาคสุนัข"}
+            </div>
           </div>
 
           <div className="line" />
@@ -205,8 +105,10 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
               <div className="text-origin">เพศ</div>
 
               <div className="text-origin">อายุ</div>
-              
-              <div className="text-origin">{typeSell=='ขาย'?'ราคา':'บริจาคฟรี'}</div>
+
+              <div className="text-origin">
+                {typeSell == "ขาย" ? "ราคา" : "บริจาคฟรี"}
+              </div>
             </div>
             <div className="input-box">
               <select
@@ -252,15 +154,18 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
                   setForm({ ...form, age: e.target.value });
                 }}
               />
-              {typeSell=='ขาย'?<Input
-                required
-                type="number"
-                value={form.cost}
-                onChange={(e) => {
-                  setForm({ ...form, cost: e.target.value });
-                }}
-              />:<div></div>}
-              
+              {typeSell == "ขาย" ? (
+                <Input
+                  required
+                  type="number"
+                  value={form.cost}
+                  onChange={(e) => {
+                    setForm({ ...form, cost: e.target.value });
+                  }}
+                />
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
           <div className="detail">รายละเอียด :</div>
@@ -318,34 +223,36 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
             <div className='show-picture' />
             <div className='show-picture' />
           </div> */}
-          {typeSell=='ขาย'?
-          <div className="text-input-box">
-            <div className="text-box-2">
-              <div className="text-origin-2">ชื่อบัญชี</div>
-              <div className="text-origin-2">รายละเอียด</div>
+          {typeSell == "ขาย" ? (
+            <div className="text-input-box">
+              <div className="text-box-2">
+                <div className="text-origin-2">ชื่อบัญชี</div>
+                <div className="text-origin-2">รายละเอียด</div>
+              </div>
+              <div className="input-box-2">
+                <Input
+                  required
+                  className="margin"
+                  value={form.nameAccountPromtpay}
+                  onChange={(e) => {
+                    setForm({ ...form, nameAccountPromtpay: e.target.value });
+                  }}
+                />
+                <textarea
+                  required
+                  className="textArea-detailAccount"
+                  rows="3"
+                  // cols='50'
+                  value={form.detailAccountPromtpay}
+                  onChange={(e) => {
+                    setForm({ ...form, detailAccountPromtpay: e.target.value });
+                  }}
+                />
+              </div>
             </div>
-            <div className="input-box-2">
-              <Input
-                required
-                className="margin"
-                value={form.nameAccountPromtpay}
-                onChange={(e) => {
-                  setForm({ ...form, nameAccountPromtpay: e.target.value });
-                }}
-              />
-              <textarea
-                required
-                className="textArea-detailAccount"
-                rows="3"
-                // cols='50'
-                value={form.detailAccountPromtpay}
-                onChange={(e) => {
-                  setForm({ ...form, detailAccountPromtpay: e.target.value });
-                }}
-              />
-            </div>
-          </div>:<div></div>}
-          
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className="bottom-box">
