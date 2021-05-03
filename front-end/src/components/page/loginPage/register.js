@@ -178,7 +178,7 @@ const Register = () => {
   const submitRegisterForm = async(next) => {
     
     console.log('submit')
-    if(
+    if((
       emailErrorSign === '✔' &&
       mobileErrorSign === '✔' &&
       passErrorSign === '✔' &&
@@ -186,7 +186,7 @@ const Register = () => {
       IDErrorSign === '✔' &&
       roadErrorSign === '✔' &&
       addressErrorSign === '✔' &&
-      dateErrorSign === '✔'
+      dateErrorSign === '✔')==true
     ){
 
 
@@ -212,9 +212,11 @@ const Register = () => {
           })
         });
         
-        
-      let path = `/login`; 
-      history.push(path);
+      console.log('ddd')
+      // let path = `/`; 
+      // history.push(path);
+      window.open('http://localhost:3000/login');
+      window.close("_self");
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }

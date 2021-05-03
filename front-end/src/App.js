@@ -41,12 +41,11 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home2} />
-        
         <Route path='/market' component={MarketPage} />
         <Route path='/donate' component={DonatePage} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path='/Profile' component={Profile}/>
+        <Route path='/Profile' component={Profile} />
       </Switch>
 
       <Footer />
