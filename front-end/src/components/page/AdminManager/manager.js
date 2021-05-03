@@ -206,6 +206,8 @@ function PaymentReport() {
 }
 
 
+
+
 const Manager = () => {
 
     // ----test list----
@@ -222,7 +224,7 @@ const Manager = () => {
             Topic: 'เนื้อหาไม่เหมาะสม',
             ProblemBy: 'คุณต้อม',
             ReportBy: 'คุณทอม',
-            Problem: 'คุณต้อมได้ทำการแจ้งรายละเอียดเท็จfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+            Problem: 'คุณต้อมได้ทำการแจ้งรายละเอียดเท็จffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
         },
         {
             id: 3,
@@ -235,11 +237,44 @@ const Manager = () => {
 
     // ---end test---
 
+    const [contractThatReport, setcontractThatReport] = useState([
+        {
+            id: 1,
+            topic: 'ต้องการติดสปอนเซอร์',
+            name: 'คุณทอม',
+            mobileNumber: '0899999999',
+            email: 'billchartkul@hotmail.com',
+            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง'
+        },
+        {
+            id: 2,
+            topic: 'ต้องการติดสปอนเซอร์2',
+            name: 'คุณทอม2',
+            mobileNumber: '0899999999',
+            email: 'billchartkul@hotmail.com2',
+            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง2'
+        },
+        {
+            id: 3,
+            topic: 'ต้องการติดสปอนเซอร์3',
+            name: 'คุณทอมมี่ไม่หันมอง',
+            mobileNumber: '0899999999',
+            email: 'billchartkul@hotmail.com3',
+            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง2'
+        }
+    ])
+
+    //// end//////
+
     const [SliderPayment, SetSliderPayment] = useState(false)
     const [SliderProblem, SetSliderProblem] = useState(false)
+    const [SliderContract, SetSliderContract] = useState(false)
     const [PaymentReportSlide, SetPaymentReportSlide] = useState('manager-barBlockSelect')
     const [ProblemReportSlide, SetProblemReportSlide] = useState('manager-barBlockSelect')
+    const [ContractSlide, SetContractSlide] = useState('manager-barBlockSelect')
     const [IDChoose, SetIDChoose] = useState(null)
+    
+    const [IDChooseContract, SetIDChooseContract] = useState(null)
 
     function ProblemReport() {
         const [problemListClass, setProblemListClass] = useState('problemListBox')
@@ -276,6 +311,42 @@ const Manager = () => {
             </div>);
     }
 
+    function ContractReport() {
+        const [ContractListClass, setContractListClass] = useState('problemListBox')
+        const ContractList = contractThatReport.map(
+            contractThatReport => <button className={ContractListClass} onFocus={() => {
+                SetIDChoose(contractThatReport.id)
+            }}>
+
+                <div>หัวข้อ #{contractThatReport.id} {contractThatReport.topic}</div>
+                <div>จาก {contractThatReport.email}</div>
+
+            </button>
+        )
+        const Contractdetail = contractThatReport.map(contractThatReport => {
+            if (contractThatReport.id == IDChoose) {
+                return <div>
+                    <p className='problemTopicText'>หัวข้อ #{contractThatReport.id} {contractThatReport.topic}</p>
+                    <div className='problemReportRespone'>
+                        <div className='problemImgDiv'><img className='problemprofile' src={imageTest}></img></div>
+                        <p className='problemReportResponeText'>จาก: {contractThatReport.name}</p>
+                        <p className='problemReportResponeText'>Email: {contractThatReport.email}</p>
+                        <p className='problemReportResponeText'>เบอร์โทร: {contractThatReport.mobileNumber}</p>
+                    </div>
+                    <p className='problemProblemText'>เนื้อหา</p>
+                    <p className='problemProblemText'>{contractThatReport.message}</p>
+                </div>
+            }
+        })
+        return (
+            <div>
+                <div className='problemReportPane'>
+                    <div className='problemListPane'><div>{ContractList}</div></div>
+                    <div className='problemDetailPane'>{Contractdetail}</div>
+                </div>
+            </div>);
+    }
+
 
     return (
         <div style={{ height: '100vh', overflow: 'auto' }}>
@@ -288,19 +359,30 @@ const Manager = () => {
 
                     <div className='manager-barPlane'>
                         <button className={PaymentReportSlide} onMouseUp={() => {
-                            SetSliderPayment(true); SetSliderProblem(false);
+                            SetSliderPayment(true); SetSliderProblem(false);SetSliderContract(false);
                             SetPaymentReportSlide('manager-barBlockSelectThis');
-                            SetProblemReportSlide('manager-barBlockSelect')
+                            SetProblemReportSlide('manager-barBlockSelect');
+                            SetContractSlide('manager-barBlockSelect');
                         }} >
                             <p>ตรวจสอบสลิปโอนเงิน</p>
                         </button>
                         <button className={ProblemReportSlide} onMouseUp={() => {
-                            SetSliderPayment(false); SetSliderProblem(true);
+                            SetSliderPayment(false); SetSliderProblem(true);SetSliderContract(false);
                             SetPaymentReportSlide('manager-barBlockSelect');
+                            SetContractSlide('manager-barBlockSelect');
                             SetProblemReportSlide('manager-barBlockSelectThis')
                         }}>
                             <p>ตรวจสอบรายงานปัญหา</p>
                         </button>
+                        <button className={ContractSlide} onMouseUp={() => {
+                            SetSliderContract(true); SetSliderProblem(false);SetSliderPayment(false);
+                            SetContractSlide('manager-barBlockSelectThis');
+                            SetPaymentReportSlide('manager-barBlockSelect');
+                            SetProblemReportSlide('manager-barBlockSelect');
+                        }}>
+                            <p>ตรวจสอบผู้ติดต่อ</p>
+                        </button>
+                        
                     </div>
 
                 </div>
@@ -309,6 +391,7 @@ const Manager = () => {
             <div style={{ overflowY: 'auto', height: '100vh' }}>
                 {SliderPayment ? <PaymentReport /> : null}
                 {SliderProblem ? <ProblemReport /> : null}
+                {SliderContract? <ContractReport/>:null}
             </div>
 
         </div>

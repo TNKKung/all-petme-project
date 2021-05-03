@@ -13,6 +13,8 @@ import TTTPhoto from "./img/TTT.jpg";
 import MMMPhoto from "./img/MMM.jpg";
 import AAAPhoto from "./img/AAA.jpg";
 import BBBPhoto from "./img/BBB.jpg";
+import PPPPhoto from "./img/PPP.jpg";
+import DDDPhoto from "./img/DDD.jpg";
 
 library.add(fas, fab, far);
 
@@ -35,7 +37,7 @@ const About = () => {
           <div className="about-TeamMemberGrid">
             <div className="about-memberBox">
               <div class="about-memberImageBox">
-                <img class="about-memberImage" src={Profile_icon_src}></img>
+                <img class="about-memberImage" src={DDDPhoto}></img>
               </div>
               <div className="about-memberName-Box">
                 <p className="about-memberName-Text">
@@ -79,7 +81,7 @@ const About = () => {
             </div>
             <div className="about-memberBox">
               <div class="about-memberImageBox">
-                <img class="about-memberImage" src={Profile_icon_src}></img>
+                <img class="about-memberImage" src={PPPPhoto}></img>
               </div>
               <div className="about-memberName-Box">
                 <p className="about-memberName-Text">ณัฐภูมิ เพ็ชรชนะ(ปอนด์)</p>

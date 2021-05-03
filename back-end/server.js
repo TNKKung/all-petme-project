@@ -299,32 +299,6 @@ expressApp.post("/api/add/registerUser", function (req, res) {
   }
 });
 
-// expressApp.post("/api/add/listPetIdForBuy", function (req, res) {
-//   const { petId, username } = req.body;
-//   MongoClient.connect(url, function (err, db) {
-//     var dbo = db.db("PetMeApp");
-//     const listPetIdForBuy = {
-//       username: username,
-//       answer1: answer1,
-//       answer2: answer2,
-//       answer3: answer3,
-//       answer4: answer4,
-//       answer5: answer5,
-//     };
-//     dbo
-//       .collection("Pet")
-//       .updateOne(
-//         { petId: petId },
-//         { $push: { likeUser } },
-//         function (err, res) {
-//           console.log("add answer of petId" + petId + " complete");
-//           res.send(true);
-//           db.close();
-//         }
-//       );
-//   });
-// });
-
 expressApp.post("/api/add/registerPet", function (req, res) {
   const {
     userId,
@@ -370,7 +344,7 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       cancelUser: [],
       statusSell: true,
       typeSell: typeSell,
-      picture: " ",
+      picture: picture,
       seller: { picture: " ", name: "ต้อม" },
       dateCreate: "12/02/2554",
     };
@@ -508,10 +482,11 @@ expressApp.get("/api/get/dataPet", function (req, res) {
             question5: result[i].question5,
             seller: result[i].seller,
             dateCreate: result[i].dateCreate,
-            petDetail: result[i].detail,
+            detail: result[i].detail,
             gender: result[i].gender,
             age: result[i].age,
             userId: result[i].userId,
+            typeSell: result[i].typeSell,
           });
         }
         res.send(data);
@@ -662,6 +637,58 @@ expressApp.put("/updateProfileUser", function (req, res) {
         };
         console.log("Update " + userId + " complete ");
         res.send(data);
+      });
+  });
+});
+
+expressApp.post("/choosePeopleForChat", function (req, res) {
+  const {
+    petId,
+    userId,
+    answer1,
+    answer2,
+    answer3,
+    answer4,
+    answer5,
+    name,
+    picture,
+  } = req.body;
+  console.log(req.body);
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    const acceptUser = {
+      userId: userId,
+      answer1: answer1,
+      answer2: answer2,
+      answer3: answer3,
+      answer4: answer4,
+      answer5: answer5,
+      name: name,
+      picture: picture,
+    };
+    dbo
+      .collection("Pet")
+      .updateOne(
+        { petId: petId },
+        { $push: { acceptUser } },
+        function (err, res) {
+          console.log("acceptUser complete");
+        }
+      );
+  });
+});
+
+expressApp.delete("/cancelLike", function (req, res) {
+  const { userId, petId } = req.body;
+  console.log(req.body);
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo
+      .collection("Pet")
+      .updateOne({ petId: petId }, { $pull: { likeUser: { userId: userId } } })
+      .then((obj) => {
+        console.log("cancel complete");
       });
   });
 });

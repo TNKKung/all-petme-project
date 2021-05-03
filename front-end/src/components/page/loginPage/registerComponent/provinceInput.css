@@ -33,14 +33,30 @@
     border: 2px solid rgb(8, 34, 34);
     border-radius: 5px;
   }
-  .selectProvince{
-    width: 500px;
-    height: 70px;
+  .selectProvinceA{
+    width: 300px;
+    height: 45px;
     background-color: rgb(202, 202, 202);
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Kanit';
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+  }
+  .selectProvinceA2{
+    width: 300px;
+    height: 45px;
+    background-color: rgb(202, 202, 202);
+    font-size: 20px;
     font-family: 'Kanit';
     border-radius: 5px;
 
+  }
+  .sdskaka{
+    margin-top: 5px;
+    margin-left: 15px;
+    font-size: 20px;
+    color: rgb(0, 0, 63);
   }
   .pad {
     display: flex;
@@ -97,8 +113,15 @@
     flex-direction: column;
   }
 
-  .reg-block {
+  .reg-blockA {
     margin-top: 23px;
+    display: flex;
+    flex-direction: column;
+    align-content: left;
+    justify-content: left;
+  }
+  .reg-blockAa2{
+      margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-content: left;

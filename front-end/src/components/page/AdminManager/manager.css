@@ -70,7 +70,7 @@
     color: white;
     background-color: #F07167;
     border: none;
-    width: 50%;
+    width: 30%;
 }
 .manager-barBlockSelect:hover{
     color: black;
@@ -93,7 +93,7 @@
     color:#F07167;
     background-color: white;
     border: none;
-    width: 50%;
+    width: 30%;
 }
 /* ----------paymentReport------------- */
 .paymentReportPane{

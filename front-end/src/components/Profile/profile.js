@@ -63,18 +63,47 @@ const Profile = () => {
     const setSubDistrict =(val) => { subDistrict = val}
     const setProvince =(val) => { province = val}   
     const setPostalCode =(val) => { postalCode = val}
-
+    var data = {}
     const [password_storer,set_password_storer] = useState([])
     const [user, setUser] = useState({})
-    const data = JSON.parse(localStorage.getItem("user"))
-
+    
         var Password=['','',''], 
         name=user.name, email=user.email, mobilePhone=user.mobileNumber, 
         birth=user.birth, address=user.address, road=user.road, 
         subDistrict=user.subDistrict, district=user.district, 
         province=user.province, postalCode=user.postalCode;
 
+    // useEffect(() => {
         
+    const [choosePeopleForAccept,setChoosePeopleForAccept] = useState()
+    // },[])
+    React.useEffect(() => {
+        const dataB = JSON.parse(localStorage.getItem("user"))
+        
+        data = dataB
+        if (data==null){
+            alert("กรุณาเข้าสู่ระบบ");
+            let path = `/`;
+            history.push(path);}
+        if(data!=null){
+        setUser(data);
+        name=user.name;
+        email=user.email
+        mobilePhone=user.mobileNumber
+        birth=user.birth
+        address=user.address
+        road=user.road
+        subDistrict=user.subDistrict
+        district=user.district
+        province=user.province
+        postalCode=user.postalCode;
+        }
+    });
+    
+    useEffect(()=>{
+        fetDataForLike();
+        fetchDataMyMarket();
+    })
 
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -154,7 +183,7 @@ const Profile = () => {
             dateErrorSign === '✔' 
         ) {
             if(postalCode != ''){
-            saveEditAccountData(name,
+            saveEditAccountData(Name,
                 mobilePhone,
                 postalCode)
             profileSwitch(1)
@@ -165,7 +194,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                    userId : data.userId,
+                    userId : user.userId,
                     name:Name,
                     mobileNumber:mobilePhone,
                     address:address,
@@ -179,7 +208,8 @@ const Profile = () => {
             const a = await res.json();
             localStorage.setItem("user",JSON.stringify(a))
             let path = `/profile`;
-            history.push(path);}
+            history.push(path);
+        }
             else{
                 profileSwitch(1)
             }
@@ -196,7 +226,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                  userId : data.userId
+                  userId : user.userId
             })
         });
         const a = await res.json();
@@ -215,7 +245,7 @@ const Profile = () => {
                     "Accept":"application/json"
                   },
                   body:JSON.stringify({
-                    userId : data.userId,
+                    userId : user.userId,
                     originalPassword : password_storer[0],
                     newPassword : password_storer[1]
                   })
@@ -238,10 +268,6 @@ const Profile = () => {
         }
     }
 
-
-    //   React.useEffect(() => {
-
-    //   },[]);
 
     const profileSwitch = (selectedTab) => {
         if (selectedTab === 1) {
@@ -395,6 +421,8 @@ const Profile = () => {
 
     const [totalPaid, setTotalPaid] = useState(12000 + 7000)
     const [popUpPay, setPopUpPay] = useState(false)
+    const [choosePayment,setChoosePayment] = useState(null)
+
     const [popUpDe, setPopUpDe] = useState(false)
     const [popUpAns, setPopUpAns] = useState(false)
 
@@ -496,8 +524,8 @@ const Profile = () => {
     }
     const logOut = () => {
         localStorage.removeItem("user")
-        let path = `/login`;
-        history.push(path);
+        window.open('http://localhost:3000/');
+        window.close("_self");
     }
     const setUserData = (attr, val) => {
         let shallowUser = user
@@ -533,12 +561,7 @@ const Profile = () => {
         }
         setUser(shallowUser)
     }
-    React.useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("user"))
-        setUser(data)
-        fetDataForLike()
-        fetchDataMyMarket()
-    }, [],[]);
+    
 
     const fetchDataMyMarket = async() => {
         const res = await fetch('http://localhost:4000/dataPetMyStore',{
@@ -548,7 +571,7 @@ const Profile = () => {
             },
             mode : "cors",
             body: JSON.stringify({
-                userId : data.userId
+                userId : user.userId
             }),
         });
         const a = await res.json(); 
@@ -557,7 +580,7 @@ const Profile = () => {
 
     const dataPet = JSON.parse(localStorage.getItem("dataPet"))
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ height: '100%', width: '100%',fontFamily:'Kanit'}}>
             <div className='containerProfile'></div>
             <div class='content'>
                 <h1>บัญชีของฉัน</h1>
@@ -579,7 +602,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => { profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -609,64 +632,64 @@ const Profile = () => {
                         </div>
 
                         <div className="Account_Text">
-                            <div id="name">
+                            <div id="name" onClick ={()=> console.log(user.name)}>
                                 <p>ชื่อ-นามสกุล</p>
                             </div>
-                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={data.name} id="text"></input>
+                            <input disabled className='edit-input-no-cursor' type="text" value="" placeholder={user.name} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อีเมล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.email} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.email} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>เบอร์โทรศัพท์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.mobileNumber} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.mobileNumber} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>วันเกิด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.birth} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.birth} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ที่อยู่</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.address} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.address} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ถนน</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.road} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.road} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>ตำบล</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.subDistrict} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.subDistrict} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>อำเภอ</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.district} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.district} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>จังหวัด</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.province} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.province} id="text"></input>
                         </div>
                         <div className="Account_Text">
                             <div id="name">
                                 <p>รหัสไปรษณีย์</p>
                             </div>
-                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={data.postalCode} id="text"></input>
+                            <input type="text" className='edit-input-no-cursor' readonly="readonly" placeholder={user.postalCode} id="text"></input>
                         </div>
                         <div className='Edit-pane'>
                             <button class="Edit-button" onClick={() => profileSwitch(5)}>
@@ -700,7 +723,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สนใจ</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(3)}} className="row">
+                                <li onClick={() => {fetchDataMyMarket(); profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -738,9 +761,9 @@ const Profile = () => {
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'สถานะ :' + ' ' + each.statusSell}</text>
-                                                                <div className='icon_details'>{each.icon}</div>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
+                                                                <text>{each.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length===0?'สถานะ :' + ' ' + 'รอการตอบรับ':'สถานะ :' + ' ' + 'ตอบรับแล้ว'}</text>
+                                                                <div className='icon_details'>{}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -762,14 +785,14 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {dataPetForLike.filter(e=>e.statusSell == true).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length===0).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
                                                                 <text>{'สถานะ :' + ' ' + 'รอการตอบรับ'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
@@ -792,14 +815,14 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {dataPetForLike.filter(e=>e.statusSell == false).map((each, key) => {
+                                            {dataPetForLike.filter(e=>e.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0).map((each, key) => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
                                                             <div className="img_list"><img className="img_list" src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
                                                                 <text>{'สถานะ :' + ' ' + 'ตอบรับแล้ว'}</text>
                                                                 <div className='icon_details'>{each.icon}</div>
                                                             </div>
@@ -835,7 +858,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -872,12 +895,12 @@ const Profile = () => {
                                             {dataPet.filter(e=>e.statusSell==true).map((each, key) => { 
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
-                                                        <div className="img_wrapper" onClick={() => { profileSwitch(6); setDogForSellToShow(each) }}>
+                                                        <div className="img_wrapper" onClick={() => { localStorage.setItem('petIdForStorePage',JSON.stringify(each.petId)); profileSwitch(6); setDogForSellToShow(each) }}>
                                                             <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
-                                                                <text>{'ราคา :' + ' ' + each.cost}</text>
-                                                                <text>{'จำนวนคนสนใจ :' + ' ' + each.like}</text>
+                                                                <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
+                                                                <text>{'จำนวนคนสนใจ :' + ' ' + each.likeUser.length}</text>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -901,7 +924,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => profileSwitch(6)}>
-                                                            <div className="img_list">{each.imgName}</div>
+                                                            <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
@@ -938,7 +961,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -974,28 +997,22 @@ const Profile = () => {
                                         <div class='col2-pic-header' />
                                         <div className='col3-name-header'><div class='.center-div-black'>สุนัข</div></div>
                                         <div className='col4-price-header'><div class='.center-div-black'>ราคา</div></div>
-                                        <div className='col5-amount-header'><div class='.center-div-black'>จำนวน</div></div>
                                         <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
                                         <div class='col4-price-header'><div class='.center-div-black'>ยกเลิก</div></div>
                                     </div>
-                                    {notPaidDogData.map(each => {
+                                    {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0).map(each => {
+                                                       /////////ต้องใส่ตัวแปรอื่น
                                         return (
                                             <div className='money-table-row'>
                                                 <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
-                                                <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
-                                                <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
-                                                <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
+                                                <div className='col3-name'><div className='.center-div-black'>{each.breed}</div></div>
+                                                <div className='col4-price'><div className='.center-div-pink'>{each.cost}</div></div>
                                                 <div className='col6-total'><div className='.center-div-pink'>
-                                                <button class="money-button" onClick={() => showPopUp('Sell')}>ซื้อสุนัข</button></div></div>
+                                                <button class="money-button" onClick={() => {showPopUp('Sell');setChoosePayment(each);}}>ซื้อสุนัข</button></div></div>
                                                 <div class='col4-price'><div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div></div>
                                             </div>
                                         )
                                     })}
-                                </div>
-                                <div className='money-info-pane-bottom'>
-                                    <div className='money-table-row'>
-                                        <div class='money-bottom-blog'>ยอดชำระทั้งหมด</div><div className='money-bottom-value'>{totalPaid}</div>
-                                    </div>
                                 </div>
                                 </div>}
 
@@ -1051,7 +1068,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -1110,7 +1127,6 @@ const Profile = () => {
                                                     let tempVVV = e.target.value
                                                     let tempPassSTR = tempVVV.replace(/[^A-Za-zก-ฮ]/ig, '')
                                                     validateName(tempPassSTR)
-                                                    name = tempPassSTR
                                                     setName(tempVVV)
                                                 }}
                                                 maxLength={maxName}
@@ -1123,7 +1139,7 @@ const Profile = () => {
 
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{data.email}</div>
+                                    <div className='edit-input-subHeader-data'>{user.email}</div>
 
                                 </div>
 
@@ -1147,7 +1163,7 @@ const Profile = () => {
                                 </div>
                                 <div className="edit-input-row-left">
 
-                                    <div className='edit-input-subHeader-data'>{data.birth}</div>
+                                    <div className='edit-input-subHeader-data'>{user.birth}</div>
 
 
                                 </div>
@@ -1215,7 +1231,7 @@ const Profile = () => {
                         />
 
                         <div className='Edit2-pane'>
-                            <button class="Edit2-button" onClick={() => {submitEditForm('profile');}}>
+                            <button class="Edit2-button" onClick={() => { submitEditForm('profile');}}>
                                 บันทึก
                         </button>
                             <button class="Edit2-button" onClick={() => profileSwitch(1)}>
@@ -1342,7 +1358,7 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">บัญชีของฉัน</div>
                                         </li>
-                                        <li onClick={() => {profileSwitch(2)}} className="row">
+                                        <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สนใจ</div>
                                         </li>
@@ -1374,13 +1390,12 @@ const Profile = () => {
                                                 </div>
                                                 <div className="Text_card">
                                                     <div className="cancel" onClick={() => profileSwitch(3)}><CancelIcon className="C_hover" style={{ fontSize: 70 }} /></div>
-                                                    <div className="garantee">{dogForSellToShow.garantee}</div>
                                                     <div className="text_card_text1">{dogForSellToShow.breed}</div>
-                                                    <div className="text_card_text2">{'ราคา :' + ' ' + dogForSellToShow.cost}</div>
+                                                    <div className="text_card_text2">{dogForSellToShow.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา :' + ' ' + dogForSellToShow.cost}</div>
                                                     <div className="text_card_text1">{'เพศ :' + ' ' + dogForSellToShow.gender}</div>
                                                     <div className="text_card_text1">{'อายุ :' + ' ' + dogForSellToShow.age}</div>
                                                     <div className="text_card_text1">{'รายละเอียด :'}</div>
-                                                    <div className="text_card_text3">{dogForSellToShow.detail}</div>
+                                                    <div className="text_card_text3" style={{width:'500px',height:'170px',overflowY:'auto'}}>{dogForSellToShow.detail}</div>
                                                     <div className="text_card_text4">{'ลงขายเมื่อวันที่ :' + ' ' + dogForSellToShow.dateCreate}</div>
 
                                                 </div>
@@ -1402,7 +1417,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.likeUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer');localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
@@ -1428,7 +1443,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.acceptUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
@@ -1455,7 +1470,7 @@ const Profile = () => {
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.cancelUser.length + ' ' + 'คนสนใจ'}</div>
                                                         {dogForSellToShow.cancelUser.map((each) => {
                                                             return (
-                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer') }}>
+                                                                <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);;localStorage.setItem('likeUser',JSON.stringify(each)) }}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
                                                                     <div className="name_block_user_detail">{each.name}</div>
                                                                 </div>
@@ -1469,7 +1484,7 @@ const Profile = () => {
                             </div>
                         </div>
                     }
-                    {popUpPay && <PopUppayment setPopUp={setPopUpPay} getTotalPaid={totalPaid} />}
+                    {popUpPay && <PopUppayment setPopUp={setPopUpPay} getTotalPaid={choosePayment} />}
 
                     {
                         popUpDe && <PopDetail setPopUp={setPopUpDe}

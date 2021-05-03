@@ -37,6 +37,8 @@ const Home2 = () => {
   const popup2 = Popup.usePopup()
   const popupFinish = Popup.usePopup()
   const [checkLogin,setCheckLogin] = useState(false)
+
+  const [PopType,SetPopType] = useState(null)
   // const setToggle = () => {
   //   classStyle == 'menu-header'
   //     ? setClassStyle('menu-header active')
@@ -72,8 +74,7 @@ const Home2 = () => {
                   <p class='welcome-text'>
                     &emsp;&emsp;เว็บไซต์สำหรับการบริจาคและการรับเลี้ยงสุนัขเพื่อช่วยลดจำนวนสุนัขไร้บ้าน
                     และสำหรับการซื้อขายสุนัขที่มีความน่าเชื่อถือมาให้ผู้ซื้อโดยตรงคุณจึงมั่นใจได้
-                    100% ว่าซื้อน้องหมาจาก PetMe
-                    ได้รับสุนัขแน่นอนและมีใบรับประกันจากผู้ขายส่งให้ลูกค้าทุกคน
+                    100% 
                   </p>
                   <div class='login-button-pad'>
                     <button class='welcome-login-button'>
@@ -177,10 +178,10 @@ const Home2 = () => {
       </div>
 
       <Popup popup={popup1}>
-        <Popup1 popup1={popup1} popup2={popup2} />
+        <Popup1 popup1={popup1} popup2={popup2} setType={SetPopType} />
       </Popup>
       <Popup popup={popup2}>
-        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} />
+        <Popup2 popup1={popup1} popup2={popup2} popupFinish={popupFinish} setType={PopType} />
       </Popup>
       <Popup popup={popupFinish}>
         <PopupFinish

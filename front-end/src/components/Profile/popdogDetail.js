@@ -63,8 +63,10 @@ const PopUpDogDetail = (props) => {
                 answer3 : dogPU.answer3,
                 answer4 : dogPU.answer4,
                 answer5 : dogPU.answer5,
+                name : data.name
             }),
         });
+        
     }
     const insertAns = async(i,ans) => {
         let curDog = {}
@@ -106,6 +108,20 @@ const PopUpDogDetail = (props) => {
     //         setSubImg(shallowSubImg)
     //     }
     // }
+    const fetchDataCancelLike = async(e) =>{
+        const res = await fetch('http://localhost:4000/cancelLike',{
+                  method: 'DELETE',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    userId : data.userId,
+                    petId : e.target.value
+                  })
+                });
+    }
+
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
         useLikePet.push(value.userId)
@@ -117,9 +133,23 @@ const PopUpDogDetail = (props) => {
         }
         else if(!useLikePet.indexOf(va)){
             return <button className="pu-buttonA2" onClick={() => {
+                
+                const fetchDataCancelLike = async() =>{
+                    const res = await fetch('http://localhost:4000/cancelLike',{
+                              method: 'DELETE',
+                              headers :{
+                                "Content-Type":"application/json",
+                                "Accept":"application/json"
+                              },
+                              body:JSON.stringify({
+                                userId : data.userId,
+                                petId :dogPU.petId
+                              })
+                            });
+                }
+                fetchDataCancelLike()
                 props.setPopUp(false);
-                                                                //////////////////////////////////พื้นที่สำหรับเขียนโค้ดยกเลิกการกดถูกใจ
-                                                                
+                window.location.reload()
             }}>ยกเลิก</button>;
         }
         else{
@@ -154,11 +184,11 @@ const PopUpDogDetail = (props) => {
                                     <div className='pu-rowHeader2'><div className='pu-headerDetail'>สุนัขพันธุ์ : {dogPU.breed}</div></div>
                                 </div>
                                 <div className='pu-row2'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> ราคา: {dogPU.cost}</div></div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail2'><div className='pu-headerDetail2-text'> {dogPU.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ dogPU.cost}</div></div></div>
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-rowHeader2'>
-                                        <div className='pu-headerDetail3'>เพศ : {dogPU.gender}</div>
+                                        <div className='pu-headerDetail3'>{dogPU.gender}</div>
                                         <div className='pu-headerDetail3-2'>อายุ : {dogPU.age} ปี</div>
                                         </div>
                                 </div>
@@ -172,7 +202,7 @@ const PopUpDogDetail = (props) => {
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-dogDatailPad'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.petDetail}</div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.detail}</div></div>
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
@@ -191,7 +221,7 @@ const PopUpDogDetail = (props) => {
                                     </div>
                                 </div>
                                 <div className='pu-row2'>
-                                <div className='ddd'>{CheckID(data.userId)}</div>  {/* แก้ asa คือ user ที่ทำการ login*/}
+                                {data && <div className='ddd'>{CheckID(data.userId)}</div>}  {/* แก้ asa คือ user ที่ทำการ login*/}
                                 </div>
                             </div>
 
@@ -245,7 +275,7 @@ const PopUpDogDetail = (props) => {
 
 
                                 <div className='pu-rowBottom2'>
-                                    <button className="pu-button2" onClick={() => {fetchdata();props.setPopUp(false)}} >{lastBtt}</button>
+                                    <button className="pu-button2" onClick={() => {fetchdata();props.setPopUp(false);window.location.reload()}} >{lastBtt}</button>
                                     <button className="pu-button2" onClick={() => showUpload(0)}>ย้อนกลับ</button>
                                 </div>
                             </div>

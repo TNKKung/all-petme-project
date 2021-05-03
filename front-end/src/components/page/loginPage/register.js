@@ -178,7 +178,7 @@ const Register = () => {
   const submitRegisterForm = async(next) => {
     
     console.log('submit')
-    if(
+    if((
       emailErrorSign === '✔' &&
       mobileErrorSign === '✔' &&
       passErrorSign === '✔' &&
@@ -186,7 +186,7 @@ const Register = () => {
       IDErrorSign === '✔' &&
       roadErrorSign === '✔' &&
       addressErrorSign === '✔' &&
-      dateErrorSign === '✔'
+      dateErrorSign === '✔')==true
     ){
 
 
@@ -212,9 +212,11 @@ const Register = () => {
           })
         });
         
-        
-      let path = `/login`; 
-      history.push(path);
+      console.log('ddd')
+      // let path = `/`; 
+      // history.push(path);
+      window.open('http://localhost:3000/login');
+      window.close("_self");
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }
@@ -228,10 +230,11 @@ const Register = () => {
         <text class='register-header'>สมัครใช้งาน</text>
         <div class='col'>
           <div class='left-rol'>
-            <div class='reg-block'>
-              <text class='reg-input-head'>ชื่อผู้ใช้งาน</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>ชื่อผู้ใช้งาน</text>
+              <div className="reg-input-wrapperA ">
               <input 
+                className='dsderer'
                 onChange={(e) => {
                   let curvalue = e.target.value
                   let tempSTR = curvalue.replace(/[^0-9A-Za-z]/ig, '')
@@ -241,13 +244,15 @@ const Register = () => {
                   }}
                 maxLength={maxID}
               /></div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>
-              {IDErrorSign}</span>
+              <div className='reg-input-error-box'>
               
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>
+              {IDErrorSign}</span>
+              </div>
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>รหัสผ่าน</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>รหัสผ่าน</text>
+              <div className="reg-input-wrapperA ">
               <input type = "password"
                 onChange={(e) => {
                   let curPassvalue = e.target.value
@@ -258,13 +263,16 @@ const Register = () => {
                   }}
                 maxLength={maxPass}
               /></div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{passErrorSign}</span>
-              
+              <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{passErrorSign}</span>
+              </div>
+
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>ชื่อจริง-นามสกุล</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>ชื่อจริง-นามสกุล</text>
+              <div className="reg-input-wrapperA ">
               <input 
+              className='reg-input-style'
                 placeholder=""
                 onChange={(e) => {
                   validateName(e)
@@ -273,12 +281,13 @@ const Register = () => {
                 
                 maxLength={maxName}
               /></div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{nameErrorSign}</span>
-              
+              <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{nameErrorSign}</span>
+              </div>
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>อีเมล</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>อีเมล</text>
+              <div className="reg-input-wrapperA ">
               <input 
                 placeholder=""
                 onChange={(e) => {
@@ -288,12 +297,15 @@ const Register = () => {
                 maxLength={maxEmail}
               />
               </div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>
+              <div className='reg-input-error-box'>
+
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>
               {emailErrorSign}</span>
+              </div>
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>เบอร์โทรศัพท์</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>เบอร์โทรศัพท์</text>
+              <div className="reg-input-wrapperA ">
               <input
                 onChange={(e) => {
                   validateMobilePhone(e)
@@ -301,12 +313,14 @@ const Register = () => {
                 }}
                 maxLength={maxMobile}
               />
-              </div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{mobileErrorSign}</span>
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>วัน/เดือน/ปี เกิด</text>
-              <div className="reg-input-wrapper">
+              <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{mobileErrorSign}</span>
+            </div>
+            </div>
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>วัน/เดือน/ปี เกิด</text>
+              <div className="reg-input-wrapperA ">
               <ModernDatepicker
                 date={ selectedDate}
                 format={'DD-MM-YYYY'}
@@ -317,7 +331,9 @@ const Register = () => {
                 }}
                 placeholder={'Select a date'}
               /></div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{dateErrorSign}</span>
+              <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{dateErrorSign}</span>
+            </div>
               
             
             </div>
@@ -325,9 +341,9 @@ const Register = () => {
 
 
           <div class='right-rol'>
-            <div class='reg-block'>
-              <text class='reg-input-head'>ที่อยู่</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>ที่อยู่</text>
+              <div className="reg-input-wrapperA ">
               <input 
                 placeholder=""
                 onChange={(e) => {
@@ -336,12 +352,13 @@ const Register = () => {
                 }}
                 maxLength={maxAddress}
               /></div>
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{addressErrorSign}</span>
-              
+              <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{addressErrorSign}</span>
+              </div>
             </div>
-            <div class='reg-block'>
-              <text class='reg-input-head'>ถนน</text>
-              <div className="reg-input-wrapper">
+            <div class='reg-blockA'>
+              <text class='reg-input-headA'>ถนน</text>
+              <div className="reg-input-wrapperA ">
               <input 
                 placeholder=""
                 onChange={(e) => {
@@ -350,8 +367,9 @@ const Register = () => {
                 }}
                 maxLength={maxRoad}
               /></div> 
-              <span style={{ fontSize:20, fontWeight: 'bold', color: 'red'}}>{roadErrorSign}</span>
-              
+                            <div className='reg-input-error-box'>
+              <span style={{ fontSize:15, fontWeight: 'bold', color: 'red'}}>{roadErrorSign}</span>
+              </div>
             </div>
             
 

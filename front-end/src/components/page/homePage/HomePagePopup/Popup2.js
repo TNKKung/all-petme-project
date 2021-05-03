@@ -14,6 +14,7 @@ import {
 function Popup2({ popup1, popup2, popupFinish }) {
   const dataUser = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
+  const typeSell = setType;
 
   function checkLogin() {
     if (dataUser == null) {
@@ -28,7 +29,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     gender: null,
     age: null,
     petDetail: null,
-    cost: null,
+    cost: 0,
     nameAccountPromtpay: null,
     detailAccountPromtpay: null,
     question1: null,
@@ -38,6 +39,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     question5: null,
     picture: null,
   });
+
   const [dataimage, setDataimage] = useState({});
 
   const sendDataImage = async (e) => {
@@ -74,35 +76,6 @@ function Popup2({ popup1, popup2, popupFinish }) {
       });
   };
 
-  const fetchRegister = async () => {
-    const data = JSON.parse(localStorage.getItem("user"));
-    const res = await fetch("http://localhost:4000/api/add/registerPet", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify({
-        userId: dataUser.userId,
-        breed: form.dogBreed,
-        gender: form.gender,
-        age: form.age,
-        petDetail: form.petDetail,
-        cost: form.cost,
-        profile: dataUser.name,
-        nameAccountPromtpay: form.nameAccountPromtpay,
-        detailAccountPromtpay: form.detailAccountPromtpay,
-        question1: form.question1,
-        question2: form.question2,
-        question3: form.question3,
-        question4: form.question4,
-        question5: form.question5,
-      }),
-    });
-    const a = await res.json();
-    localStorage.setItem("user", JSON.stringify(a));
-  };
-
   function arrayBufferToBase64(buffer) {
     var binary = "";
     var bytes = [].slice.call(new Uint8Array(buffer));
@@ -111,6 +84,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
 
     return window.btoa(binary);
   }
+  const [pathPicture, setPathPicture] = useState("");
   return (
     <form className="box-large" onSubmit={sendDataImage}>
       <div className="popup-closeButton" onClick={popup2.close}>
@@ -119,20 +93,9 @@ function Popup2({ popup1, popup2, popupFinish }) {
       <div className="top-box">
         <div className="left-box">
           <div className="header">
-            <div className="text-head">ลงทะเบียนขายสุนัข</div>
-            {/* เลือกรูปแบบการการันตี */}
-            <select
-              required
-              className="selector padding"
-              value={form.petId}
-              onChange={(e) => {
-                setForm({ ...form, petId: e.target.value });
-              }}
-            >
-              <option value="">เลือกรูปแบบการการันตี</option>
-              <option value="แบบที่1">แบบที่1</option>
-              <option value="แบบที่2">แบบที่2</option>
-            </select>
+            <div className="text-head">
+              {typeSell == "ขาย" ? "ลงทะเบียนขายสุนัข" : "ลงทะเบียนบริจาคสุนัข"}
+            </div>
           </div>
 
           <div className="line" />
@@ -142,7 +105,10 @@ function Popup2({ popup1, popup2, popupFinish }) {
               <div className="text-origin">เพศ</div>
 
               <div className="text-origin">อายุ</div>
-              <div className="text-origin">ราคา</div>
+
+              <div className="text-origin">
+                {typeSell == "ขาย" ? "ราคา" : "บริจาคฟรี"}
+              </div>
             </div>
             <div className="input-box">
               <select
@@ -188,14 +154,18 @@ function Popup2({ popup1, popup2, popupFinish }) {
                   setForm({ ...form, age: e.target.value });
                 }}
               />
-              <Input
-                required
-                type="number"
-                value={form.cost}
-                onChange={(e) => {
-                  setForm({ ...form, cost: e.target.value });
-                }}
-              />
+              {typeSell == "ขาย" ? (
+                <Input
+                  required
+                  type="number"
+                  value={form.cost}
+                  onChange={(e) => {
+                    setForm({ ...form, cost: e.target.value });
+                  }}
+                />
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
           <div className="detail">รายละเอียด :</div>
@@ -253,32 +223,36 @@ function Popup2({ popup1, popup2, popupFinish }) {
             <div className='show-picture' />
             <div className='show-picture' />
           </div> */}
-          <div className="text-input-box">
-            <div className="text-box-2">
-              <div className="text-origin-2">ชื่อบัญชี</div>
-              <div className="text-origin-2">รายละเอียด</div>
+          {typeSell == "ขาย" ? (
+            <div className="text-input-box">
+              <div className="text-box-2">
+                <div className="text-origin-2">ชื่อบัญชี</div>
+                <div className="text-origin-2">รายละเอียด</div>
+              </div>
+              <div className="input-box-2">
+                <Input
+                  required
+                  className="margin"
+                  value={form.nameAccountPromtpay}
+                  onChange={(e) => {
+                    setForm({ ...form, nameAccountPromtpay: e.target.value });
+                  }}
+                />
+                <textarea
+                  required
+                  className="textArea-detailAccount"
+                  rows="3"
+                  // cols='50'
+                  value={form.detailAccountPromtpay}
+                  onChange={(e) => {
+                    setForm({ ...form, detailAccountPromtpay: e.target.value });
+                  }}
+                />
+              </div>
             </div>
-            <div className="input-box-2">
-              <Input
-                required
-                className="margin"
-                value={form.nameAccountPromtpay}
-                onChange={(e) => {
-                  setForm({ ...form, nameAccountPromtpay: e.target.value });
-                }}
-              />
-              <textarea
-                required
-                className="textArea-detailAccount"
-                rows="3"
-                // cols='50'
-                value={form.detailAccountPromtpay}
-                onChange={(e) => {
-                  setForm({ ...form, detailAccountPromtpay: e.target.value });
-                }}
-              />
-            </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className="bottom-box">

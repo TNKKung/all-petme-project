@@ -25,8 +25,6 @@ const Login = () => {
 
   const submitForm = async(e) => {
     e.preventDefault();
-
-    
     const res = await fetch('http://localhost:4000/api/login',{
           method: 'POST',
             headers: {
@@ -38,8 +36,6 @@ const Login = () => {
               password: data.password,
             }),
         });
-
-      
         const a = await res.json();
         
         localStorage.setItem("user",JSON.stringify(a))
@@ -48,10 +44,8 @@ const Login = () => {
         if(dataPath.userId != null){
           let path = "/profile"; 
           history.push(path);
+          window.location.reload()
         }
-      
-
-
     //Carry on as normal
   }
   React.useEffect(()=>{
@@ -62,7 +56,6 @@ const Login = () => {
       <img src = {Login_icon} className = 'logo_icon_style'/>
       <text className="login-header">เข้าสู่ระบบผู้ใช้งาน</text>
       <form onSubmit={submitForm} className="form">
-        
         <InputField
           ref={inputRefs.current[0]}
           name="username"
