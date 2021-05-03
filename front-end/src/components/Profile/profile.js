@@ -203,7 +203,8 @@ const Profile = () => {
             const a = await res.json();
             localStorage.setItem("user",JSON.stringify(a))
             let path = `/profile`;
-            history.push(path);}
+            history.push(path);
+        }
             else{
                 profileSwitch(1)
             }
@@ -1226,7 +1227,7 @@ const Profile = () => {
                         />
 
                         <div className='Edit2-pane'>
-                            <button class="Edit2-button" onClick={() => {submitEditForm('profile');}}>
+                            <button class="Edit2-button" onClick={() => { submitEditForm('profile');}}>
                                 บันทึก
                         </button>
                             <button class="Edit2-button" onClick={() => profileSwitch(1)}>
