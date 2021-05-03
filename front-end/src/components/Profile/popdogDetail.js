@@ -106,6 +106,19 @@ const PopUpDogDetail = (props) => {
     //         setSubImg(shallowSubImg)
     //     }
     // }
+    const fetchDataCancelLike = async(e) =>{
+        const res = await fetch('http://localhost:4000/checkPasswordAndUpdate',{
+                  method: 'DELETE',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    userId : data.userId,
+                    petId : e.target.value
+                  })
+                });
+    }
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
         useLikePet.push(value.userId)
@@ -172,7 +185,7 @@ const PopUpDogDetail = (props) => {
                                 </div>
                                 <div className='pu-row2'>
                                     <div className='pu-dogDatailPad'>
-                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.petDetail}</div></div>
+                                    <div className='pu-rowHeader2'><div className='pu-headerDetail4'>{dogPU.detail}</div></div>
                                     </div>
                                 </div>
                                 <div className='pu-row2'>

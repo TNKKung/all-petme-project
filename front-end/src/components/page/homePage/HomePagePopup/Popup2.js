@@ -53,21 +53,24 @@ function Popup2({ popup1, popup2, popupFinish }) {
         console.log(resBody);
       });
   };
+  const fetchUpload = () =>{
+    let formData = new FormData();
 
-   
-  function arrayBufferToBase64(buffer) {
-    var binary = "";
-    var bytes = [].slice.call(new Uint8Array(buffer));
+    formData.append("avatar", dataimage);
+    fetch("http://localhost:4000/uploadFile", {
+      method: "post",
+      body: formData,
+    })
+      .then((res) => res.text())
+      .then((resBody) => {
+        let a = resBody;
+        setPathPicture(a)
+      });
+      console.log(pathPicture)
 
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-
-    return window.btoa(binary);
   }
-  return (
-    <form className="box-large" 
-    onSubmit={async(e) =>
-    {
-      const data = JSON.parse(localStorage.getItem("user"))
+  const fetchRegister = async() => {
+    const data = JSON.parse(localStorage.getItem("user"))
       const res = await fetch("http://localhost:4000/api/add/registerPet",{
         method: 'POST',
         headers: {
@@ -88,17 +91,37 @@ function Popup2({ popup1, popup2, popupFinish }) {
           question2: form.question2,
           question3: form.question3,
           question4: form.question4,
-          question5: form.question5,
-          picture: [],       
+          question5: form.question5,   
+          picture :  pathPicture
         }),
+
       })
+
+      
       const a = await res.json();
       localStorage.setItem("user",JSON.stringify(a))
+  }
+
+
+  function arrayBufferToBase64(buffer) {
+    var binary = "";
+    var bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => (binary += String.fromCharCode(b)));
+
+    return window.btoa(binary);
+  }
+  const [pathPicture,setPathPicture]=useState("")
+  return (
+    <form className="box-large" 
+    onSubmit={async(e) =>
+    {
+
       e.preventDefault()
       popup1.close()
       popup2.close()
       popupFinish.open()
-      console.table(form)
+      
     }
   }>
       <div className="popup-closeButton" onClick={popup2.close}>

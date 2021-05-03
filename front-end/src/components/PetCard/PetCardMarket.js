@@ -8,7 +8,7 @@ function PetCard(props) {
     
     <div className='petcard-wrapper' onClick={()=>{props.setdogDetail(dogDetail);props.setpop(true)}}>
       {dogDetail.garuntee && <div className='petcard-garuntee'>การันตี</div>}
-      <img src={'./img/' + dogDetail.picture} className='petcard-img' />
+      <img src={dogDetail.picture} className='petcard-img' />
       <div className='petcard-detail'>
         <div className='petcard-detail-left' >
           <div className='head'>

@@ -32,6 +32,7 @@ expressApp.use((req, res, next) => {
   );
   return next();
 });
+var a; 
 
 // upload picture naja
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
@@ -50,13 +51,14 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
           console.log("200");
         }
       );
-      getpath = `http://localhost:4000/static/${newFileName}`;
+      let getpath = `http://localhost:4000/static/${newFileName}`;
       var newItem = {
         contentType: req.file.mimetype,
         size: req.file.size,
         name: req.file.originalname,
         path: getpath,
       };
+      res.send(getpath)
       ponddb.collection("yourcollectionname").insert(newItem, () => {
         /////collection มึงไปแก้เอง
         console.log("success");
@@ -64,6 +66,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
     });
   }
 });
+
 expressApp.get("/image", (req, res) => {
   ///ส่งรูปไปแก้เอง
   console.log("haha");
@@ -274,7 +277,7 @@ expressApp.post("/api/add/registerPet", function (req, res) {
       cancelUser: [],
       statusSell: true,
       typeSell: typeSell,
-      picture: " ",
+      picture: picture,
       seller: { picture: " ", name: "ต้อม" },
       dateCreate: "12/02/2554",
     };
