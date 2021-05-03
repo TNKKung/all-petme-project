@@ -48,6 +48,7 @@ const Login = () => {
         if(dataPath.userId != null){
           let path = "/profile"; 
           history.push(path);
+          window.location.reload()
         }
       
 

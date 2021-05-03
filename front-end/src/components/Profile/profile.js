@@ -903,7 +903,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => profileSwitch(6)}>
-                                                            <div className="img_list">{each.imgName}</div>
+                                                            <div className="img_list">{each.picture}</div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
@@ -979,7 +979,7 @@ const Profile = () => {
                                         <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
                                         <div class='col4-price-header'><div class='.center-div-black'>ยกเลิก</div></div>
                                     </div>
-                                    {dataPetForLike.filter((a)=>a.typeSell==='ขาย' && a.statusSell==false).map(each => {
+                                    {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.statusSell==false).map(each => {
                                                        /////////ต้องใส่ตัวแปรอื่น
                                         return (
                                             <div className='money-table-row'>

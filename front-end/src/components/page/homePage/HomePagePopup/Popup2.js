@@ -128,8 +128,7 @@ function Popup2({ popup1, popup2, popupFinish, setType}) {
       })
         .then((res) => res.text())
         .then((resBody) => {
-          setPathPicture(resBody);
-          
+          setPathPicture(resBody); 
         });
   
       console.log(pathPicture)

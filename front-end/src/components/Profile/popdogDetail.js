@@ -63,6 +63,7 @@ const PopUpDogDetail = (props) => {
                 answer3 : dogPU.answer3,
                 answer4 : dogPU.answer4,
                 answer5 : dogPU.answer5,
+                name : data.name
             }),
         });
     }
@@ -131,7 +132,7 @@ const PopUpDogDetail = (props) => {
         }
         else if(!useLikePet.indexOf(va)){
             return <button className="pu-buttonA2" onClick={() => {
-                // props.setPopUp(false);
+                
                 const fetchDataCancelLike = async() =>{
                     const res = await fetch('http://localhost:4000/cancelLike',{
                               method: 'DELETE',
@@ -146,6 +147,8 @@ const PopUpDogDetail = (props) => {
                             });
                 }
                 fetchDataCancelLike()
+                props.setPopUp(false);
+                window.location.reload()
             }}>ยกเลิก</button>;
         }
         else{

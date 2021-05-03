@@ -367,7 +367,7 @@ expressApp.post("/addAnswer", function (req, res) {
       answer4: answer4,
       answer5: answer5,
       name : name,
-      picture : " "
+      picture : picture
 
     };
     dbo
@@ -583,12 +583,12 @@ expressApp.delete("/cancelLike",function(req,res){
     userId,
     petId
   }=req.body
-  
+  console.log(req.body)
 
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
-    dbo.collection("petId").updateOne({petId:petId},{$pull:{"userLike":{"userId" : userId}}}).then(obj => {
-      console
+    dbo.collection("Pet").updateOne({petId:petId},{$pull:{"likeUser":{"userId" : userId}}}).then(obj => {
+      console.log('1111111')
     })
   })
 })
