@@ -173,6 +173,7 @@ const Profile = () => {
     }
 
     const submitEditForm = async (next) => {
+        console.log("aaa")
 
         if (
             mobileErrorSign === '✔' &&
