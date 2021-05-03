@@ -79,6 +79,7 @@ const Profile = () => {
     // },[])
     React.useEffect(() => {
         const dataB = JSON.parse(localStorage.getItem("user"))
+        
         data = dataB
         if (data==null){
             alert("กรุณาเข้าสู่ระบบ");
@@ -96,9 +97,13 @@ const Profile = () => {
         district=user.district
         province=user.province
         postalCode=user.postalCode;
-        fetDataForLike()
-        fetchDataMyMarket()}
-    }, [],[]);
+        }
+    });
+    
+    useEffect(()=>{
+        fetDataForLike();
+        fetchDataMyMarket();
+    })
 
     const validateName = (nameInput) => {
         var format = /[`!@#$%^&()+*_\-=\[\]{};':"\\|,.<>\/?~]/;
