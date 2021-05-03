@@ -1,28 +1,27 @@
-import './Popup2.scoped.css'
-import Input from '../../../Input/Input'
-import React, { useState } from 'react'
-import fetch from 'unfetch';
+import "./Popup2.scoped.css";
+import Input from "../../../Input/Input";
+import React, { useState, useEffect } from "react";
+import fetch from "unfetch";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   useRouteMatch,
-  useHistory
-} from 'react-router-dom'
+  useHistory,
+} from "react-router-dom";
 
 function Popup2({ popup1, popup2, popupFinish }) {
-
-  const dataUser = JSON.parse(localStorage.getItem("user"))
+  const dataUser = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
 
   function checkLogin() {
-    if(dataUser == null){
+    if (dataUser == null) {
       let path = `/login`;
       history.push(path);
     }
   }
-  
+
   const [form, setForm] = useState({
     petId: null,
     dogBreed: null,
@@ -40,12 +39,33 @@ function Popup2({ popup1, popup2, popupFinish }) {
     picture: null,
   });
   const [dataimage, setDataimage] = useState({});
-  const sendDataImage = (e) => {
+
+  const sendDataImage = async (e) => {
+    const data = JSON.parse(localStorage.getItem("user"));
     console.log("succes");
     let formData = new FormData();
     formData.append("avatar", dataimage);
-    fetch("http://localhost:4000/uploadFile", {
-      method: "post",
+    formData.append(
+      "jsonbody",
+      JSON.stringify({
+        userId: dataUser.userId,
+        breed: form.dogBreed,
+        gender: form.gender,
+        age: form.age,
+        petDetail: form.petDetail,
+        cost: form.cost,
+        profile: dataUser.name,
+        nameAccountPromtpay: form.nameAccountPromtpay,
+        detailAccountPromtpay: form.detailAccountPromtpay,
+        question1: form.question1,
+        question2: form.question2,
+        question3: form.question3,
+        question4: form.question4,
+        question5: form.question5,
+      })
+    );
+    const res = await fetch("http://localhost:4000/uploadFile", {
+      method: "POST",
       body: formData,
     })
       .then((res) => res.text())
@@ -54,7 +74,35 @@ function Popup2({ popup1, popup2, popupFinish }) {
       });
   };
 
-   
+  const fetchRegister = async () => {
+    const data = JSON.parse(localStorage.getItem("user"));
+    const res = await fetch("http://localhost:4000/api/add/registerPet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify({
+        userId: dataUser.userId,
+        breed: form.dogBreed,
+        gender: form.gender,
+        age: form.age,
+        petDetail: form.petDetail,
+        cost: form.cost,
+        profile: dataUser.name,
+        nameAccountPromtpay: form.nameAccountPromtpay,
+        detailAccountPromtpay: form.detailAccountPromtpay,
+        question1: form.question1,
+        question2: form.question2,
+        question3: form.question3,
+        question4: form.question4,
+        question5: form.question5,
+      }),
+    });
+    const a = await res.json();
+    localStorage.setItem("user", JSON.stringify(a));
+  };
+
   function arrayBufferToBase64(buffer) {
     var binary = "";
     var bytes = [].slice.call(new Uint8Array(buffer));
@@ -64,43 +112,7 @@ function Popup2({ popup1, popup2, popupFinish }) {
     return window.btoa(binary);
   }
   return (
-    <form className="box-large" 
-    onSubmit={async(e) =>
-    {
-      const data = JSON.parse(localStorage.getItem("user"))
-      const res = await fetch("http://localhost:4000/api/add/registerPet",{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'     
-        },
-        mode : "cors",
-        body: JSON.stringify({
-          userId : data.userId,
-          breed: form.dogBreed,
-          gender: form.gender,
-          age: form.age,
-          petDetail: form.petDetail,
-          cost: form.cost,
-          profile : data.name,
-          nameAccountPromtpay: form.nameAccountPromtpay,
-          detailAccountPromtpay: form.detailAccountPromtpay,
-          question1: form.question1,
-          question2: form.question2,
-          question3: form.question3,
-          question4: form.question4,
-          question5: form.question5,
-          picture: [],       
-        }),
-      })
-      const a = await res.json();
-      localStorage.setItem("user",JSON.stringify(a))
-      e.preventDefault()
-      popup1.close()
-      popup2.close()
-      popupFinish.open()
-      console.table(form)
-    }
-  }>
+    <form className="box-large" onSubmit={sendDataImage}>
       <div className="popup-closeButton" onClick={popup2.close}>
         X
       </div>

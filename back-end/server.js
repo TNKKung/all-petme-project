@@ -1,4 +1,5 @@
 const expressFunction = require("express");
+const io = require("socket.io")(4000);
 const expressApp = expressFunction();
 expressApp.use(expressFunction.json());
 var multer = require("multer");
@@ -13,10 +14,13 @@ expressApp.use("/static", expressFunction.static("uploads")); //ทำให้�
 var MongoClient = require("mongodb").MongoClient;
 const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-var url =
-  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+var url = pondmongo;
+expressApp.use(bodyParser.json());
+expressApp.use(bodyParser.urlencoded());
+// in latest body-parser use like below.
+expressApp.use(expressFunction.urlencoded({ extended: true }));
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const port = process.env.PORT || 4000;
 expressApp.use(cors());
@@ -34,11 +38,30 @@ expressApp.use((req, res, next) => {
 });
 
 // upload picture naja
+
+io.on("connection", (socket) => {
+  const id = socket.handshake.query.id;
+  socket.join(id);
+
+  socket.on("send-message", ({ recipients, text }) => {
+    recipients.forEach((recipient) => {
+      const newRecipients = recipients.filter((r) => r !== recipient);
+      newRecipients.push(id);
+      socket.broadcast.to(recipient).emit("receive-message", {
+        recipients: newRecipients,
+        sender: id,
+        text,
+      });
+    });
+  });
+});
+
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
+  console.log(req.body[0]);
   if (req.file == null) {
-    console.log("empty");
+    console.log("null");
   } else {
     MongoClient.connect(url, (err, db) => {
       const ponddb = db.db("image");
@@ -50,33 +73,106 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
           console.log("200");
         }
       );
-      getpath = `http://localhost:4000/static/${newFileName}`;
+      var getpath = `http://localhost:4000/static/${newFileName}`;
       var newItem = {
         contentType: req.file.mimetype,
         size: req.file.size,
         name: req.file.originalname,
         path: getpath,
       };
-      ponddb.collection("yourcollectionname").insert(newItem, () => {
-        /////collection มึงไปแก้เอง
-        console.log("success");
-      });
     });
-  }
-});
-expressApp.get("/image", (req, res) => {
-  ///ส่งรูปไปแก้เอง
-  console.log("haha");
-  MongoClient.connect(url, (err, db) => {
-    const ponddb = db.db("image");
-    ponddb
-      .collection("yourcollectionname")
-      .find({ size: 35000 })
-      .toArray((err, result) => {
-        console.log(result[0].path);
-        res.send(result[0].path);
+    const {
+      userId,
+      breed,
+      gender,
+      age,
+      petDetail,
+      cost,
+      nameAccountPromtpay,
+      detailAccountPromtpay,
+      question1,
+      question2,
+      question3,
+      question4,
+      question5,
+      profile,
+      typeSell,
+    } = JSON.parse(req.body.jsonbody);
+
+    console.log(req.body);
+    if (req.body.lenght <= 2) {
+      res.status(400).send("Error");
+    } else {
+      const pet = {
+        petId: uuidv4(),
+        userId: userId,
+        breed: breed,
+        gender: gender,
+        age: age,
+        detail: petDetail,
+        cost: cost,
+        nameAccountPromtpay: nameAccountPromtpay,
+        detailAccountPromtpay: detailAccountPromtpay,
+        question1: question1,
+        question2: question2,
+        question3: question3,
+        question4: question4,
+        question5: question5,
+        profile: profile,
+        likeUser: [],
+        acceptUser: [],
+        cancelUser: [],
+        statusSell: true,
+        typeSell: typeSell,
+        picture: `http://localhost:4000/static/${newFileName}`,
+        seller: { picture: " ", name: "ต้อม" },
+        dateCreate: "12/02/2554",
+      };
+
+      MongoClient.connect(url, function (err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Pet").insertOne(pet, function (err, res) {
+          console.log("Add one pet");
+        });
+        const listPetIdForSell = {
+          petId: pet.petId,
+        };
+        dbo
+          .collection("User")
+          .updateOne(
+            { userId: userId },
+            { $push: { listPetIdForSell } },
+            function (err, res) {
+              console.log("add pet");
+              db.close();
+            }
+          );
+        dbo
+          .collection("User")
+          .find({ userId: userId })
+          .toArray(function (err, result) {
+            const data = {
+              address: result[0].address,
+              birth: result[0].birth,
+              district: result[0].district,
+              email: result[0].email,
+              img: [],
+              listPetIdForSell: result[0].listPetIdForSell,
+              listPetIdForBuy: result[0].listPetIdForBuy,
+              mobileNumber: result[0].mobileNumber,
+              name: result[0].name,
+              postalCode: result[0].postalCode,
+              province: result[0].province,
+              road: result[0].road,
+              subDistrict: result[0].subDistrict,
+              userId: result[0].userId,
+              username: result[0].username,
+            };
+            res.send(data);
+          });
       });
-  });
+    }
+  }
 });
 
 //---------------------------------------------------------------
@@ -325,18 +421,18 @@ expressApp.post("/api/add/registerPet", function (req, res) {
 });
 
 expressApp.post("/dataPetForLike", function (req, res) {
-  const {
-    userId,
-  } = req.body;
-    MongoClient.connect(url, function (err, db) {
-      var dbo = db.db("PetMeApp");
-      dbo.collection("Pet").find({ likeUser:{$elemMatch:{userId: userId}}}).toArray(function(err,result){
-        console.log(result)
-        res.send(result)
+  const { userId } = req.body;
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo
+      .collection("Pet")
+      .find({ likeUser: { $elemMatch: { userId: userId } } })
+      .toArray(function (err, result) {
+        console.log(result);
+        res.send(result);
       });
-    });
   });
-
+});
 
 expressApp.post("/addAnswer", function (req, res) {
   const {
@@ -348,7 +444,7 @@ expressApp.post("/addAnswer", function (req, res) {
     answer4,
     answer5,
     name,
-    picture
+    picture,
   } = req.body;
   console.log(req.body);
   MongoClient.connect(url, function (err, db) {
@@ -360,9 +456,8 @@ expressApp.post("/addAnswer", function (req, res) {
       answer3: answer3,
       answer4: answer4,
       answer5: answer5,
-      name : name,
-      picture : " "
-
+      name: name,
+      picture: " ",
     };
     dbo
       .collection("Pet")
