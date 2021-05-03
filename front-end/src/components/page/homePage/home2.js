@@ -78,7 +78,7 @@ const Home2 = () => {
                   </p>
                   <div class='login-button-pad'>
                     <button class='welcome-login-button'>
-                      <Link to='/login'>
+                      <Link to={dataUser == null ?'/login':'profile'}>
                         <div className='login-text'>
                           <div className='ok'>เข้าสู่ระบบ</div>
                         </div>

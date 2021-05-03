@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import "./PetCard.scoped.css";
+import {
+  BrowserRouter as Router,
+  useHistory,
+} from "react-router-dom";
 
 function PetCard(props) {
   const dogDetail = props.dog;
+  const history = useHistory();
+  const dataB = JSON.parse(localStorage.getItem("user"))
   return (
     <div
       className="petcard-wrapper"
       onClick={() => {
+        if (dataB==null){
+          alert("กรุณาเข้าสู่ระบบ");
+          let path = `/`;
+          history.push(path);}
         props.setdogDetail(dogDetail);
         props.setpop(true);
+
       }}
     >
       {dogDetail.garuntee && <div className="petcard-garuntee">การันตี</div>}
