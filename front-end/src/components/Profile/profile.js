@@ -596,7 +596,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => { profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -717,7 +717,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>สนใจ</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(3)}} className="row">
+                                <li onClick={() => {fetchDataMyMarket(); profileSwitch(3)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">ร้านค้าของฉัน</div>
                                 </li>
@@ -852,7 +852,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -955,7 +955,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -1062,7 +1062,7 @@ const Profile = () => {
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title" style={{ color: "#ED8E82" }}>บัญชีของฉัน</div>
                                 </li>
-                                <li onClick={() => {profileSwitch(2)}} className="row">
+                                <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                     <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                     <div id="title">สนใจ</div>
                                 </li>
@@ -1353,7 +1353,7 @@ const Profile = () => {
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">บัญชีของฉัน</div>
                                         </li>
-                                        <li onClick={() => {profileSwitch(2)}} className="row">
+                                        <li onClick={() => {fetDataForLike();profileSwitch(2)}} className="row">
                                             <div id="icon"><ArrowForwardIosIcon style={{ fontSize: 18 }} /></div>
                                             <div id="title">สนใจ</div>
                                         </li>

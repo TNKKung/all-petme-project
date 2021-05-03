@@ -15,9 +15,7 @@ const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-const kamongo = 
-  "mongodb+srv://mrzombit:erika1000@cluster0.3d2bo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-var url = kamongo;
+var url = tommongo;
 
 // var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const port = process.env.PORT || 4000;
