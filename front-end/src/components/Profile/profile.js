@@ -453,6 +453,7 @@ const Profile = () => {
 
 
     const [moneyTab, setMoneyTab] = useState([true, false, false])
+    const [petForPromtpay ,setPetForPromtpay] = useState([])
 
     const setToggle = () => {
         classStyle == 'menu-header' ? setClassStyle('menu-header active') : setClassStyle('menu-header')
@@ -595,14 +596,26 @@ const Profile = () => {
                 petId : dataPayment,
                 userId : user.userId,
             }),
-
-
         });
-
         const dataPet = await res.json()
-        localStorage.setItem('dataPetForLike',JSON.stringify(dataPet))
-        
-        
+        localStorage.setItem('dataPetForLike',JSON.stringify(dataPet))  
+    }
+    const [pathQr,setPathQr] = useState()
+    const fetchPromtpay = async(e) => {
+
+        const res = await fetch('http://localhost:4000/promtpay',{
+          method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json'    
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                amount : e.cost
+            }),
+        });
+        const a = await res.json(); 
+        localStorage.setItem('pathQr',JSON.stringify(a.path))
     }
     
 
@@ -1046,13 +1059,13 @@ const Profile = () => {
                                     </div>
                                     {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0).map(each => {
                                                        /////////ต้องใส่ตัวแปรอื่น
-                                        return (
-                                            <div className='money-table-row'>
+                                        return ( 
+                                            <div className='money-table-row'> 
                                                 <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
                                                 <div className='col3-name'><div className='.center-div-black'>{each.breed}</div></div>
                                                 <div className='col4-price'><div className='.center-div-pink'>{each.cost}</div></div>
                                                 <div className='col6-total'><div className='.center-div-pink'>
-                                                <button class="money-button" onClick={() => {showPopUp('Sell');setChoosePayment(each);}}>ซื้อสุนัข</button></div></div>
+                                                <button class="money-button" onClick={() => {fetchPromtpay(each);localStorage.setItem('qr',pathQr);showPopUp('Sell');setChoosePayment(each)}}>ซื้อสุนัข</button></div></div>
                                                 <div class='col4-price'><div class='col1-tools' onClick={() => {localStorage.setItem('petIdForCancelPay',each.petId);window.location.reload();fetchDataCancelPayment()}}>X</div></div>
                                             </div>
                                         )

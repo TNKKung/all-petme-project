@@ -41,7 +41,7 @@ expressApp.use((req, res, next) => {
 });
 
 // upload picture naja
-expressApp.use("/static", expressFunction.static("test-promptpay"));
+expressApp.use("/static", expressFunction.static("qrCodepromt"));
 
 io.on("connection", (socket) => {
   const id = socket.handshake.query.id;
@@ -96,7 +96,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
       typeSell,
     } = JSON.parse(req.body.jsonbody);
 
-    
+    var CatchCost = parseInt(cost)
     if (req.body.lenght <= 2) {
       res.status(400).send("Error");
     } else {
@@ -107,7 +107,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
         gender: gender,
         age: age,
         detail: petDetail,
-        cost: cost,
+        cost: CatchCost,
         nameAccountPromtpay: nameAccountPromtpay,
         detailAccountPromtpay: detailAccountPromtpay,
         question1: question1,
@@ -118,11 +118,9 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
         profile: profile,
         likeUser: [],
         acceptUser: [],
-        cancelUser: [],
         statusSell: true,
         typeSell: typeSell,
         picture: `http://localhost:4000/static/${newFileName}`,
-        seller: { picture: " ", name: "ต้อม" },
         dateCreate: "12/02/2554",
       };
 
@@ -153,7 +151,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
               birth: result[0].birth,
               district: result[0].district,
               email: result[0].email,
-              img: [],
+              picture : [],
               listPetIdForSell: result[0].listPetIdForSell,
               listPetIdForBuy: result[0].listPetIdForBuy,
               mobileNumber: result[0].mobileNumber,
@@ -701,6 +699,31 @@ expressApp.delete("/cancelLike", function (req, res) {
       });
   });
 });
+
+const generatePayload = require('promptpay-qr') 
+const qrcode = require('qrcode') 
+
+expressApp.post("/promtpay",function(req,res){
+
+
+const mobileNumber = '0640630406' 
+
+const amount = req.body.amount
+
+const payload = generatePayload(mobileNumber, { amount }) 
+
+
+
+const options = { type: 'svg', color: { dark: '#000', light: '#fff' } }
+qrcode.toString(payload, options, (err, svg) => {
+    if (err) return console.log(err)
+    fs.writeFileSync('./qrCodePromt/qr.svg', svg)
+
+    const qr = {path :"http://localhost:4000/static/qr.svg"}
+    console.log(qr)
+    res.send(qr)
+})
+})
 
 expressApp.listen(port, function () {
   console.log("Listen 4000");
