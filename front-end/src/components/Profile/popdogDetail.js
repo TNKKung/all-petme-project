@@ -108,6 +108,19 @@ const PopUpDogDetail = (props) => {
     //         setSubImg(shallowSubImg)
     //     }
     // }
+    const fetchDataCancelRegis = async(e) => {
+        console.log(e)
+        const res = await fetch('http://localhost:4000/cancelRegis',{
+                  method: 'DELETE',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    petId : e
+            })
+        });
+    }
     const fetchDataCancelLike = async(e) =>{
         const res = await fetch('http://localhost:4000/cancelLike',{
                   method: 'DELETE',
@@ -118,8 +131,8 @@ const PopUpDogDetail = (props) => {
                   body:JSON.stringify({
                     userId : data.userId,
                     petId : e.target.value
-                  })
-                });
+            })
+        });
     }
     const fetchDataReport = async() =>{
         const res = await fetch('http://localhost:4000/report',{
@@ -147,7 +160,7 @@ const PopUpDogDetail = (props) => {
     function CheckID(va){
 
         if(dogPU.userId == va){
-            return <button className="pu-buttonA2">ยกเลิกการลงทะเบียน</button>
+            return <button onClick= {()=>{fetchDataCancelRegis(dogPU.petId);window.location.reload()}} className="pu-buttonA2" >ยกเลิกการลงทะเบียน</button>
         }
         else if(useLikePet.includes(va)){
             return <button className="pu-buttonA2" onClick={() => {

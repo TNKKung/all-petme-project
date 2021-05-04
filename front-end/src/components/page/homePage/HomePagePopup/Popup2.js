@@ -42,6 +42,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
     subPicture2: null,
     subPicture3: null,
     subPicture4: null,
+    dataCreate: null
   });
 
   const [dataimage, setDataimage] = useState({});
@@ -69,7 +70,9 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
         question3: form.question3,
         question4: form.question4,
         question5: form.question5,
-        typeSell: typeSell
+        typeSell: typeSell,
+        dataCreate: form.dataCreate
+
       })
     );
     const res = await fetch("http://localhost:4000/uploadFile", {

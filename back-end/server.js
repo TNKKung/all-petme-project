@@ -12,14 +12,14 @@ const { v4: uuidv4 } = require("uuid");
 MongoClient = require("mongodb").MongoClient;
 expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 var MongoClient = require("mongodb").MongoClient;
-const deployUrl = "mongodb://petme:petme%402021@127.0.0.1:27017/petme";
+const deployUrl = "mongodb://petme:petme%402021@127.0.0.1:27017/PetMeApp";
 const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
   const Bmongo =
   'mongodb+srv://petMeApp:12345@cluster0.smgpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-var url = deployUrl;
+var url = tommongo;
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
@@ -759,6 +759,18 @@ expressApp.delete("/cancelLike", function (req, res) {
   });
 });
 
+expressApp.delete("/cancelRegis", function (req, res) {
+  const {petId } = req.body;
+  console.log(req.body);
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo
+      .collection("Pet")
+      .deleteOne({petId:petId}).then((obj)=>{console.log('aaa')})
+  });
+});
+
 const generatePayload = require('promptpay-qr') 
 const qrcode = require('qrcode') 
 
@@ -783,6 +795,7 @@ qrcode.toString(payload, options, (err, svg) => {
     res.send(qr)
 })
 })
+
 
 expressApp.listen(port, function () {
   console.log("Listen 4000");
