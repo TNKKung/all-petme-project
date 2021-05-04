@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const ContactsContext = React.createContext();
@@ -9,6 +9,13 @@ export function useContacts() {
 
 export function ContactsProvider({ children }) {
   const [contacts, setContacts] = useLocalStorage("contacts", []);
+
+  useEffect(() => {
+    const dataUser = JSON.parse(localStorage.getItem("likeUser"));
+    if (dataUser) {
+      setContacts([{ id: dataUser.userId, name: dataUser.name }]);
+    }
+  }, []);
 
   function createContact(id, name) {
     setContacts((prevContacts) => {
