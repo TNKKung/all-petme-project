@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {
   BrowserRouter as Router,
-  useHistory ,                              
+  useHistory ,   
+  useLocation ,                           
 } from "react-router-dom";
 import './login.css';
 
@@ -174,6 +175,8 @@ const Register = () => {
       setMobileErrorSign('กรุณากรอกเบอร์')
     }
   }
+  const location = useLocation()
+  const [error, setError] = useState('')
 
   const submitRegisterForm = async(next) => {
     
@@ -189,7 +192,9 @@ const Register = () => {
       dateErrorSign === '✔')==true
     ){
 
-
+      // let path = `/`; 
+      // history.push(path);
+      
       const res = await fetch('http://localhost:4000/api/add/registerUser',{
           method: 'POST',
           headers :{
@@ -211,19 +216,21 @@ const Register = () => {
             postalCode:postalCode
           })
         });
-        
-      console.log('ddd')
-      // let path = `/`; 
+      // let path = `/login`; 
       // history.push(path);
-      window.open('http://localhost:3000/login');
-      window.close("_self");
+        window.open('http://localhost:3000/login');
+        window.close("_self");
+      
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");
     }
   }
   useEffect(()=>{
+    const queryParams = new URLSearchParams(location.search)
+
     console.table(district,subDistrict,province,postalCode);
   },[district,subDistrict,province,postalCode])
+
   return (
     <div className='Register'>
       <form class="reg-form" >
