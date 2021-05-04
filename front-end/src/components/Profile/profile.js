@@ -43,6 +43,7 @@ import CardItem_Wait from './CardItem_Wait';
 import CardStore from './CardStoreSell';
 import CardStoreSold from './CardStoreSold';
 import CardStoreSell from './CardStoreSell';
+import { deprecatedPropType } from '@material-ui/core';
 
 
 library.add(fas, fab, far);
@@ -935,9 +936,9 @@ const Profile = () => {
                                 <div className='cards_all'>
                                     <div className='cards__container'>
                                         <div className="row_img">
-                                            {dataPet.filter(e=>e.statusSell==true).map((each, key) => { 
+                                            {dataPet.filter(e=>e.statusSell==true).map((each) => { 
                                                 return (
-                                                    <div className='cards__wrapper' key={key}>
+                                                    <div className='cards__wrapper'>
                                                         <div className="img_wrapper" onClick={() => { localStorage.setItem('petIdForStorePage',JSON.stringify(each.petId)); profileSwitch(6); setDogForSellToShow(each) }}>
                                                             <div className="petcard-img"> <img style={{justifyContent:'center',height:'300px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture}/> </div>
                                                             <div className="img_text_bottom">
@@ -1105,7 +1106,7 @@ const Profile = () => {
                                 <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" style={{width:'300px',height:'30px'}}
                                  onChange={(e) => {
                                     setProfile_Dog(URL.createObjectURL(e.target.files[0]));}}></input>
-                                    
+
                             </div>
                             {/* <input id="photo-upload" type="file" onChange={this.handleInputChange}/>  */}
                         </label>
@@ -1428,7 +1429,7 @@ const Profile = () => {
                                         <div className="store_page2">
                                             <div className="Dog_box">
                                                 <div className="Dog_card">
-                                                    <div className="img_dog">{dogForSellToShow.picture}</div>
+                                                    <div className="img_dog"><img style={{width:'350px',height:'350px',borderRadius: '15px'}} src={dogForSellToShow.picture}></img></div>
                                                     {/* <div className="img_dog_details">
                                                         <div className="img_dog_small">{each.imgdetail1}</div>
                                                         <div className="img_dog_small">{each.imgdetail2}</div>
