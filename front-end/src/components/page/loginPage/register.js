@@ -177,14 +177,14 @@ const Register = () => {
   }
   const location = useLocation()
   const [error, setError] = useState('')
-
+  const [check,setCheck] = useState()
   const summitTobackEnd = async(next)=>{
     
     const res = await fetch('http://localhost:4000/api/add/registerUser',{
       method: 'POST',
       headers :{
         "Content-Type":"application/json",
-        "Accept":"application/json"
+        // "Accept":"application/json"
       },
       body:JSON.stringify({
         username : Username,
@@ -201,6 +201,11 @@ const Register = () => {
         postalCode:postalCode
       })
     });
+    const a = await res.json();
+    setCheck(a)
+
+    
+
   }
 
   const submitRegisterForm = ()=> {
@@ -217,8 +222,15 @@ const Register = () => {
       dateErrorSign === '✔')==true
     ){
       summitTobackEnd();
-      let path = `/login`; 
-      history.push(path);
+
+      if(check == false){
+        alert('register faild')
+      }
+      else{
+        alert('register complete')
+        let path = `/profile`; 
+        history.push(path);
+      }
       
       
     }else{

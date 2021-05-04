@@ -390,16 +390,30 @@ expressApp.post("/api/add/registerUser", function (req, res) {
       picture: "",
     };
 
-    res.send(user);
+
     console.log(username);
     MongoClient.connect(url, function (err, db) {
       if (err) throw err;
       var dbo = db.db("PetMeApp");
-      dbo.collection("User").insertOne(user, function (err, res) {
-        if (err) throw err;
-        console.log("Add one people");
-        db.close();
-      });
+      var a = false;
+      dbo.collection('User').find({}).toArray(function(err,result){
+
+        for(var i =0;i<result.length;i++){
+          if(result[i].username === username){
+            a = true;
+            console.log('faild')
+            res.send(false)
+          }
+        }
+        if(a == false){
+          dbo.collection("User").insertOne(user, function (err) {
+            console.log("Add one people");
+            res.send(true)
+          });
+        }
+          
+      })
+
     });
   }
 });
@@ -658,7 +672,7 @@ expressApp.put("/updateProfileUser", function (req, res) {
           birth: result[0].birth,
           district: result[0].district,
           email: result[0].email,
-          img: [],
+          picture: result[0].picture,
           listPetIdForSell: result[0].listPetIdForsell,
           listPetIdForBuy: result[0].listPetIdForBuy,
           mobileNumber: result[0].mobileNumber,

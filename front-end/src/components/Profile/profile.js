@@ -112,12 +112,17 @@ const Profile = () => {
         district=user.district
         province=user.province
         postalCode=user.postalCode;
+        setProfile_Dog(user.picture)
         }
+
     },[],[]);
     
     useEffect(()=>{
         fetDataForLike();
         fetchDataMyMarket();
+        if(Profile_Dog == null){
+            setProfile_Dog(user.picture)
+        }
     });
 
     const validateName = (nameInput) => {
@@ -653,10 +658,11 @@ const Profile = () => {
           .then((res) => res.text())
           .then((resBody) => {
             console.log(resBody);
-          });
+            localStorage.setItem('user',resBody)
+          })
 
-          const a = await res.json();
-          localStorage.setItem('user',a)
+
+          
       };
 
      const dataUser = JSON.parse(localStorage.getItem('user'))
@@ -1140,14 +1146,14 @@ const Profile = () => {
                     <div className="tab_one">
                         <label>
                             <div className='img_border'>
-                                <img className='img-wrap' src={dataUser.picture} />
+                                <img className='img-wrap' src={Profile_Dog} />
                                 <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" style={{width:'300px',height:'30px'}}
                                  onChange={(e) => {
                                     setProfile_Dog(URL.createObjectURL(e.target.files[0]));
                                     const fileTest = e.target.files[0]
                                     setImageProfile(fileTest);
                                 }}></input>
-                                <button onClick={()=>{fetchDataPictureProfile();window.location.reload()}}>ยืนยันการอัพโหลดโปรไฟล์</button>
+                                <button onClick={()=>{fetchDataPictureProfile(); profileSwitch(1)}}>ยืนยันการอัพโหลดโปรไฟล์</button>
 
                             </div>
                             {/* <input id="photo-upload" type="file" onChange={this.handleInputChange}/>  */}

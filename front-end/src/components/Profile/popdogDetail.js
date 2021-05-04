@@ -152,13 +152,12 @@ const PopUpDogDetail = (props) => {
                 })
             });
     }
-
+ 
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
         useLikePet.push(value.userId)
     }
     function CheckID(va){
-
         if(dogPU.userId == va){
             return <button onClick= {()=>{fetchDataCancelRegis(dogPU.petId);window.location.reload()}} className="pu-buttonA2" >ยกเลิกการลงทะเบียน</button>
         }
@@ -187,7 +186,6 @@ const PopUpDogDetail = (props) => {
             return <button className="pu-buttonA2" onClick={() => showUpload(1)}>สนใจซื้อสุนัข</button>;
         }
     }
-    
     return (
         <div className='manager-modal-wrapper'>
         <div className='manager-modal-backdrop'>
@@ -255,8 +253,6 @@ const PopUpDogDetail = (props) => {
                                 {data && <div className='ddd'>{CheckID(data.userId)}</div>}  {/* แก้ asa คือ user ที่ทำการ login*/}
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
