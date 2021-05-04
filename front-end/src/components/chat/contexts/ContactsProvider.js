@@ -9,7 +9,7 @@ export function useContacts() {
 
 export function ContactsProvider({ children }) {
   const [contacts, setContacts] = useLocalStorage("contacts", []);
-  //[{id:123},{id:}]
+
   function createContact(id, name) {
     setContacts((prevContacts) => {
       return [...prevContacts, { id, name }];

@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
-import './Popup.scoped.css'
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import "./Popup.scoped.css";
 
 function Popup({ children, popup, className }) {
-  if (!popup) throw new Error('!!! Please pass `popup` to the <Popup/> !!!')
+  if (!popup) throw new Error("!!! Please pass `popup` to the <Popup/> !!!");
   return (
     <>
       {popup.isShow &&
         ReactDOM.createPortal(
-          <div className='popup-wrapper'>
+          <div className="popup-wrapper">
             <div
               className={`popup-box ${className}`}
               onClick={(e) => {
-                e.stopPropagation()
+                e.stopPropagation();
               }}
             >
               {children}
@@ -21,16 +21,16 @@ function Popup({ children, popup, className }) {
           document.body
         )}
     </>
-  )
+  );
 }
 
 Popup.usePopup = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   return {
     isShow: show,
     open: () => setShow(true),
     close: () => setShow(false),
-  }
-}
+  };
+};
 
-export default Popup
+export default Popup;

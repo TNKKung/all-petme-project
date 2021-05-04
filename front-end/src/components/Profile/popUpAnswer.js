@@ -6,6 +6,7 @@ import './popUpAnswer.css';
 
 import QR_src from './img/qr.png'
 import IMG_src from './img/img.png'
+import { NoSimOutlined } from '@material-ui/icons';
 
 const PopUpAnswer = (props) => {
     // function that takes boolean as param to conditionally display popup
@@ -85,6 +86,40 @@ const PopUpAnswer = (props) => {
     const petId = JSON.parse(localStorage.getItem("petIdForStorePage"))
     const userId = JSON.parse(localStorage.getItem("likeUser"))
 
+
+    const fetchDataCancelAccept = async() => {
+        
+        const res = await fetch('http://localhost:4000/cancelAccept',{
+          method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : petId,
+                userId : userId.userId,
+            }),
+        });
+        
+    }
+    const fetchDataCancelLike = async() => {
+        
+        const res = await fetch('http://localhost:4000/cancelLikeUser',{
+          method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : petId,
+                userId : userId.userId,
+            }),
+        });
+
+        console.log('111')
+        
+    }
+
     const fetchData = async() => {
         console.log(petId)
         const res = await fetch('http://localhost:4000/choosePeopleForChat',{
@@ -152,13 +187,18 @@ const PopUpAnswer = (props) => {
 
             { popUpAnsType && 
                 <div className='pu-ans-row-center'>
-                    <button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
-                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)}>ดูรายชื่อผู้ซื้อคนอื่น</button>
+                    {dog.acceptUser.length==0?<div><button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
+                    <button className = 'pu-ans-button' onClick={() => {setPopUp(false);window.location.reload();fetchDataCancelLike()}}>ลบจากคนสนใจ</button> {/*ยกเลิกในรายการสนใจ*/}
+                    </div>:dog.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0?
+                    <div>
+                        <button className = 'pu-ans-button' onClick={() => {setPopUp(false);fetchDataCancelAccept();window.location.reload()}}>ยกเลิกการยอมรับ</button>  {/*ยกเลิกในรายการยอมรับแล้ว*/}
+                    </div>:<div><button className = 'pu-ans-button' onClick={() => {setPopUp(false);window.location.reload();fetchDataCancelLike()}}>ลบจากคนสนใจ</button></div>}{/*ยกเลิกในรายการสนใจ*/}
+                    
                 </div>
             }
             { !popUpAnsType && 
                 <div className='pu-ans-row-center'>
-                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)} >ดูรายชื่อผู้ซื้อคนอื่น</button>
+                    <button className = 'pu-ans-button' onClick={() =>{ setPopUp(false);fetchDataCancelAccept();window.location.reload()}} >ยกเลิกการยอมรับ</button>{/*ยกเลิกในรายการยอมรับแล้ว*/}
                 </div>
             }
 

@@ -1,149 +1,31 @@
 import React,{useState} from 'react'
 import './DonatePage.scoped.css'
 import part1 from './img/part1.png'
-import PetCard from '../../PetCard/PetCard.js'
+import PetCard from '../../PetCard/PetCardMarket.js'
 import PopDetail from '../../Profile/popdogDetail'
 
 function DonatePage() {
   const [dogInfo,SetdogInfo] = useState(null);
   const [Popup,setPopups] = useState(false);
+  const [dataPet,setDataPet] = useState([])
+  React.useEffect(() => {
+    const fetchdata = async() =>{
+      const res = await fetch("http://localhost:4000/api/get/dataPet", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: "cors",
+    })
+    const data = await res.json();
+    setDataPet(data);
+    }
+    fetchdata()
+  },[]);
+  
   const dog = [
     {
-      picture: 'part3.png',
-      dogBreed: 'อื่นๆ',
-      cost: '3500 บาท',
-      profile: 'คุณต้อม',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'มันเยอะเหลือเกินน',
-      gender: 'ผู้',
-      age: '12 month'
-    },
-    {
-      picture: 'part3.png',
-      dogBreed: 'บีเกิ้ล',
-      cost: '3500 บาท',
-      profile: 'คุณต้อม',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'ตายๆ ตายกันพอดี',
-      gender: 'เมีย',
-      age: '12 month'
-    },
-    {
-      picture: 'part3.png',
-      dogBreed: 'บีเกิ้ล',
-      cost: '3500 บาท',
-      profile: 'คุณต้อม',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'รับสุนัขตัวน้อยไหมคะ',
-      gender: 'ผู้',
-      age: '12'
-    },
-    {
-      picture: 'part3.png',
-      dogBreed: 'บีเกิ้ล',
-      cost: '3500 บาท',
-      profile: 'คุณต้อม',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'front-end ไม่คุย= แตก',
-      gender: 'ชาย',
-      age: '12'
-    },
-    {
-      picture: 'part3.png',
-      dogBreed: 'บีเกิ้ล',
-      cost: '3500 บาท',
-      profile: 'คุณต้อม',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'รวมfront เหนื่อยสัส',
-      gender: 'ชาย',
-      age: '12'
-    },
-    {
-      picture: '',           
-      dogBreed: 'ซามอย',
-      cost: '35000',
-      status: 'ตอบรับแล้ว',
-      like: 5,
-      question1: 'ทำไม',
-      answer1: '',
-      question2: 'ทำไม',
-      answer2: '',
-      question3: 'ทำไม',
-      answer3: '',
-      question4: 'ทำไม',
-      answer4: '',
-      question5: 'ทำไม',
-      answer5: '',
-      seller: {picture:'',name:'คุณต้อม'},
-      dateCreate:'12/02/2554',
-      petDetail: 'รับสุนัขตัวน้อยไหมคะ',
-      gender: 'ชาย',
-      age: '12'
+      
   },
 
   ]
@@ -163,7 +45,7 @@ function DonatePage() {
       </div>
       <div className='donatePage-part2'>
         <div className='donatePage-part2-cards'>
-          {dog.map(dog => {                                                  /////edit const dog
+          {dataPet.map(dog => {                                                  /////edit const dog
             return <PetCard dog={dog} setdogDetail={SetdogInfo} setpop={setPopups}/>
           })}
           {Popup ?<PopDetail setPopUp={setPopups} getDog = {dogInfo}/>:null}

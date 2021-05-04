@@ -9,6 +9,8 @@ import fetch from "unfetch";
 import axios from "axios";
 function MainChat() {
   //const [id, setId] = useLocalStorage("id");
+  //const data = JSON.parse(localStorage.getItem("user"));
+  const [id, setId] = useLocalStorage("id");
   /*useEffect(async () => {
     const a = await axios.post("http://localhost:2000").then((respone) => {
       return respone.data;
@@ -19,7 +21,10 @@ function MainChat() {
       console.log("This will be logged on unmount");
     };
   }, []);*/
-  const id = 25;
+  useEffect(() => {
+    const dataUser = JSON.parse(localStorage.getItem("user"));
+    setId(dataUser.userId);
+  }, []);
   const dashboard = (
     <SocketProvider id={id}>
       <ContactsProvider>
@@ -30,7 +35,7 @@ function MainChat() {
     </SocketProvider>
   );
 
-  return id ? dashboard : <div>this page is not found</div>;
+  return id ? dashboard : <Login onIdSubmit={setId} />;
 }
 //<Login onIdSubmit={setId}/>
 export default MainChat;
