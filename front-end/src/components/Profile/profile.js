@@ -59,7 +59,7 @@ const Profile = () => {
     const popupFinish = Popup.usePopup()
     const [PopType,SetPopType] = useState(null)
 
-
+    
     var maxName = '30'
     var maxPass = '15'
     var maxMobile = '10'
@@ -285,7 +285,7 @@ const Profile = () => {
             alert("กรุณากรอกข้อมูลรหัสให้ถูกต้อง");
         }
     }
-
+ 
 
     const profileSwitch = (selectedTab) => {
         if (selectedTab === 1) {
@@ -634,7 +634,32 @@ const Profile = () => {
         const a = await res.json(); 
         localStorage.setItem("dataPet",JSON.stringify(a[0]))
     }
+    const [imageProfile,setImageProfile] = useState()
+    const fetchDataPictureProfile = async (e) => {
+        const data = JSON.parse(localStorage.getItem("user"));
+        console.log("succes");
+        let formData = new FormData();
+        formData.append("avatar", imageProfile);
+        formData.append(
+          "jsonbody",
+          JSON.stringify({
+            userId: data.userId,
+          })
+        );
+        const res = await fetch("http://localhost:4000/uploadProfile", {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.text())
+          .then((resBody) => {
+            console.log(resBody);
+          });
 
+          const a = await res.json();
+          localStorage.setItem('user',a)
+      };
+
+     const dataUser = JSON.parse(localStorage.getItem('user'))
     const dataPet = JSON.parse(localStorage.getItem("dataPet"))
     return (
         <div style={{ height: '100%', width: '100%',fontFamily:'Kanit'}}>
@@ -1115,10 +1140,14 @@ const Profile = () => {
                     <div className="tab_one">
                         <label>
                             <div className='img_border'>
-                                <img className='img-wrap' src={Profile_Dog} />
+                                <img className='img-wrap' src={dataUser.picture} />
                                 <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" style={{width:'300px',height:'30px'}}
                                  onChange={(e) => {
-                                    setProfile_Dog(URL.createObjectURL(e.target.files[0]));}}></input>
+                                    setProfile_Dog(URL.createObjectURL(e.target.files[0]));
+                                    const fileTest = e.target.files[0]
+                                    setImageProfile(fileTest);
+                                }}></input>
+                                <button onClick={()=>{fetchDataPictureProfile();window.location.reload()}}>ยืนยันการอัพโหลดโปรไฟล์</button>
 
                             </div>
                             {/* <input id="photo-upload" type="file" onChange={this.handleInputChange}/>  */}

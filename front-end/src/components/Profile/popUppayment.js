@@ -16,9 +16,7 @@ const PopUppayment = (props) => {
     const [puHeader, setPuHeader] = useState('หน้าชำระเงิน')
     const [puType, setPuType] = useState(1)
     const [puType2, setPuType2] = useState(0)
-
     const [paidDate, setPaidDate] = useState()
-
     const maxPaid = 20
 
     const showUpload = () => {

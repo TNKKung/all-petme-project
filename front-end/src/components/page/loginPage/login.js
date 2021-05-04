@@ -42,6 +42,8 @@ const Login = () => {
         });
         const ack = await res.json();
 
+        console.log(ack[0])
+
 
         localStorage.setItem("statusLogin",JSON.stringify(ack[1]))
         localStorage.setItem("user",JSON.stringify(ack[0]))

@@ -171,6 +171,65 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
 });
 
 
+expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
+
+  let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
+  let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
+  if (req.file == null) {
+    console.log("null");
+  } else {
+    MongoClient.connect(url, (err, db) => {
+      const ponddb = db.db("image");
+      fs.rename(
+        `./uploads/${req.file.filename}`,
+        `./uploads/${newFileName}`,
+        () => {
+          console.log("200");
+        }
+      );
+      
+    });
+    const {
+      userId
+    } = JSON.parse(req.body.jsonbody);
+
+    if (req.body.lenght <= 2) {
+      res.status(400).send("Error");
+    } else {
+      const pictureUpdate = {$set: {
+        picture : `http://localhost:4000/static/${newFileName}`
+      }};
+
+      MongoClient.connect(url, function (err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("User").updateOne({userId: userId},pictureUpdate, function (err, res) {
+          console.log("update profile");
+        });
+        dbo.collection("User").find({ userId: userId }).toArray(function (err, result) {
+            const data = {
+              address: result[0].address,
+              birth: result[0].birth,
+              district: result[0].district,
+              email: result[0].email,
+              picture : result[0].picture,
+              listPetIdForSell: result[0].listPetIdForSell,
+              listPetIdForBuy: result[0].listPetIdForBuy,
+              mobileNumber: result[0].mobileNumber,
+              name: result[0].name,
+              postalCode: result[0].postalCode,
+              province: result[0].province,
+              road: result[0].road,
+              subDistrict: result[0].subDistrict,
+              userId: result[0].userId,
+              username: result[0].username,
+            };
+            res.send(data);
+          });
+      });
+    }
+  }
+});
+
 
 //---------------------------------------------------------------
 
@@ -203,7 +262,7 @@ expressApp.post("/checkPasswordForlogin", function (req, res) {
         district : result[0].district,
         province : result[0].province,
         postalCode : result[0].postalCode,
-        picture : result.picture
+        picture : result[0].picture
       })
   })
     dbo
@@ -241,7 +300,7 @@ expressApp.post("/api/login", function (req, res) {
             birth: result[0].birth,
             district: result[0].district,
             email: result[0].email,
-            img: [],
+            picture: result[0].picture,
             listPetIdForSell: result[0].listPetIdForSell,
             listPetIdForBuy: result[0].listPetIdForBuy,
             mobileNumber: result[0].mobileNumber,
