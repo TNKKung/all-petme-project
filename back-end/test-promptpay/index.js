@@ -16,7 +16,5 @@ qrcode.toString(payload, options, (err, svg) => {
     console.log(svg)
 })
 
-expressApp.listen(4000, function () {
-    console.log("Listen 4000");
-  });
+
   

@@ -38,6 +38,7 @@ expressApp.use((req, res, next) => {
 });
 
 // upload picture naja
+expressApp.use("/static", expressFunction.static("test-promptpay"));
 
 io.on("connection", (socket) => {
   const id = socket.handshake.query.id;
@@ -173,6 +174,8 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
     }
   }
 });
+
+
 
 //---------------------------------------------------------------
 
@@ -389,6 +392,8 @@ expressApp.post("/addAnswer", function (req, res) {
       answer5: answer5,
       name: name,
       picture: picture,
+      picturePromtpay : picturePromtpay,
+      paymentStatus : paymentStatus,
     };
     dbo
       .collection("Pet")
