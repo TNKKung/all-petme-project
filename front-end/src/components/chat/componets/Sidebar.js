@@ -4,11 +4,12 @@ import Conversations from "./Conversations";
 import Contacts from "./Contacts";
 import NewContactModal from "./NewContactModal";
 import NewConversationModal from "./NewConversationModal";
-
+import { useHistory } from "react-router-dom";
 const CONVERSATIONS_KEY = "conversations";
 const CONTACTS_KEY = "contacts";
 
 export default function Sidebar({ id }) {
+  const history = useHistory();
   const [activeKey, setActiveKey] = useState(CONVERSATIONS_KEY);
   const [modalOpen, setModalOpen] = useState(false);
   const conversationsOpen = activeKey === CONVERSATIONS_KEY;
@@ -50,8 +51,12 @@ export default function Sidebar({ id }) {
         >
           <div>New {conversationsOpen ? "Conversation" : "Contact"}</div>
         </Button>
-        <Button className="rounded-0" style={{ backgroundColor: "#0A272C" }}>
-          Confirm
+        <Button
+          onClick={() => history.push("/")}
+          className="rounded-0"
+          style={{ backgroundColor: "#ED8E82" }}
+        >
+          Exit
         </Button>
       </Tab.Container>
 

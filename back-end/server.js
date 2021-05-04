@@ -11,6 +11,7 @@ const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
 MongoClient = require("mongodb").MongoClient;
 expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
+expressApp.use("/static", expressFunction.static("test-promptpay"));
 var MongoClient = require("mongodb").MongoClient;
 const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
