@@ -45,7 +45,7 @@ function DonatePage() {
       </div>
       <div className='donatePage-part2'>
         <div className='donatePage-part2-cards'>
-          {dataPet.map(dog => {                                                  /////edit const dog
+          {dataPet.filter((a)=>a.typeSell==='บริจาค').map(dog => {                                                  /////edit const dog
             return <PetCard dog={dog} setdogDetail={SetdogInfo} setpop={setPopups}/>
           })}
           {Popup ?<PopDetail setPopUp={setPopups} getDog = {dogInfo}/>:null}
