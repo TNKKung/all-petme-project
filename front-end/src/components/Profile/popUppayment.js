@@ -27,13 +27,11 @@ const PopUppayment = (props) => {
         setlastBtt('ส่ง')
         setPuHeader('ยืนยันการชำระเงิน')
     }
+    const qr = localStorage.getItem('pathQr')
     
-    const [qr,setQr]=useState(localStorage.getItem('pathQr'))
-    const [dataDog,setDataDog] = useState([])
     const uploadReceipt = () => {
         setPopUp(false)
     }
-
     return (
         <div className='manager-modal-wrapper'>
         <div className='manager-modal-backdrop'>
@@ -42,13 +40,13 @@ const PopUppayment = (props) => {
                 {puType == 1 && <div>
                     <div className='pu-nocenter'>
                         <text className='pu-header'>{puHeader}</text>
-                        <button className="popup-x" onClick={() => {window.location.reload();setPopUp(false)}} >X</button>
+                        <button className="popup-x" onClick={() => setPopUp(false)} >X</button>
                     </div>
                     <div className='pu-row'>
                         <img src={qr} width="250" height="250" />
                     </div>
                     <div className='pu-row'>
-                        <input  ></input>
+                        <button className="pu-button" onClick={() => showUpload()}>อัพโหลดหลักฐานการชำระเงิน</button>
                     </div></div>
                 }
                 {puType2 == 1 && <div>

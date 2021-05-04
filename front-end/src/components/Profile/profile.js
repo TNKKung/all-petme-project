@@ -79,7 +79,7 @@ const Profile = () => {
     var data = {}
     const [password_storer,set_password_storer] = useState([])
 
-    const [Profile_Dog,setProfile_Dog] = useState()
+    const [Profile_Dog,setProfile_Dog] = useState(null)
     const [user, setUser] = useState({})
     
         var Password=['','',''], 
