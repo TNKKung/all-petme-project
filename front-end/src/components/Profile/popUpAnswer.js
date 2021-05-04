@@ -152,13 +152,18 @@ const PopUpAnswer = (props) => {
 
             { popUpAnsType && 
                 <div className='pu-ans-row-center'>
-                    <button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
-                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)}>ดูรายชื่อผู้ซื้อคนอื่น</button>
+                    {dog.acceptUser.length==0?<div><button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
+                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)}>ลบจากคนสนใจ</button> {/*ยกเลิกในรายการสนใจ*/}
+                    </div>:dog.acceptUser.filter(e => e.userId == user.userId).map(e => e.userId).length!==0?
+                    <div>
+                        <button className = 'pu-ans-button' onClick={() => setPopUp(false)}>ยกเลิกการยอมรับ</button>  {/*ยกเลิกในรายการยอมรับแล้ว*/}
+                    </div>:<button className = 'pu-ans-button' onClick={() => setPopUp(false)} >ลบจากคนสนใจ</button>}{/*ยกเลิกในรายการสนใจ*/}
+                    
                 </div>
             }
             { !popUpAnsType && 
                 <div className='pu-ans-row-center'>
-                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)} >ดูรายชื่อผู้ซื้อคนอื่น</button>
+                    <button className = 'pu-ans-button' onClick={() => setPopUp(false)} >ยกเลิกการยอมรับ</button>{/*ยกเลิกในรายการยอมรับแล้ว*/}
                 </div>
             }
 

@@ -1,5 +1,5 @@
 import { PortableWifiOffRounded } from '@material-ui/icons';
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import './popdogDetail.css';
 import fetch from 'unfetch';
 
@@ -131,7 +131,7 @@ const PopUpDogDetail = (props) => {
         if(dogPU.userId == va){
             return <p>รายละเอียดสุนัขของคุณ</p>
         }
-        else if(!useLikePet.indexOf(va)){
+        else if(useLikePet.includes(va)){
             return <button className="pu-buttonA2" onClick={() => {
                 
                 const fetchDataCancelLike = async() =>{
@@ -156,7 +156,7 @@ const PopUpDogDetail = (props) => {
             return <button className="pu-buttonA2" onClick={() => showUpload(1)}>สนใจซื้อสุนัข</button>;
         }
     }
-
+    
     return (
         <div className='manager-modal-wrapper'>
         <div className='manager-modal-backdrop'>

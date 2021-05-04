@@ -1421,9 +1421,6 @@ const Profile = () => {
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
-                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
-                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
@@ -1447,9 +1444,6 @@ const Profile = () => {
                                                         <button className="like_button_details_selected" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
-                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
-                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
@@ -1472,9 +1466,6 @@ const Profile = () => {
                                                     </button>
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
-                                                    </button>
-                                                        <button className="like_button_details_selected" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
                                                     </button>
                                                     </div>
 
