@@ -5,7 +5,7 @@ import fetch from 'unfetch';
 
 const PopUpDogDetail = (props) => {
     const data = JSON.parse(localStorage.getItem("user"))
-    const petId = JSON.parse(localStorage.getItem("dataPetId"))
+    const petId = JSON.parse(localStorage.getItem("dataPetIdForDetailMarket"))
 
     const getDog = props.getDog
     // const dogDateCreate = props.getDateCreate
@@ -56,7 +56,7 @@ const PopUpDogDetail = (props) => {
             },
             mode : "cors",
             body: JSON.stringify({
-                petId : petId,
+                petId : petId.petId,
                 userId: data.userId,
                 answer1 : dogPU.answer1,
                 answer2 : dogPU.answer2,
@@ -121,6 +121,24 @@ const PopUpDogDetail = (props) => {
                   })
                 });
     }
+    const fetchDataReport = async() =>{
+        const res = await fetch('http://localhost:4000/report',{
+                  method: 'POST',
+                  headers :{
+                    "Content-Type":"application/json",
+                    "Accept":"application/json"
+                  },
+                  body:JSON.stringify({
+                    userIdOfSeller : petId.userId,
+                    nameOfSeller : petId.profile,
+                    petId : petId.petId,
+                    userIdOfCustomer : data.userId,
+                    nameOfCustomer : data.name,
+                    reportType : reportType,
+                    reportDetail : reportDetail
+                })
+            });
+    }
 
     const useLikePet = [];
     for (const [index, value] of dogPU.likeUser.entries()){
@@ -129,7 +147,7 @@ const PopUpDogDetail = (props) => {
     function CheckID(va){
 
         if(dogPU.userId == va){
-            return <p>รายละเอียดสุนัขของคุณ</p>
+            return <button className="pu-buttonA2">ยกเลิกการลงทะเบียน</button>
         }
         else if(useLikePet.includes(va)){
             return <button className="pu-buttonA2" onClick={() => {
@@ -307,12 +325,14 @@ const PopUpDogDetail = (props) => {
                             <div className='pu-report-inp3-style'>
                                 <textarea className='pu-report-inp3'
                                     onChange={(e) => {
+                                        
                                         set_reportDetail(e.target.value)
+                                        
                                     }}
                                 />
                             </div>
                             <div className='pu-report-row-center'>
-                                <button onClick = { () => {sendReport(); props.setPopUp(false)}} className='pu-report-button'>รายงานปัญหา</button>
+                                <button onClick = { () => {fetchDataReport(); props.setPopUp(false)}} className='pu-report-button'>รายงานปัญหา</button>
                                 <button onClick = { () => props.setPopUp(false)} className='pu-report-button'>ยกเลิก</button>
                             </div>
                         </div>

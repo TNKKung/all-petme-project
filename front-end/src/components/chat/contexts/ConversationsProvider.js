@@ -26,6 +26,7 @@ export function ConversationsProvider({ id, children }) {
 
   const addMessageToConversation = useCallback(
     ({ recipients, text, sender }) => {
+      console.log(text);
       setConversations((prevConversations) => {
         let madeChange = false;
         const newMessage = { sender, text };
@@ -60,6 +61,7 @@ export function ConversationsProvider({ id, children }) {
   }, [socket, addMessageToConversation]);
 
   function sendMessage(recipients, text) {
+    console.log(text);
     socket.emit("send-message", { recipients, text });
 
     addMessageToConversation({ recipients, text, sender: id });

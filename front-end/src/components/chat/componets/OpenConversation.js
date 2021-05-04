@@ -39,9 +39,8 @@ export default function OpenConversation() {
                 }`}
               >
                 <div
-                  style={{ backgroundColor: "#00AFB9" }}
                   className={`rounded px-2 py-1 ${
-                    message.fromMe ? "bg-info text-white" : "border"
+                    message.fromMe ? "bg-primary text-white" : "border"
                   }`}
                 >
                   {message.text}
@@ -51,7 +50,7 @@ export default function OpenConversation() {
                     message.fromMe ? "text-right" : ""
                   }`}
                 >
-                  {message.fromMe ? "You" : new Date().toLocaleString()}
+                  {message.fromMe ? "You" : message.senderName}
                 </div>
               </div>
             );
@@ -59,7 +58,7 @@ export default function OpenConversation() {
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="m-2" style={{ backgroundColor: "#00AFB9" }}>
+        <Form.Group className="m-2">
           <InputGroup>
             <Form.Control
               as="textarea"
@@ -69,9 +68,7 @@ export default function OpenConversation() {
               style={{ height: "75px", resize: "none" }}
             />
             <InputGroup.Append>
-              <Button style={{ backgroundColor: "#00AFB9" }} type="submit">
-                Send
-              </Button>
+              <Button type="submit">Send</Button>
             </InputGroup.Append>
           </InputGroup>
         </Form.Group>

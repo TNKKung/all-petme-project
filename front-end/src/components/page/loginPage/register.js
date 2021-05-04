@@ -178,7 +178,32 @@ const Register = () => {
   const location = useLocation()
   const [error, setError] = useState('')
 
-  const submitRegisterForm = async(next) => {
+  const summitTobackEnd = async(next)=>{
+    
+    const res = await fetch('http://localhost:4000/api/add/registerUser',{
+      method: 'POST',
+      headers :{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      },
+      body:JSON.stringify({
+        username : Username,
+        password:Password,
+        name:Name,
+        email:Email,
+        mobileNumber:Tell,
+        birth:Birth,
+        address:Address,
+        road:Road,
+        district:district,
+        subDistrict:subDistrict,
+        province:province,
+        postalCode:postalCode
+      })
+    });
+  }
+
+  const submitRegisterForm = ()=> {
     
     console.log('submit')
     if((
@@ -191,35 +216,10 @@ const Register = () => {
       addressErrorSign === '✔' &&
       dateErrorSign === '✔')==true
     ){
-
-      // let path = `/`; 
-      // history.push(path);
+      summitTobackEnd();
+      let path = `/login`; 
+      history.push(path);
       
-      const res = await fetch('http://localhost:4000/api/add/registerUser',{
-          method: 'POST',
-          headers :{
-            "Content-Type":"application/json",
-            "Accept":"application/json"
-          },
-          body:JSON.stringify({
-            username : Username,
-            password:Password,
-            name:Name,
-            email:Email,
-            mobileNumber:Tell,
-            birth:Birth,
-            address:Address,
-            road:Road,
-            district:district,
-            subDistrict:subDistrict,
-            province:province,
-            postalCode:postalCode
-          })
-        });
-      // let path = `/login`; 
-      // history.push(path);
-        window.open('http://localhost:3000/login');
-        window.close("_self");
       
     }else{
       alert("กรุณากรอกข้อมูลให้ถูกต้อง");

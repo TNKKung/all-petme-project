@@ -257,25 +257,25 @@ const Manager = () => {
         const [problemListClass, setProblemListClass] = useState('problemListBox')
         const ProblemList = problemThatReport.map(
             problemThatReport => <button className={problemListClass} onFocus={() => {
-                SetIDChoose(problemThatReport.id)
+                SetIDChoose(problemThatReport)
             }}>
 
-                <div>ปัญหา #{problemThatReport.id} {problemThatReport.Topic}</div>
-                <div>รายงานปัญหาโดย {problemThatReport.ReportBy}</div>
+                <div>ปัญหา #{problemThatReport.reportId} {problemThatReport.problemType}</div>
+                <div>รายงานปัญหาโดย {problemThatReport.nameOfCustomer}</div>
 
             </button>
         )
         const Problemdetail = problemThatReport.map(problemThatReport => {
-            if (problemThatReport.id == IDChoose) {
+            if (problemThatReport.reportId == IDChoose) {
                 return <div>
-                    <p className='problemTopicText'>หัวข้อปัญหา #{problemThatReport.id} {problemThatReport.Topic}</p>
+                    <p className='problemTopicText'>หัวข้อปัญหา #{problemThatReport.reportId} {problemThatReport.problemType}</p>
                     <div className='problemReportRespone'>
                         <div className='problemImgDiv'><img className='problemprofile' src={imageTest}></img></div>
-                        <p className='problemReportResponeText'>ปัญหาเกิดขึ้นโดย: {problemThatReport.ProblemBy}</p>
-                        <p className='problemReportResponeText'>รายงานโดย: {problemThatReport.ReportBy}</p>
+                        <p className='problemReportResponeText'>ปัญหาเกิดขึ้นโดย: {problemThatReport.nameOfSeller}</p>
+                        <p className='problemReportResponeText'>รายงานโดย: {problemThatReport.nameOfCustomer}</p>
                     </div>
                     <p className='problemProblemText'>เกิดอะไรขึ้น</p>
-                    <p className='problemProblemText'>{problemThatReport.Problem}</p>
+                    <p className='problemProblemText'>{problemThatReport.problemDetail}</p>
                 </div>
             }
         })
@@ -346,7 +346,18 @@ const Manager = () => {
                             <p>ตรวจสอบสลิปโอนเงิน</p>
                         </button>
                         <button className={ProblemReportSlide} onMouseUp={() => {
-                            
+                            const fetchData= async() => {
+                                const res = await fetch('http://localhost:4000/getReport',{
+                                method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json'     
+                                    },
+                                    mode : "cors",
+                                });
+                                const a =  await res.json()
+                                setproblemThatReport(a)
+                            }
+                            fetchData();
                             SetSliderPayment(false); SetSliderProblem(true);SetSliderContract(false);
                             SetPaymentReportSlide('manager-barBlockSelect');
                             SetContractSlide('manager-barBlockSelect');
@@ -356,7 +367,7 @@ const Manager = () => {
                         </button>
                         <button className={ContractSlide} onMouseUp={() => {
 
-                            const fetchDataContact = async() => {
+                            const fetchData= async() => {
                                 const res = await fetch('http://localhost:4000/getContact',{
                                 method: 'GET',
                                     headers: {
@@ -367,8 +378,7 @@ const Manager = () => {
                                 const a =  await res.json()
                                 setcontractThatReport(a)
                             }
-                            
-                            fetchDataContact();
+                            fetchData();
                             SetSliderContract(true); SetSliderProblem(false);SetSliderPayment(false);
                             SetContractSlide('manager-barBlockSelectThis');
                             SetPaymentReportSlide('manager-barBlockSelect');
