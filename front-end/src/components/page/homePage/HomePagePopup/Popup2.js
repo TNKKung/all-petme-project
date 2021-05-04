@@ -38,9 +38,14 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
     question4: null,
     question5: null,
     picture: null,
+    subPicture1: null,
+    subPicture2: null,
+    subPicture3: null,
+    subPicture4: null,
   });
 
   const [dataimage, setDataimage] = useState({});
+
 
   const sendDataImage = async (e) => {
     const data = JSON.parse(localStorage.getItem("user"));
@@ -64,7 +69,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
         question3: form.question3,
         question4: form.question4,
         question5: form.question5,
-        typeSell : typeSell
+        typeSell: typeSell
       })
     );
     const res = await fetch("http://localhost:4000/uploadFile", {
@@ -77,7 +82,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
       });
   };
 
-  
+
 
   function arrayBufferToBase64(buffer) {
     var binary = "";
@@ -185,47 +190,92 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
           />
         </div>
         <div className="right-box">
-          <div
-            className="addPicture"
-            onClick={() => {
-              const button = document.querySelector("#uploadButton");
-              button.click();
-            }}
-          >
-            {form.picture ? (
-              <img src={form.picture} className="image" />
-            ) : (
-              "เพิ่มรูปภาพ"
-            )}
-          </div>
-          <input
-            type="file"
-            id="uploadButton"
-            className="uploadPicture"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (!file) return;
-              const reader = new FileReader();
+          <div style={{ height: '150px', width: '150px', display: 'flex', justifyContent: 'center' }}>
+            <div
+              className="addPicture"
+              onClick={() => {
+                const button = document.querySelector("#uploadButton");
+                button.click();
+              }}
+            >
+              {form.picture ? (
+                <img src={form.picture} className="image"/>
+              ) : (
+                "เพิ่มรูปภาพ"
+              )}
+            </div>
+            <input
+              type="file"
+              id="uploadButton"
+              className="uploadPicture"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
 
-              reader.readAsArrayBuffer(file);
-              reader.onload = () => {
-                setForm({
-                  ...form,
-                  picture:
-                    "data:image/jpeg;base64," +
-                    arrayBufferToBase64(reader.result),
-                });
-              };
-              setDataimage(file);
-            }}
-          />
-          <div className="line2" />
-          {/* <div className='show-picture-cover'>
-            <div className='show-picture' />
-            <div className='show-picture' />
-            <div className='show-picture' />
-            <div className='show-picture' />
-          </div> */}
+                reader.readAsArrayBuffer(file);
+                reader.onload = () => {
+                  setForm({
+                    ...form,
+                    picture:
+                      "data:image/jpeg;base64," +
+                      arrayBufferToBase64(reader.result),
+                  });
+                };
+                setDataimage(file);
+              }}
+            />
+          </div>
+
+
+
+          <div className='show-picture-cover'>
+            <div className='show-picture'>
+              {form.subPicture1 ?
+                (<img src={form.subPicture1} className="image" style={{ height: '70px', width: '70px', borderRadius: '10px' }} />) : ("เพิ่ม")}
+              <input type="file" style={{ height: '70px', width: '70px', position: 'absolute', opacity: '0' }}
+                onChange={(e) => {
+                  setForm({ ...form, subPicture1: URL.createObjectURL(e.target.files[0]) }); const reader1 = new FileReader();
+                  // reader.readAsArrayBuffer(file);
+                  // reader.onload = () => {setForm({...form,subPicture1:"data:image/jpeg;base64," + arrayBufferToBase64(reader.result),});};
+                  // setDataimage(file);
+                }}
+              /></div>
+            <div className='show-picture'>
+              {form.subPicture2 ?
+                (<img src={form.subPicture2} className="image" style={{ height: '70px', width: '70px', borderRadius: '10px' }} />) : ("เพิ่ม")}
+              <input type="file" style={{ height: '70px', width: '70px', position: 'absolute', opacity: '0' }}
+                onChange={(e) => {
+                  setForm({ ...form, subPicture2: URL.createObjectURL(e.target.files[0]) }); const reader1 = new FileReader();
+                  // reader.readAsArrayBuffer(file);
+                  // reader.onload = () => {setForm({...form,subPicture1:"data:image/jpeg;base64," + arrayBufferToBase64(reader.result),});};
+                  // setDataimage(file);
+                }}
+              /></div>
+            <div className='show-picture'>
+              {form.subPicture3 ?
+                (<img src={form.subPicture3} className="image" style={{ height: '70px', width: '70px', borderRadius: '10px' }} />) : ("เพิ่ม")}
+              <input type="file" style={{ height: '70px', width: '70px', position: 'absolute', opacity: '0' }}
+                onChange={(e) => {
+                  setForm({ ...form, subPicture3: URL.createObjectURL(e.target.files[0]) }); const reader1 = new FileReader();
+                  // reader.readAsArrayBuffer(file);
+                  // reader.onload = () => {setForm({...form,subPicture1:"data:image/jpeg;base64," + arrayBufferToBase64(reader.result),});};
+                  // setDataimage(file);
+                }}
+              /></div>
+            <div className='show-picture'>
+              {form.subPicture4 ?
+                (<img src={form.subPicture4} className="image" style={{ height: '70px', width: '70px', borderRadius: '10px' }} />) : ("เพิ่ม")}
+              <input type="file" style={{ height: '70px', width: '70px', position: 'absolute', opacity: '0' }}
+                onChange={(e) => {
+                  setForm({ ...form, subPicture4: URL.createObjectURL(e.target.files[0]) }); const reader1 = new FileReader();
+                  // reader.readAsArrayBuffer(file);
+                  // reader.onload = () => {setForm({...form,subPicture1:"data:image/jpeg;base64," + arrayBufferToBase64(reader.result),});};
+                  // setDataimage(file);
+                }}
+              /></div>
+          </div>
+
           {typeSell == "ขาย" ? (
             <div className="text-input-box">
               <div className="text-box-2">
