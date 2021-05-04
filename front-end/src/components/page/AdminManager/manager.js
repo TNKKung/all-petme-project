@@ -296,7 +296,7 @@ const Manager = () => {
                 SetIDChoose(contractThatReport.reportId)
             }}>
 
-                <div>หัวข้อ #{contractThatReport.reportId} {contractThatReport.topic}</div>
+                <div style={{overflow: 'hidden',textOverflow:'ellipsis',maxWidth:'25ch',height:'35px'}}>หัวข้อ #{contractThatReport.reportId} {contractThatReport.topic}</div>
                 <div>จาก {contractThatReport.email}</div>
 
             </button>
@@ -304,7 +304,8 @@ const Manager = () => {
         const Contractdetail = contractThatReport.map(contractThatReport => {
             if (contractThatReport.reportId == IDChoose) {
                 return <div>
-                    <p className='problemTopicText'>หัวข้อ #{contractThatReport.id} {contractThatReport.topic}</p>
+                    <div className='problemTopicText'>หัวข้อ #{contractThatReport.reportId}</div>
+                    <div className='problemTopicText'>เรื่อง {contractThatReport.topic}</div>
                     <div className='problemReportRespone'>
                         <div className='problemImgDiv'><img className='problemprofile' src={imageTest}></img></div>
                         <p className='problemReportResponeText'>จาก: {contractThatReport.name}</p>

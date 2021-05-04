@@ -355,7 +355,9 @@
 }
 .problemTopicText{
     font-size: 22px;
-    height: 42px;
+    height: 30px;
+    
+
 }
 .problemReportRespone{
     display: flex;
@@ -602,8 +604,8 @@
         font-size: 20px;
     }
     .problemTopicText{
-        font-size: 42px;
-        height: 42px;
+        font-size: 35px;
+        height: 50px;
     }
     .problemReportRespone{
         display: flex;
