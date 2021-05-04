@@ -706,7 +706,7 @@ const qrcode = require('qrcode')
 expressApp.post("/promtpay",function(req,res){
 
 
-const mobileNumber = '0640630406' 
+const mobileNumber = '0892229292' 
 
 const amount = req.body.amount
 

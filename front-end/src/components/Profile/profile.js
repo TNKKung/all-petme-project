@@ -615,7 +615,7 @@ const Profile = () => {
             }),
         });
         const a = await res.json(); 
-        localStorage.setItem('pathQr',JSON.stringify(a.path))
+        localStorage.setItem('pathQr',a.path)
     }
     
 

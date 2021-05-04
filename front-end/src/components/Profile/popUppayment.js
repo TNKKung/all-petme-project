@@ -6,7 +6,6 @@ import './popUppayment.css';
 
 import QR_src from './img/qr.png'
 import IMG_src from './img/img.png'
-  
 
 const PopUppayment = (props) => {
     // function that takes boolean as param to conditionally display popup
@@ -46,7 +45,7 @@ const PopUppayment = (props) => {
                         <button className="popup-x" onClick={() => setPopUp(false)} >X</button>
                     </div>
                     <div className='pu-row'>
-                    <img src={require(qr).default} />
+                        <img src={qr} width="250" height="250" />
                     </div>
                     <div className='pu-row'>
                         <button className="pu-button" onClick={() => showUpload()}>อัพโหลดหลักฐานการชำระเงิน</button>
