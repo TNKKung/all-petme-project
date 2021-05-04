@@ -112,7 +112,7 @@ function MarketPage() {
             .map(e => {  
               return <PetCard dog={e} setdogDetail={SetdogInfo} setpop={setPopups} />
             })}
-          {Popup ?<PopDetail onChange={localStorage.setItem("dataPetId",JSON.stringify(dogInfo.petId))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
+          {Popup ?<PopDetail onChange={localStorage.setItem("dataPetIdForDetailMarket",JSON.stringify(dogInfo))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>
       </div>
     </div>

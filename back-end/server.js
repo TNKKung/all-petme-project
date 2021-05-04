@@ -12,13 +12,14 @@ const { v4: uuidv4 } = require("uuid");
 MongoClient = require("mongodb").MongoClient;
 expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 var MongoClient = require("mongodb").MongoClient;
+const deployUrl = "mongodb://petme:petme%402021@127.0.0.1:27017/petme";
 const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
   const Bmongo =
   'mongodb+srv://petMeApp:12345@cluster0.smgpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-var url = Bmongo;
+var url = tommongo;
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
@@ -60,6 +61,7 @@ io.on("connection", (socket) => {
 });
 
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
+
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
   if (req.file == null) {
@@ -67,7 +69,6 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   } else {
     MongoClient.connect(url, (err, db) => {
       const ponddb = db.db("image");
-      console.log(newFileName);
       fs.rename(
         `./uploads/${req.file.filename}`,
         `./uploads/${newFileName}`,
@@ -75,13 +76,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
           console.log("200");
         }
       );
-      var getpath = `http://localhost:4000/static/${newFileName}`;
-      var newItem = {
-        contentType: req.file.mimetype,
-        size: req.file.size,
-        name: req.file.originalname,
-        path: getpath,
-      };
+      
     });
     const {
       userId,
@@ -335,9 +330,7 @@ expressApp.post("/api/add/registerUser", function (req, res) {
       district: district,
       province: province,
       postalCode: postalCode,
-      listPetIdForSell: [],
-      listPetIdForBuy: [],
-      img: [],
+      picture: "",
     };
 
     res.send(user);
@@ -394,8 +387,8 @@ expressApp.post("/addAnswer", function (req, res) {
       answer5: answer5,
       name: name,
       picture: picture,
-      picturePromtpay : picturePromtpay,
-      paymentStatus : paymentStatus,
+      picturePromtpay : "picturePromtpay",
+      paymentStatus : "paymentStatus",
     };
     dbo
       .collection("Pet")
@@ -507,29 +500,38 @@ expressApp.get("/getContact", function (req, res) {
   });
 });
 
-expressApp.post("/api/add/report", function (req, res) {
-  const { name, email, mobileNumber, topic, message } = req.body;
+expressApp.post("/report", function (req, res) {
+  const { userIdOfSeller,userIdOfCustomer,nameOfSeller,nameOfCustomer,petId, reportType, reportDetail } = req.body;
 
-  console.log(req.body);
-  if (name.lenght <= 2) {
-    res.status(400).send("Error");
-  } else {
-    const user = {
-      name: name,
-      email: email,
-      mobileNumber: mobileNumber,
-      topic: topic,
-      message: message,
+    const report = {
+      reportId : uuidv4(),
+      userIdOfSeller : userIdOfSeller,
+      nameOfSeller : nameOfSeller,
+      petId : petId,
+      userIdOfCustomer : userIdOfCustomer,
+      nameOfCustomer : nameOfCustomer,
+      problemType : reportType,
+      problemDetail : reportDetail
     };
-    res.send(user);
+
     MongoClient.connect(url, function (err, db) {
-      var dbo = db.db("Admin");
-      dbo.collection("Report").insertOne(user, function (err, res) {
-        console.log("Add one people");
+      var dbo = db.db("manager");
+      dbo.collection("Report").insertOne(report, function (err, res) {
+        console.log("Add one report");
         db.close();
       });
     });
-  }
+  
+});
+
+expressApp.get("/getReport", function (req, res) {
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("manager");
+    dbo.collection("Report").find({}).toArray(function(err,result){
+      console.log(result)
+      res.send(result)
+    })
+  });
 });
 
 expressApp.post("/api/get/checkPayment", function (req, res) {
