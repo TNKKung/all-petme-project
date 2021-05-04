@@ -147,7 +147,7 @@ const PopUpDogDetail = (props) => {
     function CheckID(va){
 
         if(dogPU.userId == va){
-            return <p>รายละเอียดสุนัขของคุณ</p>
+            return <button className="pu-buttonA2">ยกเลิกการลงทะเบียน</button>
         }
         else if(useLikePet.includes(va)){
             return <button className="pu-buttonA2" onClick={() => {

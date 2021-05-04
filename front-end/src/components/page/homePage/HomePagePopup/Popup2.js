@@ -199,7 +199,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
               }}
             >
               {form.picture ? (
-                <img src={form.picture} className="image"/>
+                <img src={form.picture} className="image" />
               ) : (
                 "เพิ่มรูปภาพ"
               )}
@@ -320,26 +320,40 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
             <div className="text-bottom">คำถามข้อที่ 5</div>
           </div>
           <div className="input-box-bottom">
-            <textarea
+
+            <select
               required
-              className="input-bottom"
-              // rows='4'
-              // cols='50'
+              className="selector"
               value={form.question1}
               onChange={(e) => {
                 setForm({ ...form, question1: e.target.value });
               }}
-            />
-            <textarea
+            >
+              <option value="สุนัขพันธ์นี้ชอบการเอาใจใส่ คุณมีเวลาเลี้ยงดูได้ไหม?">สุนัขพันธ์นี้ชอบการเอาใจใส่ คุณมีเวลาเลี้ยงดูได้ไหม?</option>
+              <option value="สุนัขพันธ์นี้ไม่ควรอยู่ใกล้เด็กเล็ก คุณมีเด็กเล็กไหม?">สุนัขพันธ์นี้ไม่ควรอยู่ใกล้เด็กเล็ก คุณมีเด็กเล็กไหม?</option>
+              <option value="สุนัขพันธ์นี้เสี่ยงเป็นโรคได้ง่าย คุณดูแลเรื่องอาหารได้ไหม?">สุนัขพันธ์นี้เสี่ยงเป็นโรคได้ง่าย คุณดูแลเรื่องอาหารได้ไหม?</option>
+              <option value="สุนัขพันธ์นี้ต้องดูแลรักษาความสะอาดเป็นพิเศษ คุณดแลไดไหม?">สุนัขพันธ์นี้ต้องดูแลรักษาความสะอาดเป็นพิเศษ คุณดูแลได้ไหม?</option>
+              <option value="สุนัขพันธ์นี้ชอบออกกำลัง คุณมีเวลาพาสุนัขไปออกกำลังกายไหม?">สุนัขพันธ์นี้ชอบออกกำลัง คุณมีเวลาพาสุนัขไปออกกำลังกายไหม?</option>
+              <option value="สุนัขพันธ์นี้ชอบการเอาใจใส่ คุณมีเวลาเลี้ยงดูได้ไหม?">สุนัขพันธ์นี้ชอบการเอาใจใส่ คุณมีเวลาเลี้ยงดูได้ไหม?</option>
+            </select>
+
+            <select
               required
-              className="input-bottom"
-              // rows='4'
-              // cols='50'
+              className="selector"
               value={form.question2}
               onChange={(e) => {
                 setForm({ ...form, question2: e.target.value });
               }}
-            />
+            >
+              <option value="สุนัขพันธ์นี้ใช้ค่าใช้จ่ายในการเลี้ยงดูสูง คุณดูแลได้ไหม?">สุนัขพันธ์นี้ใช้ค่าใช้จ่ายในการเลี้ยงดูสูง คุณดูแลได้ไหม? </option>
+              <option value="สุนัขพันธ์นี้ชอบเล่นน้ำ คุณดูแลได้หรือไม่?">สุนัขพันธ์นี้ชอบเล่นน้ำ คุณดูแลได้หรือไม่?</option>
+              <option value="สุนัขพันธ์นี้ไม่เหมาะกับเลี้ยงในพื้นที่ปิด คุณมีสนามหญ้าไหม?">สุนัขพันธ์นี้ไม่เหมาะกับเลี้ยงในพื้นที่ปิด คุณมีสนามหญ้าไหม?</option>
+              <option value="สุนัขพันธ์นี้ต้องการพื้นที่ในการวิ่งเล่นออกกำลังกาย คุณมีพื้นที่ไหม">สุนัขพันธ์นี้ต้องการพื้นที่ในการวิ่งเล่นออกกำลังกาย คุณมีพื้นที่ไหม</option>
+              <option value="สุนัขพันธ์นี้ดุร้าย คุณดูแลได้ไหม">สุนัขพันธ์นี้ดุร้าย คุณดูแลได้ไหม</option>
+              
+              
+            </select>
+
             <textarea
               required
               className="input-bottom"

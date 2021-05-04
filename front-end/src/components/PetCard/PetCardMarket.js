@@ -28,12 +28,12 @@ function PetCard(props) {
         <div className="petcard-detail-left">
           <div className="head">
             <div>สุนัขพันธ์ : {dogDetail.breed}</div>
-            <div>ราคา : {dogDetail.cost}</div>
+            {dogDetail.typeSell==='ขาย'?<div>ราคา  :{dogDetail.cost}</div>:<div>บริจาคฟรี</div>}
           </div>
         </div>
         <div className="petcard-detail-right">
           <img className="petcard-detail-right-imgProfile" />
-          {dogDetail.profile}
+          <div style={{height:'25px',width:'7ch',textAlign:'center',overflow:'hidden'}}>{dogDetail.profile}</div>
         </div>
       </div>
     </div>

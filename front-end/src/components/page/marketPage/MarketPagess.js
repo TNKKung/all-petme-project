@@ -104,7 +104,7 @@ function MarketPage() {
         <div className='marketPage-part3-cards'>
           {/* filter(d => form.dogBreed? d.breed === form.dogBreed : true) */}
           {dataPet                                                   /////edit doger back to dataPet !!!!!!!//////// use doger to set new dataname
-            .filter((d) => {
+            .filter((a)=>a.typeSell==='ขาย').filter((d) => {
               if (form.ChoosedogBreed === null || form.ChoosedogBreed === 'ทั้งหมด')
                 return true
               else if (d.breed === form.ChoosedogBreed) return true
