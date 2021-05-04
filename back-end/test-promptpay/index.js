@@ -1,9 +1,11 @@
+const expressFunction = require("express");
+const expressApp = expressFunction();
 const generatePayload = require('promptpay-qr') 
 const qrcode = require('qrcode') 
 const fs = require('fs') 
 
 const mobileNumber = '0640630406' 
-const amount = 2000
+const amount = 1000
 const payload = generatePayload(mobileNumber, { amount }) 
 console.log(payload)
 
@@ -13,3 +15,6 @@ qrcode.toString(payload, options, (err, svg) => {
     fs.writeFileSync('./qr.svg', svg)
     console.log(svg)
 })
+
+
+  
