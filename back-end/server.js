@@ -16,7 +16,9 @@ const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-var url = pondmongo;
+  const Bmongo =
+  'mongodb+srv://petMeApp:12345@cluster0.smgpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+var url = Bmongo;
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.

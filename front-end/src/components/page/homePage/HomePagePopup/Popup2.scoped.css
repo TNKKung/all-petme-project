@@ -20,6 +20,14 @@
   position: absolute;
 }
 
+.uploadPicture {
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
 .text-head {
   color: #0081a7;
   font-size: 32px;
@@ -179,6 +187,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
   width: 100%;
   padding: 0rem 2rem;
 }
@@ -187,6 +196,11 @@
   width: 70px;
   height: 70px;
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  
 }
 .text-origin-2 {
   font-size: 22px;
