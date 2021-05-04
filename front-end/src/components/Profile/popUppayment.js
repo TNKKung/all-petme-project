@@ -16,7 +16,9 @@ const PopUppayment = (props) => {
     const [puHeader, setPuHeader] = useState('หน้าชำระเงิน')
     const [puType, setPuType] = useState(1)
     const [puType2, setPuType2] = useState(0)
+
     const [paidDate, setPaidDate] = useState()
+
     const maxPaid = 20
 
     const showUpload = () => {
@@ -27,8 +29,6 @@ const PopUppayment = (props) => {
         setlastBtt('ส่ง')
         setPuHeader('ยืนยันการชำระเงิน')
     }
-    const qr = localStorage.getItem('pathQr')
-    
     const uploadReceipt = () => {
         setPopUp(false)
     }
@@ -43,7 +43,7 @@ const PopUppayment = (props) => {
                         <button className="popup-x" onClick={() => setPopUp(false)} >X</button>
                     </div>
                     <div className='pu-row'>
-                        <img src={qr} width="250" height="250" />
+                        <img className="pu-qr-img" src={QR_src} alt="bone" />
                     </div>
                     <div className='pu-row'>
                         <button className="pu-button" onClick={() => showUpload()}>อัพโหลดหลักฐานการชำระเงิน</button>

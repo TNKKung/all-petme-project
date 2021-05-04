@@ -212,7 +212,29 @@ function PaymentReport() {
 const Manager = () => {
 
     // ----test list----
-    const [problemThatReport, setproblemThatReport] = useState([])
+    const [problemThatReport, setproblemThatReport] = useState([
+        {
+            id: 1,
+            Topic: 'เนื้อหาไม่เหมาะสม',
+            ProblemBy: 'คุณทอม',
+            ReportBy: 'คุณต้อม',
+            Problem: 'คุณทอมได้ให้รายละเอียดที่ไม่เกี่ยวข้องกับการขายสุนัขและใช้พื้นที่ขายสุนัขเป็นพื้นที่ขายโฆษณาตัวเอง'
+        },
+        {
+            id: 2,
+            Topic: 'เนื้อหาไม่เหมาะสม',
+            ProblemBy: 'คุณต้อม',
+            ReportBy: 'คุณทอม',
+            Problem: 'คุณต้อมได้ทำการแจ้งรายละเอียดเท็จffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+        },
+        {
+            id: 3,
+            Topic: 'เนื้อหาไม่เหมาะสม',
+            ProblemBy: 'คุณต้อม',
+            ReportBy: 'คุณทอม',
+            Problem: 'คุณต้อมได้ทำการแจ้งรายละเอียดเท็จ'
+        }
+    ])
 
     // ---end test---
 
@@ -235,23 +257,21 @@ const Manager = () => {
         const [problemListClass, setProblemListClass] = useState('problemListBox')
         const ProblemList = problemThatReport.map(
             problemThatReport => <button className={problemListClass} onFocus={() => {
-                SetIDChoose(problemThatReport.reportId)
+                SetIDChoose(problemThatReport)
             }}>
-                <div style={{display:'flex'}}><div style={{textAlign:'left',overflow: 'hidden',textOverflow:'ellipsis',maxWidth:'15ch',height:'35px'}}>ID #{problemThatReport.petId}</div>
-                <div>ปัญหา {problemThatReport.topic}</div></div>
 
-                <div>เกิดขึ้นจาก {problemThatReport.nameOfSeller}</div>
+                <div>ปัญหา #{problemThatReport.reportId} {problemThatReport.problemType}</div>
+                <div>รายงานปัญหาโดย {problemThatReport.nameOfCustomer}</div>
 
             </button>
         )
         const Problemdetail = problemThatReport.map(problemThatReport => {
             if (problemThatReport.reportId == IDChoose) {
                 return <div>
-                    <p className='problemTopicText'>petID #{problemThatReport.petId} </p>
-                    <p className='problemTopicText'>หัวข้อปัญหา {problemThatReport.problemType}</p>
+                    <p className='problemTopicText'>หัวข้อปัญหา #{problemThatReport.reportId} {problemThatReport.problemType}</p>
                     <div className='problemReportRespone'>
                         <div className='problemImgDiv'><img className='problemprofile' src={imageTest}></img></div>
-                        <p className='problemReportResponeText'>ปัญหาเกิดขึ้นจาก: {problemThatReport.nameOfSeller}</p>
+                        <p className='problemReportResponeText'>ปัญหาเกิดขึ้นโดย: {problemThatReport.nameOfSeller}</p>
                         <p className='problemReportResponeText'>รายงานโดย: {problemThatReport.nameOfCustomer}</p>
                     </div>
                     <p className='problemProblemText'>เกิดอะไรขึ้น</p>
@@ -276,9 +296,7 @@ const Manager = () => {
                 SetIDChoose(contractThatReport.reportId)
             }}>
 
-                <div style={{display:'flex'}}><div style={{textAlign:'left',overflow: 'hidden',textOverflow:'ellipsis',maxWidth:'15ch',height:'35px'}}>ID #{contractThatReport.reportId}</div>
-                <div>หัวข้อ {contractThatReport.topic}</div></div>
-                
+                <div style={{overflow: 'hidden',textOverflow:'ellipsis',maxWidth:'25ch',height:'35px'}}>หัวข้อ #{contractThatReport.reportId} {contractThatReport.topic}</div>
                 <div>จาก {contractThatReport.email}</div>
 
             </button>
@@ -286,7 +304,7 @@ const Manager = () => {
         const Contractdetail = contractThatReport.map(contractThatReport => {
             if (contractThatReport.reportId == IDChoose) {
                 return <div>
-                    <div className='problemTopicText'>หมายเลขID #{contractThatReport.reportId}</div>
+                    <div className='problemTopicText'>หัวข้อ #{contractThatReport.reportId}</div>
                     <div className='problemTopicText'>เรื่อง {contractThatReport.topic}</div>
                     <div className='problemReportRespone'>
                         <div className='problemImgDiv'><img className='problemprofile' src={imageTest}></img></div>
