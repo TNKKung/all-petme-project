@@ -77,6 +77,8 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
       });
   };
 
+  
+
   function arrayBufferToBase64(buffer) {
     var binary = "";
     var bytes = [].slice.call(new Uint8Array(buffer));

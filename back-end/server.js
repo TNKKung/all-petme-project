@@ -468,11 +468,12 @@ expressApp.post("/dataPetMyStore", function (req, res) {
   });
 });
 
-expressApp.post("/api/add/contact", function (req, res) {
+expressApp.post("/addContact", function (req, res) {
   const { name, email, mobileNumber, topic, message } = req.body;
 
   console.log(req.body);
-  const user = {
+  const report = {
+    reportId : uuidv4(),
     name: name,
     email: email,
     mobileNumber: mobileNumber,
@@ -482,10 +483,20 @@ expressApp.post("/api/add/contact", function (req, res) {
   res.send(user);
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("manager");
-    dbo.collection("Contact").insertOne(user, function (err, res) {
+    dbo.collection("Contact").insertOne(report, function (err, res) {
       console.log("Add one one contact");
       db.close();
     });
+  });
+});
+
+expressApp.post("/getContact", function (req, res) {
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("manager");
+    dbo.collection("Contact").find({}).toArray(function(err,result){
+      console.log(result)
+    })
   });
 });
 
@@ -638,7 +649,7 @@ expressApp.post("/choosePeopleForChat", function (req, res) {
 expressApp.delete("/cancelAccept", function (req, res) {
   const { userId, petId } = req.body;
   console.log(req.body);
-
+  console.log('tomtam')
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
     dbo
@@ -649,6 +660,8 @@ expressApp.delete("/cancelAccept", function (req, res) {
       });
   });
 });
+
+
 
 expressApp.delete("/cancelLikeUser", function (req, res) {
   const { userId, petId } = req.body;

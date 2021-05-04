@@ -124,6 +124,8 @@ const Profile = () => {
         }
     }
 
+
+
     const validMobile = (mobilePhone) => {
         if (mobilePhone[0] === '0' && (mobilePhone[1] === '9' || mobilePhone[1] === '6' || mobilePhone[1] === '8')) {
             for (var i = 0; i < 10; i++) {
@@ -573,6 +575,27 @@ const Profile = () => {
         }
         setUser(shallowUser)
     }
+   
+    const [petIdForPayment,setPetIdForPayment] = useState()
+    const fetchDataCancelPayment = async() => {
+        
+        const res = await fetch('http://localhost:4000/cancelAccept',{
+          method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+            body: JSON.stringify({
+                petId : petIdForPayment.petId,
+                userId : user.userId,
+            }),
+        });
+
+        const dataPet = await res.json()
+        localStorage.setItem('dataPetForLike',JSON.stringify(dataPet))
+        
+        
+    }
     
 
     const fetchDataMyMarket = async() => {
@@ -583,6 +606,7 @@ const Profile = () => {
             },
             mode : "cors",
             body: JSON.stringify({
+                
                 userId : user.userId
             }),
         });
@@ -1021,7 +1045,7 @@ const Profile = () => {
                                                 <div className='col4-price'><div className='.center-div-pink'>{each.cost}</div></div>
                                                 <div className='col6-total'><div className='.center-div-pink'>
                                                 <button class="money-button" onClick={() => {showPopUp('Sell');setChoosePayment(each);}}>ซื้อสุนัข</button></div></div>
-                                                <div class='col4-price'><div class='col1-tools' onClick={() => cancelPaidDog(each)}>X</div></div>
+                                                <div class='col4-price'><div class='col1-tools' onClick={() => {setPetIdForPayment(each);fetchDataCancelPayment();window.location.reload()}}>X</div></div>
                                             </div>
                                         )
                                     })}
