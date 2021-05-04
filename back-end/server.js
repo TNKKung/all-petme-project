@@ -16,9 +16,7 @@ const pondmongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
 const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-const kamongo = "mongodb+srv://mrzombit:erika1000@cluster0.3d2bo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
-  var url = kamongo;
+var url = pondmongo;
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
@@ -634,6 +632,36 @@ expressApp.post("/choosePeopleForChat", function (req, res) {
           console.log("acceptUser complete");
         }
       );
+  });
+});
+
+expressApp.delete("/cancelAccept", function (req, res) {
+  const { userId, petId } = req.body;
+  console.log(req.body);
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo
+      .collection("Pet")
+      .updateOne({ petId: petId }, { $pull: { acceptUser: { userId: userId } } })
+      .then((obj) => {
+        console.log("cancel complete");
+      });
+  });
+});
+
+expressApp.delete("/cancelLikeUser", function (req, res) {
+  const { userId, petId } = req.body;
+  console.log(req.body);
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo
+      .collection("Pet")
+      .updateOne({ petId: petId }, { $pull: { likeUser: { userId: userId } } })
+      .then((obj) => {
+        console.log("cancel like complete");
+      });
   });
 });
 
