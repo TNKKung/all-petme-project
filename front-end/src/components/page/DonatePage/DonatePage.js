@@ -48,7 +48,7 @@ function DonatePage() {
           {dataPet.filter((a)=>a.typeSell==='บริจาค').map(dog => {                                                  /////edit const dog
             return <PetCard dog={dog} setdogDetail={SetdogInfo} setpop={setPopups}/>
           })}
-          {Popup ?<PopDetail setPopUp={setPopups} getDog = {dogInfo}/>:null}
+          {Popup ?<PopDetail onChange={localStorage.setItem("dataPetIdForDetailMarket",JSON.stringify(dogInfo))} setPopUp={setPopups} getDog = {dogInfo}/>:null}
         </div>
       </div>
     </div>

@@ -203,9 +203,6 @@ const Register = () => {
     });
     const a = await res.json();
     setCheck(a)
-
-    
-
   }
 
   const submitRegisterForm = ()=> {
@@ -222,13 +219,14 @@ const Register = () => {
       dateErrorSign === '✔')==true
     ){
       summitTobackEnd();
+      console.log(check)
 
-      if(check == false){
+      if(check == true){
         alert('register faild')
       }
-      else{
+      if(check == false ){
         alert('register complete')
-        let path = `/profile`; 
+        let path = `/login`; 
         history.push(path);
       }
       

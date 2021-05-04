@@ -402,13 +402,13 @@ expressApp.post("/api/add/registerUser", function (req, res) {
           if(result[i].username === username){
             a = true;
             console.log('faild')
-            res.send(false)
+            res.send(true)
           }
         }
         if(a == false){
           dbo.collection("User").insertOne(user, function (err) {
             console.log("Add one people");
-            res.send(true)
+            res.send(false)
           });
         }
           
@@ -447,20 +447,22 @@ expressApp.post("/addAnswer", function (req, res) {
     picture,
   } = req.body;
   console.log(req.body);
+
+  const likeUser = {
+    userId,
+    answer1: answer1,
+    answer2: answer2,
+    answer3: answer3,
+    answer4: answer4,
+    answer5: answer5,
+    name: name,
+    picture: picture,
+    picturePromtpay : "picturePromtpay",
+    paymentStatus : "paymentStatus",
+  };
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
-    const likeUser = {
-      userId,
-      answer1: answer1,
-      answer2: answer2,
-      answer3: answer3,
-      answer4: answer4,
-      answer5: answer5,
-      name: name,
-      picture: picture,
-      picturePromtpay : "picturePromtpay",
-      paymentStatus : "paymentStatus",
-    };
+    
     dbo
       .collection("Pet")
       .updateOne(
@@ -470,19 +472,7 @@ expressApp.post("/addAnswer", function (req, res) {
           console.log("add answer of petId" + petId + " complete");
         }
       );
-    const listPetIdForBuy = {
-      petId: petId,
-    };
-    dbo
-      .collection("User")
-      .updateOne(
-        { userId: userId },
-        { $push: { listPetIdForBuy } },
-        function (err, res) {
-          console.log("ttt");
-          db.close();
-        }
-      );
+   
   });
 });
 
