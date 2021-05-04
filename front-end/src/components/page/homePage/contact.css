@@ -1,0 +1,712 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+  
+  @font-face {
+    font-family: 'Kanit';
+    src: url('../../../fonts/Kanit-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+
+  .pageStyle {
+    justify-content:initial;
+  }
+  
+  /*------------------------------------------------- N A V B A R -----------------------------------------------*/
+
+
+  .menu {
+    font-family: 'Kanit';
+    text-decoration: none;
+    list-style-type:  none;
+    align-items: center;
+  }
+  
+  nav {
+    background: linear-gradient(0deg, #00AFB9, #00AFB9), #0081A7;
+    box-shadow: 0px 2px 4px rgba(0, 129, 167, 0.25);
+    padding: 5px 20px;
+    height: 79px;
+  }
+  .sizePane {
+    height:max-content;
+    /* border: 5px solid green; */
+  }
+  .profile-icon:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  /* ---------------------------ติดต่อเรา--------------------------------------------- */
+  .contract-Topic{
+    height: 341px;
+    width: 100%;
+    display:flex;
+  }
+  .contract-aboutTopic{
+    position:absolute;
+    height: 341px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .contract-aboutTopic-text{
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 72px;
+  
+    color: white;
+    text-align: center;
+
+  }
+  .contract-aboutTopic-bg {
+    position: relative;
+    object-fit: cover;
+    object-position: 75% 20%;
+    height: 341px;
+    width: 100%;
+  }
+  /* ----------Address-Contract------------ */
+  .contract-addressContractBox{
+    display: flex;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    
+  }
+  .contract-addressContractWrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .contract-addressBox{
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+    min-width: 250px;
+    align-items: center;
+    margin-bottom: 5%;
+    
+  }
+  .contract-headText{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    
+    
+  }
+  .contract-textAddress{
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    padding-left: 2%;
+    overflow:auto;
+    
+  }
+  .contract-logoAddress{
+    height: 60px;
+    width: 60px;
+    margin: 0.5%;
+  }
+  .contract-textBox{
+    display: flex;
+    gap: 5%;
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  /* ----------ติดต่อ--------------- */
+  .contract-contractBox{
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    min-width: 300px;
+    align-items: center;
+    
+  }
+  .contract-inputLayer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    
+  }
+  .contract-inputTextB{
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 320px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #F3F4F4;
+    padding: 10px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+  }
+  .contract-inputTextB-alert{
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 320px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid red;
+    background-color: #F3F4F4;
+    padding: 10px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+  }
+  .contract-alert-text{
+    padding-left: 10px;
+    margin-left: 30px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    color: red;
+  }
+
+  .contract-inputTextBLong{
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 95%;
+    height: 197px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #F3F4F4;
+    padding: 10px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    box-sizing: border-box;
+    resize: none;
+    
+  }
+
+  .contract-inputTextBLong-alert{
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 95%;
+    height: 197px;
+    border-radius: 10px;
+    border: 1px solid red;
+    background-color: #F3F4F4;
+    padding: 10px;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    box-sizing: border-box;
+    resize: none;
+    
+  }
+
+  .contract-buttonSumit{
+    margin: 30px;
+    background-color: #ED8E82;
+    width: 150px;
+    height: 57px;
+    border-radius: 50px;
+    border: 1px solid #ED8E82;
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    transition: all 0.5s;;
+    font-size: 18px;
+    color: black;
+    outline: none;
+    
+  }
+  .contract-buttonSumit:hover{
+    background-color: #ED8E82;
+    color: white;
+  }
+  .contract-buttonSumit:active{
+    background-color: #c57368;
+    color: rgb(207, 207, 207);
+    transition: 0.2s;
+    border-color: none;
+  }
+  
+    
+  /* --------googlemap---------- */
+  .contract-pointText{
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    color: white;
+  }
+  .contract-pointPane{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contract-logoAddress{
+    height: 25px;
+    width: 25px;
+    margin: 0.5%;
+  }
+
+  
+  /*------------------- C O N T A C T ---------------------------------------------*/  
+  
+  .contact-section {
+    background-color: #0A272C;
+    
+    justify-content: space-around;
+    height: 500px;
+  }
+  .bottom-icon-pad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bottom-icon {
+    width: 56px;
+    height: 59px;
+    margin: 20px;
+  }
+  .bottom-icon-text {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+  }
+  .contact-pad {
+    margin: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .contact-text {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+  
+    color: white;
+    text-align: center;
+  }
+  
+  .contact-pad-roll-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .contact-pad-roll-2 {
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  .tel-icon {
+    width: 21px;
+  }
+  .mail-icon {
+    width: 23px;
+  }
+  .address-icon {
+    width: 32px;
+  }
+  /*------------------------------END SIZE---------------------------*/
+  ul {
+    list-style-type:  none;
+  }
+  
+  .toggle-button {
+    font-family: 'Kanit';
+    color: white;
+    align-items: center;
+    background: transparent;
+    border: transparent;
+  }
+  
+  .menu-logo a:hover {
+    text-decoration: none;
+  }
+  .menu-logo-img {
+    height: 61px;
+    width: 63px;
+  }
+  
+  .profile-icon{
+    height: 47px;
+    width: 47px;
+    border-radius: 100%;
+  }
+  
+  .bell-icon {
+    height: 45px;
+    width: 45px;
+  }
+  
+  .a-center {
+    align-items:  center;
+    background-color: transparent;
+    border: transparent;
+  }
+  
+  .menu li {
+    font-size: 16px;
+    padding: 15px 5px;
+    white-space: nowrap;
+    list-style-type:  none;
+  }
+  
+  .menu {
+    display:  flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+    margin-top: 5px;
+  }
+  
+  .toggle {
+    order: 1;
+  }
+  
+  
+  .menu-header.logo.button {
+    order: 2;
+    /* align-items: center; */
+  }
+  
+  .menu-header.logo.button.profile {
+    order: 2;
+  }
+  
+  .menu-header {
+    width: 100%;
+    text-align: center;
+    order:  3;
+    display: none;
+    align-items: center;
+  }
+  
+  .menu-header.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a757a;
+    height: 80px;
+    border: 2px solid rgb(184, 185, 185);
+  }
+  .menu-pad {
+    justify-content: bet;
+    /* border:  2px solid darkblue; */
+  }
+  
+  .paddy {
+    margin-top: 5px;
+    width: 139px;
+    height: 0px;
+    border-radius: 50px;
+  }
+  .current-ast{
+    font-family: 'Kanit';
+    vertical-align: middle;
+    color: white;
+    align-items: center;
+    font-size: 24px;
+  
+    align-items: center;
+    width: 139px;
+    height: 50px;
+    background-color: #EC8E82;
+    border-radius: 50px;
+  }
+  .ast {
+  
+    font-family: 'Kanit';
+    vertical-align: middle;
+    color: white;
+    align-items: center;
+    font-size: 24px;
+  
+    align-items: center;
+    width: 139px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50px;
+  
+  }
+  .ast-fullbg {
+    font-family: 'Kanit';
+    color: white;
+    text-decoration: none;
+    align-items: center;
+    font-size: 24px;
+  
+    align-items: center;
+    width: 139px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 50px;
+  }
+  .ast-fullbg:hover {
+    cursor: pointer;
+    align-items: center;
+    width: 139px;
+    height: 40px;
+    background-color: #eea89f;
+    border-radius: 50px;
+  }
+  
+  .ast:hover {
+    cursor: pointer;
+    align-items: center;
+    width: 139px;
+    height: 40px;
+    background-color: #eea89f;
+    border-radius: 50px;
+  }
+
+  @media all and (min-width: 600px){
+    
+    .menu {
+      justify-content: center;
+    }
+    
+    .menu-header {
+      border: none;
+    }
+    .menu-logo  {
+      flex: 1;
+    }
+  
+    .toggle{
+      flex: 1;
+      text-align: right;
+    }
+  
+    .menu-header.logo.button{
+      width: auto;
+      height: 100%;
+      order: 1;
+      display: block;
+      align-items: center;
+    }
+  
+    .toggle {
+      order: 2;
+    }
+  
+    .hide {
+      display: none;
+    }
+  
+    .logo.button.profile{
+      align-items: center;
+    }
+  
+    .bell.button {
+      padding: 3px 15px;
+      color: white;
+      background: teal;
+      border: 1px solid #006D6D;
+    }
+  
+    .profile-button {
+      padding: 3px 15px;
+      color: white;
+      background: transparent;
+      border: 1px solid #006D6D;
+    }
+  
+    .menu-header.logo.button:hover{
+      text-decoration:  none;
+    }
+  
+    .menu-header.logo.button:not(.profile) :hover{
+      opacity: 0.5;
+    }
+  }
+
+  @media all and (min-width: 900px) {
+    .contact-section {
+        display: flex;
+    }
+    .contact-section {
+        height: 400px;
+    }
+    .bottom-icon-text{
+        font-size: 60px;
+    }
+    
+    .menu-header{
+        display: flex;
+        width: 150px;
+        align-items: center;
+        border: none;
+    }
+    
+
+    .toggle {
+        display: none;
+    }
+
+    .ast {
+        width: 80px;
+        height: 40px;
+        background-color: #00AFB9;
+        border-radius: 50px;
+        align-items: center;
+    }
+    
+    a:hover{
+        width: 100px;
+        height: 50px;
+    }
+
+    .menu-logo {
+        order: 0;
+    }
+
+    .menu-header {
+        order: 1;
+    }
+
+    .menu-header.logo.button {
+        order: 2;
+    }
+
+    .menu li {
+        padding: 10px 10px;
+    }
+    .menu li.menu-header.logo.button {
+        padding-right: 0;
+    }
+
+  }
+  
+  @media all and (min-width: 1100px) {
+    .contact-section {
+      display: flex;
+    }
+    .contact-section {
+      height: 400px;
+    }
+    .bottom-icon-text{
+      font-size: 60px;
+    }
+    .menu-header{
+      display: flex;
+      width: auto;
+      align-items: center;
+      border: none;
+    }
+    
+
+    .toggle {
+      display: none;
+    }
+  
+    .ast {
+      width: 100px;
+      height: 50px;
+      background-color: #00AFB9;
+      border-radius: 50px;
+      align-items: center;
+    }
+    
+    a:hover{
+      width: 100px;
+      height: 50px;
+    }
+  
+    .menu-logo {
+      order: 0;
+    }
+  
+    .menu-header {
+      order: 1;
+    }
+  
+    .menu-header.logo.button {
+      order: 2;
+    }
+  
+    .menu li {
+      padding: 10px 10px;
+    }
+    .menu li.menu-header.logo.button {
+      padding-right: 0;
+    }
+  
+  
+    .menu-header.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: transparent
+    }
+
+  
+  }
+  
+  
+  @media all and (min-width: 1280px){
+    .contact-section {
+      height: 300px;
+    }
+    .bottom-icon-text{
+      font-size: 72px;
+    }
+    .contact-text {
+      font-size: 24px;
+    }
+    .menu-header.logo.button.profile {
+      padding-left: 180px;
+      margin-right: 40px;
+    }
+    .menu-header:not(.logo) {
+      padding: 0px 10px;
+    }
+    
+  }
+  
+  @media all and (min-width: 1400px){
+    .menu-header.menu-header.logo.button:not(.profile) {
+      padding-left: 41px;
+    }
+    .activity-section-inside {
+      display: flex;
+    }
+  
+    .bottom-icon-text{
+      margin-right: 300px;
+    }
+  
+  }
+  

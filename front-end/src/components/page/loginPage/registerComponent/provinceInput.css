@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+  
+  @font-face {
+    font-family: 'Kanit';
+    src: url('/src/fonts/Kanit-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .singleProvinceData {
+    font-family: 'Kanit';
+    font-size: xx-large;
+    border: 2px solid salmon;
+    width: relative*0.8;
+  }
+
+  .inputProvince{
+    font-family:  'Kanit';
+    width: 410px;
+    height: 70px;
+    font-size: 30px;
+    background-color: #e9e9e9;
+    border: 2px solid rgb(8, 34, 34);
+    border-radius: 5px;
+  }
+  .selectProvinceA{
+    width: 300px;
+    height: 45px;
+    background-color: rgb(202, 202, 202);
+    font-size: 20px;
+    font-family: 'Kanit';
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+  }
+  .selectProvinceA2{
+    width: 300px;
+    height: 45px;
+    background-color: rgb(202, 202, 202);
+    font-size: 20px;
+    font-family: 'Kanit';
+    border-radius: 5px;
+
+  }
+  .sdskaka{
+    margin-top: 5px;
+    margin-left: 15px;
+    font-size: 20px;
+    color: rgb(0, 0, 63);
+  }
+  .pad {
+    display: flex;
+    width: relative;
+    height: relative;
+    flex-direction: row;
+    /* border: 2px solid darkblue; */
+  }
+  .bttPad {
+    width: 90px;
+    height: relative;
+    background-color:rgb(63, 139, 214);
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+  }
+  .bttText {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+      color: rgb(206, 206, 206);
+      font-family: 'Kanit';
+      font-size:47px;
+      text-align: center;
+  }
+
+  .bttPad:hover {
+      cursor: pointer;
+        background-color:rgba(0, 51, 119, 0.603);
+  }
+
+  
+  .reg-input-wrapper {
+    background-color: #F3F4F4;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold;
+    background-color: #F3F4F4;
+    font-family: 'Kanit';
+    border: unset;
+    font-size: 30px;
+    border-radius: 5px;
+    width: 497px;
+    height: 71px;
+    outline: none;
+  }
+
+  .addpad {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reg-blockA {
+    margin-top: 23px;
+    display: flex;
+    flex-direction: column;
+    align-content: left;
+    justify-content: left;
+  }
+  .reg-blockAa2{
+      margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-content: left;
+    justify-content: left;
+  }
+
+  .reg-input-head {
+    font-family: 'Kanit';
+    width: relative;
+    margin-bottom: 20px;
+    text-align: left;
+    padding-top: 10px;
+    font-size: 24px;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #000000;
+  }
