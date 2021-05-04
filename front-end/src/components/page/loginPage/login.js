@@ -22,10 +22,14 @@ const Login = () => {
   const handleChange = (name, value) => {
     setData(prev => ({ ...prev, [name]: value }))
   }
-
+  const [a,setA] = React.useState()
   const submitForm = async(e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:4000/api/login',{
+
+    if(data.username == "" || data.password == ""){
+      alert("Login faild")
+    }else{
+      const res = await fetch('http://localhost:4000/checkPasswordForlogin',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
@@ -36,21 +40,27 @@ const Login = () => {
               password: data.password,
             }),
         });
-        const a = await res.json();
-        
-        localStorage.setItem("user",JSON.stringify(a))
-        const dataPath = JSON.parse(localStorage.getItem("user"))
+        const ack = await res.json();
 
-        if(dataPath.userId != null){
+
+        localStorage.setItem("statusLogin",JSON.stringify(ack[1]))
+        localStorage.setItem("user",JSON.stringify(ack[0]))
+        const statusLoginA = JSON.parse(localStorage.getItem("statusLogin"))
+        console.log(statusLoginA.statusLogin)
+
+        if(statusLoginA.statusLogIn == true){
           let path = "/profile"; 
           history.push(path);
           window.location.reload()
+        }else{
+          alert("login faild")
         }
+    }
+
+        
     //Carry on as normal
   }
-  React.useEffect(()=>{
-    console.log(data);
-  },[data]);
+
   return (
     <div className="Login">
       <img src = {Login_icon} className = 'logo_icon_style'/>

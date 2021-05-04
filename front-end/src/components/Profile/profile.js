@@ -758,7 +758,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
-                                                            <div className="img_list"><img className="img_list" src={each.picture} /></div>
+                                                            <div className="img_list"><img src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -789,7 +789,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
-                                                            <div className="img_list"><img className="img_list" src={each.picture} /></div>
+                                                            <div className="img_list"><img src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -896,7 +896,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { localStorage.setItem('petIdForStorePage',JSON.stringify(each.petId)); profileSwitch(6); setDogForSellToShow(each) }}>
-                                                            <div className="img_list">{each.picture}</div>
+                                                            <div className="petcard-img"> <img src={each.picture}/> </div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -924,7 +924,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => profileSwitch(6)}>
-                                                            <div className="img_list">{each.picture}</div>
+                                                             <div className="petcard-img"> <img src={each.picture}/> </div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>

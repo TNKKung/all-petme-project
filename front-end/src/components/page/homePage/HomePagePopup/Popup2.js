@@ -64,6 +64,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
         question3: form.question3,
         question4: form.question4,
         question5: form.question5,
+        typeSell : typeSell
       })
     );
     const res = await fetch("http://localhost:4000/uploadFile", {

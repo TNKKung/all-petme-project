@@ -59,7 +59,6 @@ io.on("connection", (socket) => {
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
-  console.log(req.body[0]);
   if (req.file == null) {
     console.log("null");
   } else {
@@ -99,7 +98,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
       typeSell,
     } = JSON.parse(req.body.jsonbody);
 
-    console.log(req.body);
+    
     if (req.body.lenght <= 2) {
       res.status(400).send("Error");
     } else {
@@ -176,6 +175,57 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
 });
 
 //---------------------------------------------------------------
+
+expressApp.post("/checkPasswordForlogin", function (req, res) {
+  const { username, password } = req.body;
+  var data=[];
+
+  function getFalse() {
+    data.push({statusLogIn : false})
+    res.send(data);
+  }
+  function getTrue() {
+    data.push({statusLogIn : true})
+    
+    res.send(data);
+  }
+
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("PetMeApp");
+    dbo.collection("User").find({username : username}).toArray(function(err,result){
+      data.push({
+        userId:result[0].userId,
+        name : result[0].name,
+        email : result[0].email,
+        mobileNumber : result[0].mobileNumber,
+        birth : result[0].birth,
+        address : result[0].address,
+        road : result[0].road,
+        subDistrict : result[0].subDistrict,
+        district : result[0].district,
+        province : result[0].province,
+        postalCode : result[0].postalCode,
+        picture : result.picture
+      })
+  })
+    dbo
+      .collection("User")
+      .find({ username: username })
+      .toArray(function (res, result) {
+        if (result[0].username === username) {
+            if(result[0].password === password){
+              getTrue()
+            }else{
+              console.log('faild')
+              getFalse()
+            }
+        } else {
+          console.log('faild')
+          getFalse()
+        }
+      });
+  });
+});
 
 expressApp.post("/api/login", function (req, res) {
   const { username, password } = req.body;
@@ -299,100 +349,7 @@ expressApp.post("/api/add/registerUser", function (req, res) {
   }
 });
 
-expressApp.post("/api/add/registerPet", function (req, res) {
-  const {
-    userId,
-    breed,
-    gender,
-    age,
-    petDetail,
-    cost,
-    nameAccountPromtpay,
-    detailAccountPromtpay,
-    question1,
-    question2,
-    question3,
-    question4,
-    question5,
-    profile,
-    picture,
-    typeSell,
-  } = req.body;
 
-  console.log(req.body);
-  if (req.body.lenght <= 2) {
-    res.status(400).send("Error");
-  } else {
-    const pet = {
-      petId: uuidv4(),
-      userId: userId,
-      breed: breed,
-      gender: gender,
-      age: age,
-      detail: petDetail,
-      cost: cost,
-      nameAccountPromtpay: nameAccountPromtpay,
-      detailAccountPromtpay: detailAccountPromtpay,
-      question1: question1,
-      question2: question2,
-      question3: question3,
-      question4: question4,
-      question5: question5,
-      profile: profile,
-      likeUser: [],
-      acceptUser: [],
-      cancelUser: [],
-      statusSell: true,
-      typeSell: typeSell,
-      picture: picture,
-      seller: { picture: " ", name: "ต้อม" },
-      dateCreate: "12/02/2554",
-    };
-
-    MongoClient.connect(url, function (err, db) {
-      var dbo = db.db("PetMeApp");
-      dbo.collection("Pet").insertOne(pet, function (err, res) {
-        console.log("Add one pet");
-      });
-      const listPetIdForSell = {
-        petId: pet.petId,
-      };
-      dbo
-        .collection("User")
-        .updateOne(
-          { userId: userId },
-          { $push: { listPetIdForSell } },
-          function (err, res) {
-            console.log("add pet");
-            db.close();
-          }
-        );
-      dbo
-        .collection("User")
-        .find({ userId: userId })
-        .toArray(function (err, result) {
-          const data = {
-            address: result[0].address,
-            birth: result[0].birth,
-            district: result[0].district,
-            email: result[0].email,
-            img: [],
-            listPetIdForSell: result[0].listPetIdForSell,
-            listPetIdForBuy: result[0].listPetIdForBuy,
-            mobileNumber: result[0].mobileNumber,
-            name: result[0].name,
-            postalCode: result[0].postalCode,
-            province: result[0].province,
-            road: result[0].road,
-            subDistrict: result[0].subDistrict,
-            userId: result[0].userId,
-            username: result[0].username,
-          };
-          res.send(data);
-        });
-    });
-  }
-});
 
 expressApp.post("/dataPetForLike", function (req, res) {
   const { userId } = req.body;
