@@ -229,7 +229,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
 
 
 
-          <div className='show-picture-cover'>
+          {/* <div className='show-picture-cover'>
             <div className='show-picture'>
               {form.subPicture1 ?
                 (<img src={form.subPicture1} className="image" style={{ height: '70px', width: '70px', borderRadius: '10px' }} />) : ("เพิ่ม")}
@@ -274,7 +274,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
                   // setDataimage(file);
                 }}
               /></div>
-          </div>
+          </div> */}
 
           {typeSell == "ขาย" ? (
             <div className="text-input-box">
