@@ -480,7 +480,7 @@ expressApp.post("/addContact", function (req, res) {
     topic: topic,
     message: message,
   };
-  res.send(user);
+
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("manager");
     dbo.collection("Contact").insertOne(report, function (err, res) {
@@ -490,12 +490,12 @@ expressApp.post("/addContact", function (req, res) {
   });
 });
 
-expressApp.post("/getContact", function (req, res) {
+expressApp.get("/getContact", function (req, res) {
 
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("manager");
     dbo.collection("Contact").find({}).toArray(function(err,result){
-      console.log(result)
+      res.send(result)
     })
   });
 });

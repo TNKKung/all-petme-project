@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 // ------------------------payment------------------------- 
 const ModalSlip = (props) => {
+    
     const [detailPaymentID, SetdetailPaymentId] = useState(props.detailPayment)
     const [imagesPreview, SetimagesPreview] = useState(null)
     function Previewpicture(e) {
@@ -237,32 +238,8 @@ const Manager = () => {
 
     // ---end test---
 
-    const [contractThatReport, setcontractThatReport] = useState([
-        {
-            id: 1,
-            topic: 'ต้องการติดสปอนเซอร์',
-            name: 'คุณทอม',
-            mobileNumber: '0899999999',
-            email: 'billchartkul@hotmail.com',
-            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง'
-        },
-        {
-            id: 2,
-            topic: 'ต้องการติดสปอนเซอร์2',
-            name: 'คุณทอม2',
-            mobileNumber: '0899999999',
-            email: 'billchartkul@hotmail.com2',
-            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง2'
-        },
-        {
-            id: 3,
-            topic: 'ต้องการติดสปอนเซอร์3',
-            name: 'คุณทอมมี่ไม่หันมอง',
-            mobileNumber: '0899999999',
-            email: 'billchartkul@hotmail.com3',
-            message: 'อยากชี้แจงรายละเอียดเพิ่มเติม กรุณาติดต่อกุ๊กกิ๊กมริกิ้งก้อง2'
-        }
-    ])
+    const [contractThatReport, setcontractThatReport] = useState([])
+    
 
     //// end//////
 
@@ -313,18 +290,19 @@ const Manager = () => {
 
     function ContractReport() {
         const [ContractListClass, setContractListClass] = useState('problemListBox')
+        
         const ContractList = contractThatReport.map(
             contractThatReport => <button className={ContractListClass} onFocus={() => {
-                SetIDChoose(contractThatReport.id)
+                SetIDChoose(contractThatReport.reportId)
             }}>
 
-                <div>หัวข้อ #{contractThatReport.id} {contractThatReport.topic}</div>
+                <div>หัวข้อ #{contractThatReport.reportId} {contractThatReport.topic}</div>
                 <div>จาก {contractThatReport.email}</div>
 
             </button>
         )
         const Contractdetail = contractThatReport.map(contractThatReport => {
-            if (contractThatReport.id == IDChoose) {
+            if (contractThatReport.reportId == IDChoose) {
                 return <div>
                     <p className='problemTopicText'>หัวข้อ #{contractThatReport.id} {contractThatReport.topic}</p>
                     <div className='problemReportRespone'>
@@ -367,6 +345,7 @@ const Manager = () => {
                             <p>ตรวจสอบสลิปโอนเงิน</p>
                         </button>
                         <button className={ProblemReportSlide} onMouseUp={() => {
+                            
                             SetSliderPayment(false); SetSliderProblem(true);SetSliderContract(false);
                             SetPaymentReportSlide('manager-barBlockSelect');
                             SetContractSlide('manager-barBlockSelect');
@@ -375,6 +354,20 @@ const Manager = () => {
                             <p>ตรวจสอบรายงานปัญหา</p>
                         </button>
                         <button className={ContractSlide} onMouseUp={() => {
+
+                            const fetchDataContact = async() => {
+                                const res = await fetch('http://localhost:4000/getContact',{
+                                method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json'     
+                                    },
+                                    mode : "cors",
+                                });
+                                const a =  await res.json()
+                                setcontractThatReport(a)
+                            }
+                            
+                            fetchDataContact();
                             SetSliderContract(true); SetSliderProblem(false);SetSliderPayment(false);
                             SetContractSlide('manager-barBlockSelectThis');
                             SetPaymentReportSlide('manager-barBlockSelect');
