@@ -77,13 +77,16 @@ const Profile = () => {
     const setPostalCode =(val) => { postalCode = val}
     var data = {}
     const [password_storer,set_password_storer] = useState([])
+
+    const [Profile_Dog,setProfile_Dog] = useState()
     const [user, setUser] = useState({})
     
         var Password=['','',''], 
         name=user.name, email=user.email, mobilePhone=user.mobileNumber, 
         birth=user.birth, address=user.address, road=user.road, 
         subDistrict=user.subDistrict, district=user.district, 
-        province=user.province, postalCode=user.postalCode;
+        province=user.province, postalCode=user.postalCode,picture=user.picture
+        
 
     // useEffect(() => {
         
@@ -1099,6 +1102,10 @@ const Profile = () => {
                         <label>
                             <div className='img_border'>
                                 <img className='img-wrap' src={Profile_Dog} />
+                                <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" style={{width:'300px',height:'30px'}}
+                                 onChange={(e) => {
+                                    setProfile_Dog(URL.createObjectURL(e.target.files[0]));}}></input>
+                                    
                             </div>
                             {/* <input id="photo-upload" type="file" onChange={this.handleInputChange}/>  */}
                         </label>
