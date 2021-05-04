@@ -577,8 +577,10 @@ const Profile = () => {
     }
    
     const [petIdForPayment,setPetIdForPayment] = useState()
+
     const fetchDataCancelPayment = async() => {
-        
+        const dataPayment = localStorage.getItem('petIdForCancelPay')
+
         const res = await fetch('http://localhost:4000/cancelAccept',{
           method: 'DELETE',
             headers: {
@@ -586,9 +588,11 @@ const Profile = () => {
             },
             mode : "cors",
             body: JSON.stringify({
-                petId : petIdForPayment.petId,
+                petId : dataPayment,
                 userId : user.userId,
             }),
+
+
         });
 
         const dataPet = await res.json()
@@ -1045,7 +1049,7 @@ const Profile = () => {
                                                 <div className='col4-price'><div className='.center-div-pink'>{each.cost}</div></div>
                                                 <div className='col6-total'><div className='.center-div-pink'>
                                                 <button class="money-button" onClick={() => {showPopUp('Sell');setChoosePayment(each);}}>ซื้อสุนัข</button></div></div>
-                                                <div class='col4-price'><div class='col1-tools' onClick={() => {setPetIdForPayment(each);fetchDataCancelPayment();window.location.reload()}}>X</div></div>
+                                                <div class='col4-price'><div class='col1-tools' onClick={() => {localStorage.setItem('petIdForCancelPay',each.petId);window.location.reload();fetchDataCancelPayment()}}>X</div></div>
                                             </div>
                                         )
                                     })}
