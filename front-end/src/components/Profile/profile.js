@@ -770,7 +770,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
-                                                            <div className="img_list"><img src={each.picture} /></div>
+                                                            <div className="img_list"><img style={{justifyContent:'center',height:'260px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -801,7 +801,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
-                                                            <div className="img_list"><img src={each.picture} /></div>
+                                                            <div className="img_list"><img style={{justifyContent:'center',height:'260px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -831,7 +831,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { setdogDetail(each); showPopUp('Dog') }}>
-                                                            <div className="img_list"><img className="img_list" src={each.picture} /></div>
+                                                            <div className="img_list"><img style={{justifyContent:'center',height:'260px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture} /></div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -908,7 +908,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => { localStorage.setItem('petIdForStorePage',JSON.stringify(each.petId)); profileSwitch(6); setDogForSellToShow(each) }}>
-                                                            <div className="petcard-img"> <img src={each.picture}/> </div>
+                                                            <div className="petcard-img"> <img style={{justifyContent:'center',height:'300px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture}/> </div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{each.typeSell==='บริจาค'?'บริจาคฟรี':'ราคา:'+ each.cost}</text>
@@ -936,7 +936,7 @@ const Profile = () => {
                                                 return (
                                                     <div className='cards__wrapper' key={key}>
                                                         <div className="img_wrapper" onClick={() => profileSwitch(6)}>
-                                                             <div className="petcard-img"> <img src={each.picture}/> </div>
+                                                             <div className="petcard-img"> <img style={{justifyContent:'center',height:'300px',width:'350px',objectFit:'cover',borderRadius: '1.5rem 1.5rem 0.5rem 0.5rem'}} src={each.picture}/> </div>
                                                             <div className="img_text_bottom">
                                                                 <text>{each.breed}</text>
                                                                 <text>{'ราคา :' + ' ' + each.cost}</text>
@@ -1421,6 +1421,9 @@ const Profile = () => {
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
+                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
+                                                            ยกเลิก
+                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
@@ -1444,6 +1447,9 @@ const Profile = () => {
                                                         <button className="like_button_details_selected" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
+                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
+                                                            ยกเลิก
+                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
@@ -1466,6 +1472,9 @@ const Profile = () => {
                                                     </button>
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
+                                                    </button>
+                                                        <button className="like_button_details_selected" onClick={() => likeNameSwitch(3)}>
+                                                            ยกเลิก
                                                     </button>
                                                     </div>
 

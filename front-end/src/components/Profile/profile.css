@@ -1134,6 +1134,7 @@ h1 {
     
     width: 165px;
     height: 107px;
+    object-fit: cover;
     border-radius: 20px;
 }
 .col3-name-header{
