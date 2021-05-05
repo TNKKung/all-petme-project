@@ -1118,15 +1118,14 @@ const Profile = () => {
                                         <div className='col6-total-header'><div class='.center-div-black'>ชำระเงิน</div></div>
                                         <div class='col4-price-header'><div class='.center-div-black'></div></div>
                                 </div>
-                                {paidDogData && paidDogData.map(each => {
+                                {dataPetForLike.filter((a)=>a.typeSell!=='บริจาค' && a.acceptUser.filter(e => e.userId == user.userId).filter(g=> a.checkStatus == true).map(e => e.userId).length!==0).map(each => {
                                     return (
                                         <div className='money-table-row'>
                                             <div class='col2-pic'><img className='money-table-pic' src={each.picture} /></div>
                                                 <div className='col3-name'><div className='.center-div-black'>{each.name}</div></div>
                                                 <div className='col4-price'><div className='.center-div-pink'>{each.price}</div></div>
                                                 <div className='col5-amount'><div className='.center-div-black'>{each.amount}</div></div>
-                                                <div className='col6-total'><div className='.center-div-pink'>
-                                                <button class="money-button" onClick={() => showPopUp('Sell')}>ดูสลิป</button></div></div>
+                                                <div className='col6-total'><div className='.center-div-pink'>{each.checkStatus?'ได้รับการยืนยันแล้ว':'รอการยืนยัน'}</div></div>
                                                 <div class='col4-price'></div>
                                         </div>
                                     )
@@ -1147,7 +1146,7 @@ const Profile = () => {
                         <label>
                             <div className='img_border'>
                                 <img className='img-wrap' src={Profile_Dog} />
-                                <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" style={{width:'300px',height:'30px'}}
+                                <p>เปลี่ยนรูปโปรไฟล์</p><input type="file" accept='image/png, image/jpeg' style={{width:'300px',height:'30px'}}
                                  onChange={(e) => {
                                     setProfile_Dog(URL.createObjectURL(e.target.files[0]));
                                     const fileTest = e.target.files[0]
@@ -1505,13 +1504,10 @@ const Profile = () => {
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
-                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
-                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
-                                                        {dogForSellToShow.likeUser.map((each) => {
+                                                        {dogForSellToShow.likeUser.filter().map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer');localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
@@ -1531,13 +1527,10 @@ const Profile = () => {
                                                         <button className="like_button_details_selected" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
                                                     </button>
-                                                        <button className="like_button_details" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
-                                                    </button>
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
-                                                        {dogForSellToShow.acceptUser.map((each) => {
+                                                        {dogForSellToShow.acceptUser.filter().map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>
@@ -1556,9 +1549,6 @@ const Profile = () => {
                                                     </button>
                                                         <button className="like_button_details" onClick={() => likeNameSwitch(2)}>
                                                             ยอมรับ
-                                                    </button>
-                                                        <button className="like_button_details_selected" onClick={() => likeNameSwitch(3)}>
-                                                            ยกเลิก
                                                     </button>
                                                     </div>
 

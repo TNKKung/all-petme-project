@@ -158,7 +158,10 @@ const PopUpDogDetail = (props) => {
         useLikePet.push(value.userId)
     }
     function CheckID(va){
-        if(dogPU.userId == va){
+        if(dogPU.slipOfCustomer != null){
+            return <div>สุนัขได้รับการยืนยันแล้ว</div>
+        }
+        else if(dogPU.userId == va){
             return <button onClick= {()=>{fetchDataCancelRegis(dogPU.petId);window.location.reload()}} className="pu-buttonA2" >ยกเลิกการลงทะเบียน</button>
         }
         else if(useLikePet.includes(va)){

@@ -211,6 +211,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
               type="file"
               id="uploadButton"
               className="uploadPicture"
+              accept='image/png, image/jpeg'
               onChange={(e) => {
                 const file = e.target.files[0];
                 if (!file) return;

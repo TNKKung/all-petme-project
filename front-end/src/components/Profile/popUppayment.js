@@ -94,7 +94,7 @@ const PopUppayment = (props) => {
                     <div className='pu-row'>
                         <div style={{display:'flex',flexDirection:'column',textAlign:'center'}}>อัพโหลดหลักฐานการชำระเงิน
                         <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center',gap:'5px'}}>
-                        <input type="file" style={{width:'300px',height:'30px'}}
+                        <input type="file" style={{width:'300px',height:'30px'}} accept='image/png, image/jpeg'
                                  onChange={(e) => {
                                     SetSlipPayment(URL.createObjectURL(e.target.files[0]));
                                     const fileTest = e.target.files[0]
