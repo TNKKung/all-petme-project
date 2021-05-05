@@ -224,11 +224,10 @@ const Register = () => {
       if(check == true){
         alert('register faild')
       }
-      if(check == false ){
-        alert('register complete')
+      
         let path = `/login`; 
         history.push(path);
-      }
+      
       
       
     }else{

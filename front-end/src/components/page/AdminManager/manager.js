@@ -73,41 +73,26 @@ const ModalSlip = (props) => {
 };
 
 const ModalSlipCheck = (props) => {
-    const [detailPaymentID, SetdetailPaymentId] = useState(props.detailPayment)
+    const [detailPaymentID, SetdetailPaymentId] = useState(props.detailAccountPromtpay)
     useEffect(() => {
         detailPaymentID.payCheck = true
     })
+    
     return (
         <div className={'manager-modal-wrapper'}>
             <div className={'manager-modal-backdrop'} />
             <div className='manager-modal-box' style={{ height: '700px' }}>
                 <div style={{ display: 'flex', flexDirection: 'row-reverse' }}><img className='paymentpictureExit' src={imageExit} onClick={() => { props.setPop(false) }}></img></div>
                 <div className='paymentSlipDetail'>
-                    <div style={{ overflow: 'auto', objectFit: 'cover', width: '300px', height: '400px' }}><img className='paymentpictureDog' style={{ width: '300px', height: '600px' }} src={detailPaymentID.SlipImage}></img></div>
+                    <div style={{ overflow: 'auto', objectFit: 'cover', width: '300px', height: '400px' }}><img className='paymentpictureDog' style={{ width: '300px', height: '600px' }} src={detailPaymentID.slipOfCustomer}></img></div>
 
-                </div>
-                <div className='infoPane'><p style={{ height: '2px' }}>ชื่อบัญชี-{detailPaymentID.NameCredit}</p>
-                    <p style={{ height: '2px', fontWeight: 'bold' }}>รายละเอียดบัญชี</p>
-                    <p style={{ height: '50px', width: '350px', overflowY: 'auto', wordWrap: 'break-word', textAlign: 'center' }}>{detailPaymentID.Creditinfo}</p>
                 </div>
 
                 {detailPaymentID.payCheck ? <p style={{ marginTop: '10px', textAlign: 'center' }}>ข้อมูลยืนยันเรียบร้อยแล้ว</p> : <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '10px' }}>
                     <button className='paymentButtonEffect' onClick={() => {
                         let a = window.confirm('ต้องการเปลี่ยนแปลง?'); if (a == true) {
-                            SetdetailPaymentId({
-                                id: detailPaymentID.id,
-                                Breed: detailPaymentID.Breed,
-                                Owner: detailPaymentID.Owner,
-                                Buyer: detailPaymentID.Buyer,
-                                Cost: detailPaymentID.Cost,
-                                imageDog: detailPaymentID.imageDog,
-                                NameCredit: detailPaymentID.NameCredit,
-                                Creditinfo: detailPaymentID.Creditinfo,
-                                SlipImage: detailPaymentID.SlipImage,
-                                payCheck: true,
-                                SlipPay: detailPaymentID.SlipPay
-                            })
-                            ///////Sent data///////////
+                            
+                            
                         }
                     }}>ยืนยันถูกต้อง</button>
                     <button className='paymentButtonEffect' onClick={() => {
@@ -165,18 +150,30 @@ function PaymentReport() {
     const [detailPaymentID, SetdetailPaymentId] = useState({ id: '', Breed: '', Owner: '', Buyer: '', Cost: '', imageDog: null, NameCredit: '', Creditinfo: '', SlipImage: '', payCheck: null })
     const [SlipPaymentPop, SetSlipPaymentPop] = useState(false)
     const [SlipCheckPop, SetSlipCheckPop] = useState(false)
+    const [payment,setPayment] = useState()
+    const fetchDataPayment= async() => {
+        const res = await fetch('http://localhost:4000/getDataPayment',{
+        method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'     
+            },
+            mode : "cors",
+        });
+        const a =  await res.json()
+        setPayment(a)
+    }
 
-    const PaymentDogList = PaymentDog.map(
+
+    const PaymentDogList = payment.map(
         PaymentDog => {
             if (PaymentDog.Buyer != '') {
                 return <div className='paymentDogPane'>
                     <div className='paymentDogTextPane'>
-                        <img className='paymentImageDog' src={PaymentDog.imageDog}></img>
-                        <div className='paymentLengthText'><p style={{ fontWeight: "bold", color: '#F07167' }}>สุนัขพันธ์:</p><p>{PaymentDog.Breed}</p></div>
-                        <p className='paymentLengthText'>คงเหลือ: {PaymentDog.Cost}</p>
+                        <img className='paymentImageDog' src={PaymentDog.picture}></img>
+                        <div className='paymentLengthText'><p style={{ fontWeight: "bold", color: '#F07167' }}>สุนัขพันธ์:</p><p>{PaymentDog.breed}</p></div>
+                        <p className='paymentLengthText'>คงเหลือ: {PaymentDog.cost}</p>
                         <div className='paymentGroupText1'>
-                            <p className='paymentLengthText'>ชื่อผู้ซื้อ : {PaymentDog.Buyer}</p>
-                            <p className='paymentLengthText'>ชื่อผู้ขาย: {PaymentDog.Owner}</p>
+                            <p className='paymentLengthText'>ชื่อผู้ขาย: {PaymentDog.profile}</p>
                         </div>
                     </div>
                     <div className='paymentGroupButton'>

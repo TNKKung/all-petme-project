@@ -1507,7 +1507,7 @@ const Profile = () => {
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.likeUser.length + ' ' + 'คนสนใจ'}</div>
-                                                        {dogForSellToShow.likeUser.filter().map((each) => {
+                                                        {dogForSellToShow.likeUser.map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(true); showPopUp('Answer');localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picture} /></div>
@@ -1530,7 +1530,7 @@ const Profile = () => {
                                                     </div>
                                                     <div className="like_card_details">
                                                         <div className="Text_like_all">{'จำนวน' + ' ' + dogForSellToShow.acceptUser.length + ' ' + 'คนสนใจ'}</div>
-                                                        {dogForSellToShow.acceptUser.filter().map((each) => {
+                                                        {dogForSellToShow.acceptUser.map((each) => {
                                                             return (
                                                                 <div className="block_user" onClick={() => { setUserAnswer(each); setPopUpAnsType(false); showPopUp('Answer');setChoosePeopleForAccept(each);localStorage.setItem('likeUser',JSON.stringify(each))}}>
                                                                     <div className="img_block_user_detail"><img className="img_user_list" src={each.picutre} /></div>

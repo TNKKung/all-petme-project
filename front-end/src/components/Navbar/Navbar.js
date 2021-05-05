@@ -5,7 +5,7 @@ import './Navbar.scoped.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Logo_icon_src from './img/top-icon.png'
 import Bell_icon_src from './img/bell-icon.png'
-import Profile_icon_src from './img/profile.jpg'
+import Profile_icon_src from './img/profile.png'
 
 
 function Navbar() {

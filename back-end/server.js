@@ -269,7 +269,6 @@ expressApp.post("/sendPromtpayForAdmin", upload.single("avatar"),function(req,re
         picture,
         dateCreate,
         slipOfCustomer,
-        checkStatus
     } = JSON.parse(req.body.jsonbody);
     
     
@@ -298,12 +297,12 @@ expressApp.post("/sendPromtpayForAdmin", upload.single("avatar"),function(req,re
         slipOfCustomer:slipOfCustomer,
         picture : `http://localhost:4000/static/${newFileName}`,
         dateCreate: dateCreate,
-        checkStatus : checkStatus
+        checkStatus : true
       };
       console.log(pet)
       MongoClient.connect(url, function (err, db) {
-        var dbo = db.db("manager");
-        dbo.collection("Payment").insertOne(pet, function (err, res) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Uer").insertOne(pet, function (err, res) {
           console.log("Add payment");
         });
       })
