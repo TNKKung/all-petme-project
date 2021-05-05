@@ -49,7 +49,7 @@ const PopUppayment = (props) => {
                     </div>
                     <div className='pu-row'>
                         <div style={{display:'flex',flexDirection:'column',textAlign:'center'}}>อัพโหลดหลักฐานการชำระเงิน
-                        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center'}}>
+                        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center',gap:'5px'}}>
                         <input type="file" style={{width:'300px',height:'30px'}}
                                  onChange={(e) => {
                                     SetSlipPayment(URL.createObjectURL(e.target.files[0]));
@@ -57,7 +57,7 @@ const PopUppayment = (props) => {
                                     // setImageProfile(fileTest);
                                 }}></input>
                                 <button onClick={()=>{ }}>ส่งสลิป</button>
-                                <div className='pu-up-imga'><img className='pu-up-img' src={SlipPayment} /></div></div>
+                                <div><div className='pu-up-imga' style={{overflow: 'auto', objectFit: 'cover',}}><img className='pu-up-img' src={SlipPayment} /></div></div></div>
                     </div></div></div>
                     
                 }
