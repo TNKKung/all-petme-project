@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
         text,
       });
     });
-  });
+});
 });
 
 expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
@@ -170,7 +170,6 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
   }
 });
 
-
 expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
 
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
@@ -229,8 +228,6 @@ expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
     }
   }
 });
-
-
 //---------------------------------------------------------------
 
 expressApp.post("/checkPasswordForlogin", function (req, res) {
@@ -418,8 +415,6 @@ expressApp.post("/api/add/registerUser", function (req, res) {
   }
 });
 
-
-
 expressApp.post("/dataPetForLike", function (req, res) {
   const { userId } = req.body;
   MongoClient.connect(url, function (err, db) {
@@ -433,6 +428,25 @@ expressApp.post("/dataPetForLike", function (req, res) {
       });
   });
 });
+
+expressApp.post("/checkPromtpayForAddmin",function(req,res){
+  const {
+    userId:userId,
+    answer1: answer1,
+    answer2: answer2,
+    answer3: answer3,
+    answer4: answer4,
+    answer5: answer5,
+    name: name,
+    picture: picture,
+    picturePromtpay : picturePromtpay,
+    paymentStatus : paymentStatus,
+  } =req.body
+
+  
+
+
+})
 
 expressApp.post("/addAnswer", function (req, res) {
   const {
@@ -731,8 +745,6 @@ expressApp.delete("/cancelAccept", function (req, res) {
   });
 });
 
-
-
 expressApp.delete("/cancelLikeUser", function (req, res) {
   const { userId, petId } = req.body;
   console.log(req.body);
@@ -777,7 +789,6 @@ expressApp.delete("/cancelRegis", function (req, res) {
 
 const generatePayload = require('promptpay-qr') 
 const qrcode = require('qrcode') 
-
 expressApp.post("/promtpay",function(req,res){
 
 
