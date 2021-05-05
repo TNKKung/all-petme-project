@@ -310,7 +310,15 @@ expressApp.post("/sendPromtpayForAdmin", upload.single("avatar"),function(req,re
     }
 })
 
+expressApp.get("/getPayment", function (req, res) {
 
+  MongoClient.connect(url, function (err, db) {
+    var dbo = db.db("manager");
+    dbo.collection("Payment").find({}).toArray(function(err,result){
+      res.send(result)
+    })
+  });
+});
 //---------------------------------------------------------------
 
 expressApp.post("/checkPasswordForlogin", function (req, res) {
