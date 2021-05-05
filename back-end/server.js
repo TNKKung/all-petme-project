@@ -19,7 +19,7 @@ const tommongo =
   "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
   const Bmongo =
   'mongodb+srv://petMeApp:12345@cluster0.smgpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-var url = Bmongo;
+var url = tommongo;
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
@@ -229,7 +229,8 @@ expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
   }
 });
 
-expressApp.post("/sendPromtpayForAddmin",function(req,res){
+expressApp.post("/sendPromtpayForAdmin", upload.single("avatar"),function(req,res){
+  console.log(req.body)
   let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
   let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
   if (req.file == null) {
@@ -244,33 +245,33 @@ expressApp.post("/sendPromtpayForAddmin",function(req,res){
           console.log("200");
         }
       );
-      
     });
-
     const {
-      petId,
-    userId,
-    breed,
-    gender,
-    age,
-    detail,
-    cost,
-    nameAccountPromtpay,
-    detailAccountPromtpay,
-    question1,
-    question2,
-    question3,
-    question4,
-    question5,
-    profile,
-    likeUser,
-    acceptUser,
-    statusSell,
-    typeSell,
-    picture,
-    dateCreate,
-    slipOfCustomer
+        petId,
+        userId,
+        breed,
+        gender,
+        age,
+        detail,
+        cost,
+        nameAccountPromtpay,
+        detailAccountPromtpay,
+        question1,
+        question2,
+        question3,
+        question4,
+        question5,
+        profile,
+        likeUser,
+        acceptUser,
+        statusSell,
+        typeSell,
+        picture,
+        dateCreate,
+        slipOfCustomer,
+        checkStatus
     } = JSON.parse(req.body.jsonbody);
+    
     
       const pet = {
         petId:petId,
@@ -297,20 +298,18 @@ expressApp.post("/sendPromtpayForAddmin",function(req,res){
         slipOfCustomer:slipOfCustomer,
         picture : `http://localhost:4000/static/${newFileName}`,
         dateCreate: dateCreate,
+        checkStatus : checkStatus
       };
-      
+      console.log(pet)
       MongoClient.connect(url, function (err, db) {
-        var dbo = db.db("PetMeApp");
+        var dbo = db.db("manager");
         dbo.collection("Payment").insertOne(pet, function (err, res) {
           console.log("Add payment");
         });
-
       })
-
-  
-  }
-  
+    }
 })
+
 
 //---------------------------------------------------------------
 
@@ -539,8 +538,6 @@ expressApp.post("/addAnswer", function (req, res) {
     answer5: answer5,
     name: name,
     picture: picture,
-    picturePromtpay : "picturePromtpay",
-    paymentStatus : "paymentStatus",
   };
   MongoClient.connect(url, function (err, db) {
     var dbo = db.db("PetMeApp");
@@ -677,30 +674,6 @@ expressApp.get("/getReport", function (req, res) {
   });
 });
 
-expressApp.post("/api/get/checkPayment", function (req, res) {
-  var data = [];
-  MongoClient.connect(url, function (err, db) {
-    var dbo = db.db("Admin");
-    dbo
-      .collection("Pament")
-      .find()
-      .toArray(function (err, result) {
-        for (var i = 0; i < result.length; i++) {
-          data.push({
-            petId: result[i].petId,
-            cost: result[i].cost,
-            breed: result[i].breed,
-            customerUser: result[i].customerUser,
-            sellerUser: result[i].sellerUser,
-            statusCheck: false,
-            nameAccountPromtpay: result[i].nameAccountPromtpay,
-          });
-        }
-        res.send(data);
-        db.close();
-      });
-  });
-});
 
 expressApp.put("/updateProfileUser", function (req, res) {
   const {

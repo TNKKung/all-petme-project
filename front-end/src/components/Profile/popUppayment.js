@@ -30,6 +30,50 @@ const PopUppayment = (props) => {
         setPuHeader('ยืนยันการชำระเงิน')
     }
     const qr = localStorage.getItem('pathQr')
+    const [imageProfile,setImageProfile] = useState()
+    const fetchDataPayment = async (e) => {
+        console.log(getTotalPaid)
+
+        let formData = new FormData();
+        formData.append("avatar", imageProfile);
+        formData.append(
+          "jsonbody",
+          JSON.stringify({
+            petId: getTotalPaid.petId,
+            userId: getTotalPaid.userId,
+            breed: getTotalPaid.breed,
+            gender: getTotalPaid.gender,
+            age: getTotalPaid.age,
+            detail: getTotalPaid.detail,
+            cost: getTotalPaid.cost,
+            nameAccountPromtpay: getTotalPaid.nameAccountPromtpay,
+            detailAccountPromtpay: getTotalPaid.detailAccountPromtpay,
+            question1: getTotalPaid.question1,
+            question2: getTotalPaid.question2,
+            question3: getTotalPaid.question3,
+            question4: getTotalPaid.question4,
+            question5: getTotalPaid.question5,
+            profile: getTotalPaid.profile,
+            likeUser: getTotalPaid.likeUser,
+            acceptUser: getTotalPaid.acceptUser,
+            statusSell: getTotalPaid.statusSell,
+            typeSell : getTotalPaid.type,
+            picture : getTotalPaid.picture,
+            dateCreate : getTotalPaid.dateCreate,
+            slipOfCustomer : getTotalPaid.slipOfCustomer,
+            checkStatus : getTotalPaid.checkStatus
+          })
+        );
+        console.log('111')
+        const res = await fetch("http://localhost:4000/sendPromtpayForAdmin", {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.text())
+          .then((resBody) => {
+            console.log(resBody);
+          })
+      };
     
     const uploadReceipt = () => {
         setPopUp(false)
@@ -54,9 +98,9 @@ const PopUppayment = (props) => {
                                  onChange={(e) => {
                                     SetSlipPayment(URL.createObjectURL(e.target.files[0]));
                                     const fileTest = e.target.files[0]
-                                    // setImageProfile(fileTest);
+                                    setImageProfile(fileTest);
                                 }}></input>
-                                <button onClick={()=>{ }}>ส่งสลิป</button>
+                                <button onClick={()=>{fetchDataPayment()}}>ส่งสลิป</button>
                                 <div><div className='pu-up-imga' style={{overflow: 'auto', objectFit: 'cover',}}><img className='pu-up-img' src={SlipPayment} /></div></div></div>
                     </div></div></div>
                     
