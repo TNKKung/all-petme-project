@@ -19,6 +19,8 @@ const PopUppayment = (props) => {
     const [paidDate, setPaidDate] = useState()
     const maxPaid = 20
 
+    const [SlipPayment,SetSlipPayment] = useState(null)
+
     const showUpload = () => {
         console.log(typeof getTotalPaid)
         setPopUp(true)
@@ -46,46 +48,21 @@ const PopUppayment = (props) => {
                         <img src={qr} width="250" height="250" />
                     </div>
                     <div className='pu-row'>
-                        <button className="pu-button" onClick={() => showUpload()}>อัพโหลดหลักฐานการชำระเงิน</button>
-                    </div></div>
+                        <div style={{display:'flex',flexDirection:'column',textAlign:'center'}}>อัพโหลดหลักฐานการชำระเงิน
+                        <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignContent:'center'}}>
+                        <input type="file" style={{width:'300px',height:'30px'}}
+                                 onChange={(e) => {
+                                    SetSlipPayment(URL.createObjectURL(e.target.files[0]));
+                                    const fileTest = e.target.files[0]
+                                    // setImageProfile(fileTest);
+                                }}></input>
+                                <button onClick={()=>{ }}>ส่งสลิป</button>
+                                <div className='pu-up-imga'><img className='pu-up-img' src={SlipPayment} /></div></div>
+                    </div></div></div>
+                    
                 }
-                {puType2 == 1 && <div>
-                    <div className='pu-nocenter'>
-                        <text className='pu-header2'>{puHeader}</text>
-                        <button className="popup-x" onClick={() => setPopUp(false)} >X</button>
-                    </div>
-                    <div className='pu-row'>
-                        <div className='pu-inp'>
-                        <div className='pu-up-text'>ยอดรวมทั้งหมด</div>
-                        <div className='pu-inp-text'>{getTotalPaid.cost} บาท</div>
-                        </div>
-                    </div>
-                    <div className='pu-row'>
-                        <div className='pu-inp-img'>
-                            <div className='pu-up-text'>อัพโหลดหลักฐานการชำระเงิน</div>
-                            <div className='pu-center-inp'>
-                                <div className='pu-up-img-btt'>
-                                    <img className='pu-up-img' src={IMG_src} />
-                                    <div className='pu-up-text'>กดเพื่อเพิ่ม</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='pu-row'>
-                        <div className='pu-inp'>
-                        <div className='pu-up-text'>วันที่โอนเงินตามหลักฐานการชำระเงิน</div>
-                        <input placeholder = 'วัน/เดือน/ปี' className='pu-inp-text'/>
-                        </div>
-                    </div>
-                    <div className='pu-row'>
-                        <div className='pu-inp'>
-                        <div className='pu-up-text'>เวลาที่โอนเงินตามหลักฐานการชำระเงิน</div>
-                        <input placeholder = '- -: - -'className='pu-inp-text'/>
-                        </div>
-                    </div>
-                </div>
-                }
-                <div className='pu-row'><button className="pu-button" onClick={() => setPopUp(false)}>{lastBtt}</button></div>
+                
+            
             </div>
         </div>
         </div>
