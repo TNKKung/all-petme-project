@@ -228,6 +228,90 @@ expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
     }
   }
 });
+
+expressApp.post("/sendPromtpayForAddmin",function(req,res){
+  let fileType = req.file.mimetype.split("/")[1]; //หานามสกุลของไฟล์ทีส่งมา PNG JPEG
+  let newFileName = req.file.filename + "." + fileType; //ดึงข้อมูลไฟล์ที่ส่งมารวมกับนามสกุล เช่น dfyhfghjfdgjdfgj.jpeg
+  if (req.file == null) {
+    console.log("null");
+  } else {
+    MongoClient.connect(url, (err, db) => {
+      const ponddb = db.db("image");
+      fs.rename(
+        `./uploads/${req.file.filename}`,
+        `./uploads/${newFileName}`,
+        () => {
+          console.log("200");
+        }
+      );
+      
+    });
+
+    const {
+      petId,
+    userId,
+    breed,
+    gender,
+    age,
+    detail,
+    cost,
+    nameAccountPromtpay,
+    detailAccountPromtpay,
+    question1,
+    question2,
+    question3,
+    question4,
+    question5,
+    profile,
+    likeUser,
+    acceptUser,
+    statusSell,
+    typeSell,
+    picture,
+    dateCreate,
+    slipOfCustomer
+    } = JSON.parse(req.body.jsonbody);
+    
+      const pet = {
+        petId:petId,
+        userId:userId,
+        breed:breed,
+        gender:gender,
+        age:age,
+        detail:detail,
+        cost:cost,
+        nameAccountPromtpay:nameAccountPromtpay,
+        detailAccountPromtpay:detailAccountPromtpay,
+        question1:question1,
+        question2:question2,
+        question3:question3,
+        question4:question4,
+        question5:question5,
+        profile:profile,
+        likeUser:likeUser,
+        acceptUser:acceptUser,
+        statusSell:statusSell,
+        typeSell:typeSell,
+        picture:picture,
+        dateCreate:dateCreate,
+        slipOfCustomer:slipOfCustomer,
+        picture : `http://localhost:4000/static/${newFileName}`,
+        dateCreate: dateCreate,
+      };
+      
+      MongoClient.connect(url, function (err, db) {
+        var dbo = db.db("PetMeApp");
+        dbo.collection("Payment").insertOne(pet, function (err, res) {
+          console.log("Add payment");
+        });
+
+      })
+
+  
+  }
+  
+})
+
 //---------------------------------------------------------------
 
 expressApp.post("/checkPasswordForlogin", function (req, res) {
@@ -429,24 +513,8 @@ expressApp.post("/dataPetForLike", function (req, res) {
   });
 });
 
-expressApp.post("/checkPromtpayForAddmin",function(req,res){
-  const {
-    userId:userId,
-    answer1: answer1,
-    answer2: answer2,
-    answer3: answer3,
-    answer4: answer4,
-    answer5: answer5,
-    name: name,
-    picture: picture,
-    picturePromtpay : picturePromtpay,
-    paymentStatus : paymentStatus,
-  } =req.body
-
-  
 
 
-})
 
 expressApp.post("/addAnswer", function (req, res) {
   const {
