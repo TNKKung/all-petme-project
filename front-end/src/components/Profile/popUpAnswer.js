@@ -185,7 +185,7 @@ const PopUpAnswer = (props) => {
             </div></div>
 {/* ------------------- buttom button ------------------------ */}
 
-            { popUpAnsType && 
+            { popUpAnsType && (dog.slipOfCustomer == null|| dog.slipOfCustomer == '') && 
                 <div className='pu-ans-row-center'>
                     {dog.acceptUser.length==0?<div><button className = 'pu-ans-button' onClick={() => {fetchData(); setPopUp(false);window.location.reload()} }>เลือกผู้ซื้อคนนี้</button>
                     <button className = 'pu-ans-button' onClick={() => {setPopUp(false);window.location.reload();fetchDataCancelLike()}}>ลบจากคนสนใจ</button> {/*ยกเลิกในรายการสนใจ*/}
@@ -196,7 +196,7 @@ const PopUpAnswer = (props) => {
                     
                 </div>
             }
-            { !popUpAnsType && 
+            { !popUpAnsType && (dog.slipOfCustomer == null || dog.slipOfCustomer == '' ) &&
                 <div className='pu-ans-row-center'>
                     <button className = 'pu-ans-button' onClick={() =>{ setPopUp(false);fetchDataCancelAccept();window.location.reload()}} >ยกเลิกการยอมรับ</button>{/*ยกเลิกในรายการยอมรับแล้ว*/}
                 </div>
