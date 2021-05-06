@@ -9,22 +9,16 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
-MongoClient = require("mongodb").MongoClient;
+
 expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 var MongoClient = require("mongodb").MongoClient;
-const deployUrl = "mongodb://petme:petme%402021@127.0.0.1:27017/PetMeApp";
-const pondmongo =
-  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-const tommongo =
-  "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-  const Bmongo =
-  'mongodb+srv://petMeApp:12345@cluster0.smgpu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-var url = tommongo;
+//  var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/cluster0?retryWrites=true&w=majority";
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
 expressApp.use(expressFunction.urlencoded({ extended: true }));
-// var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
 const port = process.env.PORT || 4000;
 expressApp.use(cors());
 expressApp.use((req, res, next) => {
