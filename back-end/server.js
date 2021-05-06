@@ -847,7 +847,7 @@ qrcode.toString(payload, options, (err, svg) => {
     if (err) return console.log(err)
     fs.writeFileSync('./qrCodePromt/qr.svg', svg)
 
-    const qr = {path :"http://localhost:4000/static/qr.svg"}
+    const qr = {path :"https://api2.evera.cloud/static/qr.svg"}
     console.log(qr)
     res.send(qr)
 })
