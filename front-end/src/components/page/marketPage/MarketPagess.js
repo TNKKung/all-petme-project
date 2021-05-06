@@ -29,7 +29,7 @@ function MarketPage() {
       setIsLoggedIn(true)
     }
     const fetchdata = async() =>{
-      const res = await fetch("http://api2.evera.cloud/api/get/dataPet", {
+      const res = await fetch("https://api2.evera.cloud/api/get/dataPet", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

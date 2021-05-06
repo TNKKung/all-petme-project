@@ -89,7 +89,7 @@ const PopUpAnswer = (props) => {
 
     const fetchDataCancelAccept = async() => {
         
-        const res = await fetch('http://api2.evera.cloud/cancelAccept',{
+        const res = await fetch('https://api2.evera.cloud/cancelAccept',{
           method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'     
@@ -104,7 +104,7 @@ const PopUpAnswer = (props) => {
     }
     const fetchDataCancelLike = async() => {
         
-        const res = await fetch('http://api2.evera.cloud/cancelLikeUser',{
+        const res = await fetch('https://api2.evera.cloud/cancelLikeUser',{
           method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'     
@@ -122,7 +122,7 @@ const PopUpAnswer = (props) => {
 
     const fetchData = async() => {
         console.log(petId)
-        const res = await fetch('http://api2.evera.cloud/choosePeopleForChat',{
+        const res = await fetch('https://api2.evera.cloud/choosePeopleForChat',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
