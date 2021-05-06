@@ -114,7 +114,7 @@ expressApp.post("/uploadFile", upload.single("avatar"), (req, res) => {
         acceptUser: [],
         statusSell: true,
         typeSell: typeSell,
-        picture: `http://localhost:4000/static/${newFileName}`,
+        picture: `https://api2.evera.cloud/static/${newFileName}`,
         dateCreate: "12/02/2554",
       };
 
@@ -190,7 +190,7 @@ expressApp.post("/uploadProfile", upload.single("avatar"), (req, res) => {
       res.status(400).send("Error");
     } else {
       const pictureUpdate = {$set: {
-        picture : `http://localhost:4000/static/${newFileName}`
+        picture : `https://api2.evera.cloud/static/${newFileName}`
       }};
 
       MongoClient.connect(url, function (err, db) {
@@ -289,7 +289,7 @@ expressApp.post("/sendPromtpayForAdmin", upload.single("avatar"),function(req,re
         picture:picture,
         dateCreate:dateCreate,
         slipOfCustomer:slipOfCustomer,
-        picture : `http://localhost:4000/static/${newFileName}`,
+        picture : `https://api2.evera.cloud/static/${newFileName}`,
         dateCreate: dateCreate,
         checkStatus : true
       };
