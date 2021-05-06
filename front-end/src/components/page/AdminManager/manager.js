@@ -152,7 +152,7 @@ function PaymentReport() {
     const [SlipCheckPop, SetSlipCheckPop] = useState(false)
     const [payment,setPayment] = useState()
     const fetchDataPayment= async() => {
-        const res = await fetch('http://localhost:4000/getDataPayment',{
+        const res = await fetch('api.evera.cloud/getDataPayment',{
         method: 'GET',
             headers: {
                 'Content-Type': 'application/json'     
@@ -326,7 +326,7 @@ const Manager = () => {
                         </button>
                         <button className={ProblemReportSlide} onMouseUp={() => {
                             const fetchData= async() => {
-                                const res = await fetch('http://localhost:4000/getReport',{
+                                const res = await fetch('api.evera.cloud/getReport',{
                                 method: 'GET',
                                     headers: {
                                         'Content-Type': 'application/json'     
@@ -347,7 +347,7 @@ const Manager = () => {
                         <button className={ContractSlide} onMouseUp={() => {
 
                             const fetchData= async() => {
-                                const res = await fetch('http://localhost:4000/getContact',{
+                                const res = await fetch('api.evera.cloud/getContact',{
                                 method: 'GET',
                                     headers: {
                                         'Content-Type': 'application/json'     

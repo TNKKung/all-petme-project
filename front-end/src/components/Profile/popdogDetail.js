@@ -49,7 +49,7 @@ const PopUpDogDetail = (props) => {
     }
     const fetchdata = async() => {
         
-        const res = await fetch('http://localhost:4000/addAnswer',{
+        const res = await fetch('api.evera.cloud/addAnswer',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
@@ -110,7 +110,7 @@ const PopUpDogDetail = (props) => {
     // }
     const fetchDataCancelRegis = async(e) => {
         console.log(e)
-        const res = await fetch('http://localhost:4000/cancelRegis',{
+        const res = await fetch('api.evera.cloud/cancelRegis',{
                   method: 'DELETE',
                   headers :{
                     "Content-Type":"application/json",
@@ -122,7 +122,7 @@ const PopUpDogDetail = (props) => {
         });
     }
     const fetchDataCancelLike = async(e) =>{
-        const res = await fetch('http://localhost:4000/cancelLike',{
+        const res = await fetch('api.evera.cloud/cancelLike',{
                   method: 'DELETE',
                   headers :{
                     "Content-Type":"application/json",
@@ -135,7 +135,7 @@ const PopUpDogDetail = (props) => {
         });
     }
     const fetchDataReport = async() =>{
-        const res = await fetch('http://localhost:4000/report',{
+        const res = await fetch('api.evera.cloud/report',{
                   method: 'POST',
                   headers :{
                     "Content-Type":"application/json",
@@ -168,7 +168,7 @@ const PopUpDogDetail = (props) => {
             return <button className="pu-buttonA2" onClick={() => {
                 
                 const fetchDataCancelLike = async() =>{
-                    const res = await fetch('http://localhost:4000/cancelLike',{
+                    const res = await fetch('api.evera.cloud/cancelLike',{
                               method: 'DELETE',
                               headers :{
                                 "Content-Type":"application/json",

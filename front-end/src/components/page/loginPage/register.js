@@ -180,7 +180,7 @@ const Register = () => {
   const [check,setCheck] = useState()
   const summitTobackEnd = async(next)=>{
     
-    const res = await fetch('http://localhost:4000/api/add/registerUser',{
+    const res = await fetch('api.evera.cloud/api/add/registerUser',{
       method: 'POST',
       headers :{
         "Content-Type":"application/json",

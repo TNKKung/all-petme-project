@@ -12,8 +12,8 @@ const { v4: uuidv4 } = require("uuid");
 
 expressApp.use("/static", expressFunction.static("uploads")); //ทำให้รองรับรูปและเอาไปแสดงจากdireactoryได้
 var MongoClient = require("mongodb").MongoClient;
-//  var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/cluster0?retryWrites=true&w=majority";
+ var url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+// var url = "mongodb+srv://petMeApp:0808317028@cluster0.9vrr0.mongodb.net/cluster0?retryWrites=true&w=majority";
 expressApp.use(bodyParser.json());
 expressApp.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
