@@ -210,7 +210,7 @@ const Profile = () => {
                 mobilePhone,
                 postalCode)
             profileSwitch(1)
-              const res = await fetch('api.evera.cloud/updateProfileUser',{
+              const res = await fetch('api2.evera.cloud/updateProfileUser',{
                   method: 'PUT',
                   headers :{
                     "Content-Type":"application/json",
@@ -242,7 +242,7 @@ const Profile = () => {
     }
     const dataPetForLike = JSON.parse(localStorage.getItem("dataPetForLike"))
     const fetDataForLike = async() => {
-        const res = await fetch('api.evera.cloud/dataPetForLike',{
+        const res = await fetch('api2.evera.cloud/dataPetForLike',{
                   method: 'post',
                   headers :{
                     "Content-Type":"application/json",
@@ -261,7 +261,7 @@ const Profile = () => {
             setUserData('password',password_storer[1])
             
 
-            const res = await fetch('api.evera.cloud/checkPasswordAndUpdate',{
+            const res = await fetch('api2.evera.cloud/checkPasswordAndUpdate',{
                   method: 'PUT',
                   headers :{
                     "Content-Type":"application/json",
@@ -591,7 +591,7 @@ const Profile = () => {
     const fetchDataCancelPayment = async() => {
         const dataPayment = localStorage.getItem('petIdForCancelPay')
 
-        const res = await fetch('api.evera.cloud/cancelAccept',{
+        const res = await fetch('api2.evera.cloud/cancelAccept',{
           method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'     
@@ -608,7 +608,7 @@ const Profile = () => {
     const [pathQr,setPathQr] = useState()
     const fetchPromtpay = async(e) => {
 
-        const res = await fetch('api.evera.cloud/promtpay',{
+        const res = await fetch('api2.evera.cloud/promtpay',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json', 
@@ -625,7 +625,7 @@ const Profile = () => {
     
 
     const fetchDataMyMarket = async() => {
-        const res = await fetch('api.evera.cloud/dataPetMyStore',{
+        const res = await fetch('api2.evera.cloud/dataPetMyStore',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     
@@ -651,7 +651,7 @@ const Profile = () => {
             userId: data.userId,
           })
         );
-        const res = await fetch("api.evera.cloud/uploadProfile", {
+        const res = await fetch("api2.evera.cloud/uploadProfile", {
           method: "POST",
           body: formData,
         })

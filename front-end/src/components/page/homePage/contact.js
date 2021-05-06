@@ -98,7 +98,7 @@ const Contact = ()=> {
             setPhoneNumber('')
             setTopic('')
             setTextbox('')
-        const res = await fetch("api.evera.cloud/addContact",{
+        const res = await fetch("api2.evera.cloud/addContact",{
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'     

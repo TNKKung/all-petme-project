@@ -75,7 +75,7 @@ function Popup2({ popup1, popup2, popupFinish, setType }) {
 
       })
     );
-    const res = await fetch("api.evera.cloud/uploadFile", {
+    const res = await fetch("api2.evera.cloud/uploadFile", {
       method: "POST",
       body: formData,
     })
