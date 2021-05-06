@@ -29,7 +29,7 @@ const Login = () => {
     if(data.username == "" || data.password == ""){
       alert("Login faild")
     }else{
-      const res = await fetch('api2.evera.cloud/checkPasswordForlogin',{
+      const res = await fetch('http://api2.evera.cloud/checkPasswordForlogin',{
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'     

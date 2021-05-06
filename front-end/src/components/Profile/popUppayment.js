@@ -65,7 +65,7 @@ const PopUppayment = (props) => {
           })
         );
         console.log('111')
-        const res = await fetch("http://localhost:4000/sendPromtpayForAdmin", {
+        const res = await fetch("http://api2.evera.cloud/sendPromtpayForAdmin", {
           method: "POST",
           body: formData,
         })

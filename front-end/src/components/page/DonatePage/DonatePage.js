@@ -10,7 +10,7 @@ function DonatePage() {
   const [dataPet,setDataPet] = useState([])
   React.useEffect(() => {
     const fetchdata = async() =>{
-      const res = await fetch("api2.evera.cloud/api/get/dataPet", {
+      const res = await fetch("http://api2.evera.cloud/api/get/dataPet", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
