@@ -1,0 +1,477 @@
+html,body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #292929;
+  }
+
+  @font-face {
+    font-family: 'Kanit';
+    src: url('./fonts/Kanit-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+  }
+
+.during-popup2{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.bg-pu2{
+    position: absolute;
+    height: 1500px;
+    width: 100%;
+    background-color:rgb(0,0,0,0.6);
+}
+
+.pu-row2{
+    margin-bottom: 20px;
+    /* border: 1px solid darkblue; */
+}
+
+.pu-nocenter2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.PopUpdetailA{
+    position:fixed;
+    top:10%;
+    left: 20%;
+    height: 740px;
+    width: 1100px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: 15px;
+    z-index:101;
+    padding:15px;
+}
+.PopUpdetailB{
+    position: fixed;
+    left: 30%;
+    top: 3%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 860px;
+
+    border-radius: 15px;
+}.pu-profile-img2{
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+.pu-header2{
+    margin-left: 170px;
+    font-family: 'Kanit';
+    font-size: 20px;
+    color: #0081A7;
+    text-align: center;
+}
+.pu-rowHeader2{
+    display: flex;
+}
+.pu-rowBottom2{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.pu-headerA2{
+    margin-left: 10px;
+    font-family: 'Kanit';
+    font-size: 25px;
+    color: #0081A7;
+    text-align: start;
+}
+.pu-first-img{
+    width: 490px;
+}
+.pu-underline{
+    width: 550px;
+    border: 1px solid #2091B2;
+    margin-bottom: 20px;
+}
+.pu-main-img{
+    border-radius: 15px;
+    width: 500px;
+    height: 500px;
+}
+
+.pu-img-bottomPad{
+    margin-left: 10px;
+    display: flex;
+}
+.pu-button2{
+    font-family: 'Kanit';
+    font-size: 18px;
+    color: #0081A7;
+    background-color: white;
+    width: 220px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 3px solid #0081A7;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+.ss{
+    border: 1px solid darkblue;
+}
+.ss:hover{
+    border: 1px solid darkgoldenrod ;
+}
+.pu-sub-imgPad{
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+.pu-sub-imgPad:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.pu-half-line{
+    height: 560px;
+    border: 1px solid #C4C4C4;
+    margin: 25px;
+}
+.plain-img{
+    width: 100px;
+    height: 100px;
+    background-color: #C4C4C4;
+    margin: 5px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+.pu-button2:hover{
+    cursor: pointer;
+    color: white;
+    background-color: #0081A7;
+    
+}
+
+.pu-buttonA2{
+    font-family: 'Kanit';
+    font-size: 18px;
+    color: white;
+    background-color: #F07167;
+    width: 220px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 3px solid #F07167;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+.pu-buttonA2:hover{
+    cursor: pointer;
+    color: #F07167;
+    background-color: white;
+}
+
+.popup-x2{
+    width: 50px;
+    height: 50px;
+    margin-left: 130px;
+    font-family: 'Kanit';
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+}
+.popup-x2:hover{
+    cursor: pointer;
+    color: rgb(46, 46, 46);
+}
+.pu-row-pad2{
+    border: 2px solid darkblue;
+}
+
+.pu-inp2 {
+    height: 90px;
+    width: 748px;
+    word-break: break-all;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #0081A7;
+    box-sizing: border-box;
+    border-radius: 20px;
+    word-wrap: break-word
+}
+.pu-inp-textrea2 {
+    margin: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 80px;
+    width: 708px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: transparent;
+    font-size: 18px;
+}
+.pu-inp-textrea2:focus{
+    outline: none !important;
+}
+.pu-insidePad1{
+    display: flex;
+    margin: 25px;
+}
+
+
+.pu-center-inp2{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.pu-up-text2 {
+    text-align: start;
+    font-family: 'Kanit';
+    font-size: 19px;
+    color: black;
+}
+
+.pu-inp-text2{
+    text-align: end;
+    margin-right: 20px;
+    width: 150px;
+    font-family: 'Kanit';
+    font-size: 16px;
+    color: #F07167;
+    border: white;
+    outline: none;
+}
+.pu-inp-text2::placeholder {
+    color: #F07167;
+}
+
+
+
+.pu-headerDetail{
+    font-family: 'Kanit';
+    font-size: 38px;
+    color: black;
+
+}
+.pu-headerDetail2{
+    text-align: start;
+    align-items: center;
+    width: 310px;
+    height: 54px;
+    background: #00AFB9;
+    border-radius: 15px;
+    
+}
+.pu-headerDetail2-text{
+    margin-left: 20px;
+    margin-top: 5px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    color: white;
+}
+.pu-headerDetail3{
+    font-family: 'Kanit';
+    font-size: 28px;
+    color: black;
+}
+.pu-headerDetail3-2{
+    margin-left: 50px;
+    font-family: 'Kanit';
+    font-size: 28px;
+    color: black;
+}
+.pu-headerDetail4-1{
+    font-family: 'Kanit';
+    font-size: 30px;
+    color: black;
+}
+.pu-dogDatailPad{
+    border: 3px solid #00AFB9;
+    width: 460px;
+    border-radius: 5px;
+    height: 210px;
+}
+.pu-headerDetail4{
+    margin: 10px;
+    font-family: 'Kanit';
+    font-size: 18px;
+    color: black;
+}
+.pu-headerDetail5{
+    
+    font-family: 'Kanit';
+    font-size: 23 px;
+    color: black;
+}
+.pu-headerDetail6{
+    font-family: 'Kanit';
+    font-size: 13px;
+    color: black;
+}
+.pu-reportBtt{
+    margin-left: 180px;
+    font-family: 'Kanit';
+    font-size: 14px;
+    width: 120px;
+    height: 43px;
+    color: white;
+    background-color: #EC8E82;
+    border: #EC8E82;
+    border-radius: 50px;
+}
+.pu-reportBtt:hover{
+    
+    cursor: pointer;
+    color: #EC8E82;
+    background-color: white;
+    border: 1px solid #EC8E82;
+}
+
+.shift-rightPad{
+    display: flex;
+    justify-content: flex-end;
+}
+.ddd{
+    display: flex;
+    justify-content: flex-end;
+}
+/*----------------------- R E P O R T -------------------------*/
+.PopUpdetailC{
+    position:fixed;
+    top:10%;
+    left: 20%;
+    height: 740px;
+    width: 1100px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: 15px;
+    z-index:101;
+    padding:15px;
+}
+
+.pu-report-Header-pad{
+    height: 120px;
+    background-color: #00AFB9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+}
+.pu-report-Header-text{
+    font-family: 'Kanit';
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+}
+.pu-report-row-left{
+    margin-left: 40px;
+    margin: 8px;
+    display: flex;
+    margin-left: 15px;
+
+}
+.pu-report-text-L{
+    font-family: 'Kanit';
+    font-size: 35px;
+    margin: 8px;
+    margin-right: 20px;
+    margin-left: 15px;
+
+}
+.pu-report-text{
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 8px;
+    margin-left: 15px;
+}
+.pu-report-text2{
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 10px;
+    color: #00a095;
+}
+.pu-report-text-step{
+    margin: 10px;
+    margin-left: 60px;
+    font-family: 'Kanit';
+    font-size: 30px;
+}
+.pu-report-row-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pu-report-flex{
+    display: flex;
+}
+.pu-report-inp3-style{
+    margin-left: 50px;
+    width: 970px;
+    height: 260px;
+    background-color: #C4C4C4;
+    border:1px solid#b9b9b9;
+    border-radius: 5px;
+}
+.pu-report-inp1-style{
+    background-color: #b9cad4;
+    border:1px solid#b9b9b9;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 20px;
+    height: 40px;
+}
+.pu-report-inp3{
+    font-family: 'Kanit';
+    font-size: 20px;
+    margin: 20px;
+    background-color: transparent;
+    border:transparent;
+    width: 930px;
+    height: 220px;
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    
+    resize: none;
+
+}
+
+.pu-report-inp3:focus{
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+}
+
+.pu-report-button{
+    color: white;
+    width: 200px;
+    height: 60px;
+    background-color: #EC8E82;
+    border-radius: 15px;
+    font-family: 'Kanit';
+    font-size: 30px;
+    margin: 10px;
+    margin-top: 20px;
+    border: transparent;
+}
+.pu-report-button:hover{
+    cursor: pointer;
+    color: #EC8E82;
+    background-color: white;
+    border: 3px solid #EC8E82;
+}
